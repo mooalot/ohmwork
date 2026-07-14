@@ -1,0 +1,13 @@
+{
+  "name": "ohmwork",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Duolingo-style EE practice app",
+  "type": "module",
+  "scripts": {
+    "test": "bash tools/test.sh",
+    "test:unit": "node --test tests/*.test.mjs",
+    "validate": "node tools/validate.js",
+    "start": "python3 -m http.server 8000"
+  }
+}

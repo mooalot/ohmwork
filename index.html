@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ohmwork — EE Practice</title>
+  <link rel="stylesheet" href="vendor/katex.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#131720">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <div class="brand" id="brand-home" title="Home">⚡ <span>Ohmwork</span></div>
+      <div class="stats">
+        <div class="stat" id="stat-streak" title="Daily streak">🔥 <b>0</b></div>
+        <div class="stat" id="stat-xp" title="Total XP">⭐ <b>0</b></div>
+        <div class="stat" id="stat-level" title="Level">Lv <b>1</b></div>
+      </div>
+    </header>
+    <main id="screen"><!-- screens render here --></main>
+  </div>
+  <script src="vendor/katex.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>

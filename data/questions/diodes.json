@@ -1,0 +1,446 @@
+[
+  {
+    "id": "d-001",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "At its core, what does an ideal diode do in a circuit?",
+    "choices": [
+      "Acts as a one-way valve: current flows freely in one direction and is blocked in the other",
+      "Limits the current to a fixed safe value in both directions",
+      "Drops exactly half the supply voltage regardless of orientation",
+      "Stores charge on one side and releases it on the other"
+    ],
+    "answer": 0,
+    "explanation": "A diode is a check valve for charge. Push current from anode to cathode and it looks like a closed switch; try to push it the other way and it looks like an open circuit. It does not regulate current magnitude (that's a resistor's or regulator's job), and it stores essentially nothing — that's a capacitor. Everything else about diodes (rectifiers, clippers, LED drivers) is this one idea applied."
+  },
+  {
+    "id": "d-002",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Is $D_1$ conducting in this circuit?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "5 V", "flipLabel": true },
+        { "type": "diode", "from": [140, 60], "to": [220, 60], "label": "D_1" },
+        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_1", "value": "1 kΩ" }
+      ],
+      "wires": [
+        [[60, 60], [140, 60]],
+        [[220, 60], [300, 60]],
+        [[60, 200], [300, 200]]
+      ]
+    },
+    "choices": [
+      "Yes — the source pushes current into the anode, so the diode is forward biased",
+      "No — the diode blocks all DC current",
+      "No — the resistor prevents the diode from reaching its turn-on voltage",
+      "Only during half of each cycle"
+    ],
+    "answer": 0,
+    "explanation": "Trace the loop: current leaves the source's + terminal (top), flows right into $D_1$'s anode, and out its cathode toward the resistor. That is the diode's easy direction — the triangle points the way conventional current flows — so it conducts. The resistor doesn't stop turn-on; it just sets how much current flows once the diode's $\\approx 0.7\\,\\text{V}$ is paid. And this is a DC source, so 'half of each cycle' doesn't apply."
+  },
+  {
+    "id": "d-003",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Is $D_1$ conducting in this circuit?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "5 V", "flipLabel": true },
+        { "type": "diode", "from": [220, 60], "to": [140, 60], "label": "D_1" },
+        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_1", "value": "1 kΩ" }
+      ],
+      "wires": [
+        [[60, 60], [140, 60]],
+        [[220, 60], [300, 60]],
+        [[60, 200], [300, 200]]
+      ]
+    },
+    "choices": [
+      "No — the source pushes current against the diode's arrow, so it is reverse biased and blocks",
+      "Yes — a 5 V source is more than enough to force any diode to conduct",
+      "Yes — but only 0.7 V worth of current flows",
+      "No — because the resistor limits the current to zero"
+    ],
+    "answer": 0,
+    "explanation": "Compared to the previous idea, the diode is flipped: the source's + terminal now drives current into the *cathode* side. A reverse-biased diode is an open switch, so essentially zero current flows and the full 5 V appears across the diode (the resistor drops nothing, since $V = IR = 0$). Supply size doesn't matter — short of breakdown, a reverse-biased diode blocks 5 V as easily as 0.5 V. '0.7 V worth of current' isn't a thing: 0.7 V is a voltage drop, not a current."
+  },
+  {
+    "id": "d-004",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The LED drops $2\\,\\text{V}$ when lit, and you want $10\\,\\text{mA}$ through it. What value should $R_1$ be, in $\\Omega$?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "5 V", "flipLabel": true },
+        { "type": "resistor", "from": [120, 60], "to": [240, 60], "label": "R_1" },
+        { "type": "led", "from": [320, 60], "to": [320, 200], "label": "D_1", "value": "2 V" }
+      ],
+      "wires": [
+        [[60, 60], [120, 60]],
+        [[240, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ]
+    },
+    "answer": 300,
+    "tolerance": 0.03,
+    "unit": "Ω",
+    "explanation": "The LED claims its 2 V first; the resistor gets whatever is left over, and that leftover is what Ohm's law applies to. Left over: $5 - 2 = 3\\,\\text{V}$. Then $R = V/I = 3 / 0.010 = 300\\,\\Omega$. The classic mistake is dividing the full 5 V by 10 mA (giving 500 Ω) — always subtract the diode drop before reaching for Ohm's law."
+  },
+  {
+    "id": "d-005",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Using the constant-drop model ($V_D = 0.7\\,\\text{V}$), find the current through $R_1$, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "diode", "from": [140, 60], "to": [220, 60], "label": "D_1" },
+        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_1", "value": "1 kΩ" }
+      ],
+      "wires": [
+        [[60, 60], [140, 60]],
+        [[220, 60], [300, 60]],
+        [[60, 200], [300, 200]]
+      ]
+    },
+    "answer": 8.3,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "The diode is forward biased (anode toward the + terminal), so treat it as a 0.7 V toll booth: it conducts, but charges 0.7 V for passage. The resistor sees the rest: $9 - 0.7 = 8.3\\,\\text{V}$, so $I = 8.3 / 1\\text{k} = 8.3\\,\\text{mA}$. One loop, one current — that same 8.3 mA flows through the diode too."
+  },
+  {
+    "id": "d-006",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The dashed curve is the input, the solid curve is the output. What circuit sits between them?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v (V)",
+      "xmin": 0,
+      "xmax": 20,
+      "ymin": -6,
+      "ymax": 6,
+      "xticks": 5,
+      "yticks": 2,
+      "curves": [
+        { "fn": "expr", "expr": "5*Math.sin(2*Math.PI*t/10)", "dash": true, "color": 2, "legend": "in" },
+        { "fn": "expr", "expr": "Math.max(0, 5*Math.sin(2*Math.PI*t/10))", "legend": "out" }
+      ]
+    },
+    "choices": [
+      "A half-wave rectifier — a single series diode that passes positive half-cycles and blocks negative ones",
+      "A full-wave rectifier — it flips negative half-cycles upward",
+      "A voltage divider — it scales the sine down",
+      "A clamper — it shifts the whole waveform up by its peak value"
+    ],
+    "answer": 0,
+    "explanation": "The output copies the input whenever the input is positive and sits at zero whenever it's negative — that's the one-way valve doing its thing. A single series diode conducts on positive half-cycles and opens on negative ones, so half of every cycle is simply thrown away. A full-wave rectifier would *fold* the negative lobes upward instead of deleting them; a divider would shrink the sine but keep both halves; a clamper preserves the shape and only shifts its DC level."
+  },
+  {
+    "id": "d-007",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A full-wave rectifier is fed a $50\\,\\text{Hz}$ sine; the plot shows its output. What is the fundamental frequency of the output ripple?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v_{out} (V)",
+      "xmin": 0,
+      "xmax": 40,
+      "ymin": 0,
+      "ymax": 10,
+      "xticks": 10,
+      "yticks": 2,
+      "curves": [
+        { "fn": "expr", "expr": "Math.abs(8*Math.sin(2*Math.PI*t/20))" }
+      ]
+    },
+    "choices": [
+      "$100\\,\\text{Hz}$ — folding the negative half-cycles up doubles the number of humps per second",
+      "$50\\,\\text{Hz}$ — rectification doesn't change frequency",
+      "$25\\,\\text{Hz}$ — rectification halves the frequency",
+      "$0\\,\\text{Hz}$ — the output is pure DC"
+    ],
+    "answer": 0,
+    "explanation": "Full-wave rectification takes $|v|$: every negative lobe is flipped positive, so one input cycle (20 ms at 50 Hz) produces *two* identical humps. Read it off the plot — the pattern repeats every 10 ms, which is 100 Hz. This doubling is a gift for power supplies: ripple at twice the frequency is twice as easy for the same filter capacitor to smooth."
+  },
+  {
+    "id": "d-008",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "With no load connected, find the current through the zener diode, in mA. The zener regulates at $V_Z = 5.1\\,\\text{V}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [120, 60], "to": [240, 60], "label": "R_1", "value": "470 Ω" },
+        { "type": "zener", "from": [300, 200], "to": [300, 60], "label": "D_Z", "value": "5.1 V" },
+        { "type": "ground", "at": [180, 200] }
+      ],
+      "wires": [
+        [[60, 60], [120, 60]],
+        [[240, 60], [300, 60]],
+        [[300, 60], [360, 60]],
+        [[60, 200], [300, 200]]
+      ],
+      "nodes": [[300, 60]],
+      "labels": [{ "text": "V_{out}", "at": [372, 60], "anchor": "left" }]
+    },
+    "answer": 14.7,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "A zener used as a regulator sits in *reverse* breakdown on purpose: it pins its node at $V_Z$ and swallows whatever current the resistor delivers. The resistor sees the difference between supply and zener voltage: $12 - 5.1 = 6.9\\,\\text{V}$, so $I = 6.9 / 470 \\approx 14.7\\,\\text{mA}$. With no load, every bit of that current goes through the zener — the price of regulation is burning current even when nothing is connected."
+  },
+  {
+    "id": "d-009",
+    "topic": "diodes",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "The zener holds $V_{out}$ at $V_Z = 6.2\\,\\text{V}$. Find the current through the zener itself, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [100, 60], "to": [180, 60], "label": "R_1", "value": "220 Ω" },
+        { "type": "zener", "from": [240, 200], "to": [240, 60], "label": "D_Z", "value": "6.2 V", "flipLabel": true },
+        { "type": "resistor", "from": [340, 60], "to": [340, 200], "label": "R_L", "value": "1 kΩ" },
+        { "type": "ground", "at": [140, 200] }
+      ],
+      "wires": [
+        [[60, 60], [100, 60]],
+        [[180, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ],
+      "nodes": [[240, 60], [240, 200]]
+    },
+    "answer": 20.2,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Think of the zener as taking the leftovers: the resistor delivers a fixed total current, the load takes what it needs, and the zener absorbs the rest to hold the voltage. Total in: $I_R = (12 - 6.2)/220 \\approx 26.4\\,\\text{mA}$. Load takes: $I_L = 6.2/1\\text{k} = 6.2\\,\\text{mA}$. Zener gets: $26.4 - 6.2 \\approx 20.2\\,\\text{mA}$. This bookkeeping (KCL at the output node) is also how you find the maximum load a zener regulator can support — when the load wants all 26.4 mA, the zener starves and regulation fails."
+  },
+  {
+    "id": "d-010",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "The LED drops $2\\,\\text{V}$ when lit. Set $R_1$ so the LED current is $20\\,\\text{mA}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "resistor", "from": [120, 60], "to": [240, 60], "label": "R_1", "bind": true },
+        { "type": "led", "from": [320, 60], "to": [320, 200], "label": "D_1", "value": "2 V" }
+      ],
+      "wires": [
+        [[60, 60], [120, 60]],
+        [[240, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ]
+    },
+    "slider": { "min": 100, "max": 1000, "step": 10, "unit": "Ω", "label": "R_1" },
+    "answer": 350,
+    "tolerance": 0.03,
+    "explanation": "The LED takes its 2 V off the top no matter what; the resistor's job is to convert the remaining $9 - 2 = 7\\,\\text{V}$ into the current you want. $R = 7 / 0.020 = 350\\,\\Omega$. Notice the lever you're pulling: smaller $R$ means more current and a brighter (or eventually dead) LED — the resistor is the only thing standing between the LED and the supply."
+  },
+  {
+    "id": "d-011",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why does an LED need a series resistor at all? Why not just connect it straight across a supply slightly above its forward voltage?",
+    "choices": [
+      "The diode's I–V curve is exponential — a tiny voltage excess causes a huge, poorly controlled current, so something else must set the current",
+      "Without a resistor the LED cannot reach its turn-on voltage",
+      "The resistor raises the voltage to the level the LED needs",
+      "LEDs only work with pulsed current, and the resistor provides the pulses"
+    ],
+    "answer": 0,
+    "explanation": "An LED is a voltage cliff, not a voltage knob: past its forward voltage, current grows exponentially, roughly 10× for every extra 60 mV. Supply tolerance, temperature drift, and part-to-part variation make 'slightly above' impossible to hold, so the current would be anywhere from dim to destructive. The series resistor takes over as the current-setter: $I = (V_{supply} - V_{LED})/R$ is dominated by $R$, which is stable. Diodes set voltage; resistors set current — pair them accordingly."
+  },
+  {
+    "id": "d-012",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Two silicon diodes ($0.7\\,\\text{V}$ each, constant-drop model) are in series with a $330\\,\\Omega$ resistor across a $5\\,\\text{V}$ supply, oriented to conduct. Find the circuit current, in mA.",
+    "answer": 10.9,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Diode drops in series simply stack — each toll booth charges its own 0.7 V. The resistor is left with $5 - 0.7 - 0.7 = 3.6\\,\\text{V}$, so $I = 3.6 / 330 \\approx 10.9\\,\\text{mA}$. Stacked diode drops are a real design tool: two or three in series make a crude low-voltage reference or a level shifter."
+  },
+  {
+    "id": "d-013",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A $\\pm 5\\,\\text{V}$ sine drives this circuit. What does $V_{out}$ look like? (Use the $0.7\\,\\text{V}$ drop model.)",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "v_{in}", "value": "±5 V", "flipLabel": true },
+        { "type": "resistor", "from": [120, 60], "to": [240, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "diode", "from": [300, 60], "to": [300, 200], "label": "D_1" },
+        { "type": "ground", "at": [180, 200] }
+      ],
+      "wires": [
+        [[60, 60], [120, 60]],
+        [[240, 60], [300, 60]],
+        [[300, 60], [360, 60]],
+        [[60, 200], [300, 200]]
+      ],
+      "nodes": [[300, 60]],
+      "labels": [{ "text": "V_{out}", "at": [372, 60], "anchor": "left" }]
+    },
+    "choices": [
+      "The negative half-cycles pass through, but positive excursions are clipped at about $+0.7\\,\\text{V}$",
+      "The positive half-cycles pass through, but negative excursions are clipped at about $-0.7\\,\\text{V}$",
+      "A full sine shifted down so its peak sits at $0.7\\,\\text{V}$",
+      "Nothing — the diode shorts the output to ground at all times"
+    ],
+    "answer": 0,
+    "explanation": "This is a clipper: the diode sits *across* the output, ready to short it to ground — but only in its conducting direction. Its anode is at $V_{out}$, so it turns on whenever $V_{out}$ tries to exceed $+0.7\\,\\text{V}$, clamping the node there while $R_1$ absorbs the excess. On negative swings the diode is reverse biased, effectively absent, and the input passes through untouched. A shunt diode clips; the resistor in front is what makes clipping possible without shorting the source."
+  },
+  {
+    "id": "d-014",
+    "topic": "diodes",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "A clamper (series capacitor into the signal path, diode from the output node to ground) and a clipper (series resistor, diode to ground) are both single-diode circuits. What is the essential difference in what they do to a sine wave?",
+    "choices": [
+      "A clamper shifts the whole waveform's DC level while preserving its shape; a clipper flattens off part of the waveform and destroys that portion",
+      "A clamper halves the amplitude; a clipper doubles it",
+      "They do the same thing — the capacitor only filters noise",
+      "A clipper works on AC only, while a clamper works on DC only"
+    ],
+    "answer": 0,
+    "explanation": "The capacitor is the tell. In a clamper, the diode conducts briefly to charge the capacitor to (roughly) the signal's peak, and thereafter that stored voltage adds in series with the input — the entire sine rides up or down to a new DC level, shape intact, with the diode barely conducting again. In a clipper there's nothing to store: whenever the signal crosses the diode's threshold, the diode conducts and *holds* the output there, amputating that part of the waveform. Shift versus chop — remember 'clamper = DC restorer'."
+  },
+  {
+    "id": "d-015",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The plot shows a silicon diode's forward I–V curve. What is the practical takeaway?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "V_D (V)",
+      "ylabel": "I_D (mA)",
+      "xmin": 0,
+      "xmax": 0.7,
+      "ymin": 0,
+      "ymax": 15,
+      "xticks": 0.1,
+      "yticks": 5,
+      "curves": [
+        { "fn": "expr", "expr": "0.00002*(Math.exp(t/0.052)-1)" }
+      ]
+    },
+    "choices": [
+      "Current is negligible below about $0.6\\,\\text{V}$, then rises so steeply that the voltage stays pinned near $0.7\\,\\text{V}$ — which is exactly why the constant-drop model works",
+      "The diode behaves like a resistor of constant slope over its whole range",
+      "Current is proportional to the square of the voltage",
+      "The diode conducts equally well at any forward voltage"
+    ],
+    "answer": 0,
+    "explanation": "Read the curve: essentially flat-zero until $\\sim 0.6\\,\\text{V}$, then nearly vertical. The real relationship is exponential ($I \\approx I_S e^{V/nV_T}$), so current multiplies by ~10 for every extra 60 mV — huge current changes barely move the voltage. That's why we can cheat and say 'a conducting silicon diode drops 0.7 V, period': the wall is so steep that the operating point can't be anywhere else. A resistor would be a straight line through the origin; this is anything but."
+  },
+  {
+    "id": "d-016",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A half-wave rectifier uses one silicon diode ($0.7\\,\\text{V}$ drop) between a sine source with $10\\,\\text{V}$ peak and a resistive load. What is the peak output voltage across the load, in volts?",
+    "answer": 9.3,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "The diode charges its 0.7 V toll on the way through, so the load never sees the full input peak. At the instant the input crests at 10 V, the output crests at $10 - 0.7 = 9.3\\,\\text{V}$. Small detail, real consequence: for small signals (say a 1 V peak sine) that 0.7 V toll eats most of the waveform, which is why precision rectifiers wrap the diode in an op-amp."
+  },
+  {
+    "id": "d-017",
+    "topic": "diodes",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A full-wave bridge rectifier ($0.7\\,\\text{V}$ per diode) is driven by a sine with $12\\,\\text{V}$ peak. On each half-cycle the current path passes through two diodes. Find the peak output voltage, in volts.",
+    "answer": 10.6,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "In a bridge, current always threads through *two* diodes in series — one into the load, one back out — so the toll doubles: $2 \\times 0.7 = 1.4\\,\\text{V}$. Peak output: $12 - 1.4 = 10.6\\,\\text{V}$. This is the bridge's tradeoff versus a center-tapped full-wave design (one diode drop, but a more expensive transformer): you pay an extra 0.7 V for skipping the center tap, which matters a lot in low-voltage supplies."
+  },
+  {
+    "id": "d-018",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A rectifier feeds a filter capacitor that supplies a load. The output shows a sawtooth 'ripple'. Which change reduces the ripple?",
+    "choices": [
+      "A larger filter capacitor — it stores more charge, so its voltage sags less between rectifier peaks",
+      "A smaller filter capacitor — it charges faster",
+      "A heavier load (more current drawn) — it stabilizes the capacitor",
+      "Removing the capacitor entirely"
+    ],
+    "answer": 0,
+    "explanation": "Between rectifier peaks the diodes are off and the capacitor alone carries the load, draining like a water tank between refills. Ripple is how far the tank level falls per cycle: a bigger tank (larger $C$) sags less for the same draw, and a thirstier load ($\\uparrow I$) drains it faster, making ripple *worse*. Full-wave rectification also helps — refills come twice as often. That's the whole ripple story: $V_r \\approx I/(fC)$."
+  },
+  {
+    "id": "d-019",
+    "topic": "diodes",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A full-wave rectifier (ripple frequency $f = 120\\,\\text{Hz}$) feeds a $1000\\,\\mu\\text{F}$ filter capacitor and a load drawing a steady $50\\,\\text{mA}$. Using the approximation $V_r \\approx I/(fC)$, find the peak-to-peak ripple, in volts.",
+    "answer": 0.42,
+    "tolerance": 0.05,
+    "unit": "V",
+    "explanation": "The capacitor loses charge $Q = I \\cdot \\Delta t$ during each discharge interval, and the voltage sag is that charge divided by $C$. With refills every $1/120\\,\\text{s}$: $V_r \\approx \\frac{I}{fC} = \\frac{0.050}{120 \\times 0.001} \\approx 0.42\\,\\text{V}$. Feel the knobs in the formula: double the capacitance or double the ripple frequency (full-wave vs half-wave) and ripple halves; double the load current and it doubles."
+  },
+  {
+    "id": "d-020",
+    "topic": "diodes",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "Two supplies drive the same output node through diodes: $5\\,\\text{V}$ through $D_1$ and $3.3\\,\\text{V}$ through $D_2$ (anodes at the supplies, cathodes joined at the node), with a load resistor from the node to ground. Using $0.7\\,\\text{V}$ drops, what happens?",
+    "choices": [
+      "$V_{out} = 4.3\\,\\text{V}$; $D_2$ is reverse biased and the 3.3 V supply delivers no current",
+      "$V_{out} = 2.6\\,\\text{V}$; only the lower supply wins because its diode turns on first",
+      "$V_{out} = 6.9\\,\\text{V}$; the two supplies add through their diodes",
+      "Both diodes conduct equally and $V_{out} = 3.45\\,\\text{V}$, the average"
+    ],
+    "answer": 0,
+    "explanation": "This is diode OR-ing: each supply *offers* the node its voltage minus a diode drop, and the highest offer wins. $D_1$ pulls the node up to $5 - 0.7 = 4.3\\,\\text{V}$. Now check $D_2$: its anode sits at 3.3 V but its cathode sits at 4.3 V — reverse biased, so it politely disconnects its supply. This is exactly how battery-backup circuits work: the backup diode sits reverse biased until the main supply sags below it, then takes over automatically."
+  }
+]

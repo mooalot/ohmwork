@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>render test</title>
+  <link rel="stylesheet" href="../vendor/katex.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>body { padding: 20px; } .qcard { margin-bottom: 24px; }</style>
+</head>
+<body>
+  <div id="app"><main id="host"></main></div>
+  <script src="../vendor/katex.min.js"></script>
+  <script type="module">
+    import { renderQuestion } from '../js/question.js';
+    const host = document.getElementById('host');
+    const params = new URLSearchParams(location.search);
+    const topic = params.get('topic') || 'dc-basics';
+    const only = params.get('ids'); // comma-separated ids, optional
+    const res = await fetch(`../data/questions/${topic}.json`);
+    const qs = await res.json();
+    const picked = only ? qs.filter((q) => only.split(',').includes(q.id)) : qs.filter((q) => q.figure);
+    for (const q of picked) {
+      const d = document.createElement('div');
+      host.appendChild(d);
+      renderQuestion(d, q, () => {});
+    }
+    document.title = `rendered ${picked.length}`;
+  </script>
+</body>
+</html>

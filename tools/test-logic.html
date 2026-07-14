@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>logic test</title>
+  <link rel="stylesheet" href="../vendor/katex.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div id="app"><main id="host"></main><pre id="out"></pre></div>
+  <script src="../vendor/katex.min.js"></script>
+  <script type="module">
+    import { renderQuestion } from '../js/question.js';
+    import * as S from '../js/state.js';
+
+    const results = [];
+    const assert = (name, cond) => results.push(`${cond ? 'PASS' : 'FAIL'} ${name}`);
+    const host = document.getElementById('host');
+
+    // --- MC grading: click the correct (original-index) choice, expect correct
+    localStorage.clear();
+    const mcq = {
+      id: 't-1', topic: 'x', tier: 1, type: 'mc',
+      prompt: 'pick $a$', choices: ['right', 'wrong1', 'wrong2'], answer: 0,
+      explanation: 'because $a$',
+    };
+    let answeredCorrect = null;
+    let player = renderQuestion(host, mcq, (c) => (answeredCorrect = c));
+    assert('mc: check before selection returns null', player.check() === null);
+    const btns = [...host.querySelectorAll('.choice')];
+    btns.find((b) => b.dataset.orig === '0').click();
+    player.check();
+    assert('mc: correct choice grades correct', answeredCorrect === true);
+    assert('mc: reveal class applied', !!host.querySelector('.reveal-correct'));
+    assert('mc: explanation shown', host.querySelector('.explanation').textContent.includes('because'));
+
+    // --- numeric grading with tolerance
+    const nq = {
+      id: 't-2', topic: 'x', tier: 2, type: 'numeric',
+      prompt: 'v?', answer: 3.92, tolerance: 0.03, unit: 'V', explanation: 'e',
+    };
+    answeredCorrect = null;
+    player = renderQuestion(host, nq, (c) => (answeredCorrect = c));
+    host.querySelector('.numeric-input').value = '3.85';
+    player.check();
+    assert('numeric: within 3% accepted', answeredCorrect === true);
+
+    answeredCorrect = null;
+    player = renderQuestion(host, nq, (c) => (answeredCorrect = c));
+    host.querySelector('.numeric-input').value = '5.0';
+    player.check();
+    assert('numeric: far value rejected', answeredCorrect === false);
+    assert('numeric: correct answer revealed', host.querySelector('.correct-answer').textContent.includes('3.92'));
+
+    // --- slider grading
+    const sq = {
+      id: 't-3', topic: 'x', tier: 2, type: 'slider',
+      prompt: 'set', slider: { min: 100, max: 10000, step: 50, unit: 'Ω', label: 'R_2' },
+      answer: 2350, tolerance: 0.03, explanation: 'e',
+      figure: { kind: 'circuit', components: [{ type: 'resistor', from: [60, 60], to: [160, 60], label: 'R', bind: true }] },
+    };
+    answeredCorrect = null;
+    player = renderQuestion(host, sq, (c) => (answeredCorrect = c));
+    const slider = host.querySelector('.slider-input');
+    slider.value = 2350;
+    player.check();
+    assert('slider: exact value accepted', answeredCorrect === true);
+
+    // --- state: XP, streak, SRS
+    localStorage.clear();
+    location.reload; // (state module already loaded with cleared storage below)
+    S.resetAll();
+    const xp = S.recordAnswer('q1', 2, true);
+    assert('state: tier-2 correct gives 15xp', xp === 15);
+    assert('state: wrong gives 2xp', S.recordAnswer('q2', 1, false) === 2);
+    assert('state: q1 in box 1, not due yet', !S.isDue('q1') && S.boxOf('q1') === 1);
+    assert('state: q2 dropped to box 0', S.boxOf('q2') === 0);
+    const { streakExtended, streak } = S.completeLesson(0);
+    assert('state: first lesson starts streak at 1', streakExtended && streak === 1);
+    const again = S.completeLesson(0);
+    assert('state: same-day lesson does not re-extend', again.streakExtended === false);
+    assert('state: level math', S.levelInfo().level >= 1);
+    const lesson = S.pickLesson([{ id: 'q1' }, { id: 'q2' }, { id: 'q3' }], 2);
+    assert('state: pickLesson returns requested size', lesson.length === 2);
+
+    const out = results.join('\n');
+    document.getElementById('out').textContent = out;
+    document.title = results.some((r) => r.startsWith('FAIL')) ? 'FAIL' : 'ALLPASS';
+  </script>
+</body>
+</html>

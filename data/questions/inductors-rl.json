@@ -1,0 +1,412 @@
+[
+  {
+    "id": "rl-001",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Deep down, what is an inductor actually doing in a circuit?",
+    "choices": [
+      "Storing energy in a magnetic field and opposing any *change* in the current through it",
+      "Storing energy in an electric field and opposing any change in the voltage across it",
+      "Converting electrical energy into heat in proportion to the current",
+      "Blocking DC entirely while passing AC"
+    ],
+    "answer": 0,
+    "explanation": "Current through the coil builds a magnetic field, and that field stores energy. Changing the current means changing the field, and the coil fights back with an induced voltage $v = L\\,\\frac{di}{dt}$ — it opposes *change in current*, not current itself. Steady DC sails through untouched. Storing energy in an electric field and guarding *voltage* is the capacitor's job — the inductor is its exact dual."
+  },
+  {
+    "id": "rl-002",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A series RL circuit has $L = 100\\,\\text{mH}$ and $R = 1\\,\\text{k}\\Omega$. What is its time constant $\\tau$, in µs?",
+    "answer": 100,
+    "tolerance": 0.02,
+    "unit": "µs",
+    "explanation": "For RL circuits $\\tau = L/R$ — divide, don't multiply, and watch the direction: a *bigger* resistor makes an RL circuit *faster* (the opposite of RC, where bigger $R$ slows the charge). Here $\\tau = 0.1 / 1000 = 100\\,\\text{µs}$. Sanity check the units: henries per ohm really is seconds."
+  },
+  {
+    "id": "rl-003",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The switch has been open forever and closes at $t = 0$. What is the current immediately after it closes?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [140, 60], "label": "S" },
+        { "type": "resistor", "from": [140, 60], "to": [260, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "inductor", "from": [320, 60], "to": [320, 200], "label": "L_1", "value": "100 mH" }
+      ],
+      "wires": [
+        [[260, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ]
+    },
+    "choices": [
+      "Zero — the inductor won't let its current jump, so it starts at zero and ramps up",
+      "$12\\,\\text{mA}$ immediately — the resistor sets it by Ohm's law",
+      "A huge inrush spike, since the inductor starts as a short circuit",
+      "$12\\,\\text{mA}$, but flowing backward through the inductor"
+    ],
+    "answer": 0,
+    "explanation": "Inductor current is the one thing in this circuit that cannot change instantaneously — a jump would require infinite voltage ($v = L\\,di/dt$). The current was zero before the switch closed, so it is zero just after; at that instant the inductor drops the full 12 V and looks like an *open* circuit. From there the current ramps up, settling exponentially toward $12/1\\text{k} = 12\\,\\text{mA}$. (An inrush spike is capacitor behavior — the exact dual.)"
+  },
+  {
+    "id": "rl-004",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The current through a $10\\,\\text{mH}$ inductor ramps steadily from $0$ to $2\\,\\text{A}$ in $1\\,\\text{ms}$. What voltage appears across the inductor during the ramp, in volts?",
+    "answer": 20,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "An inductor doesn't care what the current *is*, only how fast it's *changing*. The ramp is steady, so $di/dt = 2\\,\\text{A} / 1\\,\\text{ms} = 2000\\,\\text{A/s}$, and $v = L\\,\\frac{di}{dt} = 0.01 \\times 2000 = 20\\,\\text{V}$ — constant for the whole millisecond. The moment the ramp stops, the voltage snaps to zero even though 2 A is still flowing."
+  },
+  {
+    "id": "rl-005",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A series RL circuit has been connected to a DC source for a very long time. What does the inductor look like to the rest of the circuit?",
+    "choices": [
+      "A plain piece of wire — a short circuit, with the current set entirely by the resistor",
+      "An open circuit that blocks all current",
+      "A resistance of $L$ ohms",
+      "A small voltage source bucking the supply"
+    ],
+    "answer": 0,
+    "explanation": "Long after switching, the current has settled: $di/dt = 0$, so $v = L\\,di/dt = 0$. Zero volts across a component carrying nonzero current is, by definition, a wire. The steady-state current is just $V/R$ — the inductance value doesn't appear anywhere in the final answer, it only set how long the settling took. (Dual intuition: at DC a capacitor is an open, an inductor is a short.)"
+  },
+  {
+    "id": "rl-006",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The switch has been closed for a very long time. Find the current flowing in the loop, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [140, 60], "label": "S", "closed": true },
+        { "type": "resistor", "from": [140, 60], "to": [260, 60], "label": "R_1", "value": "180 Ω" },
+        { "type": "inductor", "from": [320, 60], "to": [320, 200], "label": "L_1", "value": "10 mH" }
+      ],
+      "wires": [
+        [[260, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ]
+    },
+    "answer": 50,
+    "tolerance": 0.02,
+    "unit": "mA",
+    "explanation": "\"A very long time\" is the cue: the transient is over, $di/dt = 0$, and the inductor drops zero volts — it's just a wire. The whole 9 V lands on the resistor, so $I = 9/180 = 50\\,\\text{mA}$. The 10 mH value is a red herring for the final current; it only determined how quickly the circuit got here ($\\tau = L/R \\approx 56\\,\\text{µs}$, so \"long\" means a few hundred microseconds)."
+  },
+  {
+    "id": "rl-007",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "You flip off a mechanical switch feeding a big electromagnet and see a bright arc jump across the opening contacts. What is going on?",
+    "choices": [
+      "The inductor insists its current keep flowing and generates whatever voltage it takes — enough to break down the air gap",
+      "The switch momentarily short-circuits the supply as it opens",
+      "Stray capacitance in the magnet discharges through the contacts",
+      "The supply voltage doubles the instant the load disconnects"
+    ],
+    "answer": 0,
+    "explanation": "The coil's magnetic field holds real energy, and that energy is carried by the current — so the current *will* keep flowing for an instant, no matter what. Opening the switch tries to force $di/dt \\to -\\infty$, and $v = L\\,di/dt$ answers with a spike of hundreds or thousands of volts, easily enough to ionize the air gap and arc. This inductive kickback is why relay drivers need flyback diodes — and, harnessed deliberately, it's how a car's ignition coil makes its spark."
+  },
+  {
+    "id": "rl-008",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "In this relay-driver circuit, why is the diode $D_1$ connected across the coil?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [140, 60], "label": "S", "closed": true },
+        { "type": "inductor", "from": [240, 60], "to": [240, 200], "label": "L_1", "value": "relay coil" },
+        { "type": "diode", "from": [340, 200], "to": [340, 60], "label": "D_1" }
+      ],
+      "wires": [
+        [[140, 60], [240, 60]],
+        [[240, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ],
+      "nodes": [[240, 60], [240, 200]]
+    },
+    "choices": [
+      "It gives the coil current a place to circulate when the switch opens, clamping the kickback spike to a safe diode drop",
+      "It protects the circuit if the supply is connected backward",
+      "It rectifies the AC ripple that the coil generates",
+      "It speeds up the relay's release by dumping the coil current instantly"
+    ],
+    "answer": 0,
+    "explanation": "While the switch is closed the diode's cathode sits at +12 V, so it is reverse-biased and invisible. The moment the switch opens, the coil keeps its current flowing and yanks its top node downward; after less than a volt of swing the diode conducts, and the current freewheels harmlessly around the coil–diode loop while the field energy burns off in the coil's resistance. Without $D_1$, that node would fly to hundreds of volts negative and arc or kill the switch. (One real trade-off: the freewheeling current keeps the relay held in slightly *longer*, so choice four is exactly backward.)"
+  },
+  {
+    "id": "rl-009",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A $47\\,\\text{mH}$ inductor carries a steady $2\\,\\text{A}$. How much energy is stored in its magnetic field, in mJ?",
+    "answer": 94,
+    "tolerance": 0.02,
+    "unit": "mJ",
+    "explanation": "The field around the coil is a little energy reservoir, filled by the current: $E = \\tfrac{1}{2}LI^2 = \\tfrac{1}{2} \\times 0.047 \\times 2^2 = 0.094\\,\\text{J} = 94\\,\\text{mJ}$. Note the square: doubling the current quadruples the stored energy. This stored energy is *why* inductor current can't just stop — the energy has to go somewhere, which is the whole kickback story."
+  },
+  {
+    "id": "rl-010",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Inductors and capacitors are exact duals. Complete the analogy: a capacitor resists sudden changes in its **voltage**, while an inductor resists sudden changes in ______; at DC steady state a capacitor looks like a(n) ______ and an inductor looks like a(n) ______.",
+    "choices": [
+      "its current; open circuit; short circuit",
+      "its voltage; short circuit; open circuit",
+      "its current; short circuit; open circuit",
+      "its magnetic field; open circuit; resistor"
+    ],
+    "answer": 0,
+    "explanation": "Swap $V \\leftrightarrow I$ and every capacitor fact becomes an inductor fact. The capacitor stores energy in an electric field, guards its *voltage* ($i = C\\,dv/dt$), and blocks DC (open); the inductor stores energy in a magnetic field, guards its *current* ($v = L\\,di/dt$), and passes DC (short). Even the formulas mirror: $\\tfrac{1}{2}CV^2 \\leftrightarrow \\tfrac{1}{2}LI^2$, $\\tau = RC \\leftrightarrow \\tau = L/R$. Learn one device deeply and you get the other one free."
+  },
+  {
+    "id": "rl-011",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A $6.8\\,\\text{mH}$ and a $3.3\\,\\text{mH}$ inductor (no magnetic coupling) are connected in parallel. What is the combined inductance?",
+    "choices": [
+      "$2.2\\,\\text{mH}$",
+      "$10.1\\,\\text{mH}$",
+      "$5.05\\,\\text{mH}$",
+      "$3.3\\,\\text{mH}$"
+    ],
+    "answer": 0,
+    "explanation": "Uncoupled inductors combine exactly like resistors — not like capacitors. Parallel means product over sum: $\\frac{6.8 \\times 3.3}{6.8 + 3.3} = \\frac{22.44}{10.1} \\approx 2.2\\,\\text{mH}$, always smaller than the smallest branch. $10.1\\,\\text{mH}$ is what you'd get by *adding* them — that's the series result (or the capacitor-parallel habit sneaking in)."
+  },
+  {
+    "id": "rl-012",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Two RL circuits use the same resistor but different inductors. The plot shows each circuit's current after its switch closes. Which circuit has the larger inductance?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "i_L (mA)",
+      "xmin": 0,
+      "xmax": 12,
+      "ymin": 0,
+      "ymax": 12,
+      "xticks": 2,
+      "yticks": 2,
+      "curves": [
+        { "fn": "exp", "v0": 0, "vf": 10, "tau": 1, "legend": "A" },
+        { "fn": "exp", "v0": 0, "vf": 10, "tau": 3, "legend": "B", "color": 2 }
+      ]
+    },
+    "choices": [
+      "B — it takes longer to settle, so $\\tau = L/R$ is larger, and with equal $R$ that means larger $L$",
+      "A — a faster response takes more inductance",
+      "They are equal, since both settle to the same final current",
+      "Can't tell — the final current is what the inductance sets"
+    ],
+    "answer": 0,
+    "explanation": "More inductance means more opposition to changing current, so the current climbs more sluggishly — curve B. The inductor never touches the *destination* ($I_f = V/R$, identical here at 10 mA); it only stretches the *journey*, via $\\tau = L/R$. Reading the curves: A covers 63% of the rise by about 1 ms, B needs about 3 ms — B's inductance is roughly 3× larger."
+  },
+  {
+    "id": "rl-013",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The plot shows an RL circuit's inductor current after the switch closes; the dashed line marks 63% of the final value. Read the circuit's time constant $\\tau$ off the curve, in ms.",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "i_L (mA)",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 12,
+      "xticks": 2,
+      "yticks": 2,
+      "curves": [
+        { "fn": "exp", "v0": 0, "vf": 10, "tau": 2 }
+      ],
+      "hlines": [{ "y": 6.3, "label": "63%" }]
+    },
+    "answer": 2,
+    "tolerance": 0.05,
+    "unit": "ms",
+    "explanation": "One time constant is where an exponential has covered 63% of the distance to its final value. The current settles at 10 mA, and the curve crosses the 6.3 mA line at $t = 2\\,\\text{ms}$ — so $\\tau = 2\\,\\text{ms}$. Cross-check: by $5\\tau = 10\\,\\text{ms}$ the curve is essentially flat at the right edge of the plot, exactly as it should be."
+  },
+  {
+    "id": "rl-014",
+    "topic": "inductors-rl",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "A source $V$, resistor $R$, and inductor $L$ are in series; the current is initially zero. At the exact instant the switch closes, what is the rate of current rise $di/dt$?",
+    "choices": [
+      "$V/L$",
+      "$V/R$",
+      "$V/(RL)$",
+      "Zero — the inductor blocks all change at first"
+    ],
+    "answer": 0,
+    "explanation": "At $t = 0^+$ the current is still zero, so the resistor drops $IR = 0$ and KVL puts the *entire* source voltage across the inductor. Then $v_L = L\\,di/dt$ gives $di/dt = V/L$ — the resistor hasn't entered the story yet. The inductor doesn't block change; it meters it out at exactly this slope. A classic construction: a line from the origin at slope $V/L$ reaches the final current $V/R$ at exactly $t = \\tau$."
+  },
+  {
+    "id": "rl-015",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "The inductor is fixed at $L = 10\\,\\text{mH}$. Set $R$ so the circuit's time constant is $\\tau = 50\\,\\text{µs}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "5 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [140, 60], "label": "S" },
+        { "type": "resistor", "from": [140, 60], "to": [260, 60], "label": "R", "bind": true },
+        { "type": "inductor", "from": [320, 60], "to": [320, 200], "label": "L", "value": "10 mH" }
+      ],
+      "wires": [
+        [[260, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ]
+    },
+    "slider": { "min": 50, "max": 500, "step": 10, "unit": "Ω", "label": "R" },
+    "answer": 200,
+    "tolerance": 0.03,
+    "explanation": "Rearrange $\\tau = L/R$ to $R = L/\\tau = 0.01 / 50\\,\\text{µs} = 200\\,\\Omega$. Note which way the knob works: because $R$ is in the *denominator*, sliding $R$ up makes the circuit **faster** — the exact opposite of RC. Intuition: a bigger resistor develops the opposing voltage at a smaller current, so the inductor gets bullied to its final (smaller) current sooner."
+  },
+  {
+    "id": "rl-016",
+    "topic": "inductors-rl",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "The switch closes at $t = 0$. Find the inductor current at $t = 150\\,\\text{µs}$, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [140, 60], "label": "S" },
+        { "type": "resistor", "from": [140, 60], "to": [260, 60], "label": "R_1", "value": "470 Ω" },
+        { "type": "inductor", "from": [320, 60], "to": [320, 200], "label": "L_1", "value": "47 mH" }
+      ],
+      "wires": [
+        [[260, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ]
+    },
+    "answer": 19.8,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Anchor the two endpoints first: the current starts at 0 (inductor forbids a jump) and heads for $I_f = 12/470 \\approx 25.5\\,\\text{mA}$ (inductor becomes a wire). The timescale is $\\tau = L/R = 0.047/470 = 100\\,\\text{µs}$, so $t = 150\\,\\text{µs}$ is 1.5 time constants in. Then $i(t) = I_f\\big(1 - e^{-t/\\tau}\\big) = 25.5\\,(1 - e^{-1.5}) = 25.5 \\times 0.777 \\approx 19.8\\,\\text{mA}$ — about three-quarters of the way there, which matches the 1.5τ gut check."
+  },
+  {
+    "id": "rl-017",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Two identical $10\\,\\text{mH}$ inductors (not magnetically coupled) can be wired in series or in parallel. Which statement is right?",
+    "choices": [
+      "Series gives $20\\,\\text{mH}$, parallel gives $5\\,\\text{mH}$ — inductors combine exactly like resistors",
+      "Series gives $5\\,\\text{mH}$, parallel gives $20\\,\\text{mH}$ — inductors combine like capacitors",
+      "Both arrangements give $20\\,\\text{mH}$",
+      "Both arrangements give $10\\,\\text{mH}$ — identical inductors don't change the total"
+    ],
+    "answer": 0,
+    "explanation": "Inductors follow the resistor rules: add in series, reciprocal-sum in parallel. In series the same $di/dt$ passes through both coils, so their opposing voltages stack — $20\\,\\text{mH}$. In parallel each coil carries half the current change, so the pair fights half as hard — $5\\,\\text{mH}$. It's *capacitors* that do it backward (parallel adds), so keep the two rulebooks straight."
+  },
+  {
+    "id": "rl-018",
+    "topic": "inductors-rl",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "The switch has been closed for a long time. At the instant it opens, what peak voltage appears across $R_1$, in volts?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "24 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [140, 60], "label": "S", "closed": true },
+        { "type": "resistor", "from": [140, 60], "to": [220, 60], "label": "R_s", "value": "120 Ω" },
+        { "type": "inductor", "from": [260, 60], "to": [260, 200], "label": "L_1", "value": "100 mH" },
+        { "type": "resistor", "from": [360, 60], "to": [360, 200], "label": "R_1", "value": "470 Ω" }
+      ],
+      "wires": [
+        [[220, 60], [260, 60]],
+        [[260, 60], [360, 60]],
+        [[60, 200], [360, 200]]
+      ],
+      "nodes": [[260, 60], [260, 200]]
+    },
+    "answer": 94,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Two steps. Before: in steady state the inductor is a wire, so it carries $24/120 = 200\\,\\text{mA}$ (it shorts out $R_1$, which carries nothing). After: the inductor's 200 mA cannot change instantly, and its only remaining path is through $R_1$ — so the full 200 mA is *forced* through 470 Ω, producing $V = 0.2 \\times 470 = 94\\,\\text{V}$. That's how a 24 V circuit conjures a 94 V spike; without $R_1$ there at all, the voltage would climb until something arced. Snubber resistors and flyback diodes exist to name that price in advance."
+  },
+  {
+    "id": "rl-019",
+    "topic": "inductors-rl",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A $12\\,\\text{V}$ source, $100\\,\\Omega$ resistor, and $10\\,\\text{mH}$ inductor are in series; the switch closes at $t = 0$. How long does the current take to reach **half** its final value, in µs?",
+    "answer": 69.3,
+    "tolerance": 0.03,
+    "unit": "µs",
+    "explanation": "Exponentials have a universal half-life: solving $1 - e^{-t/\\tau} = \\tfrac{1}{2}$ gives $t = \\tau \\ln 2 \\approx 0.693\\,\\tau$, regardless of the voltage or the final current. Here $\\tau = L/R = 0.01/100 = 100\\,\\text{µs}$, so $t = 69.3\\,\\text{µs}$. (The 12 V never entered the math — it scales the destination, not the clock. Same rule as RC charging and radioactive decay.)"
+  },
+  {
+    "id": "rl-020",
+    "topic": "inductors-rl",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "This current-rise curve was measured on a series RL circuit whose resistor is known to be $R = 220\\,\\Omega$; the dashed line marks 63% of the final current. What is the inductance?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "i_L (mA)",
+      "xmin": 0,
+      "xmax": 5,
+      "ymin": 0,
+      "ymax": 50,
+      "xticks": 1,
+      "yticks": 10,
+      "curves": [
+        { "fn": "exp", "v0": 0, "vf": 45.5, "tau": 1 }
+      ],
+      "hlines": [{ "y": 28.7, "label": "63%" }]
+    },
+    "choices": [
+      "$220\\,\\text{mH}$",
+      "$4.5\\,\\text{µH}$",
+      "$22\\,\\text{mH}$",
+      "$2.2\\,\\text{H}$"
+    ],
+    "answer": 0,
+    "explanation": "Extract the time constant first: the curve crosses the 63% line at $t = 1\\,\\text{ms}$, so $\\tau = 1\\,\\text{ms}$. Since $\\tau = L/R$, the inductance is $L = \\tau R = 0.001 \\times 220 = 0.22\\,\\text{H} = 220\\,\\text{mH}$. The $4.5\\,\\text{µH}$ trap is the inverted formula $\\tau/R$ — units save you here, because seconds *divided* by ohms is not henries, but seconds *times* ohms is."
+  }
+]

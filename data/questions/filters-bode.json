@@ -1,0 +1,400 @@
+[
+  {
+    "id": "fb-001",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The output of this circuit is taken across the capacitor. What does it do to signals?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1 kΩ" },
+        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "value": "100 nF" },
+        { "type": "ground", "at": [140, 200] }
+      ],
+      "wires": [
+        [[200, 60], [340, 60]],
+        [[60, 200], [200, 200]]
+      ],
+      "nodes": [[200, 60]],
+      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+    },
+    "choices": [
+      "Passes low frequencies, attenuates high ones — a low-pass filter",
+      "Passes high frequencies, attenuates low ones — a high-pass filter",
+      "Passes only a narrow band of frequencies around one center frequency",
+      "Attenuates all frequencies equally"
+    ],
+    "answer": 0,
+    "explanation": "Think of $R$ and $C$ as a frequency-dependent voltage divider. The capacitor's impedance $|Z_C| = 1/(2\\pi f C)$ is huge at low frequencies — the cap wins the divider and nearly all the input appears across it — but shrinks as $f$ rises, shorting the output toward ground. Output across the capacitor therefore means low-pass. Where you take the output decides the filter type: the same two parts with the output across $R$ would be a high-pass."
+  },
+  {
+    "id": "fb-002",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "An RC low-pass filter uses $R = 1\\,\\text{k}\\Omega$ and $C = 100\\,\\text{nF}$. What is its cutoff frequency $f_c$, in Hz?",
+    "answer": 1592,
+    "tolerance": 0.03,
+    "unit": "Hz",
+    "explanation": "The cutoff is the crossover point where the capacitor's impedance equals $R$ and the divider splits the signal evenly. $f_c = \\frac{1}{2\\pi RC} = \\frac{1}{2\\pi \\cdot 10^3 \\cdot 10^{-7}} = \\frac{1}{2\\pi \\cdot 10^{-4}} \\approx 1.59\\,\\text{kHz}$. Watch the powers of ten: $RC = 10^{-4}\\,\\text{s}$, so $f_c = 10^4/(2\\pi)$."
+  },
+  {
+    "id": "fb-003",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A filter's response is quoted as \"$-3\\,\\text{dB}$ at the cutoff frequency.\" What does $-3\\,\\text{dB}$ actually mean there?",
+    "choices": [
+      "Output power is half the passband power; amplitude is down to about $70.7\\%$",
+      "Amplitude is cut exactly in half",
+      "The output is $3\\%$ smaller than the input",
+      "The signal is essentially blocked beyond that frequency"
+    ],
+    "answer": 0,
+    "explanation": "Decibels count ratios: $10\\log_{10}$ for power, $20\\log_{10}$ for amplitude. $-3\\,\\text{dB}$ is a power ratio of $10^{-0.3} \\approx 1/2$, which is an amplitude ratio of $1/\\sqrt{2} \\approx 0.707$. So the cutoff is the half-power point — the filter is still passing plenty of signal there; the rolloff is a gentle slope, not a wall. (Amplitude cut in half would be $-6\\,\\text{dB}$.)"
+  },
+  {
+    "id": "fb-004",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "An amplifier multiplies signal voltage by $100$. What is its gain in dB?",
+    "answer": 40,
+    "tolerance": 0.02,
+    "unit": "dB",
+    "explanation": "For voltage (amplitude) ratios use $20\\log_{10}$: $20\\log_{10}(100) = 20 \\cdot 2 = 40\\,\\text{dB}$. Cross-check with power: voltage $\\times 100$ means power $\\times 10^4$, and $10\\log_{10}(10^4) = 40\\,\\text{dB}$ — the two conventions agree by design, which is exactly why amplitude uses the factor 20."
+  },
+  {
+    "id": "fb-005",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In this circuit the capacitor is in series with the signal and the output is taken across the resistor. What kind of filter is it?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
+        { "type": "capacitor", "from": [60, 60], "to": [200, 60], "label": "C", "value": "47 nF" },
+        { "type": "resistor", "from": [200, 60], "to": [200, 200], "label": "R", "value": "10 kΩ" },
+        { "type": "ground", "at": [140, 200] }
+      ],
+      "wires": [
+        [[200, 60], [340, 60]],
+        [[60, 200], [200, 200]]
+      ],
+      "nodes": [[200, 60]],
+      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+    },
+    "choices": [
+      "High-pass — at low frequencies the capacitor's large impedance takes almost all the input, leaving little across $R$",
+      "Low-pass — capacitors always smooth out fast changes",
+      "High-pass — the capacitor stores the low frequencies and releases them later",
+      "Band-pass — $R$ and $C$ together select a band of frequencies"
+    ],
+    "answer": 0,
+    "explanation": "Same divider logic as the low-pass, outputs swapped. At low $f$ the capacitor's impedance dominates the series chain, so the input voltage drops across $C$ and almost nothing is left for $R$; at high $f$ the cap is nearly a short and the signal passes straight through. Series cap, output across $R$ → high-pass, with the same corner $f_c = 1/(2\\pi RC)$. This is exactly the coupling capacitor at an amplifier's input: it blocks DC and deep bass while passing the signal."
+  },
+  {
+    "id": "fb-006",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "An audio chain has a preamp with $+26\\,\\text{dB}$ of gain, a tone filter set to cut $8\\,\\text{dB}$, and a power amp with $+30\\,\\text{dB}$. What is the total gain of the chain, in dB?",
+    "answer": 48,
+    "tolerance": 0.02,
+    "unit": "dB",
+    "explanation": "Cascaded stages multiply their gains — and logarithms turn multiplication into addition, which is the whole point of using dB. Total $= 26 - 8 + 30 = 48\\,\\text{dB}$. As a plain ratio that is $10^{48/20} \\approx 250\\times$ the input voltage; adding three small numbers is far easier than multiplying $20 \\times 0.4 \\times 31.6$ in your head."
+  },
+  {
+    "id": "fb-007",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "In an RC low-pass filter you double $R$ while leaving $C$ alone. What happens to the cutoff frequency?",
+    "choices": [
+      "It halves — $f_c = 1/(2\\pi RC)$ is inversely proportional to $R$",
+      "It doubles",
+      "It stays the same — the cutoff depends only on $C$",
+      "It drops to one quarter"
+    ],
+    "answer": 0,
+    "explanation": "$R$ sits in the denominator of $f_c = 1/(2\\pi RC)$, so doubling it halves the cutoff and the filter muffles more treble. This is literally how a simple tone knob works: the pot varies $R$, sliding $f_c$ down as you turn it, making the sound darker. Intuition: a bigger $R$ makes it harder for the source to charge $C$ quickly, so the circuit gives up on following fast wiggles at a lower frequency."
+  },
+  {
+    "id": "fb-008",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In a two-way loudspeaker, a capacitor is wired in series with the tweeter. Why?",
+    "choices": [
+      "It forms a high-pass filter: the cap's impedance is large at bass frequencies, blocking the low notes that would overdrive the tweeter",
+      "It stores energy so the tweeter can play louder transients",
+      "It only blocks DC — all audio frequencies pass through it equally",
+      "It forms a low-pass filter so the tweeter receives a smoother signal"
+    ],
+    "answer": 0,
+    "explanation": "A tweeter is small and fragile; bass frequencies would drive its little voice coil past its mechanical limits. The series capacitor plus the tweeter's own $\\sim 8\\,\\Omega$ resistance form an RC high-pass: large impedance at low $f$ blocks the bass, near-zero impedance at high $f$ lets the treble through. This is the simplest speaker crossover — and the woofer gets the complementary trick, a series inductor acting as a low-pass."
+  },
+  {
+    "id": "fb-009",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "An RC high-pass filter uses $R = 4.7\\,\\text{k}\\Omega$ and $C = 33\\,\\text{nF}$. Find its cutoff frequency, in Hz.",
+    "answer": 1026,
+    "tolerance": 0.03,
+    "unit": "Hz",
+    "explanation": "High-pass or low-pass, the corner is the same crossover point: $f_c = 1/(2\\pi RC)$. Here $RC = 4700 \\times 33\\times10^{-9} = 1.551\\times10^{-4}\\,\\text{s}$, so $f_c = 1/(2\\pi \\cdot 1.551\\times10^{-4}) \\approx 1.03\\,\\text{kHz}$. Below that frequency the capacitor wins the divider and blocks the signal; above it the resistor wins and the signal passes."
+  },
+  {
+    "id": "fb-010",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "Set $C$ so this low-pass filter cuts off at $f_c = 1\\,\\text{kHz}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1.6 kΩ" },
+        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "bind": true },
+        { "type": "ground", "at": [140, 200] }
+      ],
+      "wires": [
+        [[200, 60], [340, 60]],
+        [[60, 200], [200, 200]]
+      ],
+      "nodes": [[200, 60]],
+      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+    },
+    "slider": { "min": 10, "max": 220, "step": 5, "unit": "nF", "label": "C" },
+    "answer": 100,
+    "tolerance": 0.03,
+    "explanation": "Rearrange the cutoff formula for $C$: $C = \\frac{1}{2\\pi R f_c} = \\frac{1}{2\\pi \\cdot 1600 \\cdot 1000} \\approx 99.5\\,\\text{nF}$ — i.e. the standard $100\\,\\text{nF}$ part. Sanity-check the direction: a bigger cap takes longer to charge through $R$, so it lowers the cutoff; if you needed the filter to cut off higher, you would shrink $C$."
+  },
+  {
+    "id": "fb-011",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The asymptotic Bode magnitude of a filter is shown; the x-axis is $\\log_{10}$ of frequency in Hz. What filter is this?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "log10 f (Hz): 1=10, 2=100, 3=1k, 4=10k, 5=100k",
+      "ylabel": "|H| (dB)",
+      "xmin": 1,
+      "xmax": 5,
+      "ymin": -50,
+      "ymax": 10,
+      "xticks": 1,
+      "yticks": 10,
+      "curves": [
+        { "fn": "points", "points": [[1, 0], [3, 0], [5, -40]] }
+      ],
+      "vlines": [{ "x": 3 }]
+    },
+    "choices": [
+      "A first-order low-pass with $f_c \\approx 1\\,\\text{kHz}$",
+      "A first-order low-pass with $f_c \\approx 3\\,\\text{Hz}$",
+      "A first-order high-pass with $f_c \\approx 1\\,\\text{kHz}$",
+      "A second-order low-pass — it falls $40\\,\\text{dB}$ in total"
+    ],
+    "answer": 0,
+    "explanation": "Read two features: where the curve breaks, and how fast it falls. It is flat at $0\\,\\text{dB}$ (passing everything) up to $\\log_{10} f = 3$, i.e. $f_c = 10^3 = 1\\,\\text{kHz}$ — the axis is logarithmic, so \"3\" means $1000\\,\\text{Hz}$, not $3\\,\\text{Hz}$. Past the corner it drops $40\\,\\text{dB}$ over two decades $= -20\\,\\text{dB/decade}$: one pole, first order. The total drop just says how far you looked; the *slope* is what tells you the order."
+  },
+  {
+    "id": "fb-012",
+    "topic": "filters-bode",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A filter has the transfer function $H(s) = \\dfrac{1}{1 + 10^{-3}\\,s}$. What is its cutoff frequency, in Hz?",
+    "answer": 159,
+    "tolerance": 0.03,
+    "unit": "Hz",
+    "explanation": "Match it to the standard first-order low-pass $H(s) = \\frac{1}{1 + s/\\omega_c}$: here $1/\\omega_c = 10^{-3}$, so $\\omega_c = 1000\\,\\text{rad/s}$ (equivalently $RC = 1\\,\\text{ms}$). Radians per second are not hertz — divide by $2\\pi$: $f_c = 1000/(2\\pi) \\approx 159\\,\\text{Hz}$. Answering $1000$ by skipping that conversion is the classic slip."
+  },
+  {
+    "id": "fb-013",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A single-pole low-pass filter has $f_c = 500\\,\\text{Hz}$. Approximately how many dB below the passband is the output at $5\\,\\text{kHz}$? (Give the attenuation as a positive number.)",
+    "answer": 20,
+    "tolerance": 0.03,
+    "unit": "dB",
+    "explanation": "$5\\,\\text{kHz}$ is exactly one decade ($10\\times$) above the cutoff, and a single pole rolls off at $20\\,\\text{dB}$ per decade — so about $20\\,\\text{dB}$ down, meaning the amplitude is roughly $1/10$ of the passband. The exact value, $20\\log_{10}\\sqrt{1 + 10^2} \\approx 20.04\\,\\text{dB}$, shows how accurate the straight-line Bode approximation is once you are well past the corner."
+  },
+  {
+    "id": "fb-014",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "This circuit uses an inductor, with the output taken across it. What kind of filter is it?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1 kΩ" },
+        { "type": "inductor", "from": [200, 60], "to": [200, 200], "label": "L", "value": "100 mH" },
+        { "type": "ground", "at": [140, 200] }
+      ],
+      "wires": [
+        [[200, 60], [340, 60]],
+        [[60, 200], [200, 200]]
+      ],
+      "nodes": [[200, 60]],
+      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+    },
+    "choices": [
+      "High-pass — the inductor's impedance $2\\pi f L$ grows with frequency, so it wins the divider at high $f$",
+      "Low-pass — inductors oppose change, which smooths the output",
+      "Low-pass — it behaves like the RC circuit with the capacitor on the output",
+      "Band-pass — $R$ and $L$ resonate at one frequency"
+    ],
+    "answer": 0,
+    "explanation": "The inductor is the capacitor's opposite: $|Z_L| = 2\\pi f L$ *rises* with frequency. At low $f$ the inductor is nearly a plain wire, pulling the output to ground; at high $f$ its impedance dwarfs $R$ and almost the whole input appears across it. Output across $L$ → high-pass, with corner $f_c = R/(2\\pi L)$. General rule: take the output across whichever element's impedance grows with frequency and you get a high-pass."
+  },
+  {
+    "id": "fb-015",
+    "topic": "filters-bode",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "An RC low-pass filter is driven at exactly its cutoff frequency $f_c$. What is the phase of $V_{out}$ relative to $V_{in}$, in degrees?",
+    "answer": -45,
+    "tolerance": 0.02,
+    "unit": "°",
+    "explanation": "$H(j\\omega) = \\frac{1}{1 + j\\omega RC}$, so the phase is $-\\arctan(\\omega RC)$. At the cutoff $\\omega RC = 1$, giving $-\\arctan(1) = -45^\\circ$ — the output lags the input by an eighth of a cycle. This is the other half of the $-3\\,\\text{dB}$ story: at $f_c$ the real and imaginary parts of the denominator are equal, which produces the magnitude $1/\\sqrt{2}$ and the $-45^\\circ$ phase together."
+  },
+  {
+    "id": "fb-016",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "Filters A and B both cut off at $1\\,\\text{kHz}$ (x-axis is $\\log_{10}$ of frequency in Hz). Which one is second-order (two poles), and how can you tell?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "log10 f (Hz): 1=10, 2=100, 3=1k, 4=10k, 5=100k",
+      "ylabel": "|H| (dB)",
+      "xmin": 1,
+      "xmax": 5,
+      "ymin": -80,
+      "ymax": 10,
+      "xticks": 1,
+      "yticks": 20,
+      "curves": [
+        { "fn": "points", "points": [[1, 0], [3, 0], [5, -40]], "legend": "A" },
+        { "fn": "points", "points": [[1, 0], [3, 0], [5, -80]], "legend": "B", "color": 2 }
+      ]
+    },
+    "choices": [
+      "B — it falls at $40\\,\\text{dB/decade}$, and each pole contributes $20\\,\\text{dB/decade}$",
+      "A — reaching $-40\\,\\text{dB}$ proves it has two poles",
+      "Both — any low-pass that keeps falling is at least second-order",
+      "Neither can be determined — slope says nothing about order"
+    ],
+    "answer": 0,
+    "explanation": "Slope is how you count poles on a Bode plot: each pole steepens the ultimate rolloff by $20\\,\\text{dB/decade}$. B drops $80\\,\\text{dB}$ over the two decades past the corner ($-40\\,\\text{dB/decade}$): two poles. A manages only $-20\\,\\text{dB/decade}$: one. Speaker-crossover jargon encodes the same fact — a \"12 dB/octave\" crossover is a second-order filter, since $-40\\,\\text{dB/decade} \\approx -12\\,\\text{dB/octave}$."
+  },
+  {
+    "id": "fb-017",
+    "topic": "filters-bode",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "This series RLC circuit takes its output across the resistor, forming a band-pass filter. Find its center frequency $f_0$, in Hz.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
+        { "type": "inductor", "from": [60, 60], "to": [140, 60], "label": "L", "value": "2.2 mH" },
+        { "type": "capacitor", "from": [140, 60], "to": [220, 60], "label": "C", "value": "4.7 µF" },
+        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R", "value": "100 Ω" },
+        { "type": "ground", "at": [140, 200] }
+      ],
+      "wires": [
+        [[220, 60], [340, 60]],
+        [[60, 200], [220, 200]]
+      ],
+      "nodes": [[220, 60]],
+      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+    },
+    "answer": 1565,
+    "tolerance": 0.03,
+    "unit": "Hz",
+    "explanation": "At resonance the inductor's and capacitor's reactances are equal and opposite, cancelling exactly — the series branch collapses to just $R$, and the whole input reaches the output. Off resonance the leftover reactance steals voltage and the output falls away on both sides: band-pass. $f_0 = \\frac{1}{2\\pi\\sqrt{LC}} = \\frac{1}{2\\pi\\sqrt{2.2\\times10^{-3} \\cdot 4.7\\times10^{-6}}} \\approx 1565\\,\\text{Hz}$."
+  },
+  {
+    "id": "fb-018",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "An audio ADC samples at $48\\,\\text{kHz}$. Why must a low-pass \"anti-aliasing\" filter sit in front of it?",
+    "choices": [
+      "Content above $24\\,\\text{kHz}$ would fold back (alias) into the audible band as false tones, and once sampled the damage cannot be undone",
+      "To remove $50/60\\,\\text{Hz}$ mains hum before conversion",
+      "To boost frequencies near $24\\,\\text{kHz}$ so they aren't lost in sampling",
+      "The ADC would be damaged by signals faster than it can sample"
+    ],
+    "answer": 0,
+    "explanation": "A sampler cannot tell $f$ from $48\\,\\text{kHz} - f$: an inaudible $30\\,\\text{kHz}$ tone shows up in the samples as a very audible $18\\,\\text{kHz}$ tone. Everything above the Nyquist frequency ($24\\,\\text{kHz}$, half the sample rate) must be removed *before* sampling, because afterwards the alias is indistinguishable from a real signal — no digital cleverness can remove it. That is why the anti-aliasing filter must be an analog low-pass placed ahead of the ADC."
+  },
+  {
+    "id": "fb-019",
+    "topic": "filters-bode",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "At $f_0 = 1/(2\\pi\\sqrt{LC}) \\approx 1.6\\,\\text{kHz}$, what does this circuit do to the input signal?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsine", "from": [60, 220], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1 kΩ" },
+        { "type": "inductor", "from": [200, 60], "to": [200, 140], "label": "L", "value": "10 mH" },
+        { "type": "capacitor", "from": [200, 140], "to": [200, 220], "label": "C", "value": "1 µF" },
+        { "type": "ground", "at": [140, 220] }
+      ],
+      "wires": [
+        [[200, 60], [340, 60]],
+        [[60, 220], [200, 220]]
+      ],
+      "nodes": [[200, 60]],
+      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+    },
+    "choices": [
+      "It notches it out: at resonance the series LC branch has zero impedance and shorts the output node to ground",
+      "It passes it preferentially: the LC branch resonates and boosts the output",
+      "Nothing special: the inductor and capacitor cancel, so the branch acts as if it weren't there",
+      "It low-passes it, with cutoff at $f_0$"
+    ],
+    "answer": 0,
+    "explanation": "A series $L$ and $C$ have opposite-sign reactances ($+\\omega L$ vs $-1/\\omega C$); at $f_0$ they cancel and the branch's total impedance goes to zero. Hanging that branch from the output node to ground creates a dead short — but only at $f_0$, so exactly that frequency is swallowed while everything else passes: a notch (band-stop) filter. Note that \"cancel\" means zero *impedance*, not an open circuit — the opposite of the third choice. Notch filters built this way pull a single offender, like mains hum or a whistle, out of a signal."
+  },
+  {
+    "id": "fb-020",
+    "topic": "filters-bode",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "An RC low-pass filter has $R = 10\\,\\text{k}\\Omega$ and $C = 10\\,\\text{nF}$. Find its gain in dB at $5\\,\\text{kHz}$ (the exact value, not the Bode asymptote).",
+    "answer": -10.4,
+    "tolerance": 0.03,
+    "unit": "dB",
+    "explanation": "Two steps: find the corner, then evaluate the exact magnitude. $RC = 10^{-4}\\,\\text{s}$ gives $f_c = 1/(2\\pi \\cdot 10^{-4}) \\approx 1592\\,\\text{Hz}$, so $f/f_c = 5000/1592 \\approx 3.14$. Then $|H| = \\frac{1}{\\sqrt{1 + (f/f_c)^2}} = \\frac{1}{\\sqrt{1 + 9.87}} \\approx 0.303$, and $20\\log_{10}(0.303) \\approx -10.4\\,\\text{dB}$. The straight-line asymptote would guess $-20\\log_{10}(3.14) \\approx -9.9\\,\\text{dB}$ — close, but the exact curve always sits a bit below it near the corner."
+  }
+]

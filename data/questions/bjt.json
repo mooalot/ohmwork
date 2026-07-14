@@ -1,0 +1,434 @@
+[
+  {
+    "id": "bjt-001",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "What is the most useful mental model of a BJT operating in its active region?",
+    "choices": [
+      "A current amplifier: a small base current permits a collector current $\\beta$ times larger to flow",
+      "A voltage amplifier: the collector voltage is $\\beta$ times the base voltage",
+      "A variable resistor whose value is set directly by the base voltage",
+      "A charge pump that stores base current and releases it at the collector"
+    ],
+    "answer": 0,
+    "explanation": "The BJT is a current-controlled current source: forward-bias the base–emitter junction, and every microamp flowing into the base lets $\\beta$ (typically 50–300) microamps flow from collector to emitter. The transistor doesn't create that current — the external circuit supplies it; the base just grants permission. Nothing is stored and no voltages get multiplied: $I_C = \\beta I_B$ is the whole working model for hand analysis."
+  },
+  {
+    "id": "bjt-002",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A transistor with $\\beta = 150$ operates in the active region with a base current of $40\\,\\mu\\text{A}$. What collector current flows?",
+    "choices": [
+      "$6\\,\\text{mA}$",
+      "$0.27\\,\\mu\\text{A}$",
+      "$40\\,\\mu\\text{A}$",
+      "$6\\,\\text{A}$"
+    ],
+    "answer": 0,
+    "explanation": "Active region means the current-gain relationship holds: $I_C = \\beta I_B = 150 \\times 40\\,\\mu\\text{A} = 6000\\,\\mu\\text{A} = 6\\,\\text{mA}$. A tiny control current permits one 150× larger — that leverage is the entire reason a transistor amplifies. (The emitter carries the sum: $I_E = I_C + I_B = 6.04\\,\\text{mA}$.) Dividing by $\\beta$ or letting the base current 'pass through' unchanged are the classic mistakes."
+  },
+  {
+    "id": "bjt-003",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "An npn transistor is conducting. What do you know about its base–emitter voltage $V_{BE}$?",
+    "choices": [
+      "It sits pinned near $0.7\\,\\text{V}$ — the base–emitter junction is a forward-biased silicon diode",
+      "It is directly proportional to the collector current",
+      "It equals half the supply voltage",
+      "It is $0\\,\\text{V}$, since the conducting junction acts like a closed switch"
+    ],
+    "answer": 0,
+    "explanation": "The base–emitter junction is a silicon diode, and a forward-biased diode's voltage is pinned by its exponential I–V curve: increasing the current tenfold moves $V_{BE}$ by only about $60\\,\\text{mV}$. So for hand analysis, a conducting BJT has $V_{BE} \\approx 0.7\\,\\text{V}$, full stop. This one number unlocks most bias calculations: the emitter sits one diode drop below wherever the base is held."
+  },
+  {
+    "id": "bjt-004",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The base of an npn is tied directly to its emitter ($V_{BE} = 0$). What is the collector current?",
+    "choices": [
+      "Essentially zero — with no base–emitter forward bias the transistor is in cutoff, and the collector looks like an open circuit",
+      "$V_{CC}/R_C$ — the collector resistor still sets the current",
+      "A small current, $I_C = I_B/\\beta$",
+      "Whatever current the collector supply can deliver"
+    ],
+    "answer": 0,
+    "explanation": "No forward bias on the base–emitter diode means no base current, and with $I_B = 0$ there is nothing to amplify: $I_C = \\beta \\times 0 = 0$ (only nanoamps of leakage). The transistor is in cutoff and the collector–emitter path acts as an open switch — $R_C$ carries no current and drops no voltage. The transistor only wakes up once $V_{BE}$ climbs to roughly $0.6$–$0.7\\,\\text{V}$."
+  },
+  {
+    "id": "bjt-005",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "In this fixed-bias circuit, $\\beta = 100$ and $V_{BE} = 0.7\\,\\text{V}$. Find the collector current, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [160, 60], "to": [160, 140], "label": "R_B", "value": "470 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [336, 60], "to": [336, 120], "label": "R_C", "value": "1 kΩ" },
+        { "type": "npn", "at": [320, 160] },
+        { "type": "ground", "at": [336, 216] }
+      ],
+      "wires": [
+        [[160, 60], [336, 60]],
+        [[248, 60], [248, 44]],
+        [[160, 140], [160, 160], [296, 160]],
+        [[336, 120], [336, 132]],
+        [[336, 188], [336, 216]]
+      ],
+      "nodes": [[248, 60]],
+      "labels": [{ "text": "+12 V", "at": [248, 32], "terminal": [248, 44] }]
+    },
+    "answer": 2.4,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "The base resistor sees the supply minus one diode drop: $I_B = (12 - 0.7)/470\\,\\text{k}\\Omega \\approx 24\\,\\mu\\text{A}$. The transistor multiplies: $I_C = \\beta I_B = 100 \\times 24\\,\\mu\\text{A} \\approx 2.4\\,\\text{mA}$. Always sanity-check the region afterwards: $V_{CE} = 12 - 2.4\\,\\text{mA} \\times 1\\,\\text{k}\\Omega = 9.6\\,\\text{V}$, comfortably above $0.2\\,\\text{V}$, so the active-region math was valid."
+  },
+  {
+    "id": "bjt-006",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The $5\\,\\text{V}$ logic signal drives this transistor into hard saturation ($V_{CE(sat)} = 0.2\\,\\text{V}$). How much current flows through the $220\\,\\Omega$ load, in mA?",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [316, 48], "to": [316, 120], "label": "R_C", "value": "220 Ω" },
+        { "type": "resistor", "from": [180, 160], "to": [260, 160], "label": "R_B", "value": "1 kΩ" },
+        { "type": "npn", "at": [300, 160] },
+        { "type": "ground", "at": [316, 216] }
+      ],
+      "wires": [
+        [[316, 48], [316, 36]],
+        [[316, 120], [316, 132]],
+        [[164, 160], [180, 160]],
+        [[260, 160], [276, 160]],
+        [[316, 188], [316, 216]]
+      ],
+      "labels": [
+        { "text": "+5 V", "at": [316, 24], "terminal": [316, 36] },
+        { "text": "5 V", "at": [152, 160], "anchor": "right", "terminal": [164, 160] }
+      ]
+    },
+    "answer": 21.8,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Once saturated, the transistor is just a closed switch with a $0.2\\,\\text{V}$ blemish — the *load* sets the current, not $\\beta$. KVL down the collector leg: $I_C = (5 - 0.2)/220 \\approx 21.8\\,\\text{mA}$. The base is fed far more current than the load needs ($I_B = 4.3/1\\,\\text{k}\\Omega = 4.3\\,\\text{mA}$), which is exactly what 'hard saturation' means: $\\beta I_B$ vastly exceeds what the collector circuit can pass."
+  },
+  {
+    "id": "bjt-007",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A $5\\,\\text{V}$ logic output switches a $1\\,\\text{k}\\Omega$ load on a $12\\,\\text{V}$ rail through this npn. The transistor's minimum $\\beta$ is 100, but for a solid switch you design with a forced $\\beta$ of 10 (10× base overdrive). Using $V_{BE} = 0.7\\,\\text{V}$ and $V_{CE(sat)} = 0.2\\,\\text{V}$, find $R_B$ in $\\text{k}\\Omega$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [316, 48], "to": [316, 120], "label": "R_C", "value": "1 kΩ" },
+        { "type": "resistor", "from": [180, 160], "to": [260, 160], "label": "R_B" },
+        { "type": "npn", "at": [300, 160] },
+        { "type": "ground", "at": [316, 216] }
+      ],
+      "wires": [
+        [[316, 48], [316, 36]],
+        [[316, 120], [316, 132]],
+        [[164, 160], [180, 160]],
+        [[260, 160], [276, 160]],
+        [[316, 188], [316, 216]]
+      ],
+      "labels": [
+        { "text": "+12 V", "at": [316, 24], "terminal": [316, 36] },
+        { "text": "5 V", "at": [152, 160], "anchor": "right", "terminal": [164, 160] }
+      ]
+    },
+    "answer": 3.64,
+    "tolerance": 0.05,
+    "unit": "kΩ",
+    "explanation": "Start from what the load demands: $I_{C(sat)} = (12 - 0.2)/1\\,\\text{k}\\Omega = 11.8\\,\\text{mA}$. Overdriving the base 10× beyond the bare minimum guarantees saturation across temperature and part-to-part $\\beta$ spread: $I_B = 11.8/10 = 1.18\\,\\text{mA}$. The logic pin drops one diode on the way in, leaving $5 - 0.7 = 4.3\\,\\text{V}$ across $R_B$, so $R_B = 4.3\\,\\text{V}/1.18\\,\\text{mA} \\approx 3.6\\,\\text{k}\\Omega$ (in practice you'd grab a standard $3.3\\,\\text{k}\\Omega$ for extra margin)."
+  },
+  {
+    "id": "bjt-008",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why does a saturated BJT's collector–emitter voltage settle around $0.2\\,\\text{V}$ rather than dropping to zero like an ideal switch?",
+    "choices": [
+      "Both junctions are forward-biased, and $V_{CE}$ is the *difference* of two unequal diode drops: $V_{BE} - V_{BC} \\approx 0.7 - 0.5 = 0.2\\,\\text{V}$",
+      "The transistor's internal ohmic resistance always drops exactly $0.2\\,\\text{V}$",
+      "It is the minimum voltage needed to keep the base–emitter diode conducting",
+      "$V_{CE}$ cannot reach zero because the collector current would become infinite"
+    ],
+    "answer": 0,
+    "explanation": "In saturation the base is driven so hard that the collector voltage falls below the base voltage — forward-biasing the collector–base junction too. $V_{CE}$ is then the difference of two diode drops, $V_{BE} - V_{BC} \\approx 0.7 - 0.5 = 0.2\\,\\text{V}$; the two junctions differ in doping and geometry, so the drops never cancel exactly. This residual couple hundred millivolts is why a saturated BJT still dissipates a little power — and one reason MOSFETs, which have no junction offset, often replace BJTs as switches."
+  },
+  {
+    "id": "bjt-009",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "In this voltage-divider-biased stage, $V_{BE} = 0.7\\,\\text{V}$ and $\\beta$ is large enough to neglect base current. Find $I_C$, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [140, 48], "to": [140, 120], "label": "R_1", "value": "47 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [140, 160], "to": [140, 240], "label": "R_2", "value": "10 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [316, 48], "to": [316, 120], "label": "R_C", "value": "4.7 kΩ" },
+        { "type": "resistor", "from": [316, 188], "to": [316, 248], "label": "R_E", "value": "2.2 kΩ" },
+        { "type": "npn", "at": [300, 160] },
+        { "type": "ground", "at": [140, 240] },
+        { "type": "ground", "at": [316, 248] }
+      ],
+      "wires": [
+        [[128, 48], [316, 48]],
+        [[140, 120], [140, 160], [276, 160]],
+        [[316, 120], [316, 132]]
+      ],
+      "nodes": [[140, 48], [140, 160]],
+      "labels": [{ "text": "+15 V", "at": [116, 48], "anchor": "right", "terminal": [128, 48] }]
+    },
+    "answer": 0.88,
+    "tolerance": 0.04,
+    "unit": "mA",
+    "explanation": "The divider pins the base: $V_B = 15 \\cdot \\frac{10}{47+10} \\approx 2.63\\,\\text{V}$. The emitter follows one diode drop below: $V_E \\approx 1.93\\,\\text{V}$. That voltage sitting across $R_E$ sets the current: $I_C \\approx I_E = 1.93/2.2\\,\\text{k}\\Omega \\approx 0.88\\,\\text{mA}$. Notice $\\beta$ never entered the calculation — that is the entire point of this bias scheme."
+  },
+  {
+    "id": "bjt-010",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "When a pnp transistor is conducting, which way does conventional current flow through it?",
+    "choices": [
+      "In at the emitter, out at the collector and base — the mirror image of an npn, with the emitter at the *highest* potential",
+      "In at the collector, out at the emitter — exactly the same as an npn",
+      "In at the base, out at both the emitter and collector",
+      "pnp devices carry only negative charge, so no conventional current flows"
+    ],
+    "answer": 0,
+    "explanation": "Every arrow flips: in a pnp, conventional current enters the emitter (the terminal held at the highest potential), and most of it exits the collector with a small fraction exiting the base. To turn it on you pull the base about $0.7\\,\\text{V}$ *below* the emitter. This mirror symmetry is why pnp transistors make natural high-side switches: the emitter ties to the positive rail and the load hangs from the collector."
+  },
+  {
+    "id": "bjt-011",
+    "topic": "bjt",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "This common-emitter stage is biased at $I_C = 1.3\\,\\text{mA}$ (bias network not shown). Using $r_e = 26\\,\\text{mV}/I_C$, find the magnitude of the small-signal voltage gain $|v_{out}/v_{in}|$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [276, 48], "to": [276, 120], "label": "R_C", "value": "2 kΩ" },
+        { "type": "npn", "at": [260, 160] },
+        { "type": "ground", "at": [276, 216] }
+      ],
+      "wires": [
+        [[276, 48], [276, 36]],
+        [[276, 120], [276, 132]],
+        [[276, 120], [372, 120]],
+        [[152, 160], [236, 160]],
+        [[276, 188], [276, 216]]
+      ],
+      "nodes": [[276, 120]],
+      "labels": [
+        { "text": "+V_{CC}", "at": [276, 24], "terminal": [276, 36] },
+        { "text": "v_{out}", "at": [384, 120], "anchor": "left" },
+        { "text": "v_{in}", "at": [140, 160], "anchor": "right", "terminal": [152, 160] }
+      ]
+    },
+    "answer": 100,
+    "tolerance": 0.05,
+    "unit": "V/V",
+    "explanation": "The transistor converts base-voltage wiggles into collector-current wiggles through its internal emitter resistance $r_e = 26\\,\\text{mV}/1.3\\,\\text{mA} = 20\\,\\Omega$, and $R_C$ converts those current wiggles back into voltage. The gain is $-R_C/r_e = -2000/20 = -100$ (the minus sign says the output is inverted). Hotter bias means smaller $r_e$ and more gain — which is also why this bare stage's gain drifts with its operating point."
+  },
+  {
+    "id": "bjt-012",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why add a resistor in the emitter leg of a biased amplifier stage (emitter degeneration)?",
+    "choices": [
+      "Negative feedback: if $I_C$ tries to rise, the emitter voltage rises, squeezing $V_{BE}$ and pulling the current back — the bias point stops depending on $\\beta$ and temperature",
+      "It increases the stage's voltage gain",
+      "It blocks DC so that only AC signals reach the emitter",
+      "It limits the base current to protect the transistor"
+    ],
+    "answer": 0,
+    "explanation": "$R_E$ creates local negative feedback: if $I_C$ drifts upward (hotter chip, higher-$\\beta$ part), the emitter voltage rises, which *reduces* $V_{BE}$ and throttles the current right back down. With the base held by a divider, the current is simply $I_E \\approx (V_B - 0.7)/R_E$ — the flaky parameters ($\\beta$, $V_{BE}$ drift) barely matter. The price is voltage gain, which falls to roughly $-R_C/R_E$: stability bought with gain."
+  },
+  {
+    "id": "bjt-013",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "Set $R_B$ so the collector current is $2\\,\\text{mA}$. Take $\\beta = 100$ and $V_{BE} = 0.7\\,\\text{V}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [160, 60], "to": [160, 140], "label": "R_B", "bind": true, "flipLabel": true },
+        { "type": "resistor", "from": [336, 60], "to": [336, 120], "label": "R_C", "value": "2.2 kΩ" },
+        { "type": "npn", "at": [320, 160] },
+        { "type": "ground", "at": [336, 216] }
+      ],
+      "wires": [
+        [[160, 60], [336, 60]],
+        [[248, 60], [248, 44]],
+        [[160, 140], [160, 160], [296, 160]],
+        [[336, 120], [336, 132]],
+        [[336, 188], [336, 216]]
+      ],
+      "nodes": [[248, 60]],
+      "labels": [{ "text": "+10 V", "at": [248, 32], "terminal": [248, 44] }]
+    },
+    "slider": { "min": 100, "max": 1000, "step": 5, "unit": "kΩ", "label": "R_B" },
+    "answer": 465,
+    "tolerance": 0.03,
+    "explanation": "Work backwards from the goal: $I_C = 2\\,\\text{mA}$ needs $I_B = 2\\,\\text{mA}/100 = 20\\,\\mu\\text{A}$. $R_B$ has $10 - 0.7 = 9.3\\,\\text{V}$ across it, so $R_B = 9.3\\,\\text{V}/20\\,\\mu\\text{A} = 465\\,\\text{k}\\Omega$. Check the region before trusting the answer: $V_{CE} = 10 - 2\\,\\text{mA} \\times 2.2\\,\\text{k}\\Omega = 5.6\\,\\text{V}$ — solidly active, so $I_C = \\beta I_B$ was legitimate."
+  },
+  {
+    "id": "bjt-014",
+    "topic": "bjt",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Find $V_{CE}$ of this voltage-divider-biased stage, in volts. Take $V_{BE} = 0.7\\,\\text{V}$ and neglect base current.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [140, 48], "to": [140, 120], "label": "R_1", "value": "33 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [140, 160], "to": [140, 240], "label": "R_2", "value": "10 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [316, 48], "to": [316, 120], "label": "R_C", "value": "2.2 kΩ" },
+        { "type": "resistor", "from": [316, 188], "to": [316, 248], "label": "R_E", "value": "1 kΩ" },
+        { "type": "npn", "at": [300, 160] },
+        { "type": "ground", "at": [140, 240] },
+        { "type": "ground", "at": [316, 248] }
+      ],
+      "wires": [
+        [[128, 48], [316, 48]],
+        [[140, 120], [140, 160], [276, 160]],
+        [[316, 120], [316, 132]]
+      ],
+      "nodes": [[140, 48], [140, 160]],
+      "labels": [{ "text": "+12 V", "at": [116, 48], "anchor": "right", "terminal": [128, 48] }]
+    },
+    "answer": 5.31,
+    "tolerance": 0.04,
+    "unit": "V",
+    "explanation": "Walk the bias chain: $V_B = 12 \\cdot \\frac{10}{33+10} \\approx 2.79\\,\\text{V}$, so $V_E = 2.09\\,\\text{V}$ and $I_C \\approx I_E = 2.09\\,\\text{V}/1\\,\\text{k}\\Omega = 2.09\\,\\text{mA}$. That current drops voltage across *both* the collector and emitter resistors, so $V_{CE} = 12 - 2.09\\,\\text{mA} \\times (2.2\\,\\text{k}\\Omega + 1\\,\\text{k}\\Omega) \\approx 5.3\\,\\text{V}$. A mid-supply $V_{CE}$ like this is the design target for an amplifier: maximum room for the output to swing both ways."
+  },
+  {
+    "id": "bjt-015",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "You probe an npn transistor in-circuit and measure $V_{BE} = 0.7\\,\\text{V}$ and $V_{CE} = 0.1\\,\\text{V}$. What region is it operating in?",
+    "choices": [
+      "Saturation — the base is on and $V_{CE}$ has collapsed below $V_{BE}$, so both junctions are forward-biased",
+      "Active — any conducting transistor with $V_{BE} \\approx 0.7\\,\\text{V}$ is in the active region",
+      "Cutoff — $V_{CE}$ near zero means the transistor is off",
+      "Breakdown — $V_{CE}$ should never drop this low"
+    ],
+    "answer": 0,
+    "explanation": "The quick bench test: compare $V_{CE}$ to about $0.2$–$0.3\\,\\text{V}$. Here the base is clearly on ($V_{BE} = 0.7\\,\\text{V}$) and the collector has collapsed to $0.1\\,\\text{V}$ — below the base, so the collector–base junction is forward-biased too: saturation. In this state $I_C = \\beta I_B$ no longer holds; the external collector circuit decides the current. An active transistor would hold $V_{CE}$ comfortably above a few tenths of a volt."
+  },
+  {
+    "id": "bjt-016",
+    "topic": "bjt",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "$V_{CC} = 5\\,\\text{V}$, $R_C = 1\\,\\text{k}\\Omega$, $\\beta = 200$, and the base is fed $I_B = 100\\,\\mu\\text{A}$. What collector current actually flows?",
+    "choices": [
+      "About $4.8\\,\\text{mA}$ — the transistor saturates, and $R_C$ caps the current",
+      "$20\\,\\text{mA}$ — $I_C = \\beta I_B$",
+      "$5\\,\\text{mA}$ — simply $V_{CC}/R_C$",
+      "$100\\,\\mu\\text{A}$ — the same current as the base"
+    ],
+    "answer": 0,
+    "explanation": "$I_C = \\beta I_B$ is a *ceiling granted by the base*, not a guarantee — the collector circuit must actually be able to supply that current. Here the base would permit $\\beta I_B = 20\\,\\text{mA}$, but even with the transistor fully on ($V_{CE} \\approx 0.2\\,\\text{V}$), $R_C$ can only pass $(5 - 0.2)/1\\,\\text{k}\\Omega = 4.8\\,\\text{mA}$. So the transistor saturates and the resistor wins. Whenever $\\beta I_B$ exceeds what the collector circuit allows, you are in saturation — always check both."
+  },
+  {
+    "id": "bjt-017",
+    "topic": "bjt",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A common-emitter stage has $R_C = 4.7\\,\\text{k}\\Omega$ and an unbypassed emitter resistor $R_E = 220\\,\\Omega$, and is biased at $I_C = 1\\,\\text{mA}$. Using $r_e = 26\\,\\text{mV}/I_C$, find the magnitude of the small-signal voltage gain.",
+    "answer": 19.1,
+    "tolerance": 0.03,
+    "unit": "V/V",
+    "explanation": "The external emitter resistor sits in series with the transistor's internal $r_e$, so the gain is $-R_C/(R_E + r_e)$. With $r_e = 26\\,\\text{mV}/1\\,\\text{mA} = 26\\,\\Omega$: $|A_v| = 4700/(220 + 26) \\approx 19.1$. The quick estimate $R_C/R_E = 21.4$ is close but not exact — $r_e$ still matters when $R_E$ is only about 10× larger. Degeneration traded raw gain (about 181 if $R_E$ were bypassed) for a gain set mostly by two stable resistors."
+  },
+  {
+    "id": "bjt-018",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "When using a BJT as a switch, why drive it all the way into saturation instead of leaving it partway on in the active region?",
+    "choices": [
+      "In saturation $V_{CE} \\approx 0.2\\,\\text{V}$, so $P = V_{CE} I_C$ stays tiny and the transistor behaves like a closed switch",
+      "Saturation gives the highest voltage gain",
+      "In the active region the load would receive no current at all",
+      "Saturation increases $\\beta$, letting the base drive a larger load"
+    ],
+    "answer": 0,
+    "explanation": "A switch should waste nothing, and the transistor's dissipation is $P = V_{CE} \\times I_C$. Saturated, $V_{CE} \\approx 0.2\\,\\text{V}$, so even $100\\,\\text{mA}$ costs only $20\\,\\text{mW}$. Held half-on in the active region with several volts across it, the same transistor at the same current would dissipate more than ten times as much and cook. Switch design is therefore binary: cutoff (open, zero current) or saturation (closed, tiny drop) — never linger in between."
+  },
+  {
+    "id": "bjt-019",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "In this pnp circuit the base is held at $-2\\,\\text{V}$. Taking $V_{EB} = 0.7\\,\\text{V}$ and $I_C \\approx I_E$, find the collector current, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [296, 52], "to": [296, 112], "label": "R_C", "value": "3.3 kΩ" },
+        { "type": "resistor", "from": [296, 168], "to": [296, 248], "label": "R_E", "value": "1 kΩ" },
+        { "type": "pnp", "at": [280, 140] },
+        { "type": "ground", "at": [296, 248] }
+      ],
+      "wires": [
+        [[296, 52], [296, 40]],
+        [[200, 140], [256, 140]]
+      ],
+      "labels": [
+        { "text": "-9 V", "at": [296, 28], "terminal": [296, 40] },
+        { "text": "-2 V", "at": [188, 140], "anchor": "right", "terminal": [200, 140] }
+      ]
+    },
+    "answer": 1.3,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "A pnp is the npn's mirror image: its emitter must sit *higher* than its base by one diode drop, so $V_E = -2 + 0.7 = -1.3\\,\\text{V}$. That puts $0 - (-1.3) = 1.3\\,\\text{V}$ across the $1\\,\\text{k}\\Omega$ emitter resistor: $I_E = 1.3\\,\\text{mA}$, flowing from ground *into* the emitter and out the collector toward the $-9\\,\\text{V}$ rail. Check the region: $V_C = -9 + 1.3\\,\\text{mA} \\times 3.3\\,\\text{k}\\Omega = -4.7\\,\\text{V}$, well below the emitter — properly active."
+  },
+  {
+    "id": "bjt-020",
+    "topic": "bjt",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "A fixed-bias stage ($V_{CC} = 10\\,\\text{V}$, $R_B = 465\\,\\text{k}\\Omega$ from supply to base, $R_C = 2.2\\,\\text{k}\\Omega$) was designed around $\\beta = 100$, giving $I_C = 2\\,\\text{mA}$ and $V_{CE} = 5.6\\,\\text{V}$. The transistor is replaced with one having $\\beta = 200$. What happens to the operating point?",
+    "choices": [
+      "$I_C$ doubles to about $4\\,\\text{mA}$ and $V_{CE}$ collapses to about $1.2\\,\\text{V}$ — fixed bias tracks $\\beta$ directly",
+      "Nothing changes — the resistors set the bias point, not the transistor",
+      "$I_C$ stays at $2\\,\\text{mA}$ but $V_{BE}$ doubles to $1.4\\,\\text{V}$",
+      "The transistor saturates immediately, so $V_{CE} = 0.2\\,\\text{V}$"
+    ],
+    "answer": 0,
+    "explanation": "$R_B$ fixes only the *base* current — $(10 - 0.7)/465\\,\\text{k}\\Omega = 20\\,\\mu\\text{A}$ — and the collector current is $\\beta$ times that. Doubling $\\beta$ doubles $I_C$ to $4\\,\\text{mA}$, so $V_{CE} = 10 - 4\\,\\text{mA} \\times 2.2\\,\\text{k}\\Omega = 1.2\\,\\text{V}$: still (barely) active, but the amplifier's headroom is gone. Since $\\beta$ routinely varies 2:1 between parts and with temperature, fixed bias is fragile — voltage-divider bias with an emitter resistor pins $I_E$ instead of $I_B$, which is why it is the standard."
+  }
+]

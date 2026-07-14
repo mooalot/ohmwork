@@ -1,0 +1,378 @@
+[
+  {
+    "id": "rlc-001",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "An ideal LC circuit (no resistance) is given some initial energy and left alone. What is fundamentally happening inside it?",
+    "choices": [
+      "Energy sloshes back and forth between the capacitor's electric field and the inductor's magnetic field, forever, at one natural frequency",
+      "The capacitor discharges once through the inductor and then everything stops",
+      "The energy gradually converts to heat until the oscillation dies out",
+      "Current circulates at whatever frequency the components were charged at"
+    ],
+    "answer": 0,
+    "explanation": "This is the electrical mass-on-a-spring. The capacitor is the spring (energy stored as $\\frac{1}{2}CV^2$ in its electric field) and the inductor is the mass (energy stored as $\\frac{1}{2}LI^2$ in its magnetic field, with 'inertia' that resists changes in current). When the cap empties, the inductor's current keeps flowing — inertia! — and recharges the cap the other way. With no resistance there is no friction, so the energy sloshes back and forth forever at the natural frequency $f_0 = \\frac{1}{2\\pi\\sqrt{LC}}$."
+  },
+  {
+    "id": "rlc-002",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "An LC circuit has $L = 10\\,\\text{mH}$ and $C = 100\\,\\text{nF}$. Find its resonant frequency $f_0$, in kHz.",
+    "answer": 5.03,
+    "tolerance": 0.03,
+    "unit": "kHz",
+    "explanation": "Bigger $L$ (more inertia) or bigger $C$ (softer spring) both slow the oscillation down — hence the $\\sqrt{LC}$ in the denominator. $LC = 10^{-2} \\times 10^{-7} = 10^{-9}$, so $\\sqrt{LC} = 3.16 \\times 10^{-5}$ and $f_0 = \\frac{1}{2\\pi\\sqrt{LC}} = \\frac{1}{2\\pi \\cdot 3.16\\times10^{-5}} \\approx 5.03\\,\\text{kHz}$. Watch the powers of ten: pairing mH with nF lands you in the kHz range."
+  },
+  {
+    "id": "rlc-003",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "This series RLC is driven exactly at its resonant frequency. What impedance does the source see?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [160, 60], "label": "R" },
+        { "type": "inductor", "from": [160, 60], "to": [260, 60], "label": "L" },
+        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C" }
+      ],
+      "wires": [
+        [[260, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ]
+    },
+    "choices": [
+      "Just $R$ — the impedance is at its minimum and purely resistive",
+      "Infinite impedance — the L and C block everything",
+      "$R + X_L + X_C$ added as ordinary numbers, so quite large",
+      "Zero — resonance shorts out the source completely"
+    ],
+    "answer": 0,
+    "explanation": "The inductor's voltage leads the current by 90° and the capacitor's lags by 90°, so their voltages are always exact opposites. At $f_0$ their magnitudes are equal too ($X_L = X_C$), and they cancel completely — from the outside, the L and C together look like a plain wire. Only $R$ is left: $Z = R$, the minimum possible impedance for this circuit. (Not zero, though — real circuits always keep their $R$.)"
+  },
+  {
+    "id": "rlc-004",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A series RLC has $L = 100\\,\\text{mH}$, $C = 1\\,\\text{µF}$, and $R = 20\\,\\Omega$. Find its quality factor $Q$ (dimensionless).",
+    "answer": 15.8,
+    "tolerance": 0.03,
+    "explanation": "$Q$ compares the energy sloshing in the L–C 'flywheel' to the energy the resistor burns each cycle — high $Q$ means a light touch of friction on a heavy flywheel. First $\\omega_0 = \\frac{1}{\\sqrt{LC}} = \\frac{1}{\\sqrt{0.1 \\times 10^{-6}}} = 3162\\,\\text{rad/s}$. Then $Q = \\frac{\\omega_0 L}{R} = \\frac{3162 \\times 0.1}{20} \\approx 15.8$. A $Q$ of 15.8 means the circuit rings for roughly $Q$ cycles before the oscillation substantially dies away."
+  },
+  {
+    "id": "rlc-005",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The plot shows the current amplitude of a driven series RLC versus drive frequency. Why does the current peak at $f_0 = 5\\,\\text{kHz}$?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "f (kHz)",
+      "ylabel": "I (mA)",
+      "xmin": 1,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 10,
+      "xticks": 1,
+      "yticks": 2,
+      "curves": [
+        { "fn": "expr", "expr": "10/Math.sqrt(1+25*Math.pow(t/5-5/t,2))" }
+      ],
+      "vlines": [{ "x": 5 }],
+      "marks": [{ "x": 5, "y": 10, "label": "f_0" }]
+    },
+    "choices": [
+      "At $f_0$ the inductive and capacitive reactances cancel, leaving only $R$ to limit the current",
+      "At $f_0$ the resistor's resistance drops to its minimum value",
+      "The source delivers more voltage when its frequency matches $f_0$",
+      "The inductor stores its maximum energy at $f_0$, which pushes extra current through"
+    ],
+    "answer": 0,
+    "explanation": "Below resonance the capacitor's reactance dominates and chokes the current; above it, the inductor's does. Exactly at $f_0$, $X_L = X_C$ and the two cancel — the source suddenly sees only $R$, the least opposition it will ever get, so $I = V/R$ is the tallest the current can be. The drive is also perfectly in step with the natural sloshing, like pushing a swing at exactly its own rhythm."
+  },
+  {
+    "id": "rlc-006",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "An AM radio's intermediate-frequency filter is a resonant circuit with $f_0 = 455\\,\\text{kHz}$ and $Q = 50$. What is its bandwidth, in kHz?",
+    "answer": 9.1,
+    "tolerance": 0.03,
+    "unit": "kHz",
+    "explanation": "Bandwidth is the price of selectivity: $\\text{BW} = f_0 / Q = 455 / 50 = 9.1\\,\\text{kHz}$. High $Q$ means a sharp, narrow resonance peak — the filter responds strongly only within about 9.1 kHz around 455 kHz, and neighboring stations fall off the shoulders of the peak. That's just wide enough for an AM broadcast signal (about 10 kHz), which is no accident."
+  },
+  {
+    "id": "rlc-007",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A parallel LC 'tank' is driven at its resonant frequency. From the source's perspective, what does the tank look like?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "flipLabel": true },
+        { "type": "inductor", "from": [220, 60], "to": [220, 200], "label": "L" },
+        { "type": "capacitor", "from": [320, 60], "to": [320, 200], "label": "C" }
+      ],
+      "wires": [
+        [[60, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "choices": [
+      "A near-infinite impedance — the source supplies almost no current while a large current circulates inside the tank",
+      "A near-zero impedance — resonance always minimizes impedance",
+      "A pure resistance equal to $X_L + X_C$",
+      "An open circuit at all frequencies, not just resonance"
+    ],
+    "answer": 0,
+    "explanation": "This is the mirror image of series resonance. At $f_0$ the branch currents through L and C are equal and opposite — whatever current the inductor pulls, the capacitor pushes back — so they trade energy directly with each other and cancel at the terminals. The source sees (ideally) no current drawn at all: maximum impedance. Series resonance is an impedance *minimum*; parallel resonance is an impedance *maximum* — the current merrily sloshes around the loop without needing the source."
+  },
+  {
+    "id": "rlc-008",
+    "topic": "rlc-resonance",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A series RLC has $R = 200\\,\\Omega$, $L = 50\\,\\text{mH}$, $C = 2\\,\\text{µF}$. Its natural response obeys $s^2 + 2\\alpha s + \\omega_0^2 = 0$. Compute the damping coefficient $\\alpha$, in $\\text{s}^{-1}$.",
+    "answer": 2000,
+    "tolerance": 0.03,
+    "unit": "s⁻¹",
+    "explanation": "$\\alpha$ measures how fast the resistor bleeds energy out of the L–C exchange. For a series RLC, $\\alpha = \\frac{R}{2L} = \\frac{200}{2 \\times 0.05} = 2000\\,\\text{s}^{-1}$. Compare it to $\\omega_0 = \\frac{1}{\\sqrt{LC}} = \\frac{1}{\\sqrt{10^{-7}}} = 3162\\,\\text{rad/s}$: since $\\alpha < \\omega_0$, the friction loses the race to the sloshing and the circuit is *underdamped* — it rings at $\\omega_d = \\sqrt{\\omega_0^2 - \\alpha^2}$ while decaying as $e^{-\\alpha t}$."
+  },
+  {
+    "id": "rlc-009",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The plot shows a capacitor voltage in an RLC circuit after a disturbance (dashed line: the decay envelope). Which damping regime is this?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v_C (V)",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": -10,
+      "ymax": 10,
+      "xticks": 2,
+      "yticks": 5,
+      "curves": [
+        { "fn": "expr", "expr": "10*Math.exp(-t/3)*Math.cos(2*Math.PI*0.8*t)" },
+        { "fn": "expr", "expr": "10*Math.exp(-t/3)", "dash": true, "color": 2 },
+        { "fn": "expr", "expr": "-10*Math.exp(-t/3)", "dash": true, "color": 2 }
+      ]
+    },
+    "choices": [
+      "Underdamped — energy still sloshes between L and C, but the resistor shrinks each swing",
+      "Overdamped — the response is dominated by resistance",
+      "Critically damped — the fastest possible settling",
+      "Undamped — the oscillation never decays"
+    ],
+    "answer": 0,
+    "explanation": "Oscillation *with* a shrinking envelope is the signature of underdamping: the L–C energy exchange survives, but each round trip the resistor takes its cut, so the amplitude decays as $e^{-\\alpha t}$. Overdamped and critically damped responses never cross zero more than once — too much friction for the energy to slosh back. Mechanically, this is a struck tuning fork or a car with worn shocks bouncing after a bump."
+  },
+  {
+    "id": "rlc-010",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "This tank circuit tunes a simple AM radio with $L = 100\\,\\text{µH}$. Set the variable capacitor $C$ so the tank resonates at a station broadcasting on $1000\\,\\text{kHz}$ ($1\\,\\text{MHz}$).",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{ant}", "flipLabel": true },
+        { "type": "inductor", "from": [220, 60], "to": [220, 200], "label": "L", "value": "100 µH" },
+        { "type": "capacitor", "from": [320, 60], "to": [320, 200], "label": "C", "bind": true }
+      ],
+      "wires": [
+        [[60, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "slider": { "min": 50, "max": 500, "step": 1, "unit": "pF", "label": "C" },
+    "answer": 253,
+    "tolerance": 0.03,
+    "explanation": "Solve $f_0 = \\frac{1}{2\\pi\\sqrt{LC}}$ for $C$: $C = \\frac{1}{(2\\pi f_0)^2 L} = \\frac{1}{(6.28\\times10^6)^2 \\times 10^{-4}} \\approx 253\\,\\text{pF}$. This is exactly what an old radio's tuning knob does — it rotates the plates of a variable capacitor, sweeping $f_0$ across the band; the tank's impedance peaks at resonance, so only the matching station's frequency develops a large signal."
+  },
+  {
+    "id": "rlc-011",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Dozens of radio stations hit an antenna at once, yet the radio plays only one. What does the LC tuning circuit actually do to make that happen?",
+    "choices": [
+      "Its response is large only near its resonant frequency, so the chosen station's signal is strongly developed while all others are heavily attenuated",
+      "It amplifies the chosen station's signal above the others",
+      "It blocks all frequencies below the chosen station and passes everything above",
+      "It shifts every station's frequency until the chosen one matches the speaker"
+    ],
+    "answer": 0,
+    "explanation": "A resonant circuit is a frequency-selective *filter*, not an amplifier: near $f_0$ it responds enthusiastically (the incoming push matches its natural sloshing rhythm), and away from $f_0$ it barely responds at all. Tuning the knob moves $f_0$ onto the station you want; every other station is still there at the antenna, just attenuated into irrelevance. How sharply the neighbors are rejected is set by the circuit's $Q$."
+  },
+  {
+    "id": "rlc-012",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A tuning tank uses $L = 47\\,\\text{µH}$ and $C = 220\\,\\text{pF}$. What is its resonant frequency, in MHz?",
+    "answer": 1.57,
+    "tolerance": 0.03,
+    "unit": "MHz",
+    "explanation": "$LC = 47\\times10^{-6} \\times 220\\times10^{-12} = 1.034\\times10^{-14}$, so $\\sqrt{LC} = 1.017\\times10^{-7}$ and $f_0 = \\frac{1}{2\\pi\\sqrt{LC}} \\approx 1.57\\,\\text{MHz}$ — right at the top of the AM broadcast band. Powers-of-ten discipline: µH × pF gives $10^{-18}$-scale products, whose square roots land you in the MHz range. Always sanity-check the exponent before trusting the mantissa."
+  },
+  {
+    "id": "rlc-013",
+    "topic": "rlc-resonance",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "A series RLC with $L = 10\\,\\text{mH}$ and $C = 100\\,\\text{nF}$ should settle as fast as possible without ringing — critical damping. What $R$ achieves this?",
+    "choices": [
+      "$R = 2\\sqrt{L/C} \\approx 632\\,\\Omega$",
+      "$R = \\sqrt{L/C} \\approx 316\\,\\Omega$",
+      "$R = \\frac{1}{2}\\sqrt{L/C} \\approx 158\\,\\Omega$",
+      "$R = \\sqrt{LC} \\approx 32\\,\\text{µ}\\Omega$"
+    ],
+    "answer": 0,
+    "explanation": "Critical damping is the knife edge where friction exactly ties the race with the sloshing: $\\alpha = \\omega_0$, i.e. $\\frac{R}{2L} = \\frac{1}{\\sqrt{LC}}$, giving $R = 2\\sqrt{L/C}$. Here $\\sqrt{L/C} = \\sqrt{10^{-2}/10^{-7}} = \\sqrt{10^5} \\approx 316\\,\\Omega$, so $R \\approx 632\\,\\Omega$. Less resistance and the circuit rings (underdamped); more and it creeps sluggishly to its final value (overdamped). Forgetting the factor of 2 is the classic slip — that's distractor number two."
+  },
+  {
+    "id": "rlc-014",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "This series RLC is driven at exactly its resonant frequency with a $10\\,\\text{V}$-amplitude source. Find the current amplitude, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "value": "10 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [160, 60], "label": "R", "value": "25 Ω" },
+        { "type": "inductor", "from": [160, 60], "to": [260, 60], "label": "L", "value": "10 mH" },
+        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C", "value": "100 nF" }
+      ],
+      "wires": [
+        [[260, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ]
+    },
+    "answer": 400,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "At resonance the L and C reactances cancel exactly, so the source sees only the $25\\,\\Omega$ resistor — no reactance arithmetic needed at all. $I = V/R = 10/25 = 0.4\\,\\text{A} = 400\\,\\text{mA}$. This is the whole point of series resonance: the current is limited by $R$ alone, which is why it peaks here (at any other frequency the leftover reactance would add to the impedance and shrink the current)."
+  },
+  {
+    "id": "rlc-015",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In the mass-spring-friction analogy for an RLC circuit, which mapping is correct?",
+    "choices": [
+      "Inductor ↔ mass, capacitor ↔ spring, resistor ↔ friction",
+      "Capacitor ↔ mass, inductor ↔ spring, resistor ↔ friction",
+      "Resistor ↔ mass, inductor ↔ spring, capacitor ↔ friction",
+      "Inductor ↔ friction, capacitor ↔ mass, resistor ↔ spring"
+    ],
+    "answer": 0,
+    "explanation": "Match by what each element resists and stores. The inductor is the mass: it has inertia (opposes changes in current, as mass opposes changes in velocity) and stores kinetic-style energy $\\frac{1}{2}LI^2 \\leftrightarrow \\frac{1}{2}mv^2$. The capacitor is the spring: it stores potential-style energy $\\frac{1}{2}CV^2 \\leftrightarrow \\frac{1}{2}kx^2$ that pushes back. The resistor is friction, converting motion to heat. The analogy even carries the formulas over: $\\omega_0 = \\frac{1}{\\sqrt{LC}} \\leftrightarrow \\sqrt{k/m}$."
+  },
+  {
+    "id": "rlc-016",
+    "topic": "rlc-resonance",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A series RLC has $R = 100\\,\\Omega$, $L = 25\\,\\text{mH}$, $C = 1\\,\\text{µF}$. It is underdamped. At what angular frequency $\\omega_d$ does its natural response actually ring, in rad/s?",
+    "answer": 6000,
+    "tolerance": 0.03,
+    "unit": "rad/s",
+    "explanation": "Damping doesn't just shrink the oscillation — it also slows it slightly, because friction drags on every swing. Compute both rates: $\\alpha = \\frac{R}{2L} = \\frac{100}{0.05} = 2000\\,\\text{s}^{-1}$ and $\\omega_0 = \\frac{1}{\\sqrt{LC}} = \\frac{1}{\\sqrt{2.5\\times10^{-8}}} \\approx 6325\\,\\text{rad/s}$. The ringing frequency is $\\omega_d = \\sqrt{\\omega_0^2 - \\alpha^2} = \\sqrt{4.0\\times10^7 - 4\\times10^6} = \\sqrt{3.6\\times10^7} = 6000\\,\\text{rad/s}$. Note $\\omega_d < \\omega_0$, and lightly damped circuits ring at very nearly $\\omega_0$."
+  },
+  {
+    "id": "rlc-017",
+    "topic": "rlc-resonance",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "A series RLC with $Q = 50$ is driven at resonance by a $2\\,\\text{V}$ source. Roughly what voltage amplitude appears across the capacitor?",
+    "choices": [
+      "About $100\\,\\text{V}$ — the capacitor voltage is $Q$ times the source voltage",
+      "About $2\\,\\text{V}$ — the components just split the source voltage",
+      "About $1\\,\\text{V}$ — half the source, since L and C share it equally",
+      "About $0.04\\,\\text{V}$ — the source voltage divided by $Q$"
+    ],
+    "answer": 0,
+    "explanation": "At resonance the impedance collapses to $R$, so the current is large: $I = V/R$. That full current flows through the capacitor, whose reactance is $X_C = \\frac{1}{\\omega_0 C} = QR$ — so $V_C = I X_C = \\frac{V}{R} \\cdot QR = QV = 50 \\times 2 = 100\\,\\text{V}$. The L and C voltages are huge but opposite, so they cancel from the outside while each individually swings to $QV$. This resonant voltage magnification is real and dangerous: a modest source can develop component-destroying voltages inside a high-$Q$ circuit."
+  },
+  {
+    "id": "rlc-018",
+    "topic": "rlc-resonance",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "An RLC circuit's characteristic equation is $s^2 + 500s + 10^6 = 0$. What kind of natural response does it have?",
+    "choices": [
+      "Underdamped — $\\alpha = 250 < \\omega_0 = 1000$, so the roots are complex conjugates and the response rings",
+      "Overdamped — $\\alpha = 500 > \\omega_0 = 100$, so the roots are real and distinct",
+      "Critically damped — $\\alpha = \\omega_0$, giving a repeated real root",
+      "Undamped — there is no first-order term, so nothing decays"
+    ],
+    "answer": 0,
+    "explanation": "Read the standard form $s^2 + 2\\alpha s + \\omega_0^2 = 0$ straight off the coefficients: $2\\alpha = 500 \\Rightarrow \\alpha = 250\\,\\text{s}^{-1}$ (careful — the coefficient is $2\\alpha$, not $\\alpha$), and $\\omega_0^2 = 10^6 \\Rightarrow \\omega_0 = 1000\\,\\text{rad/s}$. Since $\\alpha < \\omega_0$, the discriminant is negative and the roots are complex: $s = -250 \\pm j\\sqrt{10^6 - 250^2} \\approx -250 \\pm j968$. Physically: energy still sloshes (the imaginary part, the ringing at $\\omega_d \\approx 968\\,\\text{rad/s}$) while friction shrinks it (the real part, decay as $e^{-250t}$)."
+  },
+  {
+    "id": "rlc-019",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "Two series RLC circuits share the same $f_0 = 10\\,\\text{kHz}$ but produce these current-vs-frequency curves. What can you conclude?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "f (kHz)",
+      "ylabel": "I (mA)",
+      "xmin": 4,
+      "xmax": 16,
+      "ymin": 0,
+      "ymax": 10,
+      "xticks": 2,
+      "yticks": 2,
+      "curves": [
+        { "fn": "expr", "expr": "10/Math.sqrt(1+400*Math.pow(t/10-10/t,2))", "legend": "A" },
+        { "fn": "expr", "expr": "10/Math.sqrt(1+16*Math.pow(t/10-10/t,2))", "legend": "B", "color": 2 }
+      ]
+    },
+    "choices": [
+      "A has the higher $Q$: its narrow peak means a small bandwidth, since $\\text{BW} = f_0/Q$",
+      "B has the higher $Q$: it responds over a wider range of frequencies",
+      "They have equal $Q$ because they peak at the same frequency",
+      "$Q$ cannot be compared from an amplitude response"
+    ],
+    "answer": 0,
+    "explanation": "$Q$ is written all over the *shape* of the curve, not its center: sharp and narrow means high $Q$, broad and forgiving means low $Q$. Since $\\text{BW} = f_0/Q$, the same $f_0$ with a smaller bandwidth forces a larger $Q$ — curve A. For a series RLC that means less resistance relative to the reactances. There's a trade at work: A is a pickier filter (great for rejecting a nearby interferer), while B lets a wider band through (needed if the signal itself is wide)."
+  },
+  {
+    "id": "rlc-020",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A parallel LC tank uses $L = 1\\,\\text{mH}$ and $C = 1\\,\\text{nF}$. At what frequency does its impedance peak, in kHz?",
+    "answer": 159,
+    "tolerance": 0.03,
+    "unit": "kHz",
+    "explanation": "A parallel tank's impedance peaks at the same $f_0 = \\frac{1}{2\\pi\\sqrt{LC}}$ where a series circuit's impedance dips — the L–C energy exchange is the same physics, viewed from outside instead of along the loop. $LC = 10^{-3} \\times 10^{-9} = 10^{-12}$, so $\\sqrt{LC} = 10^{-6}$ and $f_0 = \\frac{1}{2\\pi \\times 10^{-6}} \\approx 159\\,\\text{kHz}$. At that frequency the tank refuses current from the outside world — which is exactly why oscillators and tuners park a tank there to develop a large voltage."
+  }
+]

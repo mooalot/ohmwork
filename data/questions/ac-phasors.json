@@ -1,0 +1,361 @@
+[
+  {
+    "id": "ac-001",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why do sinusoids (and phasors) get such special treatment in circuit analysis?",
+    "choices": [
+      "A linear circuit driven by a sinusoid responds with a sinusoid at the *same frequency* — only amplitude and phase change, and a phasor captures exactly those two numbers",
+      "Sinusoids are the only waveform real generators can physically produce",
+      "Phasors work equally well for any waveform, sinusoidal or not",
+      "Sinusoids dissipate less power than other waveforms of the same amplitude"
+    ],
+    "answer": 0,
+    "explanation": "Linearity is the whole trick: scaling, adding, differentiating or integrating a sinusoid at frequency $f$ gives back a sinusoid at $f$. So a linear circuit can only do two things to a sine wave — change its amplitude and shift its phase — and a phasor is exactly that pair, packaged as one complex number. Differential equations collapse into complex-number algebra. Nonlinear circuits break the spell: they create brand-new frequencies, and phasors no longer apply."
+  },
+  {
+    "id": "ac-002",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "What is the reactance of a $10\\,\\text{mH}$ inductor at $f = 1\\,\\text{kHz}$?",
+    "choices": [
+      "$62.8\\,\\Omega$",
+      "$10\\,\\Omega$",
+      "$15.9\\,\\text{m}\\Omega$",
+      "$62.8\\,\\text{k}\\Omega$"
+    ],
+    "answer": 0,
+    "explanation": "An inductor fights *changes* in current, and higher frequency means faster change — so its opposition grows with frequency: $X_L = \\omega L = 2\\pi f L$. Here $X_L = 2\\pi \\cdot 1000 \\cdot 0.01 = 62.8\\,\\Omega$. The classic slip is forgetting the $2\\pi$ (which gives $10\\,\\Omega$): $\\omega$ is in rad/s, not Hz. $15.9\\,\\text{m}\\Omega$ is what you get by inverting the formula as if it were a capacitor."
+  },
+  {
+    "id": "ac-003",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "What is the reactance of a $100\\,\\text{nF}$ capacitor at $f = 1\\,\\text{kHz}$? Answer in $\\text{k}\\Omega$.",
+    "answer": 1.59,
+    "tolerance": 0.02,
+    "unit": "kΩ",
+    "explanation": "A capacitor passes current only while its voltage is *changing*, so faster wiggles get through more easily — reactance falls with frequency: $X_C = \\frac{1}{2\\pi f C}$. Plugging in: $\\frac{1}{2\\pi \\cdot 1000 \\cdot 100\\times10^{-9}} = \\frac{1}{6.28\\times10^{-4}} \\approx 1.59\\,\\text{k}\\Omega$. Sanity check the direction: double the frequency and this halves; go to DC and it blows up to an open circuit."
+  },
+  {
+    "id": "ac-004",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A pure inductor is driven by a sine-wave source. What is the phase relationship between the inductor's current and its voltage?",
+    "choices": [
+      "Current lags voltage by $90^\\circ$ — the current can't change instantly, so it trails behind",
+      "Current leads voltage by $90^\\circ$",
+      "They are exactly in phase",
+      "Current lags voltage by $180^\\circ$"
+    ],
+    "answer": 0,
+    "explanation": "An inductor's current is the *integral* of its voltage ($v = L\\,di/dt$), and integrating a sine delays it a quarter cycle — the current is still ramping up while the voltage has already peaked. The mnemonic: **ELI the ICE man** — in an inductor (L), EMF (E) comes before current (I); in a capacitor (C), current comes before EMF. A $180^\\circ$ shift would mean pure inversion, which no energy-storing element does."
+  },
+  {
+    "id": "ac-005",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A US wall outlet delivers $120\\,\\text{V}$ RMS. What is the peak voltage of the sine wave, in volts?",
+    "answer": 169.7,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "A sine wave spends most of its time below its peak, so its 'effective' (RMS) value is smaller than the peak by exactly $\\sqrt{2}$: $V_{peak} = \\sqrt{2}\\,V_{rms} = 1.414 \\cdot 120 \\approx 169.7\\,\\text{V}$. This is why capacitors on mains circuits must be rated well above 120 V — the waveform actually swings to $\\pm 170\\,\\text{V}$ a hundred and twenty times per second."
+  },
+  {
+    "id": "ac-006",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Find the magnitude of the total impedance $|Z|$ seen by the source at $1\\,\\text{kHz}$, in $\\text{k}\\Omega$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "value": "1 kHz", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1 kΩ" },
+        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "value": "100 nF" }
+      ],
+      "wires": [
+        [[60, 200], [200, 200]]
+      ]
+    },
+    "answer": 1.88,
+    "tolerance": 0.02,
+    "unit": "kΩ",
+    "explanation": "You can't just add $R$ and $X_C$ — the resistor's voltage is in phase with the current while the capacitor's is $90^\\circ$ behind, so they combine like perpendicular vectors. First $X_C = \\frac{1}{2\\pi \\cdot 1000 \\cdot 100\\,\\text{nF}} = 1.59\\,\\text{k}\\Omega$, then $|Z| = \\sqrt{R^2 + X_C^2} = \\sqrt{1.0^2 + 1.59^2} \\approx 1.88\\,\\text{k}\\Omega$. Note the result is bigger than either part alone, but far less than their plain sum of $2.59\\,\\text{k}\\Omega$."
+  },
+  {
+    "id": "ac-007",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "At the source frequency of $2\\,\\text{kHz}$, by how many degrees does the source voltage lead the current in this circuit?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "value": "2 kHz", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "100 Ω" },
+        { "type": "inductor", "from": [200, 60], "to": [200, 200], "label": "L", "value": "10 mH" }
+      ],
+      "wires": [
+        [[60, 200], [200, 200]]
+      ]
+    },
+    "answer": 51.5,
+    "tolerance": 0.02,
+    "unit": "°",
+    "explanation": "The inductor pulls the circuit toward 'voltage leads current' (ELI), and the resistor pulls toward zero phase — the impedance angle says who wins. $X_L = 2\\pi \\cdot 2000 \\cdot 0.01 = 125.7\\,\\Omega$, so $\\theta = \\arctan(X_L/R) = \\arctan(125.7/100) \\approx 51.5^\\circ$. Since $X_L$ is a bit larger than $R$, the angle lands a bit past the $45^\\circ$ midpoint — a good sanity check."
+  },
+  {
+    "id": "ac-008",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "How does a capacitor behave at the frequency extremes?",
+    "choices": [
+      "Open circuit at DC, approaching a short circuit at very high frequency",
+      "Short circuit at DC, approaching an open circuit at very high frequency",
+      "Constant reactance at all frequencies, like a resistor",
+      "Open circuit at both extremes, conducting only at one special frequency"
+    ],
+    "answer": 0,
+    "explanation": "$X_C = \\frac{1}{\\omega C}$: at DC ($\\omega \\to 0$) the reactance blows up — once the plates charge, no more current flows, an open circuit. At high frequency the voltage never stays put long enough for the plates to fill, so current sloshes freely — nearly a short. This single fact powers half of analog design: DC blocking caps, supply bypass caps, and every RC filter are just this behavior put to work. (An inductor is the exact mirror image.)"
+  },
+  {
+    "id": "ac-009",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The plot shows the voltage across and the current through a single mystery component. Which component is it?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v, i",
+      "xmin": 0,
+      "xmax": 2,
+      "ymin": -2.5,
+      "ymax": 2.5,
+      "xticks": 0.5,
+      "yticks": 1,
+      "curves": [
+        { "fn": "sine", "amp": 2, "freq": 1, "phase": 0, "offset": 0, "legend": "v(t)" },
+        { "fn": "sine", "amp": 1.2, "freq": 1, "phase": 1.5708, "offset": 0, "legend": "i(t)", "color": 2 }
+      ]
+    },
+    "choices": [
+      "A capacitor — the current peaks a quarter-cycle *before* the voltage",
+      "An inductor — the current trails the voltage",
+      "A resistor — voltage and current move together",
+      "Impossible to tell from a time-domain plot"
+    ],
+    "answer": 0,
+    "explanation": "Read the peaks: $i(t)$ crests at $t = 0$ while $v(t)$ crests at $t = 0.25\\,\\text{ms}$ — a quarter of the 1 ms period, so the current *leads* by $90^\\circ$. 'ICE': in a capacitor, current comes before EMF. Physically, current must flow *first* to pile charge on the plates, and only then does the voltage build. An inductor would show the mirror image, and a resistor's two curves would peak together."
+  },
+  {
+    "id": "ac-010",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Impedance is written $Z = R + jX$. What does the imaginary part $jX$ physically represent?",
+    "choices": [
+      "Opposition that shifts current $90^\\circ$ out of phase with voltage — energy is stored and returned each cycle, not dissipated",
+      "Extra resistance that only appears at high frequencies",
+      "A bookkeeping trick with no physical consequence",
+      "The power that reactive components burn as heat"
+    ],
+    "answer": 0,
+    "explanation": "Multiplying by $j$ *is* a $90^\\circ$ rotation — that's the entire reason complex numbers fit AC so well. The real part $R$ describes in-phase behavior (real power dissipated as heat); the imaginary part $X$ describes quadrature behavior, where inductors and capacitors borrow energy for a quarter cycle and hand it back. Reactive parts drop volts and carry amps, but on average they burn nothing — which is why $X$ lives on a different axis from $R$."
+  },
+  {
+    "id": "ac-011",
+    "topic": "ac-phasors",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "The inductor presents a reactance of $400\\,\\Omega$ at the source frequency. Find the magnitude of the current drawn from the $10\\,\\text{V}$ (RMS) source, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "value": "10 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "300 Ω" },
+        { "type": "inductor", "from": [200, 60], "to": [200, 200], "label": "X_L", "value": "400 Ω" }
+      ],
+      "wires": [
+        [[60, 200], [200, 200]]
+      ]
+    },
+    "answer": 20,
+    "tolerance": 0.02,
+    "unit": "mA",
+    "explanation": "Ohm's law survives into AC, just with complex numbers: $I = V/Z$. The impedance is $Z = 300 + j400\\,\\Omega$, a 3-4-5 triangle, so $|Z| = \\sqrt{300^2 + 400^2} = 500\\,\\Omega$ at $\\angle 53.1^\\circ$. Then $|I| = 10/500 = 20\\,\\text{mA}$, lagging the voltage by $53.1^\\circ$. Dividing phasors: divide the magnitudes, subtract the angles."
+  },
+  {
+    "id": "ac-012",
+    "topic": "ac-phasors",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Two series voltage phasors add: $V_1 = 3\\angle 0^\\circ\\,\\text{V}$ and $V_2 = 4\\angle 90^\\circ\\,\\text{V}$. What is the phase angle of the sum $V_1 + V_2$, in degrees?",
+    "answer": 53.1,
+    "tolerance": 0.02,
+    "unit": "°",
+    "explanation": "Phasors add tip-to-tail like vectors, so convert to rectangular first: $V_1 = 3 + j0$ and $V_2 = 0 + j4$, giving $V_1 + V_2 = 3 + j4$. That's the 3-4-5 triangle: magnitude $5\\,\\text{V}$ at $\\theta = \\arctan(4/3) \\approx 53.1^\\circ$. Note the magnitudes did *not* add to 7 — out-of-phase voltages partially fight each other, which is exactly what the phasor picture is for."
+  },
+  {
+    "id": "ac-013",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A motor draws $S = 500\\,\\text{VA}$ of apparent power at a power factor of 0.8 (lagging). How much reactive power $Q$ does it draw?",
+    "choices": [
+      "$300\\,\\text{VAR}$",
+      "$400\\,\\text{VAR}$",
+      "$100\\,\\text{VAR}$",
+      "$625\\,\\text{VAR}$"
+    ],
+    "answer": 0,
+    "explanation": "Power splits into a right triangle: real power $P$ along one leg, reactive power $Q$ on the other, apparent power $S$ as the hypotenuse. The power factor is $\\cos\\theta = P/S$, so $P = 500 \\cdot 0.8 = 400\\,\\text{W}$, and Pythagoras gives $Q = \\sqrt{S^2 - P^2} = \\sqrt{500^2 - 400^2} = 300\\,\\text{VAR}$ — the 3-4-5 triangle again. $400$ is $P$, not $Q$; $625$ comes from dividing instead of multiplying by the power factor."
+  },
+  {
+    "id": "ac-014",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why do factories install capacitor banks across their big motor loads ('power-factor correction')?",
+    "choices": [
+      "The capacitors' leading reactive current cancels the motors' lagging reactive current, so the supply lines carry less current for the same useful power",
+      "The capacitors store backup energy the motors can draw during startup",
+      "The capacitors boost the line voltage to overcome losses",
+      "The capacitors increase the real power delivered to the motors"
+    ],
+    "answer": 0,
+    "explanation": "Motors are inductive: part of their current just sloshes energy back and forth every cycle, doing no useful work but still heating the wires and occupying transformer capacity. A capacitor sloshes energy with the *opposite* phase, so placed across the load the two reactive currents circulate locally between L and C instead of traveling down the supply line. Real power delivered is unchanged — the win is thinner line current, lower $I^2R$ losses, and no utility penalty fees."
+  },
+  {
+    "id": "ac-015",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "Adjust the source frequency $f$ so the inductive and capacitive reactances cancel: $X_L = X_C$ (series resonance).",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "bind": true, "flipLabel": true },
+        { "type": "inductor", "from": [60, 60], "to": [200, 60], "label": "L", "value": "100 mH" },
+        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "value": "1 µF" }
+      ],
+      "wires": [
+        [[60, 200], [200, 200]]
+      ]
+    },
+    "slider": { "min": 100, "max": 1000, "step": 1, "unit": "Hz", "label": "f" },
+    "answer": 503,
+    "tolerance": 0.02,
+    "explanation": "As $f$ rises, $X_L = 2\\pi f L$ climbs while $X_C = \\frac{1}{2\\pi f C}$ falls — they must cross exactly once, and that crossing is resonance. Setting them equal gives $f_0 = \\frac{1}{2\\pi\\sqrt{LC}} = \\frac{1}{2\\pi\\sqrt{0.1 \\cdot 10^{-6}}} \\approx 503\\,\\text{Hz}$. At that frequency the $+jX_L$ and $-jX_C$ cancel outright, and this series pair looks like a plain wire (plus whatever resistance is hiding in the coil) — the heart of every tuned radio circuit."
+  },
+  {
+    "id": "ac-016",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A wall outlet is labeled '$120\\,\\text{V}$ AC' even though the waveform peaks near $170\\,\\text{V}$. What does the $120\\,\\text{V}$ (RMS) figure actually mean?",
+    "choices": [
+      "It's the DC voltage that would deliver the same average power to a resistive load — RMS makes AC power math work like DC",
+      "It's the average of the waveform's absolute value",
+      "It's the peak-to-peak swing divided by two",
+      "It's a conservative safety rating set below the true peak"
+    ],
+    "answer": 0,
+    "explanation": "RMS is defined so that power formulas carry over unchanged: a $120\\,\\text{V}$ RMS sine heats a toaster exactly like a $120\\,\\text{V}$ battery would, because $P = V_{rms}^2/R$. For a sine wave $V_{rms} = V_{peak}/\\sqrt{2}$, hence the 170 V peak. The rectified average is a *different* (smaller) number, $0.637\\,V_{peak} \\approx 108\\,\\text{V}$ — cheap multimeters actually measure that and quietly scale it, which is why they misread non-sinusoidal waveforms."
+  },
+  {
+    "id": "ac-017",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Sinusoids A and B share the same $16\\,\\text{ms}$ period. Read the time shift between them off the plot: by how many degrees does B lag A?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v (V)",
+      "xmin": 0,
+      "xmax": 16,
+      "ymin": -6,
+      "ymax": 6,
+      "xticks": 2,
+      "yticks": 2,
+      "curves": [
+        { "fn": "sine", "amp": 5, "freq": 0.0625, "phase": 0, "offset": 0, "legend": "A" },
+        { "fn": "sine", "amp": 5, "freq": 0.0625, "phase": -0.7854, "offset": 0, "legend": "B", "color": 2 }
+      ]
+    },
+    "answer": 45,
+    "tolerance": 0.05,
+    "unit": "°",
+    "explanation": "Phase is just time shift measured in fractions of a period: $\\Delta\\theta = 360^\\circ \\cdot \\Delta t / T$. B repeats everything A does $2\\,\\text{ms}$ later (compare the upward zero crossings: A at $0$, B at $2\\,\\text{ms}$), so $\\Delta\\theta = 360^\\circ \\cdot 2/16 = 45^\\circ$. Zero crossings are the best landmarks for this — the waveform is steepest there, so the shift is easiest to read accurately."
+  },
+  {
+    "id": "ac-018",
+    "topic": "ac-phasors",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "At the source frequency of $1\\,\\text{kHz}$, by how many degrees does the current *lead* the source voltage?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "value": "1 kHz", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1.2 kΩ" },
+        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "value": "100 nF" }
+      ],
+      "wires": [
+        [[60, 200], [200, 200]]
+      ]
+    },
+    "answer": 53,
+    "tolerance": 0.02,
+    "unit": "°",
+    "explanation": "The capacitor drags the circuit toward 'current leads' (ICE), and the impedance angle quantifies how far. $X_C = \\frac{1}{2\\pi \\cdot 1000 \\cdot 100\\,\\text{nF}} = 1592\\,\\Omega$, so $Z = 1200 - j1592\\,\\Omega$ with angle $-\\arctan(1592/1200) \\approx -53^\\circ$. Since $I = V/Z$, the current's angle is the *negative* of the impedance angle: the current leads the source voltage by $53^\\circ$. With $X_C$ somewhat larger than $R$, expect a bit more than $45^\\circ$ — check."
+  },
+  {
+    "id": "ac-019",
+    "topic": "ac-phasors",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A plant load draws $P = 1\\,\\text{kW}$ of real power at a power factor of 0.6 (lagging). How many VAR must a correction capacitor bank supply to raise the power factor to exactly 1.0?",
+    "answer": 1333,
+    "tolerance": 0.02,
+    "unit": "VAR",
+    "explanation": "To reach unity power factor, the capacitors must cancel *all* of the load's lagging reactive power, so the question is just: what is $Q$? From $\\cos\\theta = 0.6$ we get $\\sin\\theta = 0.8$ (a 3-4-5 triangle), so $\\tan\\theta = 0.8/0.6 = 1.333$ and $Q = P\\tan\\theta = 1000 \\cdot 1.333 \\approx 1333\\,\\text{VAR}$. Striking: at this poor power factor the reactive power *exceeds* the useful power — the line current would drop by 40% after correction, since only $P$ must still flow from the utility."
+  },
+  {
+    "id": "ac-020",
+    "topic": "ac-phasors",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "Two impedances are in series: $Z_1 = 100 + j50\\,\\Omega$ and $Z_2 = 200 - j150\\,\\Omega$. What is the combined impedance, and how does the current relate to the applied voltage?",
+    "choices": [
+      "$Z = 300 - j100\\,\\Omega$ — net capacitive, so the current slightly *leads* the voltage",
+      "$Z = 300 - j100\\,\\Omega$ — net inductive, so the current slightly *lags* the voltage",
+      "$Z = 300 + j200\\,\\Omega$ — reactances always add by magnitude",
+      "$|Z| = 361.8\\,\\Omega$ — series impedances add by magnitude: $111.8 + 250$"
+    ],
+    "answer": 0,
+    "explanation": "Series impedances add *as complex numbers*, real with real and imaginary with imaginary: $Z = (100+200) + j(50-150) = 300 - j100\\,\\Omega$. The inductive $+j50$ and capacitive $-j150$ partially cancel — reactances of opposite sign fight each other, they never add by magnitude. The surviving $-j100$ means the combination is net capacitive, so the current leads, by $\\arctan(100/300) \\approx 18.4^\\circ$. Adding magnitudes ($111.8 + 250$) is wrong for the same reason $3+4j$ doesn't have magnitude 7."
+  }
+]

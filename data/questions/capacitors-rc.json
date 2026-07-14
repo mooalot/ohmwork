@@ -1,0 +1,390 @@
+[
+  {
+    "id": "rc-001",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Deep down, what is a capacitor actually doing in a circuit?",
+    "choices": [
+      "Storing energy in an electric field between its plates, and resisting any *change* in the voltage across it",
+      "Converting electrical energy to heat in proportion to the current through it",
+      "Resisting any change in the current through it by storing energy in a magnetic field",
+      "Amplifying fast signals while attenuating slow ones"
+    ],
+    "answer": 0,
+    "explanation": "A capacitor is two plates separated by an insulator: current pushes charge onto the plates, and that stored charge sets the voltage ($Q = CV$). Because the voltage can only move as fast as charge can be delivered, a capacitor fights *changes* in voltage — it's electrical inertia for voltage. Heat is a resistor's job, and opposing current change via a magnetic field is an inductor (the capacitor's exact dual)."
+  },
+  {
+    "id": "rc-002",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A capacitor sits at a steady $9\\,\\text{V}$ that isn't changing. What current flows through it?",
+    "choices": [
+      "Zero — capacitor current depends on how fast the voltage *changes*, not on its value",
+      "A current proportional to the 9 V, by Ohm's law",
+      "A small leakage current equal to $C \\cdot V$",
+      "It depends on how much charge is already stored"
+    ],
+    "answer": 0,
+    "explanation": "The defining law is $i = C\\,\\frac{dv}{dt}$: current flows only while the voltage is *moving*, because that's when charge is being added to or removed from the plates. A rock-steady 9 V means $dv/dt = 0$, so $i = 0$ — no matter how large the voltage or the stored charge. This is the opposite of a resistor, where the voltage itself (not its slope) sets the current."
+  },
+  {
+    "id": "rc-003",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The voltage across a $2.2\\,\\mu\\text{F}$ capacitor ramps linearly from $0$ to $5\\,\\text{V}$ in $2\\,\\text{ms}$. What constant current flows during the ramp, in mA?",
+    "answer": 5.5,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "A steady voltage ramp needs a steady stream of charge onto the plates — so a linear $v(t)$ means a *constant* current. $i = C\\,\\frac{dv}{dt} = 2.2\\,\\mu\\text{F} \\times \\frac{5\\,\\text{V}}{2\\,\\text{ms}} = 2.2\\times10^{-6} \\times 2500 = 5.5\\,\\text{mA}$. Faster ramps or bigger caps demand more current — that's why big capacitors can't change voltage quickly."
+  },
+  {
+    "id": "rc-004",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Two $10\\,\\mu\\text{F}$ capacitors are connected in **series**. What is the total capacitance?",
+    "choices": [
+      "$5\\,\\mu\\text{F}$ — capacitors combine *opposite* to resistors, so series halves them",
+      "$20\\,\\mu\\text{F}$ — series components always add",
+      "$10\\,\\mu\\text{F}$ — series connection doesn't change capacitance",
+      "$100\\,\\mu\\text{F}$ — the values multiply"
+    ],
+    "answer": 0,
+    "explanation": "Capacitors combine backwards from resistors: parallel caps add (more plate area), series caps combine reciprocally (the same charge must squeeze through both, but the voltages add, so it takes *more* volts per coulomb — less capacitance). Two equal caps in series give exactly half: $\\frac{10 \\times 10}{10 + 10} = 5\\,\\mu\\text{F}$. Remembering \"caps are resistors flipped\" saves you from the most common combination mistake."
+  },
+  {
+    "id": "rc-005",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A $4.7\\,\\mu\\text{F}$ capacitor is in series with a $10\\,\\mu\\text{F}$ capacitor. Find the equivalent capacitance, in $\\mu\\text{F}$.",
+    "answer": 3.2,
+    "tolerance": 0.03,
+    "unit": "µF",
+    "explanation": "Series capacitors always give *less* than the smallest one — sanity check: expect below $4.7\\,\\mu\\text{F}$. Product over sum (same formula as parallel resistors): $\\frac{4.7 \\times 10}{4.7 + 10} = \\frac{47}{14.7} \\approx 3.2\\,\\mu\\text{F}$. Intuitively, stacking caps in series is like moving the plates farther apart — the same charge now costs more voltage."
+  },
+  {
+    "id": "rc-006",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The switch closes at $t = 0$. What is the time constant $\\tau$ of this charging circuit, in ms?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1" },
+        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "value": "4.7 kΩ" },
+        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C_1", "value": "10 µF" }
+      ],
+      "wires": [
+        [[280, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ]
+    },
+    "answer": 47,
+    "tolerance": 0.03,
+    "unit": "ms",
+    "explanation": "The time constant is simply the product of the resistance feeding the cap and the capacitance: $\\tau = RC = 4.7\\,\\text{k}\\Omega \\times 10\\,\\mu\\text{F} = 4.7\\times10^{3} \\times 10^{-5} = 0.047\\,\\text{s} = 47\\,\\text{ms}$. Bigger $R$ means charge trickles in more slowly; bigger $C$ means more charge is needed for the same voltage — either one stretches the transient. Handy shortcut: kΩ × µF gives τ directly in ms."
+  },
+  {
+    "id": "rc-007",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A discharged capacitor starts charging toward a supply voltage through a resistor. After exactly one time constant $\\tau$, what fraction of the final voltage has it reached?",
+    "choices": [
+      "About 63%",
+      "About 37%",
+      "Exactly 50%",
+      "Essentially 100% — one time constant completes the charge"
+    ],
+    "answer": 0,
+    "explanation": "Charging is fast at first (big voltage across $R$ drives big current) and slows as the cap fills — an exponential approach. At $t = \\tau$ the remaining gap has shrunk by a factor $e^{-1} \\approx 0.37$, so the cap has covered $1 - e^{-1} \\approx 63\\%$ of the way. The mirror fact: a *discharging* cap falls *to* 37% in one $\\tau$. Full charge takes about $5\\tau$ for practical purposes."
+  },
+  {
+    "id": "rc-008",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "An initially uncharged capacitor charges through a resistor toward $12\\,\\text{V}$, with $\\tau = 10\\,\\text{ms}$. What is the capacitor voltage at $t = 10\\,\\text{ms}$?",
+    "choices": [
+      "$\\approx 7.6\\,\\text{V}$",
+      "$\\approx 4.4\\,\\text{V}$",
+      "$6\\,\\text{V}$",
+      "$12\\,\\text{V}$"
+    ],
+    "answer": 0,
+    "explanation": "One time constant in, the cap has climbed 63% of the way to its target: $v_C = 12(1 - e^{-1}) = 12 \\times 0.632 \\approx 7.6\\,\\text{V}$. The classic trap is $12 \\times 0.37 \\approx 4.4\\,\\text{V}$ — that's what *remains* to be covered (and what a discharge would read at one $\\tau$), not what's been reached. Charging: up to 63%. Discharging: down to 37%."
+  },
+  {
+    "id": "rc-009",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The plot shows a capacitor charging toward $10\\,\\text{V}$. Using the 63% line, read the time constant $\\tau$ off the plot, in ms.",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v_C (V)",
+      "xmin": 0,
+      "xmax": 8,
+      "ymin": 0,
+      "ymax": 12,
+      "xticks": 1,
+      "yticks": 2,
+      "curves": [
+        { "fn": "exp", "v0": 0, "vf": 10, "tau": 2 }
+      ],
+      "hlines": [
+        { "y": 6.32, "label": "63%" }
+      ]
+    },
+    "answer": 2,
+    "tolerance": 0.05,
+    "unit": "ms",
+    "explanation": "The time constant is where the curve crosses 63% of its final value — here $0.632 \\times 10 = 6.32\\,\\text{V}$. The curve hits the 63% line at $t = 2\\,\\text{ms}$, so $\\tau = 2\\,\\text{ms}$. This is the standard lab move for measuring $\\tau$ on an oscilloscope: mark 63% of the final level, read across, read down. As a cross-check, the curve looks essentially settled by $5\\tau = 10\\,\\text{ms}$, just off the right edge."
+  },
+  {
+    "id": "rc-010",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "The plot shows a capacitor discharging from $10\\,\\text{V}$. About how long until it is *practically* fully discharged (under 1% remaining)?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v_C (V)",
+      "xmin": 0,
+      "xmax": 12,
+      "ymin": 0,
+      "ymax": 12,
+      "xticks": 2,
+      "yticks": 2,
+      "curves": [
+        { "fn": "exp", "v0": 10, "vf": 0, "tau": 2 }
+      ]
+    },
+    "choices": [
+      "About $10\\,\\text{ms}$ — roughly five time constants",
+      "About $2\\,\\text{ms}$ — one time constant empties it",
+      "About $4\\,\\text{ms}$ — two time constants",
+      "It never usefully discharges — the exponential goes on forever"
+    ],
+    "answer": 0,
+    "explanation": "First read $\\tau$ from the plot: the curve falls to 37% of 10 V ($3.7\\,\\text{V}$) at $t = 2\\,\\text{ms}$, so $\\tau = 2\\,\\text{ms}$. Each further $\\tau$ chops the remainder by another factor of $e \\approx 2.7$; after $5\\tau$ only $e^{-5} \\approx 0.7\\%$ is left — gone for any practical purpose. So $5 \\times 2 = 10\\,\\text{ms}$. Mathematically the exponential never reaches zero, but engineering calls $5\\tau$ \"done\", and that rule of thumb is worth memorizing."
+  },
+  {
+    "id": "rc-011",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The switch has been closed for a very long time. What are the current $I$ and the capacitor voltage $v_C$?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1", "closed": true },
+        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C_1", "value": "100 µF" }
+      ],
+      "wires": [
+        [[280, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ]
+    },
+    "choices": [
+      "$I = 0$ and $v_C = 12\\,\\text{V}$ — a charged cap looks like an open circuit at DC",
+      "$I = 12\\,\\text{mA}$ and $v_C = 12\\,\\text{V}$",
+      "$I = 12\\,\\text{mA}$ and $v_C = 0$ — the cap acts like a wire",
+      "$I = 0$ and $v_C = 0$ — no current means no voltage anywhere"
+    ],
+    "answer": 0,
+    "explanation": "Once the cap has charged, its voltage stops changing, and $i = C\\,dv/dt = 0$: at DC steady state a capacitor is an *open circuit*. With zero current, the resistor drops nothing ($V = IR = 0$), so the full 12 V appears across the capacitor. \"Cap = open at DC\" is one of the two instant-analysis rules (the other: an *uncharged* cap looks like a short at the first instant)."
+  },
+  {
+    "id": "rc-012",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A $100\\,\\mu\\text{F}$ capacitor is charged to $12\\,\\text{V}$. How much energy does it store, in mJ?",
+    "answer": 7.2,
+    "tolerance": 0.03,
+    "unit": "mJ",
+    "explanation": "The energy lives in the electric field between the plates, and it grows with the *square* of voltage: $E = \\tfrac{1}{2}CV^2 = \\tfrac{1}{2} \\times 100\\times10^{-6} \\times 12^2 = \\tfrac{1}{2} \\times 10^{-4} \\times 144 = 7.2\\,\\text{mJ}$. The $\\tfrac{1}{2}$ is there because the cap isn't at 12 V the whole time it charges — early charge arrives cheap, late charge costs full price. Note the $V^2$: doubling the voltage quadruples the stored energy."
+  },
+  {
+    "id": "rc-013",
+    "topic": "capacitors-rc",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "The switch closes at $t = 0$ with the capacitor initially uncharged. Find $v_C$ at $t = 100\\,\\text{ms}$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1" },
+        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "value": "10 kΩ" },
+        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C_1", "value": "4.7 µF" }
+      ],
+      "wires": [
+        [[280, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ]
+    },
+    "answer": 7.93,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "First get the time constant: $\\tau = RC = 10\\,\\text{k}\\Omega \\times 4.7\\,\\mu\\text{F} = 47\\,\\text{ms}$, so 100 ms is a bit over $2\\tau$ — expect the cap to be most of the way to 9 V. Then apply the charging law: $v_C = 9\\left(1 - e^{-100/47}\\right) = 9\\left(1 - e^{-2.13}\\right) \\approx 9(1 - 0.119) \\approx 7.93\\,\\text{V}$. The workflow is always the same: find $\\tau$, form $t/\\tau$, plug into the exponential."
+  },
+  {
+    "id": "rc-014",
+    "topic": "capacitors-rc",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A $220\\,\\mu\\text{F}$ capacitor charged to $10\\,\\text{V}$ discharges through a $1\\,\\text{k}\\Omega$ resistor. How long until its voltage falls to $2\\,\\text{V}$, in ms?",
+    "answer": 354,
+    "tolerance": 0.03,
+    "unit": "ms",
+    "explanation": "Discharge follows $v(t) = V_0\\,e^{-t/\\tau}$ with $\\tau = RC = 1\\,\\text{k}\\Omega \\times 220\\,\\mu\\text{F} = 220\\,\\text{ms}$. To find *time* instead of voltage, invert with a logarithm: $t = \\tau \\ln\\frac{V_0}{v} = 220 \\ln\\frac{10}{2} = 220 \\times 1.609 \\approx 354\\,\\text{ms}$. Sanity check: falling to 2 V means dropping to 20%, which is a bit further than one $\\tau$ (37%) — and indeed the answer is between $\\tau$ and $2\\tau$."
+  },
+  {
+    "id": "rc-015",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "Set $R_1$ so the circuit's time constant is $\\tau = 47\\,\\text{ms}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1" },
+        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "bind": true },
+        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C_1", "value": "10 µF" }
+      ],
+      "wires": [
+        [[280, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ]
+    },
+    "slider": { "min": 500, "max": 10000, "step": 100, "unit": "Ω", "label": "R_1" },
+    "answer": 4700,
+    "tolerance": 0.03,
+    "explanation": "Rearrange $\\tau = RC$ for the unknown: $R = \\tau / C = 0.047 / (10\\times10^{-6}) = 4700\\,\\Omega$. The shortcut form makes it instant: ms ÷ µF = kΩ, so $47/10 = 4.7\\,\\text{k}\\Omega$. This is exactly how you'd pick timing components in practice — choose a convenient cap, then dial the resistor to hit the target time."
+  },
+  {
+    "id": "rc-016",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why is a small capacitor placed right next to a chip's power pins (a \"decoupling\" or \"bypass\" cap)?",
+    "choices": [
+      "It acts as a tiny local energy reservoir, holding the supply voltage steady by instantly supplying the chip's fast current spikes",
+      "It blocks DC from reaching the chip so only the signal gets through",
+      "It increases the supply voltage slightly to compensate for wiring losses",
+      "It slows the chip down so the power supply can keep up"
+    ],
+    "answer": 0,
+    "explanation": "A capacitor opposes voltage change — put one across the supply pins and it fights dips on the rail. When the chip suddenly demands current, the distant power supply (behind inductive, resistive traces) can't respond fast enough, but the nearby cap dumps charge immediately, and the rail barely moves. It's a local water tower for charge. Blocking DC is the *series* (coupling) use of a cap — here the cap is in *parallel* with the supply."
+  },
+  {
+    "id": "rc-017",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A capacitor is placed in **series** between two amplifier stages (a \"coupling\" cap). What does it accomplish?",
+    "choices": [
+      "It passes the AC signal while blocking DC, so each stage keeps its own bias voltage",
+      "It stores the signal briefly to remove noise",
+      "It passes DC while blocking AC, smoothing the signal",
+      "It matches the impedance between the two stages"
+    ],
+    "answer": 0,
+    "explanation": "At DC a capacitor is an open circuit, so the steady bias voltages of the two stages can't fight each other through it. But a wiggling signal is a changing voltage, and changing voltage drives current through a cap ($i = C\\,dv/dt$) — the AC sails across. One component, two-way filter: DC stopped, AC passed. (The parallel version of this trick is the decoupling cap, which does the mirror-image job of shorting AC ripple to ground.)"
+  },
+  {
+    "id": "rc-018",
+    "topic": "capacitors-rc",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "The switch has been closed a long time. Find the capacitor voltage $v_C$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1", "closed": true },
+        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [280, 60], "to": [280, 200], "label": "R_2", "value": "2 kΩ", "flipLabel": true },
+        { "type": "capacitor", "from": [360, 60], "to": [360, 200], "label": "C_1", "value": "15 µF" }
+      ],
+      "wires": [
+        [[280, 60], [360, 60]],
+        [[60, 200], [360, 200]]
+      ],
+      "nodes": [[280, 60], [280, 200]]
+    },
+    "answer": 8,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Long after the switch closes, the cap is fully charged and carries no current — replace it with an open circuit and it vanishes from the analysis. What remains is a plain voltage divider, and the cap simply reads the divider's output: $v_C = 12 \\cdot \\frac{2}{1 + 2} = 8\\,\\text{V}$. This two-step move — delete the cap, solve the resistive circuit — cracks every DC steady-state problem."
+  },
+  {
+    "id": "rc-019",
+    "topic": "capacitors-rc",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A $15\\,\\mu\\text{F}$ capacitor connects from the midpoint of a divider to ground: $R_1 = 1\\,\\text{k}\\Omega$ runs from a $12\\,\\text{V}$ source to the midpoint, and $R_2 = 2\\,\\text{k}\\Omega$ from the midpoint to ground. What time constant governs the capacitor's transient, in ms?",
+    "answer": 10,
+    "tolerance": 0.03,
+    "unit": "ms",
+    "explanation": "The $R$ in $\\tau = RC$ is the resistance the capacitor *sees* looking out from its own terminals — the Thévenin resistance, with the source shorted. From the midpoint, $R_1$ (to the now-grounded source) and $R_2$ (to ground) both lead to the same place, so they're in parallel: $1\\text{k} \\| 2\\text{k} = \\frac{1 \\times 2}{3} \\approx 667\\,\\Omega$. Then $\\tau = 667 \\times 15\\,\\mu\\text{F} = 10\\,\\text{ms}$. Using $R_1 + R_2$ (or just $R_1$) is the classic error — always ask \"what does the cap see?\"."
+  },
+  {
+    "id": "rc-020",
+    "topic": "capacitors-rc",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "The triangle wave shown is applied across a $1\\,\\mu\\text{F}$ capacitor. What does the capacitor current look like?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 200,
+      "xlabel": "t (ms)",
+      "ylabel": "v_C (V)",
+      "xmin": 0,
+      "xmax": 4,
+      "ymin": 0,
+      "ymax": 5,
+      "xticks": 1,
+      "yticks": 1,
+      "curves": [
+        { "fn": "points", "points": [[0, 0], [1, 4], [2, 0], [3, 4], [4, 0]] }
+      ]
+    },
+    "choices": [
+      "A square wave alternating between $+4\\,\\text{mA}$ and $-4\\,\\text{mA}$",
+      "A triangle wave of the same shape, scaled by $C$",
+      "A sine wave at the same frequency",
+      "A constant $2\\,\\text{mA}$, the average of the ramp currents"
+    ],
+    "answer": 0,
+    "explanation": "The capacitor differentiates: $i = C\\,\\frac{dv}{dt}$, so the current traces the *slope* of the voltage. A triangle wave has only two slopes — constant up, constant down — so the current snaps between two constant levels: a square wave. Each ramp covers 4 V in 1 ms, giving $|i| = 1\\,\\mu\\text{F} \\times 4000\\,\\text{V/s} = 4\\,\\text{mA}$, positive while charging, negative while discharging. Corners in voltage become jumps in current — the visual signature of $dv/dt$."
+  }
+]

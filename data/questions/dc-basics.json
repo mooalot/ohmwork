@@ -1,0 +1,478 @@
+[
+  {
+    "id": "dc-001",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Deep down, what is a resistor actually doing in a circuit?",
+    "choices": [
+      "Converting electrical energy to heat while forcing a proportional relationship between its voltage and current",
+      "Storing charge for later release",
+      "Blocking DC current entirely while passing AC",
+      "Boosting the voltage available to downstream components"
+    ],
+    "answer": 0,
+    "explanation": "A resistor is an energy converter and a constraint. It turns electrical energy into heat, and it enforces $V = IR$: you cannot set its voltage and current independently. Charge storage is a capacitor's job; blocking DC is also capacitor behavior; nothing passive boosts voltage."
+  },
+  {
+    "id": "dc-002",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Find $V_{out}$ of this voltage divider, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [70, 220], "to": [70, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [200, 60], "to": [200, 140], "label": "R_1", "value": "6.8 kΩ" },
+        { "type": "resistor", "from": [200, 140], "to": [200, 220], "label": "R_2", "value": "3.3 kΩ" },
+        { "type": "ground", "at": [135, 220] }
+      ],
+      "wires": [
+        [[70, 60], [200, 60]],
+        [[70, 220], [200, 220]],
+        [[200, 140], [330, 140]]
+      ],
+      "nodes": [[200, 140]],
+      "labels": [{ "text": "V_{out}", "at": [342, 140], "anchor": "left" }]
+    },
+    "answer": 3.92,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "The same current flows through both resistors, so the 12 V splits in proportion to resistance — $R_2$ gets its share of the total. $V_{out} = 12 \\cdot \\frac{3.3}{6.8 + 3.3} = 12 \\cdot \\frac{3.3}{10.1} \\approx 3.92\\,\\text{V}$. Sanity check: $R_2$ is about a third of the total, so expect about a third of 12 V."
+  },
+  {
+    "id": "dc-003",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Three resistors of very different sizes are in series. What can you say about the current through each?",
+    "choices": [
+      "It is identical in all three — there is only one path",
+      "The largest resistor carries the least current",
+      "The current splits proportionally to each resistance",
+      "It depends on which resistor is closest to the battery"
+    ],
+    "answer": 0,
+    "explanation": "In series there is exactly one path, and charge doesn't pile up anywhere in steady state — what flows into a resistor must flow out. So the current is the same everywhere in the loop. What *differs* between the resistors is the voltage each one drops ($V = IR$), not the current. Position in the loop is irrelevant."
+  },
+  {
+    "id": "dc-004",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "What is the equivalent resistance of $4.7\\,\\text{k}\\Omega$ in parallel with $10\\,\\text{k}\\Omega$? Answer in $\\text{k}\\Omega$.",
+    "answer": 3.2,
+    "tolerance": 0.03,
+    "unit": "kΩ",
+    "explanation": "Parallel paths make it *easier* for current to flow, so the result is always smaller than the smallest branch — here, below $4.7\\,\\text{k}\\Omega$. Product over sum: $\\frac{4.7 \\times 10}{4.7 + 10} = \\frac{47}{14.7} \\approx 3.2\\,\\text{k}\\Omega$."
+  },
+  {
+    "id": "dc-005",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Which resistor carries the most current?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "resistor", "from": [160, 60], "to": [160, 200], "label": "R_A", "value": "1 kΩ" },
+        { "type": "resistor", "from": [260, 60], "to": [260, 200], "label": "R_B", "value": "4.7 kΩ" },
+        { "type": "resistor", "from": [360, 60], "to": [360, 200], "label": "R_C", "value": "10 kΩ" }
+      ],
+      "wires": [
+        [[60, 60], [360, 60]],
+        [[60, 200], [360, 200]]
+      ],
+      "nodes": [[160, 60], [260, 60], [160, 200], [260, 200]]
+    },
+    "choices": [
+      "$R_A$ (1 kΩ)",
+      "$R_B$ (4.7 kΩ)",
+      "$R_C$ (10 kΩ)",
+      "They all carry the same current"
+    ],
+    "answer": 0,
+    "explanation": "All three resistors see the *same* 9 V, because they're connected across the same two nodes. With equal voltage, current is inversely proportional to resistance ($I = V/R$) — the smallest resistance is the easiest path and carries the most current: $9/1\\text{k} = 9\\,\\text{mA}$ versus $1.9\\,\\text{mA}$ and $0.9\\,\\text{mA}$."
+  },
+  {
+    "id": "dc-006",
+    "topic": "dc-basics",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Find the current through $R_3$, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R_2", "value": "2.2 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [320, 60], "to": [320, 200], "label": "R_3", "value": "3.3 kΩ" }
+      ],
+      "wires": [
+        [[180, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "answer": 2.07,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Collapse the parallel pair first: $R_2 \\| R_3 = \\frac{2.2 \\times 3.3}{5.5} = 1.32\\,\\text{k}\\Omega$. That forms a divider with $R_1$, so the node voltage is $12 \\cdot \\frac{1.32}{1 + 1.32} \\approx 6.83\\,\\text{V}$. Then $I_{R_3} = 6.83 / 3.3\\text{k} \\approx 2.07\\,\\text{mA}$. The habit to build: reduce the network until the question becomes one Ohm's-law step, then walk back."
+  },
+  {
+    "id": "dc-007",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A $100\\,\\Omega$ and a $10\\,\\text{k}\\Omega$ resistor are in **series**. Which one runs hotter?",
+    "choices": [
+      "The 10 kΩ — same current through both, and $P = I^2R$ grows with $R$",
+      "The 100 Ω — smaller resistors always dissipate more",
+      "They dissipate equally since the current is the same",
+      "The 100 Ω — it sees more voltage"
+    ],
+    "answer": 0,
+    "explanation": "In series the current is shared, so compare with $P = I^2 R$: power scales directly with resistance, and the $10\\,\\text{k}\\Omega$ dissipates 100× more. (Flip the setup to *parallel* and the answer flips too: shared voltage means $P = V^2/R$, and the *small* resistor runs hotter. Knowing which form of the power law to grab is the intuition here.)"
+  },
+  {
+    "id": "dc-008",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A $220\\,\\Omega$ resistor has $9\\,\\text{V}$ across it. How much power does it dissipate, in mW?",
+    "answer": 368,
+    "tolerance": 0.03,
+    "unit": "mW",
+    "explanation": "Voltage is known, so use $P = V^2/R = 81/220 \\approx 0.368\\,\\text{W} = 368\\,\\text{mW}$. Worth noticing: that's above the rating of a standard ¼-W resistor — this part would cook. Real designs check power, not just resistance."
+  },
+  {
+    "id": "dc-009",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "You add another resistor in parallel with an existing one. Whatever its value, what happens to the total resistance?",
+    "choices": [
+      "It always decreases",
+      "It always increases",
+      "It increases only if the new resistor is larger than the old one",
+      "It stays the same if the new resistor is much larger"
+    ],
+    "answer": 0,
+    "explanation": "A new parallel branch is a new path for current — you've made conduction easier, so resistance *must* drop, even if the new branch is $1\\,\\text{M}\\Omega$. A huge parallel resistor drops it only a tiny bit (which is why we can often ignore it), but the direction is never in doubt. Think 'extra lane on a highway'."
+  },
+  {
+    "id": "dc-010",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "Set $R_2$ so that $V_{out} = 4\\,\\text{V}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [70, 220], "to": [70, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [200, 60], "to": [200, 140], "label": "R_1", "value": "4.7 kΩ" },
+        { "type": "resistor", "from": [200, 140], "to": [200, 220], "label": "R_2", "bind": true },
+        { "type": "ground", "at": [135, 220] }
+      ],
+      "wires": [
+        [[70, 60], [200, 60]],
+        [[70, 220], [200, 220]],
+        [[200, 140], [330, 140]]
+      ],
+      "nodes": [[200, 140]],
+      "labels": [{ "text": "V_{out}", "at": [342, 140], "anchor": "left" }]
+    },
+    "slider": { "min": 100, "max": 10000, "step": 50, "unit": "Ω", "label": "R_2" },
+    "answer": 2350,
+    "tolerance": 0.03,
+    "explanation": "You want $R_2$ to take $4/12 = 1/3$ of the total voltage, so it must be $1/3$ of the total resistance — i.e. half of $R_1$. From $12\\frac{R_2}{4700 + R_2} = 4$: $R_2 = 2350\\,\\Omega$. Divider intuition in one line: output fraction = resistance fraction."
+  },
+  {
+    "id": "dc-011",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why is an ideal voltmeter built with (effectively) infinite input resistance?",
+    "choices": [
+      "So it draws no current and doesn't disturb the circuit it's measuring",
+      "So it can withstand high voltages without burning out",
+      "To maximize the current through the meter for a stronger reading",
+      "Because voltage can only be measured where no current flows"
+    ],
+    "answer": 0,
+    "explanation": "A voltmeter connects in *parallel* with the thing it measures. Any current it draws is stolen from the circuit — that's a new parallel branch changing the very voltage you're trying to read. Infinite resistance means zero stolen current, zero disturbance. (This matters in practice: probe a high-impedance node with a $10\\,\\text{M}\\Omega$ meter and you can visibly drag the voltage down.)"
+  },
+  {
+    "id": "dc-012",
+    "topic": "dc-basics",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "In this single loop, two sources oppose each other. Find the loop current, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R_1", "value": "2.2 kΩ" },
+        { "type": "vsource", "from": [340, 200], "to": [340, 60], "label": "V_2", "value": "5 V" },
+        { "type": "resistor", "from": [340, 200], "to": [200, 200], "label": "R_2", "value": "1.2 kΩ" }
+      ],
+      "wires": [
+        [[200, 60], [340, 60]],
+        [[60, 200], [200, 200]]
+      ]
+    },
+    "answer": 2.06,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Walk the loop with KVL. $V_1$ pushes current clockwise; $V_2$ (its + terminal meets the arriving current) pushes back. The net drive is $12 - 5 = 7\\,\\text{V}$ across $2.2\\text{k} + 1.2\\text{k} = 3.4\\,\\text{k}\\Omega$, so $I = 7/3.4\\text{k} \\approx 2.06\\,\\text{mA}$. Opposing sources simply subtract — this is exactly how charging a battery works."
+  },
+  {
+    "id": "dc-013",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A wire (a short) is accidentally connected directly across a resistor. What happens to that resistor?",
+    "choices": [
+      "Its voltage collapses to zero and essentially all current bypasses it through the wire",
+      "It burns out from the surge of current through it",
+      "It shares the current equally with the wire",
+      "Nothing changes — the wire has no resistance so it has no effect"
+    ],
+    "answer": 0,
+    "explanation": "The wire and resistor are in parallel, so they must have the *same* voltage — and a (near-)zero-resistance wire can only have (near-)zero volts. Zero volts across the resistor means zero current through it: the short doesn't overload the resistor, it *starves* it. The danger is elsewhere — the source and the wire now carry a huge current."
+  },
+  {
+    "id": "dc-014",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Find the equivalent resistance seen by the source: $R_1 = 1\\,\\text{k}\\Omega$ in series with $\\big(R_2 = 2.2\\,\\text{k}\\Omega \\text{ in parallel with } (R_3 = 1\\,\\text{k}\\Omega + R_4 = 1.2\\,\\text{k}\\Omega)\\big)$. Answer in $\\text{k}\\Omega$.",
+    "answer": 2.1,
+    "tolerance": 0.03,
+    "unit": "kΩ",
+    "explanation": "Work from the far end back toward the source. $R_3 + R_4 = 2.2\\,\\text{k}\\Omega$; that in parallel with $R_2 = 2.2\\,\\text{k}\\Omega$ gives exactly half, $1.1\\,\\text{k}\\Omega$ (equal resistors in parallel always halve). Add the series $R_1$: $2.1\\,\\text{k}\\Omega$. Every resistor network reduces by repeating these two moves."
+  },
+  {
+    "id": "dc-015",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The plot shows measured $I$–$V$ curves for two resistors. Which has the smaller resistance?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "V (V)",
+      "ylabel": "I (mA)",
+      "xmin": 0,
+      "xmax": 5,
+      "ymin": 0,
+      "ymax": 10,
+      "curves": [
+        { "fn": "points", "points": [[0, 0], [5, 10]], "legend": "A" },
+        { "fn": "points", "points": [[0, 0], [5, 2.5]], "legend": "B", "color": 2 }
+      ]
+    },
+    "choices": [
+      "A — steeper slope means more current per volt",
+      "B — it resists the current more strongly",
+      "They're equal where the lines cross the same gridline",
+      "Can't tell without knowing the actual component values"
+    ],
+    "answer": 0,
+    "explanation": "On an $I$–$V$ plot the slope *is* conductance: $I = V/R$, so slope $= 1/R$. Steeper line A passes more current for the same voltage — less resistance ($R_A = 5\\,\\text{V}/10\\,\\text{mA} = 500\\,\\Omega$ vs $R_B = 2\\,\\text{k}\\Omega$). Reading component behavior off an $I$–$V$ curve becomes essential with diodes and transistors, where the curve stops being a straight line."
+  },
+  {
+    "id": "dc-016",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "At a circuit node, $3\\,\\text{mA}$ and $1.2\\,\\text{mA}$ flow **in**, while $2.5\\,\\text{mA}$ flows **out** through one branch and an unknown current flows out through the last branch. Find the unknown current, in mA.",
+    "answer": 1.7,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Charge can't accumulate at a node, so in = out (Kirchhoff's current law). In: $3 + 1.2 = 4.2\\,\\text{mA}$. Out so far: $2.5\\,\\text{mA}$. The last branch must carry the remaining $1.7\\,\\text{mA}$. KCL is just bookkeeping — like water pipes at a junction."
+  },
+  {
+    "id": "dc-017",
+    "topic": "dc-basics",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "A Wheatstone bridge (divider $R_1$-over-$R_2$ next to divider $R_3$-over-$R_4$, meter between the midpoints) reads exactly zero. What must be true?",
+    "choices": [
+      "$R_1 / R_2 = R_3 / R_4$",
+      "$R_1 = R_3$ and $R_2 = R_4$",
+      "$R_1 R_2 = R_3 R_4$",
+      "$R_1 + R_2 = R_3 + R_4$"
+    ],
+    "answer": 0,
+    "explanation": "Zero meter current means the two midpoints sit at the same voltage — the two dividers produce the same output *fraction*: $\\frac{R_2}{R_1+R_2} = \\frac{R_4}{R_3+R_4}$, which rearranges to $R_1/R_2 = R_3/R_4$. Equal ratios, not equal values: a 1k/2k divider balances a 10k/20k divider perfectly. This ratio trick is why bridges measure unknown resistances so precisely."
+  },
+  {
+    "id": "dc-018",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A real 9 V battery has internal resistance $r = 0.5\\,\\Omega$, shown explicitly. What voltage actually appears across the load $R_L$, in volts?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "battery", "from": [60, 200], "to": [60, 60], "label": "ε", "value": "9 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "r", "value": "0.5 Ω" },
+        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_L", "value": "8.5 Ω" }
+      ],
+      "wires": [
+        [[180, 60], [300, 60]],
+        [[60, 200], [300, 200]]
+      ]
+    },
+    "answer": 8.5,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "The internal resistance forms a divider with the load: $V_L = 9 \\cdot \\frac{8.5}{0.5 + 8.5} = 8.5\\,\\text{V}$. Half a volt died inside the battery. This is why battery voltage 'sags' under load, and why the sag grows as the battery ages ($r$ rises) or the load gets hungrier ($R_L$ falls)."
+  },
+  {
+    "id": "dc-019",
+    "topic": "dc-basics",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A source is $10\\,\\text{V}$ behind a $50\\,\\Omega$ internal resistance. Choosing the load $R_L$ for **maximum power transfer**, how much power reaches the load, in mW?",
+    "answer": 500,
+    "tolerance": 0.03,
+    "unit": "mW",
+    "explanation": "Maximum power transfer happens at $R_L = R_s = 50\\,\\Omega$ (smaller loads waste voltage internally; larger loads choke the current — the optimum is the matched middle). Then the 10 V splits evenly: 5 V across the load with $I = 10/100 = 0.1\\,\\text{A}$, so $P = 5 \\times 0.1 = 0.5\\,\\text{W} = 500\\,\\text{mW}$. Note efficiency is only 50% at match — matching is for signal power, not for power supplies."
+  },
+  {
+    "id": "dc-020",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A bird perches with both feet on a single high-voltage line and is perfectly fine. Why?",
+    "choices": [
+      "Both feet are at (nearly) the same potential, so almost no current flows through the bird",
+      "Feathers are excellent electrical insulators",
+      "The line's current is far too small to matter",
+      "Birds' bodies have far higher resistance than the power line"
+    ],
+    "answer": 0,
+    "explanation": "Current needs a potential *difference* to drive it. The stretch of wire between the bird's feet has tiny resistance, so it drops microvolts — the bird is a huge-resistance path in parallel with an almost-zero-volt segment, and $I = V/R \\approx 0$. Absolute voltage doesn't shock; voltage difference does. (A bird bridging the line and a grounded pole would have a very bad day.)"
+  },
+  {
+    "id": "dc-021",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "probe",
+    "prompt": "One node in this circuit sits at about $6.8\\,\\text{V}$. Click it.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R_2", "value": "2.2 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [320, 60], "to": [320, 200], "label": "R_3", "value": "3.3 kΩ" }
+      ],
+      "wires": [
+        [[180, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "probe": { "target": "node" },
+    "answer": { "at": [220, 60] },
+    "explanation": "The parallel pair $R_2 \\| R_3 = 1.32\\,\\text{k}\\Omega$ forms a divider with $R_1$, so the shared top node sits at $12 \\cdot \\frac{1.32}{2.32} \\approx 6.8\\,\\text{V}$. Everything left of $R_1$ is 12 V, everything along the bottom is 0 V — a *node* is the whole connected copper region, not a single dot."
+  },
+  {
+    "id": "dc-022",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "probe",
+    "prompt": "Click the resistor dissipating the **most** power.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R_2", "value": "4.7 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [320, 60], "to": [320, 200], "label": "R_3", "value": "10 kΩ" }
+      ],
+      "wires": [
+        [[180, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "R_2" },
+    "explanation": "Total current is $12/(1\\text{k} + 4.7\\text{k}\\|10\\text{k}) = 2.86\\,\\text{mA}$, leaving $9.14\\,\\text{V}$ on the parallel pair. Powers: $R_1$: $I^2R = 8.2\\,\\text{mW}$; $R_2$: $V^2/R = 17.8\\,\\text{mW}$; $R_3$: $8.4\\,\\text{mW}$. $R_2$ wins — it sees the full parallel-node voltage *and* is the smaller of the pair. After checking, hover the live circuit and verify the numbers yourself."
+  },
+  {
+    "id": "dc-023",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Three resistors divide the $12\\,\\text{V}$ source. Click the node sitting at about $8.2\\,\\text{V}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 300,
+      "components": [
+        { "type": "vsource", "from": [60, 240], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [300, 60], "to": [300, 120], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [300, 120], "to": [300, 180], "label": "R_2", "value": "2.2 kΩ" },
+        { "type": "resistor", "from": [300, 180], "to": [300, 240], "label": "R_3", "value": "6.8 kΩ" },
+        { "type": "ground", "at": [180, 240] }
+      ],
+      "wires": [
+        [[60, 60], [300, 60]],
+        [[60, 240], [300, 240]]
+      ]
+    },
+    "probe": { "target": "node" },
+    "answer": { "at": [300, 180] },
+    "explanation": "Series current: $12\\,\\text{V} / 10\\,\\text{k}\\Omega = 1.2\\,\\text{mA}$. Walking down from the top: after $R_1$ you're at $12 - 1.2 = 10.8\\,\\text{V}$; after $R_2$ at $10.8 - 2.64 = 8.16\\,\\text{V}$ — the node between $R_2$ and $R_3$. Equivalently from the bottom: $R_3$'s share is $12 \\cdot 6.8/10 = 8.16\\,\\text{V}$. Reading a resistor string as a voltage ladder is one of the most-used skills in electronics."
+  },
+  {
+    "id": "dc-024",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Click the **resistor** that, if removed (open-circuited), would stop current flow *everywhere* in the circuit.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "470 Ω" },
+        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R_2", "value": "1 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [320, 60], "to": [320, 200], "label": "R_3", "value": "2.2 kΩ" }
+      ],
+      "wires": [
+        [[180, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "R_1" },
+    "explanation": "$R_1$ is in *series* with everything — it's the only bridge between the source and the rest, so opening it breaks the one and only path. Remove $R_2$ instead and current still flows through $R_3$ (and vice versa): parallel branches are redundant paths, series elements are single points of failure. This is exactly how a fuse works — it's a deliberately weak series element."
+  }
+]

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>interactive test</title>
+  <link rel="stylesheet" href="../vendor/katex.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>body { padding: 20px; } .qcard { margin-bottom: 24px; }</style>
+</head>
+<body>
+  <div id="app"><main id="host"></main><pre id="out"></pre></div>
+  <script src="../vendor/katex.min.js"></script>
+  <script type="module">
+    import { renderQuestion } from '../js/question.js';
+    import { simulate } from '../js/sim.js';
+
+    const results = [];
+    const assert = (name, cond) => results.push(`${cond ? 'PASS' : 'FAIL'} ${name}`);
+    const host = document.getElementById('host');
+    const qs = await (await fetch('../data/questions/dc-basics.json')).json();
+    const byId = Object.fromEntries(qs.map((q) => [q.id, q]));
+
+    function clickCanvas(root, fx, fy) {
+      const canvas = root.querySelector('canvas');
+      const r = canvas.getBoundingClientRect();
+      const w = parseFloat(canvas.style.width);
+      const ev = new MouseEvent('click', {
+        clientX: r.left + (fx / w) * r.width,
+        clientY: r.top + (fy / (canvas.height / (canvas.width / w))) * r.height,
+        bubbles: true,
+      });
+      canvas.dispatchEvent(ev);
+    }
+
+    // --- probe node: click correct net at a DIFFERENT point than answer.at
+    let d1 = document.createElement('div');
+    host.appendChild(d1);
+    let graded = null;
+    let p = renderQuestion(d1, byId['dc-021'], (c) => (graded = c));
+    clickCanvas(d1, 320, 60); // same net as [220,60] via the top wire
+    p.check();
+    assert('probe node: same-net click accepted', graded === true);
+
+    // --- probe node: wrong net rejected
+    let d2 = document.createElement('div');
+    host.appendChild(d2);
+    graded = null;
+    p = renderQuestion(d2, byId['dc-021'], (c) => (graded = c));
+    clickCanvas(d2, 60, 200); // bottom-left, 0 V net
+    p.check();
+    assert('probe node: wrong net rejected', graded === false);
+
+    // --- probe component
+    let d3 = document.createElement('div');
+    host.appendChild(d3);
+    graded = null;
+    p = renderQuestion(d3, byId['dc-022'], (c) => (graded = c));
+    clickCanvas(d3, 220, 130); // middle of R_2
+    p.check();
+    assert('probe component: R_2 accepted', graded === true);
+
+    // --- explore mode appears after answering a solvable circuit question
+    let d4 = document.createElement('div');
+    host.appendChild(d4);
+    graded = null;
+    p = renderQuestion(d4, byId['dc-006'], (c) => (graded = c));
+    d4.querySelector('.numeric-input').value = '2.07';
+    p.check();
+    assert('explore: readout bar appears', !!d4.querySelector('.explore-readout'));
+
+    // --- sim sanity for the probe figures
+    const s22 = simulate(byId['dc-022'].figure);
+    const pR2 = s22.elements.find((e) => e.comp.label === 'R_2').P;
+    const pMax = Math.max(...s22.elements.filter((e) => e.comp.type === 'resistor').map((e) => e.P));
+    assert('dc-022 answer is truly max power', Math.abs(pR2 - pMax) < 1e-9);
+    const s23 = simulate(byId['dc-023'].figure);
+    const v = s23.nets[s23.netOfPoint([300, 180])].v;
+    assert('dc-023 answer node is 8.16 V', Math.abs(v - 8.16) < 0.02);
+
+    document.getElementById('out').textContent = results.join('\n');
+    document.title = results.some((r) => r.startsWith('FAIL')) ? 'FAIL' : 'ALLPASS';
+  </script>
+</body>
+</html>

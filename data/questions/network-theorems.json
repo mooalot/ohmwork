@@ -1,0 +1,431 @@
+[
+  {
+    "id": "nt-001",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why can *any* linear two-terminal network — no matter how many sources and resistors are inside — be replaced by a single voltage source in series with a single resistor?",
+    "choices": [
+      "Because its terminal voltage–current relationship is a straight line, and a line is fully described by two numbers: an intercept (the open-circuit voltage) and a slope (the resistance)",
+      "Because the internal sources always cancel down to exactly one net source",
+      "Because Kirchhoff's current law forces all internal currents to sum to zero at the terminals",
+      "It only works for networks containing a single source and series resistors"
+    ],
+    "answer": 0,
+    "explanation": "From the outside, all you can ever know about a two-terminal box is its $V$–$I$ curve at those terminals. Linearity makes that curve a straight line, and a straight line needs just two parameters — which is exactly what a source ($V_{th}$, the intercept) plus a resistor ($R_{th}$, the slope) provides. The internal complexity is real, but it's invisible from the terminals. That's the whole magic of Thévenin's theorem."
+  },
+  {
+    "id": "nt-002",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "What, physically, is the Thévenin voltage $V_{th}$ of a two-terminal network?",
+    "choices": [
+      "The voltage across the terminals with nothing connected to them — the open-circuit voltage",
+      "The voltage across the terminals when they are shorted together",
+      "The largest source voltage found inside the network",
+      "The sum of all the source voltages inside the network"
+    ],
+    "answer": 0,
+    "explanation": "With nothing attached, no current flows out of the terminals, so no voltage is lost across $R_{th}$ — the full internal drive appears at the terminals. That's why $V_{th}$ is simply what an ideal voltmeter would read across the open terminals. Shorting the terminals gives you the *Norton current* instead, and internal source values by themselves tell you nothing until you account for how the network divides them."
+  },
+  {
+    "id": "nt-003",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A network contains only resistors and *independent* sources. To find its Thévenin resistance $R_{th}$, what do you do with the sources?",
+    "choices": [
+      "Replace voltage sources with short circuits and current sources with open circuits, then find the resistance looking into the terminals",
+      "Replace voltage sources with open circuits and current sources with short circuits",
+      "Remove every source and simply add up all the resistor values",
+      "Leave the sources in place — they are part of the resistance"
+    ],
+    "answer": 0,
+    "explanation": "Killing a source means setting its value to zero. A 0 V voltage source still forces zero volts across itself — that's a wire (short). A 0 A current source still forces zero current through itself — that's a gap (open). With every source dead, only the resistor skeleton remains, and $R_{th}$ is whatever resistance you see looking into the terminals of that skeleton. Getting the short/open assignment backwards is the classic mistake."
+  },
+  {
+    "id": "nt-004",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Find the Thévenin voltage $V_{th}$ seen at terminal $a$ (with respect to ground), in volts. Nothing is connected to $a$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [70, 220], "to": [70, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [200, 60], "to": [200, 140], "label": "R_1", "value": "2.2 kΩ" },
+        { "type": "resistor", "from": [200, 140], "to": [200, 220], "label": "R_2", "value": "3.3 kΩ" },
+        { "type": "ground", "at": [140, 220] }
+      ],
+      "wires": [
+        [[70, 60], [200, 60]],
+        [[70, 220], [200, 220]],
+        [[200, 140], [340, 140]]
+      ],
+      "nodes": [[200, 140]],
+      "labels": [{ "text": "a", "at": [352, 140], "anchor": "left", "terminal": [340, 140] }]
+    },
+    "answer": 7.2,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "With terminal $a$ open, no current leaves the divider, so it behaves exactly like an unloaded voltage divider — $V_{th}$ is just the open-circuit output. $V_{th} = 12 \\cdot \\frac{3.3}{2.2 + 3.3} = 12 \\cdot 0.6 = 7.2\\,\\text{V}$. (For the full equivalent you'd also compute $R_{th} = 2.2\\,\\text{k} \\| 3.3\\,\\text{k} = 1.32\\,\\text{k}\\Omega$.)"
+  },
+  {
+    "id": "nt-005",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Find the Thévenin resistance $R_{th}$ seen looking into terminal $a$ (with respect to ground), in $\\text{k}\\Omega$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [70, 220], "to": [70, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "resistor", "from": [200, 60], "to": [200, 140], "label": "R_1", "value": "4.7 kΩ" },
+        { "type": "resistor", "from": [200, 140], "to": [200, 220], "label": "R_2", "value": "4.7 kΩ" },
+        { "type": "ground", "at": [140, 220] }
+      ],
+      "wires": [
+        [[70, 60], [200, 60]],
+        [[70, 220], [200, 220]],
+        [[200, 140], [340, 140]]
+      ],
+      "nodes": [[200, 140]],
+      "labels": [{ "text": "a", "at": [352, 140], "anchor": "left", "terminal": [340, 140] }]
+    },
+    "answer": 2.35,
+    "tolerance": 0.03,
+    "unit": "kΩ",
+    "explanation": "Kill the source: the 9 V source becomes a short, which connects the top of $R_1$ straight to ground. Now, looking in from terminal $a$, both resistors run from the same node to ground — they're in *parallel*, even though they look like a series stack. $R_{th} = 4.7\\,\\text{k} \\| 4.7\\,\\text{k} = 2.35\\,\\text{k}\\Omega$ (equal resistors in parallel halve). This 'divider output impedance = parallel combination' result is worth memorizing."
+  },
+  {
+    "id": "nt-006",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Find the Norton current $I_N$ of this network as seen from terminals $a$–$b$, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "15 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "1.5 kΩ" }
+      ],
+      "wires": [
+        [[180, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ],
+      "labels": [
+        { "text": "a", "at": [332, 60], "anchor": "left", "terminal": [320, 60] },
+        { "text": "b", "at": [332, 200], "anchor": "left", "terminal": [320, 200] }
+      ]
+    },
+    "answer": 10,
+    "tolerance": 0.02,
+    "unit": "mA",
+    "explanation": "The Norton current is what flows if you short the terminals together — the network's maximum deliverable current. Shorting $a$ to $b$ puts the full 15 V across the only resistance in the path: $I_N = 15 / 1.5\\,\\text{k} = 10\\,\\text{mA}$. Note the neat bookkeeping: $I_N = V_{th}/R_{th}$, so open-circuit voltage, short-circuit current, and resistance are locked together — measure any two and you know the third."
+  },
+  {
+    "id": "nt-007",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A $2\\,\\text{mA}$ current source sits in parallel with a $4.7\\,\\text{k}\\Omega$ resistor. What is the equivalent voltage-source form of this network?",
+    "choices": [
+      "$9.4\\,\\text{V}$ in series with $4.7\\,\\text{k}\\Omega$",
+      "$9.4\\,\\text{V}$ in parallel with $4.7\\,\\text{k}\\Omega$",
+      "$0.43\\,\\text{V}$ in series with $4.7\\,\\text{k}\\Omega$",
+      "$9.4\\,\\text{V}$ with no resistance at all"
+    ],
+    "answer": 0,
+    "explanation": "A source transformation swaps a Norton form (current source *parallel* resistor) for a Thévenin form (voltage source *series* resistor) with the *same* resistor value. The voltage is what the current source would produce across that resistor open-circuited: $V = I R = 2\\,\\text{mA} \\times 4.7\\,\\text{k}\\Omega = 9.4\\,\\text{V}$. The topology swap matters: parallel becomes series — keeping the resistor in parallel with a voltage source would clamp the terminals to 9.4 V regardless of load, which is a different circuit entirely."
+  },
+  {
+    "id": "nt-008",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Engineers describe a voltage source as \"stiff\". What does that mean?",
+    "choices": [
+      "Its Thévenin resistance is small, so its terminal voltage barely sags as the load draws more current",
+      "Its Thévenin resistance is large, so it holds its current steady no matter the load",
+      "It outputs a high voltage",
+      "It can only drive purely resistive loads"
+    ],
+    "answer": 0,
+    "explanation": "Every real source is a $V_{th}$ behind an $R_{th}$, and load current drops $I \\cdot R_{th}$ inside the source before reaching the terminals. Small $R_{th}$ means small internal loss — the voltage holds firm ('stiff') as the load varies. Large $R_{th}$ makes a *weak* voltage source, though interestingly it makes a *good current source*: the internal resistance dominates, so the delivered current barely depends on the load. Stiffness is always relative to the load: a source is stiff when $R_{th} \\ll R_L$."
+  },
+  {
+    "id": "nt-009",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Unloaded, this 10 kΩ/10 kΩ divider outputs 6 V. Find $V_{out}$ with the $10\\,\\text{k}\\Omega$ load $R_L$ attached, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [70, 220], "to": [70, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [200, 60], "to": [200, 140], "label": "R_1", "value": "10 kΩ" },
+        { "type": "resistor", "from": [200, 140], "to": [200, 220], "label": "R_2", "value": "10 kΩ" },
+        { "type": "resistor", "from": [320, 140], "to": [320, 220], "label": "R_L", "value": "10 kΩ" }
+      ],
+      "wires": [
+        [[70, 60], [200, 60]],
+        [[70, 220], [320, 220]],
+        [[200, 140], [320, 140]]
+      ],
+      "nodes": [[200, 140], [200, 220]],
+      "labels": [{ "text": "V_{out}", "at": [280, 120] }]
+    },
+    "answer": 4,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "This is *loading* — and Thévenin makes it a one-liner. The divider alone is $V_{th} = 6\\,\\text{V}$ behind $R_{th} = 10\\,\\text{k} \\| 10\\,\\text{k} = 5\\,\\text{k}\\Omega$. The load then forms a new divider with $R_{th}$: $V_{out} = 6 \\cdot \\frac{10}{5 + 10} = 4\\,\\text{V}$. The output dropped by a third the moment you connected something — this is why divider outputs should only feed loads much larger than $R_{th}$, and why Thévenin equivalents are worth computing at all."
+  },
+  {
+    "id": "nt-010",
+    "topic": "network-theorems",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Use superposition to find the voltage across $R_2$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R_2", "value": "2.2 kΩ", "flipLabel": true },
+        { "type": "isource", "from": [340, 200], "to": [340, 60], "label": "I_1", "value": "3 mA" }
+      ],
+      "wires": [
+        [[180, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "answer": 10.31,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Superposition: let each source act alone, then add the results. With $I_1$ opened, $V_1$ drives a plain divider: $12 \\cdot \\frac{2.2}{1 + 2.2} = 8.25\\,\\text{V}$. With $V_1$ shorted, the 3 mA flows into $R_1 \\| R_2 = \\frac{1 \\times 2.2}{3.2} = 687.5\\,\\Omega$, producing $3\\,\\text{mA} \\times 687.5\\,\\Omega = 2.06\\,\\text{V}$. Both push the node the same way, so they add: $8.25 + 2.06 = 10.31\\,\\text{V}$. Superposition works because the circuit is linear — each source's contribution is unaffected by the others."
+  },
+  {
+    "id": "nt-011",
+    "topic": "network-theorems",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Two sources drive the same node through equal resistors. Find the voltage across $R_3$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "10 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R_3", "value": "1 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [260, 60], "to": [360, 60], "label": "R_2", "value": "1 kΩ" },
+        { "type": "vsource", "from": [360, 200], "to": [360, 60], "label": "V_2", "value": "5 V" }
+      ],
+      "wires": [
+        [[180, 60], [260, 60]],
+        [[60, 200], [360, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "answer": 5,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "By superposition, each source alone sees the other shorted, leaving a divider of its own resistor against the other two in parallel ($1\\,\\text{k} \\| 1\\,\\text{k} = 0.5\\,\\text{k}\\Omega$). $V_1$ contributes $10 \\cdot \\frac{0.5}{1.5} = \\frac{10}{3}\\,\\text{V}$; $V_2$ contributes $5 \\cdot \\frac{0.5}{1.5} = \\frac{5}{3}\\,\\text{V}$. Sum: $5\\,\\text{V}$ exactly. Sanity check by node equation: $(V-10) + (V-5) + V = 0 \\Rightarrow 3V = 15$. With equal resistors the node simply averages the three 'inputs' (10, 5, and 0 V from ground) — this averaging view is the seed of the summing amplifier."
+  },
+  {
+    "id": "nt-012",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A network has Thévenin equivalent $V_{th} = 12\\,\\text{V}$, $R_{th} = 100\\,\\Omega$. If the load is chosen for maximum power transfer, how much power reaches the load, in mW?",
+    "answer": 360,
+    "tolerance": 0.03,
+    "unit": "mW",
+    "explanation": "Maximum power transfer happens at the matched load $R_L = R_{th} = 100\\,\\Omega$: a smaller load chokes the voltage, a larger one chokes the current, and the optimum sits in the middle. At match the 12 V splits evenly — 6 V on the load — with $I = 12/200 = 60\\,\\text{mA}$, so $P_L = 6 \\times 0.06 = 0.36\\,\\text{W} = 360\\,\\text{mW}$. The shortcut worth remembering: $P_{max} = V_{th}^2 / 4R_{th} = 144/400\\,\\text{W}$."
+  },
+  {
+    "id": "nt-013",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Matching the load to the source ($R_L = R_{th}$) maximizes the power delivered to the load. Why do power-supply designers deliberately *avoid* this operating point?",
+    "choices": [
+      "At match, half the power is burned inside the source — supplies aim for $R_{th} \\ll R_L$ so nearly all the power (and a steady voltage) reaches the load",
+      "A matched load would draw no current at all",
+      "Maximum power transfer only applies to AC circuits",
+      "Matching requires the load to be capacitive, which supplies can't drive"
+    ],
+    "answer": 0,
+    "explanation": "At match, $R_{th}$ and $R_L$ drop equal voltages and carry the same current, so exactly half the power dies as heat inside the source — 50% efficiency, with a terminal voltage sagging to $V_{th}/2$. Maximum power transfer answers 'what load extracts the most from a *fixed* source?' — the right question for a radio antenna or a sensor's faint signal. A power supply asks the opposite question: the load is fixed, and the designer drives $R_{th}$ toward zero for efficiency and stiffness."
+  },
+  {
+    "id": "nt-014",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "You compute both the Thévenin and Norton equivalents of the same two-terminal network. Which statement is true?",
+    "choices": [
+      "They share the same resistance, $I_N = V_{th}/R_{th}$, and no measurement at the terminals can tell them apart",
+      "The Norton resistance is the reciprocal of the Thévenin resistance",
+      "Thévenin works for any linear network, but Norton requires a current source inside",
+      "They are only equivalent when the load is matched to the source"
+    ],
+    "answer": 0,
+    "explanation": "Both equivalents reproduce the same straight terminal $V$–$I$ line, just parameterized differently: Thévenin quotes the open-circuit intercept ($V_{th}$), Norton the short-circuit intercept ($I_N$), and the slope $R_{th} = R_N$ is identical. Since $I_N = V_{th}/R_{th}$, converting between them is one multiplication — that's a source transformation. Because the terminal behavior is identical for *every* load, no external measurement can distinguish them; which one you use is purely a matter of algebraic convenience."
+  },
+  {
+    "id": "nt-015",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "This source has $R_{th} = 220\\,\\Omega$. Set the load $R_L$ for maximum power transfer into it.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_{th}", "value": "10 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_{th}", "value": "220 Ω" },
+        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_L", "bind": true }
+      ],
+      "wires": [
+        [[180, 60], [300, 60]],
+        [[60, 200], [300, 200]]
+      ]
+    },
+    "slider": { "min": 50, "max": 1000, "step": 10, "unit": "Ω", "label": "R_L" },
+    "answer": 220,
+    "tolerance": 0.03,
+    "explanation": "Maximum power lands on the load when it *matches* the source: $R_L = R_{th} = 220\\,\\Omega$. Feel for why it's a peak: at low $R_L$ plenty of current flows but the load sees almost no voltage ($P = V I \\to 0$); at high $R_L$ the voltage is there but the current dies. Power is the product, and the product peaks exactly at the matched middle, delivering $V_{th}^2/4R_{th} = 100/880 \\approx 114\\,\\text{mW}$."
+  },
+  {
+    "id": "nt-016",
+    "topic": "network-theorems",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Find the Thévenin resistance $R_{th}$ seen from terminals $a$–$b$, in $\\text{k}\\Omega$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [180, 60], "to": [180, 200], "label": "R_2", "value": "2.2 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [180, 60], "to": [300, 60], "label": "R_3", "value": "1 kΩ" }
+      ],
+      "wires": [
+        [[300, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ],
+      "nodes": [[180, 60], [180, 200]],
+      "labels": [
+        { "text": "a", "at": [352, 60], "anchor": "left", "terminal": [340, 60] },
+        { "text": "b", "at": [352, 200], "anchor": "left", "terminal": [340, 200] }
+      ]
+    },
+    "answer": 1.69,
+    "tolerance": 0.03,
+    "unit": "kΩ",
+    "explanation": "Kill the 12 V source (short it) and stand at the terminals looking in — that vantage point is everything. From $a$, you travel through $R_3$ to the middle node, where $R_1$ (now grounded at both ends via the shorted source) and $R_2$ both lead to $b$: they're in parallel. $R_{th} = R_3 + R_1 \\| R_2 = 1 + \\frac{1 \\times 2.2}{3.2} = 1 + 0.6875 \\approx 1.69\\,\\text{k}\\Omega$. Note $R_3$ is in *series* seen from the terminals even though it looked like a mere connecting branch with the source active."
+  },
+  {
+    "id": "nt-017",
+    "topic": "network-theorems",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Thévenize the divider first, then find the current through the load $R_L$, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "24 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "6.8 kΩ" },
+        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R_2", "value": "3.3 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [320, 60], "to": [320, 200], "label": "R_L", "value": "4.7 kΩ" }
+      ],
+      "wires": [
+        [[180, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "answer": 1.13,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Detach $R_L$ and shrink everything else to two numbers: $V_{th} = 24 \\cdot \\frac{3.3}{6.8 + 3.3} = 7.84\\,\\text{V}$ and $R_{th} = 6.8\\,\\text{k} \\| 3.3\\,\\text{k} = 2.22\\,\\text{k}\\Omega$. Reattach the load to this tiny equivalent: $I_L = \\frac{7.84}{2.22\\,\\text{k} + 4.7\\,\\text{k}} \\approx 1.13\\,\\text{mA}$. The payoff: if you now try five different loads, each is one division — no re-solving the whole network each time."
+  },
+  {
+    "id": "nt-018",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A sensor's output reads $5\\,\\text{V}$ on a high-impedance meter. When you connect a $10\\,\\text{k}\\Omega$ load, the reading drops to $2.5\\,\\text{V}$. What is the sensor's Thévenin (output) resistance?",
+    "choices": [
+      "$10\\,\\text{k}\\Omega$ — the voltage halved, so $R_{th}$ and the load split it equally",
+      "$5\\,\\text{k}\\Omega$ — half the load, since the voltage halved",
+      "$20\\,\\text{k}\\Omega$ — twice the load resistance",
+      "$0\\,\\Omega$ — a working sensor has no output resistance"
+    ],
+    "answer": 0,
+    "explanation": "The unloaded reading is $V_{th} = 5\\,\\text{V}$; the load forms a divider with $R_{th}$: $2.5 = 5 \\cdot \\frac{10\\text{k}}{R_{th} + 10\\text{k}}$. An even split means equal resistances, so $R_{th} = 10\\,\\text{k}\\Omega$. This 'half-voltage' trick is a genuinely practical lab technique: dial a load until the output halves, and you've measured the output impedance of a source without ever opening it up."
+  },
+  {
+    "id": "nt-019",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In a resistor bridge, no two resistors are in plain series or parallel, so the usual reduction moves stall. What does the wye-delta (Y-Δ) transform provide?",
+    "choices": [
+      "A swap of three resistors meeting at a node (Y) for an equivalent triangle (Δ), or vice versa — identical from the three terminals, and it un-sticks the reduction",
+      "A way to eliminate one of the sources so the bridge becomes a single loop",
+      "A shortcut that only applies when all three resistors are equal",
+      "A method for converting an AC bridge into an equivalent DC circuit"
+    ],
+    "answer": 0,
+    "explanation": "Series and parallel are two-terminal ideas, and a bridge is fundamentally a *three-terminal* tangle — that's why reduction stalls. The Y-Δ transform is Thévenin-style thinking one step up: two different internal arrangements (star vs. triangle) that present identical resistance between every pair of the three terminals, so you may swap one for the other freely. Converting one arm of a bridge from Δ to Y suddenly creates series and parallel pairs, and the reduction proceeds. It works for any values, not just equal ones — equal resistors are just the memorable special case ($R_\\Delta = 3R_Y$)."
+  },
+  {
+    "id": "nt-020",
+    "topic": "network-theorems",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Using source transformations (or otherwise), find the Thévenin voltage of this network at terminals $a$–$b$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "isource", "from": [260, 200], "to": [260, 60], "label": "I_1", "value": "3 mA" }
+      ],
+      "wires": [
+        [[180, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ],
+      "nodes": [[260, 60], [260, 200]],
+      "labels": [
+        { "text": "a", "at": [352, 60], "anchor": "left", "terminal": [340, 60] },
+        { "text": "b", "at": [352, 200], "anchor": "left", "terminal": [340, 200] }
+      ]
+    },
+    "answer": 15,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "Transform the left side: 12 V in series with 1 kΩ becomes a 12 mA source in parallel with 1 kΩ. It now sits directly in parallel with $I_1$, and parallel current sources pointing the same way simply add: $12 + 3 = 15\\,\\text{mA}$ through 1 kΩ. Transform back: $V_{th} = 15\\,\\text{mA} \\times 1\\,\\text{k}\\Omega = 15\\,\\text{V}$ in series with 1 kΩ. Cross-check without transformations: with $a$–$b$ open, all 3 mA must return through $R_1$, raising node $a$ to $12 + 3\\,\\text{mA} \\cdot 1\\,\\text{k} = 15\\,\\text{V}$. Same answer — the transformations are just bookkeeping."
+  }
+]

@@ -1,0 +1,441 @@
+[
+  {
+    "id": "mo-001",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "At its core, what kind of device is a MOSFET?",
+    "choices": [
+      "A voltage-controlled switch: the gate's electric field opens a conductive channel, and essentially no current flows into the gate",
+      "A current amplifier: a small gate current controls a large drain current",
+      "A diode that starts conducting once its voltage exceeds about 0.7 V",
+      "A variable resistor whose value is fixed at manufacture"
+    ],
+    "answer": 0,
+    "explanation": "The gate is one plate of a capacitor sitting over the channel. Raising its voltage creates an electric *field* that pulls carriers in between drain and source — a conductive path appears with no steady current into the gate at all. That's the key contrast with a BJT, where base *current* does the controlling. Field opens the door; charge never has to flow through it."
+  },
+  {
+    "id": "mo-002",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "What must be true for an NMOS transistor to start conducting between drain and source?",
+    "choices": [
+      "$V_{GS} > V_{th}$ — the gate must sit at least a threshold voltage above the source",
+      "$V_{DS} > V_{th}$ — the drain must exceed the threshold",
+      "Any positive gate voltage at all, however small",
+      "The gate current must exceed a threshold current"
+    ],
+    "answer": 0,
+    "explanation": "The channel forms only when the gate's field is strong enough to invert the silicon under it, and that strength is measured *gate-to-source*: $V_{GS}$ must exceed $V_{th}$ (typically 1–4 V). Below threshold the device is cut off no matter what the drain does. A small positive $V_{GS}$ under threshold is not enough, and gate current is irrelevant — the gate draws none."
+  },
+  {
+    "id": "mo-003",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "An NMOS has $V_{th} = 2\\,\\text{V}$ and is operating with $V_{GS} = 5\\,\\text{V}$ and $V_{DS} = 0.2\\,\\text{V}$. Which region is it in?",
+    "choices": [
+      "Triode (linear) — it behaves like a small resistor, the switch regime",
+      "Saturation — it behaves like a current source",
+      "Cutoff — no channel exists",
+      "Breakdown — $V_{DS}$ is dangerously low"
+    ],
+    "answer": 0,
+    "explanation": "First check the overdrive: $V_{GS} - V_{th} = 3\\,\\text{V}$, so the channel is well formed. Then the region test: if $V_{DS} < V_{GS} - V_{th}$ the device is in triode; here $0.2 < 3$, comfortably so. In triode the channel acts like a small resistor ($R_{DS(on)}$) — exactly what you want from a switch, since a tiny $V_{DS}$ means tiny wasted power. Saturation would need $V_{DS} > 3\\,\\text{V}$."
+  },
+  {
+    "id": "mo-004",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The gate is driven to $V_G = 5\\,\\text{V}$ (well above $V_{th} = 2\\,\\text{V}$), so the switch is fully on with $R_{DS(on)} = 50\\,\\text{m}\\Omega$. Find the current through the load, in A.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "vsource", "from": [60, 260], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [316, 60], "to": [316, 140], "label": "R_L", "value": "24 Ω" },
+        { "type": "nmos", "at": [300, 200] },
+        { "type": "ground", "at": [160, 260] }
+      ],
+      "wires": [
+        [[60, 60], [316, 60]],
+        [[316, 140], [316, 172]],
+        [[276, 200], [200, 200]],
+        [[316, 228], [316, 260]],
+        [[60, 260], [316, 260]]
+      ],
+      "labels": [{ "text": "V_G", "at": [188, 200], "anchor": "right" }]
+    },
+    "answer": 0.499,
+    "tolerance": 0.03,
+    "unit": "A",
+    "explanation": "A fully-on MOSFET is just a very small resistor in series with the load, so the loop is 12 V across $24 + 0.05 = 24.05\\,\\Omega$: $I = 12/24.05 \\approx 0.499\\,\\text{A}$. Notice the switch barely matters — it drops only $0.499 \\times 0.05 \\approx 25\\,\\text{mV}$ of the 12 V. That's the whole point of low $R_{DS(on)}$: the load gets essentially everything."
+  },
+  {
+    "id": "mo-005",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "An NMOS low-side switch carries $2\\,\\text{A}$ into an LED strip. The MOSFET is fully on with $R_{DS(on)} = 25\\,\\text{m}\\Omega$. How much power does the MOSFET itself dissipate, in mW?",
+    "answer": 100,
+    "tolerance": 0.03,
+    "unit": "mW",
+    "explanation": "When on, the MOSFET is just a $25\\,\\text{m}\\Omega$ resistor, and its current is set by the load — so use $P = I^2 R = 2^2 \\times 0.025 = 0.1\\,\\text{W} = 100\\,\\text{mW}$. That's why modern MOSFETs make such good switches: amps of load current, but only milliwatts of heat in the switch. Note the square: doubling the load current would quadruple the switch's dissipation."
+  },
+  {
+    "id": "mo-006",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "If a MOSFET's gate draws no DC current, why do power MOSFETs still need dedicated gate driver circuits?",
+    "choices": [
+      "The gate is a capacitor (nanofarads): switching it quickly requires large *transient* currents to charge and discharge it",
+      "The gate actually needs a steady bias current once the device is on",
+      "Drivers boost the gate above the drain voltage, which is always required",
+      "Drivers protect the gate from current flowing backward out of the channel"
+    ],
+    "answer": 0,
+    "explanation": "\"No gate current\" is a *DC* statement. The gate is physically a capacitor of a few nanofarads, and $I = C\\,dV/dt$: to slew it 10 V in 100 ns you need on the order of an amp — briefly. A weak driver charges the gate slowly, so the MOSFET lingers in its half-on, high-dissipation region during every transition and cooks. Gate drivers exist to deliver those short, fierce charge pulses."
+  },
+  {
+    "id": "mo-007",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why is an NMOS the natural choice for a *low-side* switch and a PMOS for a *high-side* switch?",
+    "choices": [
+      "Each puts its source at a fixed rail: NMOS source at ground turns on with a simple logic-high $V_{GS}$; PMOS source at the supply turns on by pulling its gate low",
+      "NMOS devices can only sink current and PMOS can only source it",
+      "PMOS transistors switch faster, which matters more on the high side",
+      "NMOS devices fail short and PMOS fail open, so placement follows safety"
+    ],
+    "answer": 0,
+    "explanation": "Turning a MOSFET on is about $V_{GS}$, so the question is: where does the source sit? A low-side NMOS has its source nailed to ground — any ground-referenced logic signal above $V_{th}$ turns it on. A high-side PMOS has its source nailed to the supply rail — pulling the gate toward ground makes $V_{GS}$ negative and turns it on, again with easy-to-generate voltages. Swap the roles and the gate drive gets awkward (an NMOS high-side needs a gate *above* the supply rail)."
+  },
+  {
+    "id": "mo-008",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "In this CMOS inverter, $V_{in}$ is high (at $V_{DD}$). What happens at $V_{out}$?",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "pmos", "at": [240, 100] },
+        { "type": "nmos", "at": [240, 200] },
+        { "type": "ground", "at": [256, 256] }
+      ],
+      "wires": [
+        [[256, 72], [256, 40]],
+        [[256, 128], [256, 172]],
+        [[256, 150], [340, 150]],
+        [[216, 100], [180, 100], [180, 200], [216, 200]],
+        [[180, 150], [130, 150]],
+        [[256, 228], [256, 256]]
+      ],
+      "nodes": [[256, 150], [180, 150]],
+      "labels": [
+        { "text": "V_{DD}", "at": [256, 28] },
+        { "text": "V_{out}", "at": [352, 150], "anchor": "left" },
+        { "text": "V_{in}", "at": [118, 150], "anchor": "right" }
+      ]
+    },
+    "choices": [
+      "It is pulled to $0\\,\\text{V}$: the NMOS turns on and the PMOS turns off",
+      "It is pulled to $V_{DD}$: the input passes straight through",
+      "It sits at $V_{DD}/2$ because both transistors conduct equally",
+      "It floats — neither transistor conducts"
+    ],
+    "answer": 0,
+    "explanation": "The two gates see the same input but the transistors respond oppositely. With $V_{in} = V_{DD}$, the NMOS (source at ground) has a large positive $V_{GS}$ and turns on hard, while the PMOS (source at $V_{DD}$) has $V_{GS} = 0$ and turns off — so the output is connected to ground and to nothing else: a solid logic low. Exactly one device conducts in either state, which is why CMOS logic draws almost no current while idle."
+  },
+  {
+    "id": "mo-009",
+    "topic": "mosfets-opamps",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "The divider sets the gate voltage. $V_{th} = 2\\,\\text{V}$, and once fully enhanced the MOSFET has $R_{DS(on)} = 0.1\\,\\Omega$. Find the power dissipated in the MOSFET, in mW.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "vsource", "from": [60, 260], "to": [60, 60], "label": "V_1", "value": "10 V", "flipLabel": true },
+        { "type": "resistor", "from": [180, 60], "to": [180, 140], "label": "R_1", "value": "100 kΩ" },
+        { "type": "resistor", "from": [180, 140], "to": [180, 260], "label": "R_2", "value": "100 kΩ" },
+        { "type": "resistor", "from": [316, 60], "to": [316, 140], "label": "R_L", "value": "5.1 Ω" },
+        { "type": "nmos", "at": [300, 200] },
+        { "type": "ground", "at": [120, 260] }
+      ],
+      "wires": [
+        [[60, 60], [316, 60]],
+        [[316, 140], [316, 172]],
+        [[180, 140], [240, 140], [240, 200], [276, 200]],
+        [[316, 228], [316, 260]],
+        [[60, 260], [316, 260]]
+      ],
+      "nodes": [[180, 60], [180, 140], [180, 260]]
+    },
+    "answer": 370,
+    "tolerance": 0.03,
+    "unit": "mW",
+    "explanation": "The gate draws no current, so the divider is unloaded and delivers exactly $10 \\times \\frac{100}{200} = 5\\,\\text{V}$ — comfortably above $V_{th} = 2\\,\\text{V}$, so the MOSFET is fully on and acts like $0.1\\,\\Omega$. The load loop then carries $I = 10/(5.1 + 0.1) = 1.92\\,\\text{A}$, and the switch dissipates $P = I^2 R_{DS(on)} = 1.92^2 \\times 0.1 \\approx 0.37\\,\\text{W} = 370\\,\\text{mW}$. The chain — check the gate, reduce the switch to a resistor, then do plain Ohm's law — is how every MOSFET switch problem falls apart."
+  },
+  {
+    "id": "mo-010",
+    "topic": "mosfets-opamps",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "An NMOS ($V_{th} = 2\\,\\text{V}$) is misused as a *high-side* switch: drain tied to $12\\,\\text{V}$, load from source to ground, gate driven to $12\\,\\text{V}$. What is the highest voltage the source (load) can reach?",
+    "choices": [
+      "$10\\,\\text{V}$ — the source rises until $V_{GS}$ shrinks to $V_{th}$, and the device starves itself",
+      "$12\\,\\text{V}$ — the gate is high, so it is fully on",
+      "$2\\,\\text{V}$ — one threshold above ground",
+      "$0\\,\\text{V}$ — an NMOS cannot conduct on the high side"
+    ],
+    "answer": 0,
+    "explanation": "The trap is that $V_{GS}$ is gate *minus source*, and here the source is not pinned — it rides up with the load. As the source rises toward the rail, $V_{GS} = 12 - V_S$ shrinks; conduction dies out when it reaches $V_{th}$, i.e. at $V_S = 12 - 2 = 10\\,\\text{V}$. The transistor never fully enhances, hovers in a lossy half-on state, and the load loses two volts. This is exactly why high-side switching uses a PMOS — or an NMOS with a bootstrap/charge-pump driver that lifts the gate *above* the rail."
+  },
+  {
+    "id": "mo-011",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "An op-amp is wired with negative feedback. What are the two \"golden rules\" for analyzing the circuit?",
+    "choices": [
+      "The inputs draw no current, and the output does whatever it takes to make the two inputs equal",
+      "The output sources no current, and the two inputs draw equal currents",
+      "The inputs draw no current, and the inputs are forced equal even without any feedback",
+      "The output equals the difference of the inputs times a fixed gain of 100"
+    ],
+    "answer": 0,
+    "explanation": "Rule 1 is physical: the inputs are extremely high impedance, so they draw (essentially) zero current. Rule 2 is a *consequence of feedback*: the open-loop gain is enormous, so any difference between the inputs would slam the output — the feedback path keeps nudging the inverting input until $V_- = V_+$ (the \"virtual short\"). Rule 2 only holds when negative feedback exists to do the nudging; the same op-amp without feedback is a comparator, not an amplifier."
+  },
+  {
+    "id": "mo-012",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Find $V_{out}$ of this inverting amplifier when $V_{in} = 0.5\\,\\text{V}$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [80, 146], "to": [180, 146], "label": "R_{in}", "value": "10 kΩ" },
+        { "type": "resistor", "from": [220, 80], "to": [340, 80], "label": "R_f", "value": "47 kΩ" },
+        { "type": "opamp", "at": [280, 160] },
+        { "type": "ground", "at": [210, 220] }
+      ],
+      "wires": [
+        [[180, 146], [248, 146]],
+        [[220, 146], [220, 80]],
+        [[340, 80], [340, 160]],
+        [[312, 160], [392, 160]],
+        [[248, 174], [210, 174], [210, 220]]
+      ],
+      "nodes": [[220, 146], [340, 160]],
+      "labels": [
+        { "text": "V_{in}", "at": [68, 146], "anchor": "right", "terminal": [80, 146] },
+        { "text": "V_{out}", "at": [404, 160], "anchor": "left" }
+      ]
+    },
+    "answer": -2.35,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Feedback holds the inverting input at $0\\,\\text{V}$ (a virtual ground, since the + input is grounded), so the input resistor sees the full $V_{in}$ and carries $I = 0.5/10\\text{k} = 50\\,\\mu\\text{A}$. None of it enters the op-amp, so it all continues through $R_f$, pulling the output *below* ground: $V_{out} = -\\frac{R_f}{R_{in}} V_{in} = -\\frac{47}{10} \\times 0.5 = -2.35\\,\\text{V}$. Gain is set purely by the resistor ratio — the op-amp's own gain never appears."
+  },
+  {
+    "id": "mo-013",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Find $V_{out}$ of this non-inverting amplifier when $V_{in} = 0.5\\,\\text{V}$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "opamp", "at": [290, 140], "swap": true },
+        { "type": "resistor", "from": [230, 190], "to": [350, 190], "label": "R_f", "value": "10 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [230, 190], "to": [230, 260], "label": "R_g", "value": "2.2 kΩ" },
+        { "type": "ground", "at": [230, 260] }
+      ],
+      "wires": [
+        [[120, 126], [258, 126]],
+        [[258, 154], [230, 154], [230, 190]],
+        [[350, 190], [350, 140]],
+        [[322, 140], [400, 140]]
+      ],
+      "nodes": [[230, 190], [350, 140]],
+      "labels": [
+        { "text": "V_{in}", "at": [108, 126], "anchor": "right", "terminal": [120, 126] },
+        { "text": "V_{out}", "at": [412, 140], "anchor": "left" }
+      ]
+    },
+    "answer": 2.77,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Feedback forces the inverting input to match the + input, so the top of $R_g$ sits at exactly $V_{in} = 0.5\\,\\text{V}$. That means $R_g$ and $R_f$ form a divider *from the output*, and the output must rise until the divider reproduces $V_{in}$: $V_{out} = \\left(1 + \\frac{R_f}{R_g}\\right)V_{in} = \\left(1 + \\frac{10}{2.2}\\right) \\times 0.5 \\approx 2.77\\,\\text{V}$. The \"+1\" is the giveaway of the non-inverting topology — its gain can never drop below 1."
+  },
+  {
+    "id": "mo-014",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A voltage follower (op-amp output wired straight back to its inverting input) has a gain of exactly 1. What is it actually *for*?",
+    "choices": [
+      "Buffering: it draws almost nothing from a delicate source yet can drive a heavy load — an impedance transformer",
+      "Nothing — a gain of 1 means a plain wire would do the same job",
+      "Filtering high-frequency noise out of the signal",
+      "Limiting the current delivered to the load for protection"
+    ],
+    "answer": 0,
+    "explanation": "Gain isn't the point — *impedance* is. The follower's input draws essentially zero current (so a weak, high-impedance source isn't disturbed), while its output behaves like a stiff low-impedance source (so a hungry load gets all the current it wants, supplied by the op-amp's power rails). It copies a voltage across an impedance chasm a wire could never bridge: connect the load directly and the source would sag."
+  },
+  {
+    "id": "mo-015",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The same op-amp is used with *no* feedback network: one signal on each input. What does the output do?",
+    "choices": [
+      "Slams to a supply rail — whichever input is higher wins, making the circuit a comparator",
+      "Outputs the input difference times a modest, usable gain",
+      "Still holds its two inputs equal via the virtual short",
+      "Outputs the average of the two inputs"
+    ],
+    "answer": 0,
+    "explanation": "The open-loop gain is enormous (often $>10^5$), so even a millivolt of input difference asks for hundreds of volts of output — the op-amp just saturates at whichever rail the sign demands. That's a comparator: a 1-bit \"which input is bigger?\" answer. The virtual short is not a property of the op-amp itself; it exists only when negative feedback is present to enforce it."
+  },
+  {
+    "id": "mo-016",
+    "topic": "mosfets-opamps",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "This summing amplifier has $V_1 = 1\\,\\text{V}$ and $V_2 = 0.5\\,\\text{V}$. Find $V_{out}$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [80, 146], "to": [180, 146], "label": "R_1", "value": "10 kΩ" },
+        { "type": "resistor", "from": [80, 240], "to": [180, 240], "label": "R_2", "value": "4.7 kΩ" },
+        { "type": "resistor", "from": [240, 80], "to": [360, 80], "label": "R_f", "value": "10 kΩ" },
+        { "type": "opamp", "at": [300, 160] },
+        { "type": "ground", "at": [268, 220] }
+      ],
+      "wires": [
+        [[180, 146], [268, 146]],
+        [[180, 240], [220, 240], [220, 146]],
+        [[240, 146], [240, 80]],
+        [[360, 80], [360, 160]],
+        [[332, 160], [400, 160]],
+        [[268, 174], [268, 220]]
+      ],
+      "nodes": [[220, 146], [240, 146], [360, 160]],
+      "labels": [
+        { "text": "V_1", "at": [68, 146], "anchor": "right", "terminal": [80, 146] },
+        { "text": "V_2", "at": [68, 240], "anchor": "right", "terminal": [80, 240] },
+        { "text": "V_{out}", "at": [412, 160], "anchor": "left" }
+      ]
+    },
+    "answer": -2.06,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "The virtual ground makes the inputs independent: each source sees only its own resistor to $0\\,\\text{V}$, so the currents simply add at the summing node. $I_1 = 1/10\\text{k} = 100\\,\\mu\\text{A}$ and $I_2 = 0.5/4.7\\text{k} \\approx 106\\,\\mu\\text{A}$; all $206\\,\\mu\\text{A}$ must flow on through $R_f$. So $V_{out} = -R_f(I_1 + I_2) = -10\\text{k} \\times 206\\,\\mu\\text{A} \\approx -2.06\\,\\text{V}$ — equivalently $-\\left(\\frac{10}{10} \\cdot 1 + \\frac{10}{4.7} \\cdot 0.5\\right)$. Summing junctions are how op-amps do arithmetic: currents add, the feedback resistor converts the total back to a voltage."
+  },
+  {
+    "id": "mo-017",
+    "topic": "mosfets-opamps",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "Derive the inverting amplifier's gain ($V_{in}$ through $R_{in}$ to the $-$ input, $R_f$ from the $-$ input to the output, $+$ input grounded) using only the golden rules. Which chain of reasoning is correct?",
+    "choices": [
+      "Feedback forces $V_- = V_+ = 0$ (virtual ground), so $I = V_{in}/R_{in}$; no current enters the op-amp, so all of $I$ flows through $R_f$, giving $V_{out} = 0 - IR_f = -\\frac{R_f}{R_{in}}V_{in}$",
+      "$R_{in}$ and $R_f$ form a voltage divider, so $V_{out} = \\frac{R_f}{R_{in} + R_f}V_{in}$",
+      "The virtual ground means no current can flow through $R_{in}$, so the gain is set by the op-amp's internal open-loop gain",
+      "The op-amp inputs draw the full input current, so $V_{out} = -V_{in}$ regardless of the resistors"
+    ],
+    "answer": 0,
+    "explanation": "Both golden rules do one job each. The virtual short pins $V_-$ at ground potential (because $V_+$ is grounded), which fixes the current in $R_{in}$ at $V_{in}/R_{in}$; the no-input-current rule then says that current has nowhere to go but through $R_f$. Walking from the $0\\,\\text{V}$ node across $R_f$ in the direction of that current lands you at $V_{out} = -\\frac{R_f}{R_{in}}V_{in}$. It is not a divider — the virtual ground *breaks* the divider by holding the midpoint at zero, which is exactly what makes the gain a clean ratio."
+  },
+  {
+    "id": "mo-018",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "Set $R_f$ so this non-inverting amplifier has a gain of exactly 5 (i.e. $V_{out} = 5\\,V_{in}$).",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "opamp", "at": [290, 140], "swap": true },
+        { "type": "resistor", "from": [230, 190], "to": [350, 190], "label": "R_f", "bind": true, "flipLabel": true },
+        { "type": "resistor", "from": [230, 190], "to": [230, 260], "label": "R_g", "value": "1 kΩ" },
+        { "type": "ground", "at": [230, 260] }
+      ],
+      "wires": [
+        [[120, 126], [258, 126]],
+        [[258, 154], [230, 154], [230, 190]],
+        [[350, 190], [350, 140]],
+        [[322, 140], [400, 140]]
+      ],
+      "nodes": [[230, 190], [350, 140]],
+      "labels": [
+        { "text": "V_{in}", "at": [108, 126], "anchor": "right", "terminal": [120, 126] },
+        { "text": "V_{out}", "at": [412, 140], "anchor": "left" }
+      ]
+    },
+    "slider": { "min": 500, "max": 10000, "step": 100, "unit": "Ω", "label": "R_f" },
+    "answer": 4000,
+    "tolerance": 0.03,
+    "explanation": "Non-inverting gain is $1 + R_f/R_g$: the feedback divider must attenuate $V_{out}$ back down to $V_{in}$, so for a gain of 5 the divider must divide by 5 — $R_g$ takes 1 part and $R_f$ takes the other 4. With $R_g = 1\\,\\text{k}\\Omega$ that means $R_f = 4\\,\\text{k}\\Omega$. Remember the built-in \"+1\": a common mistake is setting $R_f = 5R_g$, which gives a gain of 6."
+  },
+  {
+    "id": "mo-019",
+    "topic": "mosfets-opamps",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "This $10\\,\\text{k}\\Omega/10\\,\\text{k}\\Omega$ divider is supposed to produce $5\\,\\text{V}$, but a $2.2\\,\\text{k}\\Omega$ load is connected directly to the midpoint with no buffer. What voltage does the load actually see, in volts?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [70, 220], "to": [70, 60], "label": "V_1", "value": "10 V", "flipLabel": true },
+        { "type": "resistor", "from": [200, 60], "to": [200, 140], "label": "R_1", "value": "10 kΩ" },
+        { "type": "resistor", "from": [200, 140], "to": [200, 220], "label": "R_2", "value": "10 kΩ" },
+        { "type": "resistor", "from": [320, 140], "to": [320, 220], "label": "R_L", "value": "2.2 kΩ" },
+        { "type": "ground", "at": [135, 220] }
+      ],
+      "wires": [
+        [[70, 60], [200, 60]],
+        [[200, 140], [320, 140]],
+        [[70, 220], [320, 220]]
+      ],
+      "nodes": [[200, 140], [200, 220]]
+    },
+    "answer": 1.53,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "The load doesn't just read the divider — it *joins* it: $R_L$ lands in parallel with $R_2$, giving $10\\text{k} \\parallel 2.2\\text{k} \\approx 1.80\\,\\text{k}\\Omega$. The divider is now $10\\,\\text{k}\\Omega$ over $1.80\\,\\text{k}\\Omega$: $V = 10 \\times \\frac{1.80}{11.80} \\approx 1.53\\,\\text{V}$ — the expected 5 V has collapsed to under a third. Insert a voltage follower between midpoint and load and the full 5 V returns, because the follower's input draws no current: this is precisely the problem buffers exist to solve."
+  },
+  {
+    "id": "mo-020",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A sensor produces $2\\,\\text{V}$ open-circuit but has a $100\\,\\text{k}\\Omega$ output resistance. It drives an ideal op-amp voltage follower, whose output drives a $1\\,\\text{k}\\Omega$ load. What voltage appears across the load, in volts?",
+    "answer": 2,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "The follower's input draws no current, so the sensor's $100\\,\\text{k}\\Omega$ carries zero current and drops zero volts — the + input sees the full $2\\,\\text{V}$, and feedback copies it to the output. The $2\\,\\text{mA}$ the load needs comes from the op-amp's supply rails, not from the sensor. Without the buffer, the sensor's $100\\,\\text{k}\\Omega$ against the $1\\,\\text{k}\\Omega$ load would form a brutal divider leaving only $2 \\times \\frac{1}{101} \\approx 20\\,\\text{mV}$."
+  }
+]
