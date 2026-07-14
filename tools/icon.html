@@ -2,14 +2,45 @@
 <html>
 <head><meta charset="UTF-8"><style>
   * { margin: 0; padding: 0; }
-  body { width: 512px; height: 512px; overflow: hidden; }
-  .tile {
-    width: 512px; height: 512px;
-    background: linear-gradient(135deg, #1b2130 0%, #131720 60%);
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 96px;
-  }
-  .bolt { font-size: 300px; filter: drop-shadow(0 0 40px rgba(88, 204, 2, 0.55)); }
+  body { width: 512px; height: 512px; overflow: hidden; background: #000; }
 </style></head>
-<body><div class="tile"><div class="bolt">⚡</div></div></body>
+<body>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="35%" r="80%">
+      <stop offset="0%" stop-color="#12241b"/>
+      <stop offset="100%" stop-color="#080e0b"/>
+    </radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <!-- faint PCB traces -->
+  <g stroke="#1e3a2c" stroke-width="7" fill="none" stroke-linecap="round">
+    <path d="M60 120 H150 L200 70 H300"/>
+    <path d="M452 392 H370 L320 442 H240"/>
+    <path d="M70 330 V260 L120 210"/>
+    <path d="M442 180 V250 L392 300"/>
+  </g>
+  <g fill="#2a5440">
+    <circle cx="60" cy="120" r="11"/><circle cx="300" cy="70" r="11"/>
+    <circle cx="452" cy="392" r="11"/><circle cx="240" cy="442" r="11"/>
+    <circle cx="70" cy="330" r="11"/><circle cx="120" cy="210" r="11"/>
+    <circle cx="442" cy="180" r="11"/><circle cx="392" cy="300" r="11"/>
+  </g>
+  <!-- copper leads -->
+  <g stroke="#e0954f" stroke-width="18" fill="none" stroke-linecap="round">
+    <path d="M40 256 H108"/>
+    <path d="M404 256 H472"/>
+  </g>
+  <circle cx="40" cy="256" r="17" fill="#e0954f"/>
+  <circle cx="472" cy="256" r="17" fill="#e0954f"/>
+  <!-- phosphor resistor zigzag -->
+  <path d="M108 256 L140 256 L166 196 L214 316 L262 196 L310 316 L358 196 L378 256 L404 256"
+        fill="none" stroke="#3df5a6" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"
+        filter="url(#glow)"/>
+</svg>
+</body>
 </html>

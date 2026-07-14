@@ -10,12 +10,12 @@ function cssVar(name, fallback) {
 
 function theme() {
   return {
-    stroke: cssVar('--fig-stroke', '#e8eaf0'),
-    text: cssVar('--fig-text', '#aab2c5'),
-    accent: cssVar('--fig-accent', '#58cc02'),
-    muted: cssVar('--fig-muted', '#5a6275'),
-    grid: cssVar('--fig-grid', 'rgba(140,150,175,0.15)'),
-    curves: ['#58cc02', '#1cb0f6', '#ff9600', '#ff4b6e'],
+    stroke: cssVar('--fig-stroke', '#dcefe2'),
+    text: cssVar('--fig-text', '#93b3a2'),
+    accent: cssVar('--fig-accent', '#3df5a6'),
+    muted: cssVar('--fig-muted', '#4e6a5c'),
+    grid: cssVar('--fig-grid', 'rgba(120,170,145,0.13)'),
+    curves: ['#3df5a6', '#46d4e8', '#e0954f', '#ff5c7a'],
   };
 }
 
@@ -204,8 +204,8 @@ function drawOverlay(ctx, fig, ov) {
   if (ov.probePick && !ov.probeReveal) ring(ov.probePick.at, t.curves[1], ov.probePick.kind === 'node' ? 9 : 24);
   if (ov.probeReveal) {
     const { target, ok } = ov.probeReveal;
-    if (ov.probePick && !ok) ring(ov.probePick.at, '#ff4b6e', ov.probePick.kind === 'node' ? 9 : 24);
-    ring(target.at, '#58cc02', target.kind === 'node' ? 9 : 24);
+    if (ov.probePick && !ok) ring(ov.probePick.at, t.curves[3], ov.probePick.kind === 'node' ? 9 : 24);
+    ring(target.at, t.accent, target.kind === 'node' ? 9 : 24);
   }
 }
 
