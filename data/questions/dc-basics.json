@@ -474,5 +474,286 @@
     "probe": { "target": "component" },
     "answer": { "component": "R_1" },
     "explanation": "$R_1$ is in *series* with everything — it's the only bridge between the source and the rest, so opening it breaks the one and only path. Remove $R_2$ instead and current still flows through $R_3$ (and vice versa): parallel branches are redundant paths, series elements are single points of failure. This is exactly how a fuse works — it's a deliberately weak series element."
+  },
+  {
+    "id": "dc-025",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In a copper wire, the electrons actually drift from the battery's **−** terminal toward **+**. Yet every schematic arrow and every formula uses current flowing from **+** to **−**. Why does this mismatch never cause wrong answers?",
+    "choices": [
+      "Negative charge moving one way is mathematically identical to positive charge moving the other way, so every circuit law gives the same result either way",
+      "Electrons reverse direction inside components, so both descriptions are physically true",
+      "The two conventions give slightly different answers, but the error is negligible at low voltage",
+      "In metals the current really is carried by positive charges"
+    ],
+    "answer": 0,
+    "explanation": "Conventional current is bookkeeping, not physics gone wrong. A $-1$ charge drifting left transfers exactly the same charge per second as a $+1$ charge drifting right — same $I$, same $V$, same power, so Ohm's law and Kirchhoff's laws can't tell the difference. Franklin guessed the sign before anyone knew about electrons, and we simply kept the convention. The only time the *actual* carrier matters is inside devices like semiconductors or Hall-effect sensors — never in circuit analysis."
+  },
+  {
+    "id": "dc-026",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "What does an ideal $12\\,\\text{V}$ voltage source actually *promise*?",
+    "choices": [
+      "It holds exactly 12 V across its terminals no matter what — the current is whatever the attached circuit demands",
+      "It pushes out a fixed amount of current, and the voltage adjusts to suit the load",
+      "It delivers a fixed 12 W of power, shared among the components",
+      "It fixes both its voltage and its current at nameplate values"
+    ],
+    "answer": 0,
+    "explanation": "A source pins down *one* variable and surrenders the other. An ideal voltage source is a promise about voltage only: connect $1\\,\\text{M}\\Omega$ and it supplies $12\\,\\mu\\text{A}$; connect $1\\,\\Omega$ and it must supply $12\\,\\text{A}$ — the load's Ohm's law decides. That's exactly why shorting a voltage source is violent: it promises 12 V across nearly zero ohms, which demands nearly infinite current. Power isn't fixed either — it's just $V$ times whatever current flows."
+  },
+  {
+    "id": "dc-027",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Schematics treat every wire as a perfect $0\\,\\Omega$ conductor. When does this convenient lie start to break down in real life?",
+    "choices": [
+      "When wires are long or thin **and** the current is large — milliohms times many amps becomes a real voltage drop",
+      "Never — copper genuinely has zero resistance at room temperature",
+      "Only with AC — a DC current never drops voltage along a wire",
+      "When the voltage is high, because resistance grows with applied voltage"
+    ],
+    "answer": 0,
+    "explanation": "A wire is a very small resistor, and $V = IR$ decides when 'very small' stops meaning 'zero'. A few meters of thin hookup wire is roughly $0.1\\,\\Omega$: at $10\\,\\text{mA}$ that drops $1\\,\\text{mV}$ — ignore it; at $10\\,\\text{A}$ it drops a full volt and cooks off $10\\,\\text{W}$ as heat. This is why car battery cables are thick, why phones charge slowly on long skinny USB cables, and why power-supply traces on a PCB get special width treatment."
+  },
+  {
+    "id": "dc-028",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Which statement captures the perfect *duality* between an open circuit and a short circuit?",
+    "choices": [
+      "An open fixes $I = 0$ and lets the circuit decide the voltage across the gap; a short fixes $V = 0$ and lets the circuit decide the current through it",
+      "An open fixes $V = 0$ across the gap; a short fixes $I = 0$ through the wire",
+      "Both force zero power, so they behave identically in a circuit",
+      "An open has zero resistance and a short has infinite resistance"
+    ],
+    "answer": 0,
+    "explanation": "They are mirror images: an open ($R \\to \\infty$) pins the *current* at zero and lets voltage float to whatever the rest of the circuit imposes; a short ($R \\to 0$) pins the *voltage* at zero and carries whatever current the rest of the circuit pushes. Amusingly, both dissipate exactly zero power — one factor of $P = VI$ is always zero — yet they have opposite effects on everything around them. Swapping the two is the classic trap when reasoning about failures."
+  },
+  {
+    "id": "dc-029",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Three identical bulbs (modeled as $60\\,\\Omega$ resistors). Bulb $L_3$ burns out — it becomes an open circuit. One of the remaining bulbs gets **brighter**. Click it.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "L_1", "value": "60 Ω" },
+        { "type": "resistor", "from": [240, 60], "to": [240, 200], "label": "L_2", "value": "60 Ω", "flipLabel": true },
+        { "type": "resistor", "from": [340, 60], "to": [340, 200], "label": "L_3", "value": "60 Ω" }
+      ],
+      "wires": [
+        [[180, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ],
+      "nodes": [[240, 60], [240, 200]]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "L_2" },
+    "explanation": "Removing a parallel branch raises the total resistance, so *less* total current flows — the series bulb $L_1$ drops less voltage, leaving *more* for whatever survives at the parallel node. Before: $60 + 60\\|60 = 90\\,\\Omega$, $I = 133\\,\\text{mA}$, node at 4 V, so $L_2$ carries $67\\,\\text{mA}$. After: a plain $120\\,\\Omega$ series loop, $100\\,\\text{mA}$, node at 6 V — $L_2$ jumps from 67 to 100 mA and brightens while $L_1$ dims. Perturbation reasoning like this needs no calculator: fewer paths → more resistance → less total current → the series drop shrinks."
+  },
+  {
+    "id": "dc-030",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A schematic shows current flowing from the battery, through a resistor, 'to ground'. Where does that current actually end up?",
+    "choices": [
+      "Back at the battery's other terminal — ground symbols are a shared reference net, and every current must complete a loop to its source",
+      "Absorbed by the earth, which acts as an infinite sink for charge",
+      "Consumed by the resistor, which converts the current into heat",
+      "It accumulates at the ground node until something discharges it"
+    ],
+    "answer": 0,
+    "explanation": "Circuits are loops — charge is conserved, so every ampere that leaves the + terminal must arrive back at the − terminal. All the ground symbols on a schematic are shorthand for *one shared net* (usually the battery's − side), drawn separately just to reduce wire clutter; nothing drains away into the planet. And the resistor consumes *energy*, never current: the same current exits it that entered. A car makes this literal — the steel chassis *is* the return wire back to the battery."
+  },
+  {
+    "id": "dc-031",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "The ground symbol defines $0\\,\\text{V}$. One node in this circuit sits at a **negative** voltage — click it.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [60, 220], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [220, 60], "to": [220, 140], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [220, 140], "to": [220, 220], "label": "R_2", "value": "1 kΩ" },
+        { "type": "ground", "at": [320, 140] }
+      ],
+      "wires": [
+        [[60, 60], [220, 60]],
+        [[60, 220], [220, 220]],
+        [[220, 140], [320, 140]]
+      ],
+      "nodes": [[220, 140]]
+    },
+    "probe": { "target": "node" },
+    "answer": { "at": [60, 220] },
+    "explanation": "Ground is just a *label* for where we plant the zero of our measuring stick — nothing forces it onto the battery's − terminal. Here it's tied to the divider midpoint, so that node is 0 V by definition. The loop current is $12\\,\\text{V}/2\\,\\text{k}\\Omega = 6\\,\\text{mA}$: walking up through $R_1$ the top rail sits at $+6\\,\\text{V}$, and walking down through $R_2$ the bottom rail sits at $-6\\,\\text{V}$. Note the ground wire carries no current at all — it's a dead-end reference, not a return path. This is exactly how split $\\pm$ supplies are made."
+  },
+  {
+    "id": "dc-032",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A resistor is marked $1\\,\\text{k}\\Omega$ with a gold (±5%) tolerance band. Your meter reads $1.04\\,\\text{k}\\Omega$. What's the verdict?",
+    "choices": [
+      "Perfectly normal — anything from 950 Ω to 1050 Ω is within spec, and designs must tolerate that spread",
+      "Defective — a 1 kΩ resistor should measure 1000 Ω",
+      "Out of spec — gold means ±5 Ω, not ±5%",
+      "Fine today, but gold means it will drift up to 5% per year of use"
+    ],
+    "answer": 0,
+    "explanation": "The marked value is a *nominal* center, not a promise of exactness: ±5% of $1\\,\\text{k}\\Omega$ is ±50 Ω, so 950–1050 Ω is all in spec and 1040 Ω is unremarkable. The design lesson is bigger than the color code: a good circuit shouldn't hinge on a resistor being exact — dividers care about *ratios*, and where absolute precision matters you reach for 1% metal-film parts (or a trimmer). This is also why standard E12/E24 values are spaced the way they are: neighboring values' tolerance ranges tile the number line."
+  },
+  {
+    "id": "dc-033",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Sanity-check the divider formula $V_{out} = V \\cdot \\frac{R_2}{R_1 + R_2}$ (output taken across $R_2$) by pushing $R_2$ to its limits. What *should* happen?",
+    "choices": [
+      "$V_{out} \\to V$ as $R_2 \\to \\infty$ (no current, so $R_1$ drops nothing) and $V_{out} \\to 0$ as $R_2 \\to 0$ (a short)",
+      "$V_{out} \\to 0$ as $R_2 \\to \\infty$ and $V_{out} \\to V$ as $R_2 \\to 0$",
+      "$V_{out} \\to V/2$ in both limits",
+      "The formula breaks down in both limits, so the check is meaningless"
+    ],
+    "answer": 0,
+    "explanation": "Limit-checking is the fastest lie detector in circuit analysis. $R_2 \\to \\infty$ is an open circuit: current stops, $R_1$ drops nothing, and the full $V$ appears at the output — and indeed $\\frac{R_2}{R_1+R_2} \\to 1$. $R_2 \\to 0$ is a short: the output is nailed to 0 V, matching $\\frac{0}{R_1} = 0$. If you'd accidentally written $R_1$ on top, the limits would come out backwards and expose the mistake instantly — make this two-second check a habit for every formula you derive."
+  },
+  {
+    "id": "dc-034",
+    "topic": "dc-basics",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "The switch $S_1$ is open. Click the resistor carrying **zero** current.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "resistor", "from": [180, 60], "to": [180, 200], "label": "R_1", "value": "1 kΩ" },
+        { "type": "switch", "from": [300, 60], "to": [300, 120], "label": "S_1" },
+        { "type": "resistor", "from": [300, 120], "to": [300, 200], "label": "R_2", "value": "2.2 kΩ" }
+      ],
+      "wires": [
+        [[60, 60], [300, 60]],
+        [[60, 200], [300, 200]]
+      ],
+      "nodes": [[180, 60], [180, 200]]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "R_2" },
+    "explanation": "Elements in series share one current, so an open *anywhere* in a branch kills the current *everywhere* in that branch — the open switch starves $R_2$ completely. $R_1$'s loop is untouched: it still carries $9\\,\\text{V}/1\\,\\text{k}\\Omega = 9\\,\\text{mA}$, because parallel branches live independent lives across the same two rails. Close the switch and $R_2$ springs to life with $9/2.2\\text{k} \\approx 4.1\\,\\text{mA}$, while $R_1$ doesn't change at all — this independence is exactly why house wiring puts every outlet in parallel with its own switch."
+  },
+  {
+    "id": "dc-035",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A long cable with a total (round-trip) resistance of $0.4\\,\\Omega$ carries $5\\,\\text{A}$ from a $12\\,\\text{V}$ supply to a heater. How much voltage is lost in the cable, in volts?",
+    "answer": 2,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Once the amps get big, a wire stops being 'a wire' and becomes a resistor in series with your load. Ohm's law on the cable alone: $V = IR = 5 \\times 0.4 = 2\\,\\text{V}$ — the heater only ever sees 10 V, and the cable itself bakes off $P = I^2R = 10\\,\\text{W}$ along its length. Doubling the copper cross-section would halve the loss, which is why high-current wiring is thick — and why the grid transmits at very high voltage: for the same power, less current means far less $I^2R$ wasted in the wires."
+  },
+  {
+    "id": "dc-036",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A $12\\,\\text{V}$ supply feeds two parallel loads, $6\\,\\Omega$ and $4\\,\\Omega$, through a single fuse in the supply line. What current must the fuse carry in normal operation, in amps?",
+    "answer": 5,
+    "tolerance": 0.03,
+    "unit": "A",
+    "explanation": "The fuse sits in *series* with the source, so KCL says it carries the *sum* of every branch current: $12/6 = 2\\,\\text{A}$ plus $12/4 = 3\\,\\text{A}$ makes $5\\,\\text{A}$. A fuse is a deliberately weak series element — its rating must sit above the normal 5 A (with some headroom, so you'd fit a standard 6.3 A part) but below the current that would cook the wiring it protects. Rate it too low and it blows in normal use; too high and it protects nothing."
+  },
+  {
+    "id": "dc-037",
+    "topic": "dc-basics",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Unloaded, this $10\\,\\text{k}\\Omega$/$10\\,\\text{k}\\Omega$ divider would output $6\\,\\text{V}$. With the $10\\,\\text{k}\\Omega$ load $R_L$ attached as shown, what is $V_{out}$, in volts?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [70, 220], "to": [70, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [200, 60], "to": [200, 140], "label": "R_1", "value": "10 kΩ" },
+        { "type": "resistor", "from": [200, 140], "to": [200, 220], "label": "R_2", "value": "10 kΩ" },
+        { "type": "resistor", "from": [320, 140], "to": [320, 220], "label": "R_L", "value": "10 kΩ" },
+        { "type": "ground", "at": [135, 220] }
+      ],
+      "wires": [
+        [[70, 60], [200, 60]],
+        [[70, 220], [320, 220]],
+        [[200, 140], [320, 140]]
+      ],
+      "nodes": [[200, 140], [200, 220]],
+      "labels": [{ "text": "V_{out}", "at": [260, 120] }]
+    },
+    "answer": 4,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Anything you connect to a divider's output becomes part of the divider. $R_L$ lands in parallel with $R_2$, shrinking the bottom leg to $10\\text{k}\\|10\\text{k} = 5\\,\\text{k}\\Omega$, so $V_{out} = 12 \\cdot \\frac{5}{10+5} = 4\\,\\text{V}$ — a full 2 V below the unloaded value. This is *source loading*: every real output sags when you hang something on it. Rule of thumb: keep the load at least 10× the divider's resistance if you want the unloaded voltage to survive roughly intact."
+  },
+  {
+    "id": "dc-038",
+    "topic": "dc-basics",
+    "tier": 3,
+    "type": "mc",
+    "prompt": "To measure a $10\\,\\text{m}\\Omega$ shunt precisely, a bench meter uses **four** wires: one pair forces a known test current through the part, a separate pair senses the voltage across it (Kelvin sensing). Why does this eliminate the error from lead resistance?",
+    "choices": [
+      "The sense wires feed a high-impedance voltmeter, so they carry essentially no current — their resistance drops no voltage, and the meter reads the true drop across only the shunt",
+      "Four wires put the leads in parallel, halving the lead resistance",
+      "The two current wires cancel each other's magnetic fields, removing the error",
+      "The meter takes two independent 2-wire readings and averages them"
+    ],
+    "answer": 0,
+    "explanation": "The trick is separating the *force* path from the *sense* path. In a 2-wire measurement the test current flows through the leads too, so you read $R_{shunt} + R_{leads}$ — and with $0.1\\,\\Omega$ leads on a $10\\,\\text{m}\\Omega$ part, the leads outweigh the part 10-to-1. The sense pair connects straight to a voltmeter with enormous input resistance: with $I \\approx 0$ in those wires, their $IR$ drop $\\approx 0$ no matter how long or corroded they are, so the sensed voltage is exactly the shunt's. The same force/sense separation shows up in power-supply remote sensing and battery testing."
+  },
+  {
+    "id": "dc-039",
+    "topic": "dc-basics",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A $10\\,\\text{k}\\Omega$ potentiometer across $10\\,\\text{V}$ has its wiper at the exact midpoint — drawn as two $5\\,\\text{k}\\Omega$ halves, $R_{top}$ and $R_{bot}$. A $5\\,\\text{k}\\Omega$ load hangs on the wiper. Find the wiper voltage $V_w$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [70, 220], "to": [70, 60], "label": "V_1", "value": "10 V", "flipLabel": true },
+        { "type": "resistor", "from": [200, 60], "to": [200, 140], "label": "R_{top}", "value": "5 kΩ" },
+        { "type": "resistor", "from": [200, 140], "to": [200, 220], "label": "R_{bot}", "value": "5 kΩ" },
+        { "type": "resistor", "from": [320, 140], "to": [320, 220], "label": "R_L", "value": "5 kΩ" },
+        { "type": "ground", "at": [135, 220] }
+      ],
+      "wires": [
+        [[70, 60], [200, 60]],
+        [[70, 220], [320, 220]],
+        [[200, 140], [320, 140]]
+      ],
+      "nodes": [[200, 140], [200, 220]],
+      "labels": [{ "text": "V_w", "at": [260, 120] }]
+    },
+    "answer": 3.33,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "A pot is just an adjustable divider, and like any divider it sags under load. Naively the midpoint should give 5 V, but the load parallels the bottom half: $5\\text{k}\\|5\\text{k} = 2.5\\,\\text{k}\\Omega$, so $V_w = 10 \\cdot \\frac{2.5}{5 + 2.5} = 3.33\\,\\text{V}$ — a third of the supply, not half. Worse, the sag depends on wiper position (zero at the ends, worst near the middle), so a loaded pot's dial becomes *nonlinear*. The standard cure is the same rule as any divider: make the load at least 10× the pot's resistance, or buffer the wiper."
   }
 ]

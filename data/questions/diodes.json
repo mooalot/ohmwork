@@ -25,14 +25,77 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "5 V", "flipLabel": true },
-        { "type": "diode", "from": [140, 60], "to": [220, 60], "label": "D_1" },
-        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_1", "value": "1 kΩ" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "5 V",
+          "flipLabel": true
+        },
+        {
+          "type": "diode",
+          "from": [
+            140,
+            60
+          ],
+          "to": [
+            220,
+            60
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            300,
+            60
+          ],
+          "to": [
+            300,
+            200
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        }
       ],
       "wires": [
-        [[60, 60], [140, 60]],
-        [[220, 60], [300, 60]],
-        [[60, 200], [300, 200]]
+        [
+          [
+            60,
+            60
+          ],
+          [
+            140,
+            60
+          ]
+        ],
+        [
+          [
+            220,
+            60
+          ],
+          [
+            300,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            300,
+            200
+          ]
+        ]
       ]
     },
     "choices": [
@@ -55,14 +118,77 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "5 V", "flipLabel": true },
-        { "type": "diode", "from": [220, 60], "to": [140, 60], "label": "D_1" },
-        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_1", "value": "1 kΩ" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "5 V",
+          "flipLabel": true
+        },
+        {
+          "type": "diode",
+          "from": [
+            220,
+            60
+          ],
+          "to": [
+            140,
+            60
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            300,
+            60
+          ],
+          "to": [
+            300,
+            200
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        }
       ],
       "wires": [
-        [[60, 60], [140, 60]],
-        [[220, 60], [300, 60]],
-        [[60, 200], [300, 200]]
+        [
+          [
+            60,
+            60
+          ],
+          [
+            140,
+            60
+          ]
+        ],
+        [
+          [
+            220,
+            60
+          ],
+          [
+            300,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            300,
+            200
+          ]
+        ]
       ]
     },
     "choices": [
@@ -85,14 +211,77 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "5 V", "flipLabel": true },
-        { "type": "resistor", "from": [120, 60], "to": [240, 60], "label": "R_1" },
-        { "type": "led", "from": [320, 60], "to": [320, 200], "label": "D_1", "value": "2 V" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "5 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            120,
+            60
+          ],
+          "to": [
+            240,
+            60
+          ],
+          "label": "R_1"
+        },
+        {
+          "type": "led",
+          "from": [
+            320,
+            60
+          ],
+          "to": [
+            320,
+            200
+          ],
+          "label": "D_1",
+          "value": "2 V"
+        }
       ],
       "wires": [
-        [[60, 60], [120, 60]],
-        [[240, 60], [320, 60]],
-        [[60, 200], [320, 200]]
+        [
+          [
+            60,
+            60
+          ],
+          [
+            120,
+            60
+          ]
+        ],
+        [
+          [
+            240,
+            60
+          ],
+          [
+            320,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            320,
+            200
+          ]
+        ]
       ]
     },
     "answer": 300,
@@ -111,14 +300,77 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
-        { "type": "diode", "from": [140, 60], "to": [220, 60], "label": "D_1" },
-        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_1", "value": "1 kΩ" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "9 V",
+          "flipLabel": true
+        },
+        {
+          "type": "diode",
+          "from": [
+            140,
+            60
+          ],
+          "to": [
+            220,
+            60
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            300,
+            60
+          ],
+          "to": [
+            300,
+            200
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        }
       ],
       "wires": [
-        [[60, 60], [140, 60]],
-        [[220, 60], [300, 60]],
-        [[60, 200], [300, 200]]
+        [
+          [
+            60,
+            60
+          ],
+          [
+            140,
+            60
+          ]
+        ],
+        [
+          [
+            220,
+            60
+          ],
+          [
+            300,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            300,
+            200
+          ]
+        ]
       ]
     },
     "answer": 8.3,
@@ -145,8 +397,18 @@
       "xticks": 5,
       "yticks": 2,
       "curves": [
-        { "fn": "expr", "expr": "5*Math.sin(2*Math.PI*t/10)", "dash": true, "color": 2, "legend": "in" },
-        { "fn": "expr", "expr": "Math.max(0, 5*Math.sin(2*Math.PI*t/10))", "legend": "out" }
+        {
+          "fn": "expr",
+          "expr": "5*Math.sin(2*Math.PI*t/10)",
+          "dash": true,
+          "color": 2,
+          "legend": "in"
+        },
+        {
+          "fn": "expr",
+          "expr": "Math.max(0, 5*Math.sin(2*Math.PI*t/10))",
+          "legend": "out"
+        }
       ]
     },
     "choices": [
@@ -177,7 +439,10 @@
       "xticks": 10,
       "yticks": 2,
       "curves": [
-        { "fn": "expr", "expr": "Math.abs(8*Math.sin(2*Math.PI*t/20))" }
+        {
+          "fn": "expr",
+          "expr": "Math.abs(8*Math.sin(2*Math.PI*t/20))"
+        }
       ]
     },
     "choices": [
@@ -200,19 +465,112 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
-        { "type": "resistor", "from": [120, 60], "to": [240, 60], "label": "R_1", "value": "470 Ω" },
-        { "type": "zener", "from": [300, 200], "to": [300, 60], "label": "D_Z", "value": "5.1 V" },
-        { "type": "ground", "at": [180, 200] }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "12 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            120,
+            60
+          ],
+          "to": [
+            240,
+            60
+          ],
+          "label": "R_1",
+          "value": "470 Ω"
+        },
+        {
+          "type": "zener",
+          "from": [
+            300,
+            200
+          ],
+          "to": [
+            300,
+            60
+          ],
+          "label": "D_Z",
+          "value": "5.1 V"
+        },
+        {
+          "type": "ground",
+          "at": [
+            180,
+            200
+          ]
+        }
       ],
       "wires": [
-        [[60, 60], [120, 60]],
-        [[240, 60], [300, 60]],
-        [[300, 60], [360, 60]],
-        [[60, 200], [300, 200]]
+        [
+          [
+            60,
+            60
+          ],
+          [
+            120,
+            60
+          ]
+        ],
+        [
+          [
+            240,
+            60
+          ],
+          [
+            300,
+            60
+          ]
+        ],
+        [
+          [
+            300,
+            60
+          ],
+          [
+            360,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            300,
+            200
+          ]
+        ]
       ],
-      "nodes": [[300, 60]],
-      "labels": [{ "text": "V_{out}", "at": [372, 60], "anchor": "left" }]
+      "nodes": [
+        [
+          300,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            372,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
     },
     "answer": 14.7,
     "tolerance": 0.03,
@@ -230,18 +588,110 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
-        { "type": "resistor", "from": [100, 60], "to": [180, 60], "label": "R_1", "value": "220 Ω" },
-        { "type": "zener", "from": [240, 200], "to": [240, 60], "label": "D_Z", "value": "6.2 V", "flipLabel": true },
-        { "type": "resistor", "from": [340, 60], "to": [340, 200], "label": "R_L", "value": "1 kΩ" },
-        { "type": "ground", "at": [140, 200] }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "12 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            100,
+            60
+          ],
+          "to": [
+            180,
+            60
+          ],
+          "label": "R_1",
+          "value": "220 Ω"
+        },
+        {
+          "type": "zener",
+          "from": [
+            240,
+            200
+          ],
+          "to": [
+            240,
+            60
+          ],
+          "label": "D_Z",
+          "value": "6.2 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            340,
+            60
+          ],
+          "to": [
+            340,
+            200
+          ],
+          "label": "R_L",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
       ],
       "wires": [
-        [[60, 60], [100, 60]],
-        [[180, 60], [340, 60]],
-        [[60, 200], [340, 200]]
+        [
+          [
+            60,
+            60
+          ],
+          [
+            100,
+            60
+          ]
+        ],
+        [
+          [
+            180,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
       ],
-      "nodes": [[240, 60], [240, 200]]
+      "nodes": [
+        [
+          240,
+          60
+        ],
+        [
+          240,
+          200
+        ]
+      ]
     },
     "answer": 20.2,
     "tolerance": 0.03,
@@ -259,17 +709,87 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
-        { "type": "resistor", "from": [120, 60], "to": [240, 60], "label": "R_1", "bind": true },
-        { "type": "led", "from": [320, 60], "to": [320, 200], "label": "D_1", "value": "2 V" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "9 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            120,
+            60
+          ],
+          "to": [
+            240,
+            60
+          ],
+          "label": "R_1",
+          "bind": true
+        },
+        {
+          "type": "led",
+          "from": [
+            320,
+            60
+          ],
+          "to": [
+            320,
+            200
+          ],
+          "label": "D_1",
+          "value": "2 V"
+        }
       ],
       "wires": [
-        [[60, 60], [120, 60]],
-        [[240, 60], [320, 60]],
-        [[60, 200], [320, 200]]
+        [
+          [
+            60,
+            60
+          ],
+          [
+            120,
+            60
+          ]
+        ],
+        [
+          [
+            240,
+            60
+          ],
+          [
+            320,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            320,
+            200
+          ]
+        ]
       ]
     },
-    "slider": { "min": 100, "max": 1000, "step": 10, "unit": "Ω", "label": "R_1" },
+    "slider": {
+      "min": 100,
+      "max": 1000,
+      "step": 10,
+      "unit": "Ω",
+      "label": "R_1"
+    },
     "answer": 350,
     "tolerance": 0.03,
     "explanation": "The LED takes its 2 V off the top no matter what; the resistor's job is to convert the remaining $9 - 2 = 7\\,\\text{V}$ into the current you want. $R = 7 / 0.020 = 350\\,\\Omega$. Notice the lever you're pulling: smaller $R$ means more current and a brighter (or eventually dead) LED — the resistor is the only thing standing between the LED and the supply."
@@ -311,19 +831,111 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "v_{in}", "value": "±5 V", "flipLabel": true },
-        { "type": "resistor", "from": [120, 60], "to": [240, 60], "label": "R_1", "value": "1 kΩ" },
-        { "type": "diode", "from": [300, 60], "to": [300, 200], "label": "D_1" },
-        { "type": "ground", "at": [180, 200] }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "v_{in}",
+          "value": "±5 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            120,
+            60
+          ],
+          "to": [
+            240,
+            60
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "diode",
+          "from": [
+            300,
+            60
+          ],
+          "to": [
+            300,
+            200
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "ground",
+          "at": [
+            180,
+            200
+          ]
+        }
       ],
       "wires": [
-        [[60, 60], [120, 60]],
-        [[240, 60], [300, 60]],
-        [[300, 60], [360, 60]],
-        [[60, 200], [300, 200]]
+        [
+          [
+            60,
+            60
+          ],
+          [
+            120,
+            60
+          ]
+        ],
+        [
+          [
+            240,
+            60
+          ],
+          [
+            300,
+            60
+          ]
+        ],
+        [
+          [
+            300,
+            60
+          ],
+          [
+            360,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            300,
+            200
+          ]
+        ]
       ],
-      "nodes": [[300, 60]],
-      "labels": [{ "text": "V_{out}", "at": [372, 60], "anchor": "left" }]
+      "nodes": [
+        [
+          300,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            372,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
     },
     "choices": [
       "The negative half-cycles pass through, but positive excursions are clipped at about $+0.7\\,\\text{V}$",
@@ -368,7 +980,10 @@
       "xticks": 0.1,
       "yticks": 5,
       "curves": [
-        { "fn": "expr", "expr": "0.00002*(Math.exp(t/0.052)-1)" }
+        {
+          "fn": "expr",
+          "expr": "0.00002*(Math.exp(t/0.052)-1)"
+        }
       ]
     },
     "choices": [
@@ -442,5 +1057,876 @@
     ],
     "answer": 0,
     "explanation": "This is diode OR-ing: each supply *offers* the node its voltage minus a diode drop, and the highest offer wins. $D_1$ pulls the node up to $5 - 0.7 = 4.3\\,\\text{V}$. Now check $D_2$: its anode sits at 3.3 V but its cathode sits at 4.3 V — reverse biased, so it politely disconnects its supply. This is exactly how battery-backup circuits work: the backup diode sits reverse biased until the main supply sags below it, then takes over automatically."
+  },
+  {
+    "id": "d-021",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Two supplies feed one load through diodes — a diode-OR. **Click the diode that is conducting.**",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "12 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            100,
+            60
+          ],
+          "to": [
+            160,
+            60
+          ],
+          "label": "R_{s1}",
+          "value": "1 Ω"
+        },
+        {
+          "type": "diode",
+          "from": [
+            160,
+            60
+          ],
+          "to": [
+            240,
+            60
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "vsource",
+          "from": [
+            140,
+            200
+          ],
+          "to": [
+            140,
+            120
+          ],
+          "label": "V_2",
+          "value": "9 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            140,
+            120
+          ],
+          "to": [
+            200,
+            120
+          ],
+          "label": "R_{s2}",
+          "value": "1 Ω"
+        },
+        {
+          "type": "diode",
+          "from": [
+            200,
+            120
+          ],
+          "to": [
+            280,
+            120
+          ],
+          "label": "D_2"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            340,
+            60
+          ],
+          "to": [
+            340,
+            200
+          ],
+          "label": "R_L",
+          "value": "1 kΩ"
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            60
+          ],
+          [
+            100,
+            60
+          ]
+        ],
+        [
+          [
+            240,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            280,
+            120
+          ],
+          [
+            280,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
+      ],
+      "nodes": [
+        [
+          280,
+          60
+        ],
+        [
+          140,
+          200
+        ]
+      ]
+    },
+    "probe": {
+      "target": "component"
+    },
+    "answer": {
+      "component": "D_1"
+    },
+    "explanation": "Each supply *offers* the shared node its voltage minus one diode drop, and the highest offer wins. $V_1$ pulls the node up to $12 - 0.7 \\approx 11.3\\,\\text{V}$ through $D_1$ (the 1 Ω internal resistance drops only millivolts at this current). Now look at $D_2$: its anode sits at 9 V but its cathode sits at 11.3 V — reverse biased, so the 9 V supply is politely disconnected. One node, many diodes: only the winner conducts; every other diode is held off by the very voltage the winner establishes."
+  },
+  {
+    "id": "d-022",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The battery has been inserted **backwards** (+ terminal at the bottom — check the figure). What happens to the load $R_L$?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "battery",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            60,
+            200
+          ],
+          "label": "V_1",
+          "value": "9 V",
+          "flipLabel": true
+        },
+        {
+          "type": "diode",
+          "from": [
+            120,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            280,
+            60
+          ],
+          "to": [
+            280,
+            200
+          ],
+          "label": "R_L",
+          "value": "470 Ω"
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            60
+          ],
+          [
+            120,
+            60
+          ]
+        ],
+        [
+          [
+            200,
+            60
+          ],
+          [
+            280,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            280,
+            200
+          ]
+        ]
+      ]
+    },
+    "choices": [
+      "Nothing — $D_1$ is now reverse biased and blocks all current, so the load never sees the reversed voltage",
+      "The load sees $-8.3\\,\\text{V}$ — the diode conducts and only subtracts its 0.7 V",
+      "The full $-9\\,\\text{V}$ appears across the load and may damage it",
+      "The diode conducts a huge current and burns out"
+    ],
+    "answer": 0,
+    "explanation": "This is reverse-polarity protection: the diode is a one-way valve placed so that only *correct* battery polarity can push current through it. Backwards, the battery drives current into $D_1$'s cathode — the blocking direction — so zero current flows and the load is untouched; the diode itself absorbs the full 9 V of reverse bias, which it shrugs off. The price you pay is 0.7 V lost during *normal* operation, which is why designs that can't spare it use a Schottky diode or a MOSFET-based 'ideal diode' instead."
+  },
+  {
+    "id": "d-023",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A series protection diode ($0.7\\,\\text{V}$ drop) is no big deal in a $12\\,\\text{V}$ car circuit but a real problem on a $3.3\\,\\text{V}$ board. Why?",
+    "choices": [
+      "Because the toll is fixed but the budget isn't: $0.7\\,\\text{V}$ is over a fifth of $3.3\\,\\text{V}$, leaving only $2.6\\,\\text{V}$ — possibly below what the chips are guaranteed to run at",
+      "Because diodes cannot conduct when the supply is below about 5 V",
+      "Because a diode's forward drop grows as the supply voltage shrinks",
+      "It isn't a problem — the 0.7 V drop scales down in proportion to the supply"
+    ],
+    "answer": 0,
+    "explanation": "A diode charges the same absolute toll no matter how rich the circuit is: 0.7 V is under 6% of a 12 V supply but 21% of a 3.3 V one. After the diode, the 3.3 V board runs on 2.6 V, which can sit below the minimum operating voltage of its chips — and every milliamp the board draws burns $0.7\\,\\text{V} \\times I$ in the diode as pure heat. Low-voltage designs therefore reach for Schottky diodes ($\\approx 0.3\\,\\text{V}$) or MOSFET 'ideal diode' circuits that drop only millivolts."
+  },
+  {
+    "id": "d-024",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Two LEDs, two resistors, one supply — but the LEDs point opposite ways. **Click the LED that actually lights up.**",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "5 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            120
+          ],
+          "label": "R_1",
+          "value": "330 Ω"
+        },
+        {
+          "type": "led",
+          "from": [
+            200,
+            120
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            320,
+            60
+          ],
+          "to": [
+            320,
+            120
+          ],
+          "label": "R_2",
+          "value": "330 Ω"
+        },
+        {
+          "type": "led",
+          "from": [
+            320,
+            200
+          ],
+          "to": [
+            320,
+            120
+          ],
+          "label": "D_2"
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            60
+          ],
+          [
+            320,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            320,
+            200
+          ]
+        ]
+      ],
+      "nodes": [
+        [
+          200,
+          60
+        ],
+        [
+          200,
+          200
+        ]
+      ]
+    },
+    "probe": {
+      "target": "component"
+    },
+    "answer": {
+      "component": "D_1"
+    },
+    "explanation": "An LED is a diode first and a light source second: it only emits when current flows anode → cathode. $D_1$'s anode faces the + rail, so current flows down through it — about $(5-2)/330 \\approx 9\\,\\text{mA}$ — and it lights. $D_2$ is flipped: the supply pushes into its cathode, it blocks, and it stays completely dark (a reverse-biased LED emits nothing at all). This is why an LED wired backwards simply doesn't work — and why LEDs make handy free polarity indicators."
+  },
+  {
+    "id": "d-025",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "$D_1$ is a flyback (freewheeling) diode meant to protect the switch from the relay coil's inductive kick when the switch opens. Is $D_1$ oriented correctly?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "12 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            100,
+            60
+          ],
+          "to": [
+            180,
+            60
+          ],
+          "label": "S_1",
+          "closed": true
+        },
+        {
+          "type": "inductor",
+          "from": [
+            260,
+            60
+          ],
+          "to": [
+            260,
+            120
+          ],
+          "label": "L_1",
+          "value": "50 mH"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            260,
+            120
+          ],
+          "to": [
+            260,
+            200
+          ],
+          "label": "R_1",
+          "value": "120 Ω"
+        },
+        {
+          "type": "diode",
+          "from": [
+            340,
+            200
+          ],
+          "to": [
+            340,
+            60
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            60
+          ],
+          [
+            100,
+            60
+          ]
+        ],
+        [
+          [
+            180,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
+      ],
+      "nodes": [
+        [
+          260,
+          60
+        ],
+        [
+          260,
+          200
+        ]
+      ]
+    },
+    "choices": [
+      "Yes — with its cathode toward the + rail it sits idle during normal operation, but the instant the switch opens it gives the coil current a safe loop to keep circulating in",
+      "No — it should be flipped so it conducts while the switch is closed and absorbs energy continuously",
+      "No — a flyback diode belongs in series with the coil, not across it",
+      "Yes, but only because the diode also carries the coil's normal operating current"
+    ],
+    "answer": 0,
+    "explanation": "An inductor's current cannot stop instantly — open the switch and the coil will generate whatever voltage it takes to keep its current flowing, arcing across the switch contacts if you let it. The fix is to give that current somewhere to go: $D_1$ points 'up' so the coil current can circulate coil → diode → coil, decaying gently while the diode clamps the kick to one diode drop. During normal operation the diode's cathode sits at +12 V, so it's reverse biased and does nothing. Flipped, it would short the supply through the switch — the orientation is everything."
+  },
+  {
+    "id": "d-026",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "You can model a diode as an ideal switch ($0\\,\\text{V}$ drop), as a constant $0.7\\,\\text{V}$ drop, or with the full exponential equation. What's the right way to think about these three models?",
+    "choices": [
+      "They're an accuracy ladder: ideal for figuring out *which* diodes conduct, 0.7 V for everyday hand design, exponential when precision demands it — use the cheapest model that answers your question",
+      "The exponential model is the physically correct one, so the other two should never be used",
+      "They describe different diode types: some diodes are ideal, some drop 0.7 V, some are exponential",
+      "The models differ only in how much current the diode can safely carry"
+    ],
+    "answer": 0,
+    "explanation": "All three describe the *same* diode at different zoom levels. The ideal model answers topology questions — which way does current flow, which diodes are on — in your head. The 0.7 V model adds the one correction that usually matters and powers nearly all hand calculation (as in this app's simulator). The exponential law is the truth, but you only need it for precision work, temperature analysis, or small-signal behavior. Engineering skill isn't using the fanciest model — it's knowing when the cheap one is good enough."
+  },
+  {
+    "id": "d-027",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Zener diodes are deliberately operated in *reverse* — the direction where ordinary diodes block. Why on earth would you use a diode backwards?",
+    "choices": [
+      "Because reverse breakdown happens at a sharp, precisely manufactured voltage $V_Z$, and sitting on that cliff turns the diode into a stable voltage reference — forward, it's just another 0.7 V diode",
+      "Because zeners physically cannot conduct in the forward direction",
+      "Because reverse operation makes the diode switch faster",
+      "Because running them backwards keeps them from overheating"
+    ],
+    "answer": 0,
+    "explanation": "Every diode breaks down in reverse eventually; a zener is one where that breakdown voltage is engineered to be precise, repeatable, and non-destructive. In breakdown the I–V curve is nearly vertical — current can swing wildly while the voltage barely moves — which is exactly the property you want in a voltage reference or crude regulator. Forward biased, a zener behaves like any silicon diode ($\\approx 0.7\\,\\text{V}$), so nothing special is gained. 'Backwards on purpose' is the whole trick: the useful terrain is the reverse cliff at $V_Z$."
+  },
+  {
+    "id": "d-028",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Every MOSFET contains a parasitic **body diode** between source and drain (for an n-channel part: anode at the source, cathode at the drain). What is the practical consequence?",
+    "choices": [
+      "An 'off' MOSFET blocks current in only one direction — the body diode conducts the other way — so a single MOSFET can never stop reverse current on its own",
+      "The body diode means MOSFETs cannot switch DC at all",
+      "The body diode only exists in p-channel devices",
+      "It acts as a second transistor that amplifies the gate signal"
+    ],
+    "answer": 0,
+    "explanation": "The body diode isn't a design choice — it falls out of the silicon structure, a pn junction you get whether you want it or not. Turn an n-MOSFET fully off and it still conducts whenever current tries to flow source → drain, because that's the body diode's forward direction. Circuits exploit this (MOSFET reverse-polarity protection deliberately orients the body diode to conduct on correct polarity) or fight it (bidirectional switches use two MOSFETs back-to-back so the body diodes oppose each other). Remember: buying a transistor gets you a free diode, like it or not."
+  },
+  {
+    "id": "d-029",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A full-wave bridge rectifier contains four diodes. At any instant while it is delivering current, how many of them are conducting?",
+    "choices": [
+      "Two — one diagonal pair steers current through the load, and the opposite pair takes over when the input reverses",
+      "One — diodes take turns individually",
+      "All four — that's what makes it 'full-wave'",
+      "Zero — the bridge couples the signal capacitively"
+    ],
+    "answer": 0,
+    "explanation": "The bridge's job is to route current through the load in the *same* direction no matter which way the source is pushing. Each polarity of the input gets its own diagonal pair: one diode carries current into the load's + terminal, and its partner carries it back out to the source — in one, back out, always two in the path. The other pair sits reverse biased, waiting for the input to flip. That two-diode toll is also why a bridge loses $2 \\times 0.7 = 1.4\\,\\text{V}$ rather than one drop."
+  },
+  {
+    "id": "d-030",
+    "topic": "diodes",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A diode's forward voltage *falls* about $2\\,\\text{mV}$ for every °C it heats up. Why does this make connecting a bare diode (or LED) straight across a stiff voltage source dangerous?",
+    "choices": [
+      "It closes a vicious loop: heating lowers $V_F$, so at a fixed applied voltage the current rises, which dissipates more heat, which lowers $V_F$ further — thermal runaway",
+      "Falling $V_F$ makes the diode gradually stop conducting as it warms up",
+      "It isn't dangerous — a lower voltage drop means lower power dissipation",
+      "The temperature rise reverses the diode's polarity"
+    ],
+    "answer": 0,
+    "explanation": "The danger is positive feedback. On the diode's near-vertical I–V curve, a mere 2 mV shift moves the current a lot — so warming lowers the turn-on voltage, the stiff source drives more current through it, that current makes more heat, and around it goes until something burns. A series resistor breaks the loop with negative feedback: any rise in current increases the resistor's drop, which steals voltage *away* from the diode and pushes the current back down. This is the deeper reason current limiting is non-negotiable — not just to pick a brightness, but to make the operating point stable at all."
+  },
+  {
+    "id": "d-031",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A main $12\\,\\text{V}$ supply and a $9\\,\\text{V}$ backup battery each feed the same load through their own silicon diode ($0.7\\,\\text{V}$ drop, cathodes joined at the load). As the main supply sags, at what main-supply voltage does the backup battery start to take over, in volts?",
+    "answer": 9,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "In a diode-OR, each source offers the load node its voltage minus one diode drop, and the highest offer wins. The backup's standing offer is $9 - 0.7 = 8.3\\,\\text{V}$; the main supply wins as long as $V_{main} - 0.7 > 8.3$, i.e. while $V_{main} > 9\\,\\text{V}$. Because both diodes charge the same 0.7 V toll, the drops cancel and the handover happens simply when the raw voltages cross. The switchover is automatic, instant, and needs no controller — that's why diode-ORs guard everything from RAM backup batteries to server power feeds."
+  },
+  {
+    "id": "d-032",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "probe",
+    "prompt": "This $3.3\\,\\text{V}$ rail reaches its load through a protection diode ($0.7\\,\\text{V}$ drop). **Click the node** that sits at $2.6\\,\\text{V}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "3.3 V",
+          "flipLabel": true
+        },
+        {
+          "type": "diode",
+          "from": [
+            120,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            280,
+            60
+          ],
+          "to": [
+            280,
+            200
+          ],
+          "label": "R_L",
+          "value": "100 Ω"
+        },
+        {
+          "type": "ground",
+          "at": [
+            160,
+            200
+          ]
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            60
+          ],
+          [
+            120,
+            60
+          ]
+        ],
+        [
+          [
+            200,
+            60
+          ],
+          [
+            280,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            280,
+            200
+          ]
+        ]
+      ]
+    },
+    "probe": {
+      "target": "node"
+    },
+    "answer": {
+      "at": [
+        240,
+        60
+      ]
+    },
+    "explanation": "Voltage drops happen *across* components, so walk the loop and collect the tolls: the supply's + terminal sits at 3.3 V, and crossing the conducting diode costs 0.7 V, leaving the far side — the diode's cathode, and everything wired to it up to $R_L$ — at $3.3 - 0.7 = 2.6\\,\\text{V}$. The load then drops the full 2.6 V to ground, drawing 26 mA. Notice what protection cost you: the load lives on 2.6 V, a fifth of the supply gone, which is why low-voltage designs use Schottky diodes or MOSFET ideal-diode circuits instead."
+  },
+  {
+    "id": "d-033",
+    "topic": "diodes",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A half-wave rectifier (one diode in series with a resistive load, no filter capacitor) is driven by a sine with $10\\,\\text{V}$ peak. What maximum **reverse** voltage must the diode withstand?",
+    "choices": [
+      "$10\\,\\text{V}$ — at the negative peak the diode is off, no current flows, the resistor drops nothing, so the entire source voltage lands across the diode",
+      "$0.7\\,\\text{V}$ — a diode never sees more than its forward drop",
+      "$20\\,\\text{V}$ — the reverse voltage is always twice the peak",
+      "$9.3\\,\\text{V}$ — the peak minus one diode drop"
+    ],
+    "answer": 0,
+    "explanation": "When the diode is off it becomes the *only* place the source voltage can appear: zero current means the resistor drops $IR = 0$, so KVL hands the whole input to the diode. At the negative crest that's the full 10 V of reverse bias. This number is the diode's **peak inverse voltage (PIV)** requirement — a rating you must check just like current. And beware: add a filter capacitor and the requirement nearly doubles, because the charged cap holds the cathode high while the input swings low."
+  },
+  {
+    "id": "d-034",
+    "topic": "diodes",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A half-wave rectifier (silicon diode, $0.7\\,\\text{V}$ drop) charges a large filter capacitor from a sine with $10\\,\\text{V}$ peak. The load is light, so the capacitor holds its peak charge between cycles. What peak reverse voltage must the diode withstand, in volts?",
+    "answer": 19.3,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "The capacitor is a memory: it charges to the peak minus one diode drop, $10 - 0.7 = 9.3\\,\\text{V}$, and — lightly loaded — just sits there holding the diode's cathode at 9.3 V. Half a cycle later the input drives the anode down to $-10\\,\\text{V}$. The diode is now stretched between the two: $9.3 - (-10) = 19.3\\,\\text{V}$ of reverse bias, nearly *twice* the peak you might naively expect. This is why rectifier diodes in capacitor-filtered supplies are specified with PIV ratings of at least $2V_{peak}$, with margin on top."
+  },
+  {
+    "id": "d-035",
+    "topic": "diodes",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "The switch has been closed a long time, so a steady current flows in the relay coil ($L_1$ + its winding resistance $R_1$). The instant the switch opens, the coil current keeps flowing through the flyback diode $D_1$ ($0.7\\,\\text{V}$ drop). What peak voltage appears across the now-open switch, in volts?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "12 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            100,
+            60
+          ],
+          "to": [
+            180,
+            60
+          ],
+          "label": "S_1",
+          "closed": true
+        },
+        {
+          "type": "inductor",
+          "from": [
+            260,
+            60
+          ],
+          "to": [
+            260,
+            120
+          ],
+          "label": "L_1",
+          "value": "50 mH"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            260,
+            120
+          ],
+          "to": [
+            260,
+            200
+          ],
+          "label": "R_1",
+          "value": "120 Ω"
+        },
+        {
+          "type": "diode",
+          "from": [
+            340,
+            200
+          ],
+          "to": [
+            340,
+            60
+          ],
+          "label": "D_1"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            60
+          ],
+          [
+            100,
+            60
+          ]
+        ],
+        [
+          [
+            180,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
+      ],
+      "nodes": [
+        [
+          260,
+          60
+        ],
+        [
+          260,
+          200
+        ]
+      ]
+    },
+    "answer": 12.7,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "Follow the current after the switch opens: the coil insists on keeping its $12/120 = 100\\,\\text{mA}$ flowing, and its only path is down through $R_1$, along the ground rail, and *up* through $D_1$ back to the coil's top node. A conducting $D_1$ pins that top node one diode drop **below** ground: $-0.7\\,\\text{V}$. The switch is now stretched between the +12 V rail on one side and $-0.7\\,\\text{V}$ on the other — just $12.7\\,\\text{V}$ across its contacts. Without the diode, the coil would slew that node hundreds of volts negative and arc the contacts; the flyback diode caps the whole drama at one diode drop."
   }
 ]

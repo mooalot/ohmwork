@@ -10,17 +10,91 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
-        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1 kΩ" },
-        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "value": "100 nF" },
-        { "type": "ground", "at": [140, 200] }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "C",
+          "value": "100 nF"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
       ],
       "wires": [
-        [[200, 60], [340, 60]],
-        [[60, 200], [200, 200]]
+        [
+          [
+            200,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
       ],
-      "nodes": [[200, 60]],
-      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+      "nodes": [
+        [
+          200,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            352,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
     },
     "choices": [
       "Passes low frequencies, attenuates high ones — a low-pass filter",
@@ -79,17 +153,91 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
-        { "type": "capacitor", "from": [60, 60], "to": [200, 60], "label": "C", "value": "47 nF" },
-        { "type": "resistor", "from": [200, 60], "to": [200, 200], "label": "R", "value": "10 kΩ" },
-        { "type": "ground", "at": [140, 200] }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "C",
+          "value": "47 nF"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "R",
+          "value": "10 kΩ"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
       ],
       "wires": [
-        [[200, 60], [340, 60]],
-        [[60, 200], [200, 200]]
+        [
+          [
+            200,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
       ],
-      "nodes": [[200, 60]],
-      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+      "nodes": [
+        [
+          200,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            352,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
     },
     "choices": [
       "High-pass — at low frequencies the capacitor's large impedance takes almost all the input, leaving little across $R$",
@@ -163,19 +311,99 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
-        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1.6 kΩ" },
-        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "bind": true },
-        { "type": "ground", "at": [140, 200] }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R",
+          "value": "1.6 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "C",
+          "bind": true
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
       ],
       "wires": [
-        [[200, 60], [340, 60]],
-        [[60, 200], [200, 200]]
+        [
+          [
+            200,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
       ],
-      "nodes": [[200, 60]],
-      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+      "nodes": [
+        [
+          200,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            352,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
     },
-    "slider": { "min": 10, "max": 220, "step": 5, "unit": "nF", "label": "C" },
+    "slider": {
+      "min": 10,
+      "max": 220,
+      "step": 5,
+      "unit": "nF",
+      "label": "C"
+    },
     "answer": 100,
     "tolerance": 0.03,
     "explanation": "Rearrange the cutoff formula for $C$: $C = \\frac{1}{2\\pi R f_c} = \\frac{1}{2\\pi \\cdot 1600 \\cdot 1000} \\approx 99.5\\,\\text{nF}$ — i.e. the standard $100\\,\\text{nF}$ part. Sanity-check the direction: a bigger cap takes longer to charge through $R$, so it lowers the cutoff; if you needed the filter to cut off higher, you would shrink $C$."
@@ -199,9 +427,29 @@
       "xticks": 1,
       "yticks": 10,
       "curves": [
-        { "fn": "points", "points": [[1, 0], [3, 0], [5, -40]] }
+        {
+          "fn": "points",
+          "points": [
+            [
+              1,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              -40
+            ]
+          ]
+        }
       ],
-      "vlines": [{ "x": 3 }]
+      "vlines": [
+        {
+          "x": 3
+        }
+      ]
     },
     "choices": [
       "A first-order low-pass with $f_c \\approx 1\\,\\text{kHz}$",
@@ -245,17 +493,91 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
-        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1 kΩ" },
-        { "type": "inductor", "from": [200, 60], "to": [200, 200], "label": "L", "value": "100 mH" },
-        { "type": "ground", "at": [140, 200] }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "inductor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "L",
+          "value": "100 mH"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
       ],
       "wires": [
-        [[200, 60], [340, 60]],
-        [[60, 200], [200, 200]]
+        [
+          [
+            200,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
       ],
-      "nodes": [[200, 60]],
-      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+      "nodes": [
+        [
+          200,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            352,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
     },
     "choices": [
       "High-pass — the inductor's impedance $2\\pi f L$ grows with frequency, so it wins the divider at high $f$",
@@ -296,8 +618,43 @@
       "xticks": 1,
       "yticks": 20,
       "curves": [
-        { "fn": "points", "points": [[1, 0], [3, 0], [5, -40]], "legend": "A" },
-        { "fn": "points", "points": [[1, 0], [3, 0], [5, -80]], "legend": "B", "color": 2 }
+        {
+          "fn": "points",
+          "points": [
+            [
+              1,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              -40
+            ]
+          ],
+          "legend": "A"
+        },
+        {
+          "fn": "points",
+          "points": [
+            [
+              1,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              -80
+            ]
+          ],
+          "legend": "B",
+          "color": 2
+        }
       ]
     },
     "choices": [
@@ -320,18 +677,104 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
-        { "type": "inductor", "from": [60, 60], "to": [140, 60], "label": "L", "value": "2.2 mH" },
-        { "type": "capacitor", "from": [140, 60], "to": [220, 60], "label": "C", "value": "4.7 µF" },
-        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R", "value": "100 Ω" },
-        { "type": "ground", "at": [140, 200] }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "inductor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            140,
+            60
+          ],
+          "label": "L",
+          "value": "2.2 mH"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            140,
+            60
+          ],
+          "to": [
+            220,
+            60
+          ],
+          "label": "C",
+          "value": "4.7 µF"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            220,
+            60
+          ],
+          "to": [
+            220,
+            200
+          ],
+          "label": "R",
+          "value": "100 Ω"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
       ],
       "wires": [
-        [[220, 60], [340, 60]],
-        [[60, 200], [220, 200]]
+        [
+          [
+            220,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            220,
+            200
+          ]
+        ]
       ],
-      "nodes": [[220, 60]],
-      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+      "nodes": [
+        [
+          220,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            352,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
     },
     "answer": 1565,
     "tolerance": 0.03,
@@ -364,18 +807,104 @@
       "width": 420,
       "height": 260,
       "components": [
-        { "type": "vsine", "from": [60, 220], "to": [60, 60], "label": "V_{in}", "flipLabel": true },
-        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1 kΩ" },
-        { "type": "inductor", "from": [200, 60], "to": [200, 140], "label": "L", "value": "10 mH" },
-        { "type": "capacitor", "from": [200, 140], "to": [200, 220], "label": "C", "value": "1 µF" },
-        { "type": "ground", "at": [140, 220] }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            220
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "inductor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            140
+          ],
+          "label": "L",
+          "value": "10 mH"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            200,
+            140
+          ],
+          "to": [
+            200,
+            220
+          ],
+          "label": "C",
+          "value": "1 µF"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            220
+          ]
+        }
       ],
       "wires": [
-        [[200, 60], [340, 60]],
-        [[60, 220], [200, 220]]
+        [
+          [
+            200,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            220
+          ],
+          [
+            200,
+            220
+          ]
+        ]
       ],
-      "nodes": [[200, 60]],
-      "labels": [{ "text": "V_{out}", "at": [352, 60], "anchor": "left" }]
+      "nodes": [
+        [
+          200,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            352,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
     },
     "choices": [
       "It notches it out: at resonance the series LC branch has zero impedance and shorts the output node to ground",
@@ -396,5 +925,762 @@
     "tolerance": 0.03,
     "unit": "dB",
     "explanation": "Two steps: find the corner, then evaluate the exact magnitude. $RC = 10^{-4}\\,\\text{s}$ gives $f_c = 1/(2\\pi \\cdot 10^{-4}) \\approx 1592\\,\\text{Hz}$, so $f/f_c = 5000/1592 \\approx 3.14$. Then $|H| = \\frac{1}{\\sqrt{1 + (f/f_c)^2}} = \\frac{1}{\\sqrt{1 + 9.87}} \\approx 0.303$, and $20\\log_{10}(0.303) \\approx -10.4\\,\\text{dB}$. The straight-line asymptote would guess $-20\\log_{10}(3.14) \\approx -9.9\\,\\text{dB}$ — close, but the exact curve always sits a bit below it near the corner."
+  },
+  {
+    "id": "fb-021",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "This RC low-pass is driven at a frequency so low that the capacitor's impedance is $100\\times$ the resistor's. Roughly how much of $V_{in}$ appears at $V_{out}$?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "C"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
+      ],
+      "wires": [
+        [
+          [
+            200,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
+      ],
+      "nodes": [
+        [
+          200,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            352,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
+    },
+    "choices": [
+      "Nearly all of it — the cap's huge impedance wins the tug-of-war, so almost the whole input drops across it",
+      "About $1\\%$ — the capacitor blocks the signal",
+      "About $71\\%$ — every RC filter sits at its $-3\\,\\text{dB}$ point",
+      "Exactly half — $R$ and $C$ always split the input evenly"
+    ],
+    "answer": 0,
+    "explanation": "A series chain carries one shared current, so the input voltage divides *in proportion to impedance* — a tug-of-war that the bigger impedance wins. Here the cap holds 100 parts against the resistor's 1, so it takes roughly $100/101 \\approx 99\\%$ of the input (exactly $100/\\sqrt{100^2+1} \\approx 99.995\\%$ counting phase). This is why a low-pass passes lows: deep in the passband the output element's impedance dwarfs $R$ and the filter is effectively invisible. The $-3\\,\\text{dB}$ point only happens at the one frequency where the two impedances are *equal*."
+  },
+  {
+    "id": "fb-022",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Just from the shape of this Bode magnitude plot (x-axis is $\\log_{10}$ of frequency in Hz), what kind of filter is it?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "log10 f (Hz): 1=10, 2=100, 3=1k, 4=10k, 5=100k",
+      "ylabel": "|H| (dB)",
+      "xmin": 1,
+      "xmax": 5,
+      "ymin": -50,
+      "ymax": 10,
+      "xticks": 1,
+      "yticks": 10,
+      "curves": [
+        {
+          "fn": "points",
+          "points": [
+            [
+              1,
+              -40
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              -40
+            ]
+          ]
+        }
+      ],
+      "vlines": [
+        {
+          "x": 3
+        }
+      ]
+    },
+    "choices": [
+      "Band-pass centered near $1\\,\\text{kHz}$ — only frequencies around the peak get through",
+      "Low-pass with $f_c \\approx 1\\,\\text{kHz}$",
+      "High-pass with $f_c \\approx 1\\,\\text{kHz}$",
+      "Notch (band-stop) at $1\\,\\text{kHz}$"
+    ],
+    "answer": 0,
+    "explanation": "Read Bode shapes by asking \"where is the curve at the top?\" — that plateau (or peak) is what the filter passes. Here the response climbs to $0\\,\\text{dB}$ at $\\log_{10} f = 3$ ($1\\,\\text{kHz}$) and falls away on *both* sides: lows and highs are attenuated, only the middle band survives — a band-pass. A notch is exactly this picture flipped upside down: flat everywhere with a dip at one frequency."
+  },
+  {
+    "id": "fb-023",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Identify this filter at a glance from its Bode magnitude (x-axis is $\\log_{10}$ of frequency in Hz).",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "log10 f (Hz): 1=10, 2=100, 3=1k, 4=10k, 5=100k",
+      "ylabel": "|H| (dB)",
+      "xmin": 1,
+      "xmax": 5,
+      "ymin": -50,
+      "ymax": 10,
+      "xticks": 1,
+      "yticks": 10,
+      "curves": [
+        {
+          "fn": "points",
+          "points": [
+            [
+              1,
+              -40
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              0
+            ]
+          ]
+        }
+      ],
+      "vlines": [
+        {
+          "x": 3
+        }
+      ]
+    },
+    "choices": [
+      "High-pass with $f_c \\approx 1\\,\\text{kHz}$ — lows are rolled off, everything above the corner passes",
+      "Low-pass with $f_c \\approx 1\\,\\text{kHz}$ — the curve starts low, so lows are passed",
+      "High-pass with $f_c \\approx 3\\,\\text{Hz}$ — the corner sits at 3 on the axis",
+      "Band-pass centered at $1\\,\\text{kHz}$"
+    ],
+    "answer": 0,
+    "explanation": "The flat $0\\,\\text{dB}$ shelf is the passband, and here it sits on the *high*-frequency side: the response climbs out of the basement as $f$ rises and levels off above the corner — a high-pass. Don't read the axis literally: it's logarithmic, so the break at \"3\" means $10^3 = 1\\,\\text{kHz}$, not $3\\,\\text{Hz}$. The mirror image of this shape (flat then falling) would be the low-pass."
+  },
+  {
+    "id": "fb-024",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "This is a speaker crossover: the woofer is modeled as the $8\\,\\Omega$ resistor. **Click the component that blocks the highs from reaching the woofer.**",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "inductor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "L",
+          "value": "2.2 mH"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "R_{spk}",
+          "value": "8 Ω"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
+      ],
+      "labels": [
+        {
+          "text": "woofer",
+          "at": [
+            232,
+            130
+          ],
+          "anchor": "left"
+        }
+      ]
+    },
+    "probe": {
+      "target": "component"
+    },
+    "answer": {
+      "component": "L"
+    },
+    "explanation": "The series inductor is the gatekeeper: its impedance $|Z_L| = 2\\pi f L$ grows with frequency, so it's practically a plain wire for bass but a wall for treble — the highs drop across $L$ and never reach the driver. That makes an RL low-pass with corner $f_c = R/(2\\pi L) = 8/(2\\pi \\cdot 2.2\\,\\text{mH}) \\approx 580\\,\\text{Hz}$. It's the exact complement of the tweeter's series capacitor, which blocks the *lows* instead."
+  },
+  {
+    "id": "fb-025",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Both dividers hang from the same source — same parts, opposite order. One midpoint is a low-pass output, the other a high-pass. **Click the node** where $V_{out}$ is the high-pass version of the input.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            140,
+            60
+          ],
+          "to": [
+            140,
+            140
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            140,
+            140
+          ],
+          "to": [
+            140,
+            200
+          ],
+          "label": "C_1",
+          "value": "100 nF"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            320,
+            60
+          ],
+          "to": [
+            320,
+            140
+          ],
+          "label": "C_2",
+          "value": "100 nF",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            320,
+            140
+          ],
+          "to": [
+            320,
+            200
+          ],
+          "label": "R_2",
+          "value": "1 kΩ",
+          "flipLabel": true
+        },
+        {
+          "type": "ground",
+          "at": [
+            200,
+            200
+          ]
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            60
+          ],
+          [
+            320,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            320,
+            200
+          ]
+        ]
+      ],
+      "nodes": [
+        [
+          140,
+          60
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "labels": [
+        {
+          "text": "A",
+          "at": [
+            116,
+            140
+          ],
+          "anchor": "right"
+        },
+        {
+          "text": "B",
+          "at": [
+            344,
+            140
+          ],
+          "anchor": "left"
+        }
+      ]
+    },
+    "probe": {
+      "target": "node"
+    },
+    "answer": {
+      "at": [
+        320,
+        140
+      ]
+    },
+    "explanation": "Ask who wins the divider at high frequency: the output is high-pass wherever the element *between output and ground* is the one that wins as $f$ rises. In branch B the resistor sits on the bottom — at high $f$ the series cap $C_2$ shrinks to nearly a short and the full input lands across $R_2$; at low $f$ the cap hogs the voltage and node B goes quiet. Branch A is the same parts stacked the other way, so node A is the low-pass. That's the whole swap trick: exchanging $R$ and $C$ (or just moving where you tap the output) converts low-pass into high-pass."
+  },
+  {
+    "id": "fb-026",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "No calculator allowed: a voltage gain of $\\times 2000$ is how many dB? (Patterns: $\\times 10 = +20\\,\\text{dB}$, $\\times 2 \\approx +6\\,\\text{dB}$.)",
+    "choices": [
+      "$\\approx 66\\,\\text{dB}$",
+      "$\\approx 33\\,\\text{dB}$",
+      "$\\approx 46\\,\\text{dB}$",
+      "$\\approx 86\\,\\text{dB}$"
+    ],
+    "answer": 0,
+    "explanation": "Factor the ratio, then add the dB — logarithms turn multiplication into addition, so factoring is all the math you need. $2000 = 10 \\times 10 \\times 10 \\times 2$, giving $20 + 20 + 20 + 6 = 66\\,\\text{dB}$ (exact: $20\\log_{10}2000 = 66.02$). $33$ is the power-convention slip ($10\\log$ instead of $20\\log$); $46$ is what $\\times 200$ would be — a lost decade."
+  },
+  {
+    "id": "fb-027",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A filter attenuates a tone by $26\\,\\text{dB}$. Without a calculator, roughly what fraction of the original *amplitude* survives?",
+    "choices": [
+      "About $1/20$ ($5\\%$) — split $26 = 20 + 6$: a $\\div 10$ then a $\\div 2$",
+      "About $1/400$ ($0.25\\%$)",
+      "About $1/2$",
+      "About $3/4$ — each dB shaves off roughly $1\\%$"
+    ],
+    "answer": 0,
+    "explanation": "Decompose the dB into chunks you know: $-26\\,\\text{dB} = -20\\,\\text{dB} - 6\\,\\text{dB}$, i.e. divide the amplitude by 10, then by 2 — leaving $1/20$ (exact: $10^{-26/20} = 1/19.95$). Note the trap: $1/400$ is the *power* ratio ($10^{-2.6} \\approx 1/398$), because power falls as the square of amplitude. dB aren't a percentage — they compound multiplicatively, not additively."
+  },
+  {
+    "id": "fb-028",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A recorded bass track picked up $60\\,\\text{Hz}$ mains hum. Which filter removes the hum while doing the *least* damage to the music?",
+    "choices": [
+      "A narrow notch (band-stop) centered on $60\\,\\text{Hz}$",
+      "A low-pass with $f_c = 60\\,\\text{Hz}$",
+      "A high-pass with $f_c = 200\\,\\text{Hz}$",
+      "A band-pass centered on $60\\,\\text{Hz}$"
+    ],
+    "answer": 0,
+    "explanation": "The hum lives at exactly one frequency, so use the surgical tool: a notch is a band-pass turned inside out — it swallows a narrow slice around its center and passes everything else untouched. The high-pass at $200\\,\\text{Hz}$ would kill the hum *and* the entire bass line; the low-pass at $60\\,\\text{Hz}$ discards nearly all the music; the band-pass at $60\\,\\text{Hz}$ keeps *only the hum*. Killing single offenders — mains hum, an adjacent-station whistle on AM radio — is precisely what notch filters are for."
+  },
+  {
+    "id": "fb-029",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A pushbutton wired to a microcontroller pin produces a burst of fast on–off glitches for a few milliseconds on every press (contact bounce). Why does inserting an RC low-pass between button and pin stop the false triggers?",
+    "choices": [
+      "Fast edges are high-frequency content: with the RC time constant chosen slower than the bounce, the glitches average away while the slow press/release still gets through",
+      "The resistor limits the current, so the contacts physically stop bouncing",
+      "The capacitor stores the press and replays it once, cleanly",
+      "It's really a high-pass: it removes the DC part of the bounce"
+    ],
+    "answer": 0,
+    "explanation": "Speed and frequency are the same thing in disguise: a signal that flips in microseconds is made of high-frequency content, while the press itself is nearly DC. Pick $RC$ of a few tens of milliseconds and the capacitor simply can't charge or discharge fast enough to follow the chatter — it glides through the burst and settles at the new level once the contact stays put. The filter doesn't stop the bouncing; it just refuses to react to anything that brief. This anti-glitch trick (debouncing) is the same low-pass idea as smoothing, applied in the time domain."
+  },
+  {
+    "id": "fb-030",
+    "topic": "filters-bode",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Qualitatively, what happens to the *phase* of an RC low-pass output as the frequency sweeps from far below cutoff to far above it?",
+    "choices": [
+      "The output lags more and more: $\\approx 0°$ well below cutoff, $45°$ of lag at $f_c$, approaching (but never exceeding) $90°$ far above",
+      "The output *leads* the input by up to $90°$ — capacitor current leads voltage",
+      "Phase stays $0°$ through the passband, then jumps to $180°$ at cutoff",
+      "The output lags $90°$ at every frequency"
+    ],
+    "answer": 0,
+    "explanation": "The capacitor needs time to charge through $R$, and that charging delay shows up as phase lag — negligible when the input wiggles slowly, increasingly costly as the input speeds up. The lag builds *gradually*: about $0°$ deep in the passband, exactly $45°$ at the corner, creeping toward $90°$ far above it. One pole can never lag more than $90°$ (a quarter cycle); jumps to $180°$ or any *lead* would need a different circuit. Magnitude and phase are two symptoms of the same rolloff — by the time the gain is falling hard, the lag is already near its $90°$ ceiling."
+  },
+  {
+    "id": "fb-031",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A design needs an ultimate rolloff of $-60\\,\\text{dB/decade}$. You have identical *buffered* first-order low-pass stages ($-20\\,\\text{dB/decade}$ each). What is the minimum required, and why?",
+    "choices": [
+      "Three stages — cascaded gains multiply, so their dB (and therefore their slopes) simply add: $3 \\times 20 = 60\\,\\text{dB/decade}$",
+      "One stage with its cutoff moved $3\\times$ lower — lowering $f_c$ makes the slope steeper",
+      "Two stages — each added stage doubles the previous slope",
+      "It can't be done — no combination of first-order stages exceeds $20\\,\\text{dB/decade}$"
+    ],
+    "answer": 0,
+    "explanation": "In cascade, transfer functions multiply — and on a log (dB) axis multiplication becomes addition, so slopes stack linearly: three poles give $-60\\,\\text{dB/decade}$. This is also *why steeper filters need more components*: each $20\\,\\text{dB/decade}$ of slope requires one more pole, and each pole requires one more energy-storage element (a capacitor or inductor). Moving a single stage's cutoff lower just slides the same $-20\\,\\text{dB/decade}$ line sideways — the corner shifts, the steepness never changes."
+  },
+  {
+    "id": "fb-032",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A subwoofer crossover places a $6.8\\,\\text{mH}$ inductor in series with a $4\\,\\Omega$ driver, output across the driver. What is the cutoff frequency of this RL low-pass, in Hz?",
+    "answer": 93.6,
+    "tolerance": 0.03,
+    "unit": "Hz",
+    "explanation": "The corner is where the tug-of-war ties: $2\\pi f L = R$. Solving, $f_c = \\frac{R}{2\\pi L} = \\frac{4}{2\\pi \\cdot 6.8\\times10^{-3}} \\approx 93.6\\,\\text{Hz}$ — right where subwoofers hand off to the main speakers. Note the RL formula puts $R$ on *top* (unlike RC's $1/(2\\pi RC)$): a bigger inductor lowers the cutoff, a bigger driver resistance raises it."
+  },
+  {
+    "id": "fb-033",
+    "topic": "filters-bode",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "A filter is built as: series capacitor from the source, then a resistor to ground, with the output taken across the resistor ($f_c \\approx 1\\,\\text{kHz}$). Which Bode magnitude curve belongs to it?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "log10 f (Hz): 1=10, 2=100, 3=1k, 4=10k, 5=100k",
+      "ylabel": "|H| (dB)",
+      "xmin": 1,
+      "xmax": 5,
+      "ymin": -50,
+      "ymax": 10,
+      "xticks": 1,
+      "yticks": 10,
+      "curves": [
+        {
+          "fn": "points",
+          "points": [
+            [
+              1,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              -40
+            ]
+          ],
+          "legend": "A"
+        },
+        {
+          "fn": "points",
+          "points": [
+            [
+              1,
+              -40
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "legend": "B",
+          "color": 2
+        },
+        {
+          "fn": "points",
+          "points": [
+            [
+              1,
+              -40
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              5,
+              -40
+            ]
+          ],
+          "legend": "C",
+          "color": 3
+        }
+      ]
+    },
+    "choices": [
+      "Curve B — the series cap starves the output at low $f$, and the response climbs to a flat passband up high",
+      "Curve A — output across the resistor always means low-pass",
+      "Curve C — an R and a C together form a band-pass"
+    ],
+    "answer": 0,
+    "explanation": "Translate the circuit into a story before looking at the plot: at low $f$ the series capacitor's impedance is enormous, hogging the input and leaving the resistor (the output) starved — so the curve must start low. At high $f$ the cap is nearly a short and everything lands on $R$ — flat at $0\\,\\text{dB}$. That rising-then-flat shape is curve B, a high-pass breaking at $\\log_{10} f = 3$ ($1\\,\\text{kHz}$). Curve A is the same parts with output across the cap; making C's band-pass shape takes both an inductor *and* a capacitor."
+  },
+  {
+    "id": "fb-034",
+    "topic": "filters-bode",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "This series RLC band-pass (output across $R$) has center frequency $f_0 \\approx 1.59\\,\\text{kHz}$. Find its $-3\\,\\text{dB}$ bandwidth, in Hz.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_{in}",
+          "flipLabel": true
+        },
+        {
+          "type": "inductor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            140,
+            60
+          ],
+          "label": "L",
+          "value": "10 mH"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            140,
+            60
+          ],
+          "to": [
+            220,
+            60
+          ],
+          "label": "C",
+          "value": "1 µF"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            220,
+            60
+          ],
+          "to": [
+            220,
+            200
+          ],
+          "label": "R",
+          "value": "100 Ω"
+        },
+        {
+          "type": "ground",
+          "at": [
+            140,
+            200
+          ]
+        }
+      ],
+      "wires": [
+        [
+          [
+            220,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            220,
+            200
+          ]
+        ]
+      ],
+      "nodes": [
+        [
+          220,
+          60
+        ]
+      ],
+      "labels": [
+        {
+          "text": "V_{out}",
+          "at": [
+            352,
+            60
+          ],
+          "anchor": "left"
+        }
+      ]
+    },
+    "answer": 1592,
+    "tolerance": 0.03,
+    "unit": "Hz",
+    "explanation": "$R$ is the damping: it sets how far off resonance you can stray before the leftover reactance matches $R$ and steals half the power — so $R$ (with $L$) fixes the width of the passband. For a series RLC band-pass, $BW = \\frac{R}{2\\pi L} = \\frac{100}{2\\pi \\cdot 10^{-2}} \\approx 1592\\,\\text{Hz}$. Cross-check via $Q$: $\\omega_0 = 1/\\sqrt{LC} = 10^4\\,\\text{rad/s}$, so $Q = \\omega_0 L / R = 10^4 \\cdot 0.01 / 100 = 1$ and $BW = f_0/Q = f_0 \\approx 1.59\\,\\text{kHz}$ — a $Q$ of 1 means the filter is exactly as wide as its center frequency. Shrink $R$ and the band narrows (higher $Q$); grow it and the filter gets sloppy."
+  },
+  {
+    "id": "fb-035",
+    "topic": "filters-bode",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Two identical first-order low-pass filters, each with $f_c = 2\\,\\text{kHz}$, are cascaded with an ideal buffer between them (no loading). What is the overall gain in dB at exactly $2\\,\\text{kHz}$?",
+    "answer": -6.02,
+    "tolerance": 0.03,
+    "unit": "dB",
+    "explanation": "A buffered cascade multiplies the two transfer functions, so the dB simply add — and each stage sits at its own $-3\\,\\text{dB}$ point at $2\\,\\text{kHz}$. Total: $|H| = (1/\\sqrt{2})^2 = 1/2$, i.e. $20\\log_{10}(1/2) \\approx -6.02\\,\\text{dB}$ — half the voltage, a quarter of the power. Hidden lesson: the cascade's *own* $-3\\,\\text{dB}$ cutoff is no longer $2\\,\\text{kHz}$; it slides down to $f_c\\sqrt{\\sqrt{2}-1} \\approx 0.64\\,f_c \\approx 1.29\\,\\text{kHz}$, which is why multi-stage designs stagger or re-scale their corners."
   }
 ]

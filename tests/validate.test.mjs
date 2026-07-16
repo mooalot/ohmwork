@@ -41,6 +41,14 @@ test('rejects unbalanced math delimiters', () => {
   assert.match(r.out, /unbalanced/);
 });
 
+test('rejects markdown bold spanning a math segment', () => {
+  const r = run([{ ...GOOD, prompt: 'ok **click the node at $2.6\\,\\text{V}$.**' }]);
+  assert.equal(r.code, 1);
+  assert.match(r.out, /doesn't resolve/);
+  // properly closed bold next to math is fine
+  assert.equal(run([{ ...GOOD, prompt: '**click the node** at $2.6\\,\\text{V}$, flows **in**, while $x$' }]).code, 0);
+});
+
 test('rejects duplicate ids and wrong topic', () => {
   const r = run([GOOD, { ...GOOD }]);
   assert.equal(r.code, 1);

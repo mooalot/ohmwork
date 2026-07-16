@@ -77,14 +77,80 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
-        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1" },
-        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "value": "4.7 kΩ" },
-        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C_1", "value": "10 µF" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "12 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            160,
+            60
+          ],
+          "label": "S_1"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            160,
+            60
+          ],
+          "to": [
+            280,
+            60
+          ],
+          "label": "R_1",
+          "value": "4.7 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            340,
+            60
+          ],
+          "to": [
+            340,
+            200
+          ],
+          "label": "C_1",
+          "value": "10 µF"
+        }
       ],
       "wires": [
-        [[280, 60], [340, 60]],
-        [[60, 200], [340, 200]]
+        [
+          [
+            280,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
       ]
     },
     "answer": 47,
@@ -141,10 +207,18 @@
       "xticks": 1,
       "yticks": 2,
       "curves": [
-        { "fn": "exp", "v0": 0, "vf": 10, "tau": 2 }
+        {
+          "fn": "exp",
+          "v0": 0,
+          "vf": 10,
+          "tau": 2
+        }
       ],
       "hlines": [
-        { "y": 6.32, "label": "63%" }
+        {
+          "y": 6.32,
+          "label": "63%"
+        }
       ]
     },
     "answer": 2,
@@ -171,7 +245,12 @@
       "xticks": 2,
       "yticks": 2,
       "curves": [
-        { "fn": "exp", "v0": 10, "vf": 0, "tau": 2 }
+        {
+          "fn": "exp",
+          "v0": 10,
+          "vf": 0,
+          "tau": 2
+        }
       ]
     },
     "choices": [
@@ -194,14 +273,81 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
-        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1", "closed": true },
-        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "value": "1 kΩ" },
-        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C_1", "value": "100 µF" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "12 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            160,
+            60
+          ],
+          "label": "S_1",
+          "closed": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            160,
+            60
+          ],
+          "to": [
+            280,
+            60
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            340,
+            60
+          ],
+          "to": [
+            340,
+            200
+          ],
+          "label": "C_1",
+          "value": "100 µF"
+        }
       ],
       "wires": [
-        [[280, 60], [340, 60]],
-        [[60, 200], [340, 200]]
+        [
+          [
+            280,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
       ]
     },
     "choices": [
@@ -235,14 +381,80 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
-        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1" },
-        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "value": "10 kΩ" },
-        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C_1", "value": "4.7 µF" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "9 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            160,
+            60
+          ],
+          "label": "S_1"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            160,
+            60
+          ],
+          "to": [
+            280,
+            60
+          ],
+          "label": "R_1",
+          "value": "10 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            340,
+            60
+          ],
+          "to": [
+            340,
+            200
+          ],
+          "label": "C_1",
+          "value": "4.7 µF"
+        }
       ],
       "wires": [
-        [[280, 60], [340, 60]],
-        [[60, 200], [340, 200]]
+        [
+          [
+            280,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
       ]
     },
     "answer": 7.93,
@@ -272,17 +484,89 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
-        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1" },
-        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "bind": true },
-        { "type": "capacitor", "from": [340, 60], "to": [340, 200], "label": "C_1", "value": "10 µF" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "12 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            160,
+            60
+          ],
+          "label": "S_1"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            160,
+            60
+          ],
+          "to": [
+            280,
+            60
+          ],
+          "label": "R_1",
+          "bind": true
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            340,
+            60
+          ],
+          "to": [
+            340,
+            200
+          ],
+          "label": "C_1",
+          "value": "10 µF"
+        }
       ],
       "wires": [
-        [[280, 60], [340, 60]],
-        [[60, 200], [340, 200]]
+        [
+          [
+            280,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
       ]
     },
-    "slider": { "min": 500, "max": 10000, "step": 100, "unit": "Ω", "label": "R_1" },
+    "slider": {
+      "min": 500,
+      "max": 10000,
+      "step": 100,
+      "unit": "Ω",
+      "label": "R_1"
+    },
     "answer": 4700,
     "tolerance": 0.03,
     "explanation": "Rearrange $\\tau = RC$ for the unknown: $R = \\tau / C = 0.047 / (10\\times10^{-6}) = 4700\\,\\Omega$. The shortcut form makes it instant: ms ÷ µF = kΩ, so $47/10 = 4.7\\,\\text{k}\\Omega$. This is exactly how you'd pick timing components in practice — choose a convenient cap, then dial the resistor to hit the target time."
@@ -328,17 +612,106 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
-        { "type": "switch", "from": [60, 60], "to": [160, 60], "label": "S_1", "closed": true },
-        { "type": "resistor", "from": [160, 60], "to": [280, 60], "label": "R_1", "value": "1 kΩ" },
-        { "type": "resistor", "from": [280, 60], "to": [280, 200], "label": "R_2", "value": "2 kΩ", "flipLabel": true },
-        { "type": "capacitor", "from": [360, 60], "to": [360, 200], "label": "C_1", "value": "15 µF" }
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "12 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            160,
+            60
+          ],
+          "label": "S_1",
+          "closed": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            160,
+            60
+          ],
+          "to": [
+            280,
+            60
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            280,
+            60
+          ],
+          "to": [
+            280,
+            200
+          ],
+          "label": "R_2",
+          "value": "2 kΩ",
+          "flipLabel": true
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            360,
+            60
+          ],
+          "to": [
+            360,
+            200
+          ],
+          "label": "C_1",
+          "value": "15 µF"
+        }
       ],
       "wires": [
-        [[280, 60], [360, 60]],
-        [[60, 200], [360, 200]]
+        [
+          [
+            280,
+            60
+          ],
+          [
+            360,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            360,
+            200
+          ]
+        ]
       ],
-      "nodes": [[280, 60], [280, 200]]
+      "nodes": [
+        [
+          280,
+          60
+        ],
+        [
+          280,
+          200
+        ]
+      ]
     },
     "answer": 8,
     "tolerance": 0.03,
@@ -375,7 +748,31 @@
       "xticks": 1,
       "yticks": 1,
       "curves": [
-        { "fn": "points", "points": [[0, 0], [1, 4], [2, 0], [3, 4], [4, 0]] }
+        {
+          "fn": "points",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              0
+            ]
+          ]
+        }
       ]
     },
     "choices": [
@@ -386,5 +783,621 @@
     ],
     "answer": 0,
     "explanation": "The capacitor differentiates: $i = C\\,\\frac{dv}{dt}$, so the current traces the *slope* of the voltage. A triangle wave has only two slopes — constant up, constant down — so the current snaps between two constant levels: a square wave. Each ramp covers 4 V in 1 ms, giving $|i| = 1\\,\\mu\\text{F} \\times 4000\\,\\text{V/s} = 4\\,\\text{mA}$, positive while charging, negative while discharging. Corners in voltage become jumps in current — the visual signature of $dv/dt$."
+  },
+  {
+    "id": "rc-021",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In the classic water-tank analogy, a capacitor is a tank being filled through a pipe. Which mapping is correct?",
+    "choices": [
+      "Water level ↔ voltage, amount of water ↔ charge, tank cross-section ↔ capacitance — a wider tank needs more water to raise its level",
+      "Water level ↔ current, flow rate ↔ voltage — the level shows how fast charge is moving",
+      "Amount of water ↔ voltage, water level ↔ charge — the total volume is what a voltmeter reads",
+      "Tank cross-section ↔ resistance — a wider tank lets water pass through more easily"
+    ],
+    "answer": 0,
+    "explanation": "Think volume = area × level: that's exactly $Q = CV$, so charge is the water, voltage is the level, and capacitance is how wide the tank is. Current is the *flow rate* into the tank — you can pour fast or slow, but the level (voltage) only rises as water accumulates, which is why capacitor voltage can't change instantly. And nothing actually flows *through* the tank floor: the dielectric blocks DC, the tank just fills and empties from the top."
+  },
+  {
+    "id": "rc-022",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "You double the capacitance in an RC charging circuit (same source, same resistor). Qualitatively, what changes?",
+    "choices": [
+      "Charging takes twice as long, but the capacitor still ends up at the full source voltage",
+      "Charging takes the same time, but the final voltage doubles",
+      "Charging takes twice as long and the final voltage halves",
+      "Nothing changes — only the resistor sets the charging speed"
+    ],
+    "answer": 0,
+    "explanation": "Doubling $C$ is doubling the tank: it now takes twice the charge to reach the same level, delivered through the same skinny pipe — so the fill time doubles ($\\tau = RC$). The *destination* doesn't move: the cap always charges until its voltage matches the source, no matter its size. Doubling $R$ would do the same thing to the time for the opposite reason — same tank, half the flow."
+  },
+  {
+    "id": "rc-023",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "The switch closes at $t = 0$ with $C_1$ completely uncharged. At the very first instant ($t = 0^+$) the empty capacitor behaves like a plain wire. **Click the component that carries almost no current at that instant.**",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "10 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            160,
+            60
+          ],
+          "label": "S_1",
+          "closed": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            160,
+            60
+          ],
+          "to": [
+            280,
+            60
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            280,
+            60
+          ],
+          "to": [
+            280,
+            200
+          ],
+          "label": "R_2",
+          "value": "2.2 kΩ",
+          "flipLabel": true
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            360,
+            60
+          ],
+          "to": [
+            360,
+            200
+          ],
+          "label": "C_1",
+          "value": "47 µF"
+        }
+      ],
+      "wires": [
+        [
+          [
+            280,
+            60
+          ],
+          [
+            360,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            360,
+            200
+          ]
+        ]
+      ],
+      "nodes": [
+        [
+          280,
+          60
+        ],
+        [
+          280,
+          200
+        ]
+      ]
+    },
+    "probe": {
+      "target": "component"
+    },
+    "answer": {
+      "component": "R_2"
+    },
+    "explanation": "An empty cap's voltage is zero and can't jump, so at $t = 0^+$ it acts like a short — a wire slapped directly across $R_2$. With zero volts forced across it, $R_2$ carries essentially nothing; all of $R_1$'s current dives into the capacitor instead. Long after, the roles swap completely: the full cap goes open, and $R_2$ carries all the current — that's the steady state ($3.1\\,\\text{mA}$, $v_C \\approx 6.9\\,\\text{V}$) you can explore in the live figure. Wire at $t=0^+$, break at $t=\\infty$ — the two bookends of every RC problem."
+  },
+  {
+    "id": "rc-024",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A tube amplifier has been unplugged for ten minutes, yet a technician gets a serious shock from its large filter capacitor. Why is the cap still dangerous?",
+    "choices": [
+      "With no path to drain it, the capacitor simply holds its charge — and its full voltage — long after the power is removed",
+      "The capacitor keeps generating voltage from residual magnetic energy stored in its plates",
+      "Unplugging reverses the capacitor's polarity, which makes it deliver current",
+      "The mains cord keeps leaking a little charge into it even when unplugged"
+    ],
+    "answer": 0,
+    "explanation": "A tank stays full until something drains it: a charged capacitor with no discharge path just sits there at its full voltage, like a cocked spring, for minutes or hours. A big high-voltage electrolytic can hold several joules, all of which will happily dump through the first conductor offered — including a hand. That's why real designs add a \"bleeder\" resistor across such caps, and why technicians deliberately discharge them before reaching in. Capacitors store energy in an electric field, not a magnetic one — that's the inductor's trick."
+  },
+  {
+    "id": "rc-025",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "How does a capacitive touch screen sense your fingertip?",
+    "choices": [
+      "Your conductive body adds a small extra capacitance at that spot on the electrode grid, and the controller detects the change",
+      "Finger pressure squeezes the glass, pushing capacitor plates closer together",
+      "Skin conducts a small DC current between two contacts at the touch point",
+      "Body heat changes the dielectric constant of the glass"
+    ],
+    "answer": 0,
+    "explanation": "The screen is a grid of electrodes, each with a tiny, known baseline capacitance. Your fingertip is conductive and connected to a big grounded object (you), so hovering it over an electrode forms a new capacitor and shifts how much charge that electrode needs to swing — the controller scans the grid looking for exactly that change. No pressure or current through the skin is needed, which is why it works through glass but ignores a plastic stylus: sensing a capacitance *change* is the whole trick, the same principle behind many proximity and humidity sensors."
+  },
+  {
+    "id": "rc-026",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A capacitor charged to $5\\,\\text{V}$ stores a certain energy. If you charge the same capacitor to $10\\,\\text{V}$ instead, how much energy does it hold?",
+    "choices": [
+      "Four times as much — twice the charge, stored at twice the average voltage",
+      "Twice as much — energy is proportional to voltage",
+      "Eight times as much — energy grows with the cube of voltage",
+      "The same — stored energy depends only on the capacitance"
+    ],
+    "answer": 0,
+    "explanation": "Doubling the voltage doubles the charge ($Q = CV$), *and* every bit of that charge is now stored at twice the electrical \"height\" — two doublings multiply, giving $4\\times$. That's the $V^2$ in $E = \\tfrac{1}{2}CV^2$, same as a spring stretched twice as far holding four times the energy. It's why a 400 V electrolytic is enormously more dangerous than a 12 V cap of the same microfarads — over a thousand times the stored energy."
+  },
+  {
+    "id": "rc-027",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "An RC filter takes its output across the capacitor. In time-domain terms, why do fast input wiggles barely appear at the output?",
+    "choices": [
+      "The output can only move as fast as the cap can charge through $R$ — wiggles much quicker than $\\tau$ are over before the cap has responded, so they average out to almost nothing",
+      "The capacitor short-circuits slow signals to ground, leaving only fast ones",
+      "The resistor dissipates high-frequency energy as heat, blocking it",
+      "Fast wiggles carry less charge, so they can't develop a voltage anywhere"
+    ],
+    "answer": 0,
+    "explanation": "The capacitor is sluggish: through the resistor it needs a time on the order of $\\tau = RC$ to change its voltage. Slow input swings give it plenty of time to follow faithfully; fast wiggles reverse before the cap has moved, so the output just averages them away. That sluggishness *is* low-pass filtering — the frequency-domain cutoff $f_c = 1/(2\\pi RC)$ is the same fact wearing different clothes. Big $\\tau$ means a smoother, slower output; small $\\tau$ means a faster, more faithful one."
+  },
+  {
+    "id": "rc-028",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Two RC circuits charge their capacitors toward the same $10\\,\\text{V}$ target, shown below. **Without calculating anything**, which has the larger time constant?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v_C (V)",
+      "xmin": 0,
+      "xmax": 8,
+      "ymin": 0,
+      "ymax": 12,
+      "xticks": 1,
+      "yticks": 2,
+      "curves": [
+        {
+          "fn": "exp",
+          "v0": 0,
+          "vf": 10,
+          "tau": 1,
+          "color": 0,
+          "legend": "A"
+        },
+        {
+          "fn": "exp",
+          "v0": 0,
+          "vf": 10,
+          "tau": 3,
+          "color": 1,
+          "legend": "B"
+        }
+      ]
+    },
+    "choices": [
+      "B — it climbs more lazily, taking about three times longer to cover the same 63% milestone",
+      "A — it moves faster at the start, and a fast start means a large $\\tau$",
+      "They're equal, since both settle at the same final voltage",
+      "Can't tell without knowing the actual R and C values"
+    ],
+    "answer": 0,
+    "explanation": "The time constant is pure *sluggishness*, and you can read it straight off the shape: A crosses 63% of the target ($6.3\\,\\text{V}$) around $1\\,\\text{ms}$, while B takes about $3\\,\\text{ms}$ — so $\\tau_B \\approx 3\\tau_A$. The final voltage tells you nothing about $\\tau$; that's the destination, not the speed. And you never need R and C individually — the curve itself is the measurement, which is exactly how $\\tau$ is read on an oscilloscope."
+  },
+  {
+    "id": "rc-029",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "The switch closes at $t = 0$; $C_1$ starts uncharged. A capacitor's voltage cannot jump. **Click the node** — other than the grounded bottom rail — that is still at $0\\,\\text{V}$ the instant after the switch closes.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "10 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            160,
+            60
+          ],
+          "label": "S_1",
+          "closed": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            160,
+            60
+          ],
+          "to": [
+            280,
+            60
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            340,
+            60
+          ],
+          "to": [
+            340,
+            200
+          ],
+          "label": "C_1",
+          "value": "100 µF"
+        },
+        {
+          "type": "ground",
+          "at": [
+            60,
+            200
+          ]
+        }
+      ],
+      "wires": [
+        [
+          [
+            280,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
+      ]
+    },
+    "probe": {
+      "target": "node"
+    },
+    "answer": {
+      "at": [
+        340,
+        60
+      ]
+    },
+    "explanation": "The node between $R_1$ and $C_1$ is pinned by the capacitor: jumping its voltage instantly would demand infinite current ($i = C\\,dv/dt$), so at $t = 0^+$ it hasn't budged from $0\\,\\text{V}$ even though the switch side has leapt to 10 V. That means the entire 10 V momentarily lands across $R_1$ — which is exactly what drives the big inrush current that starts the charge. From there the node drifts up exponentially; the live figure shows the end of that story, with the node at 10 V and the current at zero. Voltage across a cap is history — it only knows where it's *been*."
+  },
+  {
+    "id": "rc-030",
+    "topic": "capacitors-rc",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "The amplifier's output sits at a $5\\,\\text{V}$ DC bias with the audio signal wiggling on top — but the speaker should feel only the wiggle, never the bias. **Click the component that blocks the DC while letting the signal through.**",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "5 V",
+          "flipLabel": true
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            120,
+            60
+          ],
+          "to": [
+            220,
+            60
+          ],
+          "label": "C_1",
+          "value": "220 µF"
+        },
+        {
+          "type": "resistor",
+          "from": [
+            320,
+            60
+          ],
+          "to": [
+            320,
+            200
+          ],
+          "label": "R_L",
+          "value": "8 Ω"
+        },
+        {
+          "type": "ground",
+          "at": [
+            60,
+            200
+          ]
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            60
+          ],
+          [
+            120,
+            60
+          ]
+        ],
+        [
+          [
+            220,
+            60
+          ],
+          [
+            320,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            320,
+            200
+          ]
+        ]
+      ],
+      "labels": [
+        {
+          "text": "amp out",
+          "at": [
+            90,
+            40
+          ]
+        },
+        {
+          "text": "speaker",
+          "at": [
+            370,
+            130
+          ],
+          "anchor": "left"
+        }
+      ]
+    },
+    "probe": {
+      "target": "component"
+    },
+    "answer": {
+      "component": "C_1"
+    },
+    "explanation": "A series capacitor is an open circuit at DC: the steady 5 V charges $C_1$ once, ends up parked across its plates, and then no DC current flows at all — probe the live circuit and you'll see the speaker sitting at exactly $0\\,\\text{V}$. But the audio is a *changing* voltage, and changing voltage drives current through a cap ($i = C\\,dv/dt$), so the wiggle passes through almost untouched. The cap \"absorbs\" the bias so the two sides can each keep their own DC level — that's a coupling cap, and it's why one sits in front of nearly every speaker and between amplifier stages."
+  },
+  {
+    "id": "rc-031",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The switch closes at $t = 0$ with the capacitor completely uncharged. What current flows at the very first instant ($t = 0^+$), in mA?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsource",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_1",
+          "value": "9 V",
+          "flipLabel": true
+        },
+        {
+          "type": "switch",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            160,
+            60
+          ],
+          "label": "S_1",
+          "closed": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            160,
+            60
+          ],
+          "to": [
+            280,
+            60
+          ],
+          "label": "R_1",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            340,
+            60
+          ],
+          "to": [
+            340,
+            200
+          ],
+          "label": "C_1",
+          "value": "47 µF"
+        }
+      ],
+      "wires": [
+        [
+          [
+            280,
+            60
+          ],
+          [
+            340,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            340,
+            200
+          ]
+        ]
+      ]
+    },
+    "answer": 9,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "An uncharged capacitor's voltage is zero and can't jump, so at $t = 0^+$ it acts like a plain wire — the source sees only the resistor. $I(0^+) = V/R = 9\\,\\text{V} / 1\\,\\text{k}\\Omega = 9\\,\\text{mA}$, the biggest current the circuit will ever carry; from there it decays exponentially to zero as the cap fills (the live figure shows that final state: no current, cap at 9 V). Remember the two bookends: at $t = 0^+$ a cap is a wire, at $t = \\infty$ it's a break — most RC questions are answered by asking which end of the story you're at."
+  },
+  {
+    "id": "rc-032",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A $1000\\,\\mu\\text{F}$ reservoir capacitor alone supplies a steady $100\\,\\text{mA}$ to a load during the $8\\,\\text{ms}$ gap between rectifier peaks. How much does its voltage droop before the next peak refills it, in V?",
+    "answer": 0.8,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Between peaks the cap is a water tower riding the town through a dry spell: a constant drain lowers its level at a constant rate. Rearranging $i = C\\,\\Delta v/\\Delta t$: $\\Delta V = I\\,\\Delta t / C = 0.1 \\times 0.008 / 0.001 = 0.8\\,\\text{V}$ of ripple. The recipe scales simply — double the load current and the ripple doubles; double the capacitance and it halves — which is exactly how you size a power-supply filter cap."
+  },
+  {
+    "id": "rc-033",
+    "topic": "capacitors-rc",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A $470\\,\\mu\\text{F}$ capacitor is charged to $12\\,\\text{V}$. How much charge is stored on it, in mC?",
+    "answer": 5.64,
+    "tolerance": 0.03,
+    "unit": "mC",
+    "explanation": "Volume equals area times level: $Q = CV = 470\\,\\mu\\text{F} \\times 12\\,\\text{V} = 5.64\\,\\text{mC}$. Charge is the *stuff* a capacitor actually holds — voltage is just how high that stuff is stacked. For a feel of the scale: 5.64 mC delivered at 100 mA lasts $Q/I \\approx 56\\,\\text{ms}$, which is exactly the kind of hold-up duty a cap this size performs in a power supply."
+  },
+  {
+    "id": "rc-034",
+    "topic": "capacitors-rc",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A $100\\,\\mu\\text{F}$ capacitor charged to $12\\,\\text{V}$ is connected in parallel with an uncharged $200\\,\\mu\\text{F}$ capacitor. After everything settles, what is the voltage across the pair, in V?",
+    "answer": 4,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Two tanks joined at the bottom share water until the levels match — and what's conserved is the *water* (charge), not the level (voltage). Total charge $Q = 100\\,\\mu\\text{F} \\times 12 = 1.2\\,\\text{mC}$ now spreads over $300\\,\\mu\\text{F}$, so $V = Q/C_{total} = 1.2\\,\\text{mC}/300\\,\\mu\\text{F} = 4\\,\\text{V}$. Check the energy: before, $\\tfrac{1}{2}(100\\,\\mu)(12^2) = 7.2\\,\\text{mJ}$; after, $\\tfrac{1}{2}(300\\,\\mu)(4^2) = 2.4\\,\\text{mJ}$ — two thirds vanished into wiring resistance and the connection spark. Charge shares; energy doesn't."
+  },
+  {
+    "id": "rc-035",
+    "topic": "capacitors-rc",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A $10\\,\\mu\\text{F}$ and a $22\\,\\mu\\text{F}$ capacitor sit in series across a $12\\,\\text{V}$ DC source, fully settled. What voltage appears across the $10\\,\\mu\\text{F}$ capacitor, in V?",
+    "answer": 8.25,
+    "tolerance": 0.03,
+    "unit": "V",
+    "explanation": "Series caps carry identical charge — the same current fed both, coulomb for coulomb. Since $V = Q/C$, the *smaller* tank shows the *higher* level: voltage divides inversely with capacitance, the exact opposite of a resistor divider. Work it: $C_{eq} = \\frac{10 \\times 22}{32} = 6.875\\,\\mu\\text{F}$, so $Q = 6.875\\,\\mu \\times 12 = 82.5\\,\\mu\\text{C}$, giving $V_{10} = 82.5/10 = 8.25\\,\\text{V}$ (and $V_{22} = 3.75\\,\\text{V}$ — they sum to 12). This is why the smallest cap in a series string needs the highest voltage rating."
   }
 ]

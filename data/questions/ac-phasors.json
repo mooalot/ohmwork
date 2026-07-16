@@ -77,12 +77,58 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "value": "1 kHz", "flipLabel": true },
-        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1 kΩ" },
-        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "value": "100 nF" }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_s",
+          "value": "1 kHz",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "C",
+          "value": "100 nF"
+        }
       ],
       "wires": [
-        [[60, 200], [200, 200]]
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
       ]
     },
     "answer": 1.88,
@@ -101,12 +147,58 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "value": "2 kHz", "flipLabel": true },
-        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "100 Ω" },
-        { "type": "inductor", "from": [200, 60], "to": [200, 200], "label": "L", "value": "10 mH" }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_s",
+          "value": "2 kHz",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R",
+          "value": "100 Ω"
+        },
+        {
+          "type": "inductor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "L",
+          "value": "10 mH"
+        }
       ],
       "wires": [
-        [[60, 200], [200, 200]]
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
       ]
     },
     "answer": 51.5,
@@ -148,8 +240,23 @@
       "xticks": 0.5,
       "yticks": 1,
       "curves": [
-        { "fn": "sine", "amp": 2, "freq": 1, "phase": 0, "offset": 0, "legend": "v(t)" },
-        { "fn": "sine", "amp": 1.2, "freq": 1, "phase": 1.5708, "offset": 0, "legend": "i(t)", "color": 2 }
+        {
+          "fn": "sine",
+          "amp": 2,
+          "freq": 1,
+          "phase": 0,
+          "offset": 0,
+          "legend": "v(t)"
+        },
+        {
+          "fn": "sine",
+          "amp": 1.2,
+          "freq": 1,
+          "phase": 1.5708,
+          "offset": 0,
+          "legend": "i(t)",
+          "color": 2
+        }
       ]
     },
     "choices": [
@@ -187,12 +294,58 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "value": "10 V", "flipLabel": true },
-        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "300 Ω" },
-        { "type": "inductor", "from": [200, 60], "to": [200, 200], "label": "X_L", "value": "400 Ω" }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_s",
+          "value": "10 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R",
+          "value": "300 Ω"
+        },
+        {
+          "type": "inductor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "X_L",
+          "value": "400 Ω"
+        }
       ],
       "wires": [
-        [[60, 200], [200, 200]]
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
       ]
     },
     "answer": 20,
@@ -252,15 +405,67 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "bind": true, "flipLabel": true },
-        { "type": "inductor", "from": [60, 60], "to": [200, 60], "label": "L", "value": "100 mH" },
-        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "value": "1 µF" }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_s",
+          "bind": true,
+          "flipLabel": true
+        },
+        {
+          "type": "inductor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "L",
+          "value": "100 mH"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "C",
+          "value": "1 µF"
+        }
       ],
       "wires": [
-        [[60, 200], [200, 200]]
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
       ]
     },
-    "slider": { "min": 100, "max": 1000, "step": 1, "unit": "Hz", "label": "f" },
+    "slider": {
+      "min": 100,
+      "max": 1000,
+      "step": 1,
+      "unit": "Hz",
+      "label": "f"
+    },
     "answer": 503,
     "tolerance": 0.02,
     "explanation": "As $f$ rises, $X_L = 2\\pi f L$ climbs while $X_C = \\frac{1}{2\\pi f C}$ falls — they must cross exactly once, and that crossing is resonance. Setting them equal gives $f_0 = \\frac{1}{2\\pi\\sqrt{LC}} = \\frac{1}{2\\pi\\sqrt{0.1 \\cdot 10^{-6}}} \\approx 503\\,\\text{Hz}$. At that frequency the $+jX_L$ and $-jX_C$ cancel outright, and this series pair looks like a plain wire (plus whatever resistance is hiding in the coil) — the heart of every tuned radio circuit."
@@ -299,8 +504,23 @@
       "xticks": 2,
       "yticks": 2,
       "curves": [
-        { "fn": "sine", "amp": 5, "freq": 0.0625, "phase": 0, "offset": 0, "legend": "A" },
-        { "fn": "sine", "amp": 5, "freq": 0.0625, "phase": -0.7854, "offset": 0, "legend": "B", "color": 2 }
+        {
+          "fn": "sine",
+          "amp": 5,
+          "freq": 0.0625,
+          "phase": 0,
+          "offset": 0,
+          "legend": "A"
+        },
+        {
+          "fn": "sine",
+          "amp": 5,
+          "freq": 0.0625,
+          "phase": -0.7854,
+          "offset": 0,
+          "legend": "B",
+          "color": 2
+        }
       ]
     },
     "answer": 45,
@@ -319,12 +539,58 @@
       "width": 420,
       "height": 240,
       "components": [
-        { "type": "vsine", "from": [60, 200], "to": [60, 60], "label": "V_s", "value": "1 kHz", "flipLabel": true },
-        { "type": "resistor", "from": [60, 60], "to": [200, 60], "label": "R", "value": "1.2 kΩ" },
-        { "type": "capacitor", "from": [200, 60], "to": [200, 200], "label": "C", "value": "100 nF" }
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_s",
+          "value": "1 kHz",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R",
+          "value": "1.2 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "C",
+          "value": "100 nF"
+        }
       ],
       "wires": [
-        [[60, 200], [200, 200]]
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
       ]
     },
     "answer": 53,
@@ -357,5 +623,467 @@
     ],
     "answer": 0,
     "explanation": "Series impedances add *as complex numbers*, real with real and imaginary with imaginary: $Z = (100+200) + j(50-150) = 300 - j100\\,\\Omega$. The inductive $+j50$ and capacitive $-j150$ partially cancel — reactances of opposite sign fight each other, they never add by magnitude. The surviving $-j100$ means the combination is net capacitive, so the current leads, by $\\arctan(100/300) \\approx 18.4^\\circ$. Adding magnitudes ($111.8 + 250$) is wrong for the same reason $3+4j$ doesn't have magnitude 7."
+  },
+  {
+    "id": "ac-021",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A sinusoid can be pictured as the shadow of an arrow spinning counterclockwise at $\\omega$ radians per second. In this picture, what exactly is the *phasor*?",
+    "choices": [
+      "A snapshot of the arrow with the spinning *frozen out* — every arrow in the circuit spins at the same $\\omega$, so only the frozen lengths and relative angles carry information",
+      "The arrow's rotation speed $\\omega$",
+      "The full circle the arrow tip traces over one revolution",
+      "The arrow's shadow at the instant it passes through zero"
+    ],
+    "answer": 0,
+    "explanation": "Since a linear circuit driven at one frequency has *every* voltage and current spinning at that same $\\omega$, the whole picture rotates rigidly, like a merry-go-round. Freeze the rotation and nothing is lost: what remains is each arrow's length (amplitude) and angle (phase) — one complex number per signal, the phasor. Time is reinserted at the very end by letting the picture spin again: multiply by $e^{j\\omega t}$ and take the real part. That freeze is what turns differential equations into arrow geometry."
+  },
+  {
+    "id": "ac-022",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Two sinusoidal voltages of the same frequency are shown. Which waveform **leads**? (No math needed — just read the plot.)",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v (V)",
+      "xmin": 0,
+      "xmax": 16,
+      "ymin": -6,
+      "ymax": 6,
+      "xticks": 4,
+      "yticks": 2,
+      "curves": [
+        {
+          "fn": "sine",
+          "amp": 3,
+          "freq": 0.0625,
+          "phase": 0,
+          "offset": 0,
+          "legend": "A"
+        },
+        {
+          "fn": "sine",
+          "amp": 5,
+          "freq": 0.0625,
+          "phase": 1.5708,
+          "offset": 0,
+          "legend": "B",
+          "color": 2
+        }
+      ]
+    },
+    "choices": [
+      "B — it reaches each peak and zero crossing a quarter-cycle *earlier in time* than A does",
+      "A — it starts at zero, so it begins the cycle first",
+      "A — the larger waveform always lags the smaller one",
+      "Neither — two waveforms at the same frequency are always in phase"
+    ],
+    "answer": 0,
+    "explanation": "'Leads' means 'gets there first': pick any landmark — a peak, an upward zero crossing — and see which curve hits it earlier. B peaks at $t = 0$ while A doesn't peak until $t = 4\\,\\text{ms}$, a quarter of the 16 ms period, so B leads by $90^\\circ$. Amplitude is a red herring — lead and lag are purely about timing, not size. This is exactly the comparison you make on a two-channel scope when checking ELI (voltage first in an inductor) or ICE (current first in a capacitor)."
+  },
+  {
+    "id": "ac-023",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A $100\\,\\Omega$ resistor and an ideal capacitor with reactance $X_C = 100\\,\\Omega$ each carry the same $1\\,\\text{A}$ RMS sine current for an hour. Which one is hot?",
+    "choices": [
+      "Only the resistor — the capacitor borrows energy for a quarter-cycle and hands every joule back, so it dissipates nothing",
+      "Both equally — $100\\,\\Omega$ of opposition is $100\\,\\Omega$, so each dissipates $I^2 \\cdot 100 = 100\\,\\text{W}$",
+      "Only the capacitor — reactive opposition dissipates more than resistance",
+      "Neither — RMS current produces no heating"
+    ],
+    "answer": 0,
+    "explanation": "Reactance is opposition *without dissipation*. The resistor's voltage is in phase with its current, so $p = vi$ is always positive — energy flows one way, into heat, $100\\,\\text{W}$ of it. The capacitor's voltage is $90^\\circ$ out of phase, so $p = vi$ spends exactly half of each cycle negative: it charges up, then pumps the same energy straight back to the source, netting zero. Both drop $100\\,\\text{V}$ and limit the current identically — but only one needs a heatsink. That's the physical meaning of $X$ living on the imaginary axis."
+  },
+  {
+    "id": "ac-024",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "How does an inductor behave at the frequency extremes?",
+    "choices": [
+      "Short circuit at DC, approaching an open circuit at very high frequency",
+      "Open circuit at DC, approaching a short circuit at very high frequency",
+      "Constant reactance at all frequencies, like a resistor",
+      "Open circuit at both extremes, conducting only at one special frequency"
+    ],
+    "answer": 0,
+    "explanation": "An inductor only objects to *change* in current ($v = L\\,di/dt$). At DC the current is steady, $di/dt = 0$, no back-EMF at all — it's just a piece of wire. At very high frequency the current must reverse millions of times a second, the back-EMF becomes enormous, and almost nothing gets through. That's the physical reading of $X_L = \\omega L$ growing without bound — and it's the exact mirror image of the capacitor, which blocks DC and passes high frequencies. Remember the pair as: inductors pass DC, capacitors pass AC."
+  },
+  {
+    "id": "ac-025",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Impedance is often called a 'generalized resistance'. In what sense does $Z$ generalize $R$?",
+    "choices": [
+      "Ohm's law survives as $V = IZ$ with complex numbers: $|Z|$ sets how much current flows, and the angle of $Z$ sets how far that current is shifted in phase",
+      "Impedance is simply resistance measured at high frequency",
+      "Impedance replaces resistance only in circuits that contain no resistors",
+      "Impedance is the component's resistance plus the resistance of its leads"
+    ],
+    "answer": 0,
+    "explanation": "The generalization keeps the *shape* of every DC tool you know: series impedances add, parallel ones combine by product-over-sum, voltage dividers and Thevenin equivalents all carry over — you just do the arithmetic with complex numbers. A resistor is the special case $Z = R + j0$: magnitude only, zero phase shift. Inductors and capacitors extend the idea with $Z_L = j\\omega L$ and $Z_C = 1/(j\\omega C)$, adding the second thing a linear circuit can do to a sinusoid — shift it in time."
+  },
+  {
+    "id": "ac-026",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In the classic beer-glass analogy for AC power, the whole glass is apparent power $S$, the drinkable beer is real power $P$, and the foam is reactive power $Q$. What, then, is the power factor?",
+    "choices": [
+      "The fraction of the glass that is actual beer, $P/S$ — how much of what the system must carry ends up doing useful work",
+      "The foam-to-beer ratio, $Q/P$",
+      "The size of the glass — bigger glass, better power factor",
+      "How fast the beer is being drunk"
+    ],
+    "answer": 0,
+    "explanation": "The glass (the wires, the transformer) must be big enough for *everything* in it — beer and foam alike — but only the beer quenches thirst. Power factor $= P/S = \\cos\\theta$ is the useful fraction: 1.0 means a foam-free pour (purely resistive load), while 0.5 means half of the delivery capacity is tied up in froth that does no work. The foam isn't 'lost' — reactive power returns to the source each cycle — but the glass still had to be sized for it."
+  },
+  {
+    "id": "ac-027",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Two factories each consume exactly $100\\,\\text{kW}$ of real power from the same line voltage, but factory A runs at power factor 1.0 and factory B at 0.5. What does the utility see?",
+    "choices": [
+      "B draws *twice* the line current of A — wires, transformers, and $I^2R$ losses must all be sized for power B doesn't even use",
+      "They look identical to the utility — real power is all that matters",
+      "B draws half the current of A, since its power factor is lower",
+      "B consumes twice the energy, so its bill automatically doubles"
+    ],
+    "answer": 0,
+    "explanation": "Line current is set by the *apparent* power: $I = P/(V\\cos\\theta)$, so at power factor 0.5 factory B pulls twice the amps for the same useful kilowatts — and since wire heating goes as $I^2R$, the distribution losses quadruple. The utility must build generators, transformers, and cables for current it can't bill as energy, because the reactive portion sloshes back every cycle. That's why industrial customers get metered on power factor and fined below a threshold, while your house — a small, mostly resistive load — never sees such a charge."
+  },
+  {
+    "id": "ac-028",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "An ideal capacitor is connected straight across the AC mains and draws several amps. Over one *complete* cycle, how much net energy does it take from the grid?",
+    "choices": [
+      "Zero — it charges for a quarter-cycle, then pushes every joule straight back; energy sloshes to and fro but is never consumed",
+      "$\\frac{1}{2}CV_{peak}^2$ per cycle, dissipated as heat inside the capacitor",
+      "The same as a resistor carrying equal current — amps are amps",
+      "Half of what an equivalent resistor would take, since it only conducts for half of each cycle"
+    ],
+    "answer": 0,
+    "explanation": "Watch the instantaneous power $p = vi$: with current leading voltage by $90^\\circ$, $p$ is positive for a quarter-cycle (the cap fills with $\\frac{1}{2}Cv^2$ of field energy) and then negative for the next quarter (it empties back into the line). Four quarter-cycles later the books balance exactly at zero. A home energy meter — which integrates real power — would read essentially nothing, despite the very real amps in the wires. Those amps are the 'sloshing' that VARs measure, and they're the whole reason reactive power gets its own unit."
+  },
+  {
+    "id": "ac-029",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "The AC source drives current around this loop all day. One component gets warm; the other never does. **Click the component that dissipates zero average power.**",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_s",
+          "value": "10 V",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            200,
+            60
+          ],
+          "label": "R",
+          "value": "1 kΩ"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            200,
+            60
+          ],
+          "to": [
+            200,
+            200
+          ],
+          "label": "C",
+          "value": "100 nF"
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            200
+          ],
+          [
+            200,
+            200
+          ]
+        ]
+      ]
+    },
+    "probe": {
+      "target": "component"
+    },
+    "answer": {
+      "component": "C"
+    },
+    "explanation": "The capacitor's current runs $90^\\circ$ ahead of its voltage, so its instantaneous power $p = vi$ alternates sign every quarter-cycle: energy flows in, then flows right back out, averaging to zero — no heat, ever. The resistor's voltage and current move together, so its $p = vi$ is *always* positive and it converts every watt it receives into warmth. Same loop current through both; only the phase decides who heats up. This is the practical meaning of 'reactance opposes without dissipating.'"
+  },
+  {
+    "id": "ac-030",
+    "topic": "ac-phasors",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "One current flows through every component of this series circuit. Using ELI the ICE man, **click the component** whose voltage *leads* that current by $90^\\circ$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_s",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            60,
+            60
+          ],
+          "to": [
+            180,
+            60
+          ],
+          "label": "R"
+        },
+        {
+          "type": "inductor",
+          "from": [
+            180,
+            60
+          ],
+          "to": [
+            300,
+            60
+          ],
+          "label": "L"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            300,
+            60
+          ],
+          "to": [
+            300,
+            200
+          ],
+          "label": "C"
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            200
+          ],
+          [
+            300,
+            200
+          ]
+        ]
+      ]
+    },
+    "probe": {
+      "target": "component"
+    },
+    "answer": {
+      "component": "L"
+    },
+    "explanation": "ELI: in an inductor (L), EMF (E) comes before current (I) — the voltage leads by $90^\\circ$. Physically, the inductor's current is the integral of its voltage, so the voltage must appear *first* and the current catches up a quarter-cycle later. The capacitor is the mirror image (ICE — its voltage *lags* the shared current by $90^\\circ$), and the resistor shifts nothing at all. In a series string the current is the common reference, so each component's personality shows up purely in where its voltage sits relative to that one current."
+  },
+  {
+    "id": "ac-031",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "US mains is a $60\\,\\text{Hz}$ sine wave. What angular frequency $\\omega$, in rad/s, do you plug into formulas like $X_L = \\omega L$?",
+    "answer": 377,
+    "tolerance": 0.02,
+    "unit": "rad/s",
+    "explanation": "Frequency $f$ counts full cycles per second; $\\omega$ counts radians per second, and each cycle is one full turn of $2\\pi$ radians — picture the spinning phasor arrow. So $\\omega = 2\\pi f = 2\\pi \\cdot 60 \\approx 377\\,\\text{rad/s}$, a number worth memorizing for US mains work (its 50 Hz sibling is $314\\,\\text{rad/s}$). Forgetting the $2\\pi$ and using 60 directly is the single most common reactance blunder — every $\\omega$-based formula silently assumes radians."
+  },
+  {
+    "id": "ac-032",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The scope trace shows a sinusoidal voltage. Read its peak value off the plot, then give the **RMS** value in volts.",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v (V)",
+      "xmin": 0,
+      "xmax": 40,
+      "ymin": -12,
+      "ymax": 12,
+      "xticks": 10,
+      "yticks": 4,
+      "curves": [
+        {
+          "fn": "sine",
+          "amp": 10,
+          "freq": 0.05,
+          "phase": 0,
+          "offset": 0
+        }
+      ]
+    },
+    "answer": 7.07,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "A scope shows you the whole waveform, so the natural reading is the peak — here the trace tops out at $10\\,\\text{V}$. But a sine spends most of its time below its crest, so its DC-equivalent heating value is smaller: $V_{rms} = V_{peak}/\\sqrt{2} = 10/1.414 \\approx 7.07\\,\\text{V}$. Keep the two instruments straight: scopes read peaks, multimeters read RMS — and the $\\sqrt{2}$ bridge between them only holds for sinusoids."
+  },
+  {
+    "id": "ac-033",
+    "topic": "ac-phasors",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A European motor datasheet specifies the mains angular frequency as $\\omega = 314\\,\\text{rad/s}$. What ordinary frequency $f$ does that correspond to, in Hz?",
+    "answer": 50,
+    "tolerance": 0.02,
+    "unit": "Hz",
+    "explanation": "Undo the radians: one cycle is $2\\pi$ radians, so $f = \\omega/2\\pi = 314/6.283 \\approx 50\\,\\text{Hz}$ — European mains. The world's grids run at just two frequencies, 50 Hz (Europe, most of Asia) and 60 Hz (the Americas), so $314$ and $377\\,\\text{rad/s}$ are the two $\\omega$ values behind nearly every power calculation on Earth. Datasheets mix the two notations freely; the $2\\pi$ is the only bridge."
+  },
+  {
+    "id": "ac-034",
+    "topic": "ac-phasors",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "An industrial load on a $120\\,\\text{V}$ RMS line draws $2\\,\\text{A}$ RMS, with the current lagging the voltage by $60^\\circ$. How much **reactive power** $Q$ does the load draw, in VAR?",
+    "answer": 207.8,
+    "tolerance": 0.02,
+    "unit": "VAR",
+    "explanation": "Volts times amps gives only the hypotenuse of the power triangle: $S = VI = 120 \\cdot 2 = 240\\,\\text{VA}$ of apparent power. The phase angle splits it into the in-phase part that does work and the quadrature part that sloshes: $Q = S\\sin\\theta = 240 \\sin 60^\\circ = 240 \\cdot 0.866 \\approx 207.8\\,\\text{VAR}$. Check with the other leg: $P = 240\\cos 60^\\circ = 120\\,\\text{W}$, and indeed $\\sqrt{120^2 + 207.8^2} = 240$. At $60^\\circ$ the load returns more power to the grid each cycle than it keeps — a power factor of only 0.5."
+  },
+  {
+    "id": "ac-035",
+    "topic": "ac-phasors",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "At the source frequency, the capacitor's reactance is $X_C = 100\\,\\Omega$. Find the magnitude of the impedance the source sees, in Ω.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        {
+          "type": "vsine",
+          "from": [
+            60,
+            200
+          ],
+          "to": [
+            60,
+            60
+          ],
+          "label": "V_s",
+          "flipLabel": true
+        },
+        {
+          "type": "resistor",
+          "from": [
+            180,
+            60
+          ],
+          "to": [
+            180,
+            200
+          ],
+          "label": "R",
+          "value": "100 Ω"
+        },
+        {
+          "type": "capacitor",
+          "from": [
+            320,
+            60
+          ],
+          "to": [
+            320,
+            200
+          ],
+          "label": "C",
+          "value": "X_C = 100 Ω"
+        }
+      ],
+      "wires": [
+        [
+          [
+            60,
+            60
+          ],
+          [
+            320,
+            60
+          ]
+        ],
+        [
+          [
+            60,
+            200
+          ],
+          [
+            320,
+            200
+          ]
+        ]
+      ],
+      "nodes": [
+        [
+          180,
+          60
+        ],
+        [
+          180,
+          200
+        ]
+      ]
+    },
+    "answer": 70.7,
+    "tolerance": 0.02,
+    "unit": "Ω",
+    "explanation": "Both branches see the full source voltage, but their currents are $90^\\circ$ apart — the resistor's in phase, the capacitor's leading — so the total current is the *vector* sum: $|I| = \\sqrt{I_R^2 + I_C^2} = \\sqrt{2}\\,V/100$, giving $|Z| = 100/\\sqrt{2} \\approx 70.7\\,\\Omega$. Formally: $Z = \\frac{R \\cdot (-jX_C)}{R - jX_C} = \\frac{10000\\angle{-90^\\circ}}{141.4\\angle{-45^\\circ}} = 70.7\\angle{-45^\\circ}\\,\\Omega$. Note the trap: the DC-style answer $100 \\parallel 100 = 50\\,\\Omega$ is wrong precisely because the branch currents don't add head-to-head — they add at right angles."
   }
 ]

@@ -120,6 +120,13 @@ test('topicMastery: unseen 0, all-max 1', () => {
   assert.equal(S.topicMastery([]), 0);
 });
 
+test('settings: intuitionOnly defaults off, persists when set', () => {
+  assert.equal(S.getSetting('intuitionOnly'), false);
+  S.setSetting('intuitionOnly', true);
+  assert.equal(S.getSetting('intuitionOnly'), true);
+  assert.ok(store.get('ohmwork-state-v1').includes('"intuitionOnly":true'));
+});
+
 test('state persists through storage round-trip', () => {
   S.recordAnswer('q', 2, true);
   const raw = store.get('ohmwork-state-v1');

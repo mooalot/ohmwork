@@ -430,5 +430,308 @@
     ],
     "answer": 0,
     "explanation": "$R_B$ fixes only the *base* current — $(10 - 0.7)/465\\,\\text{k}\\Omega = 20\\,\\mu\\text{A}$ — and the collector current is $\\beta$ times that. Doubling $\\beta$ doubles $I_C$ to $4\\,\\text{mA}$, so $V_{CE} = 10 - 4\\,\\text{mA} \\times 2.2\\,\\text{k}\\Omega = 1.2\\,\\text{V}$: still (barely) active, but the amplifier's headroom is gone. Since $\\beta$ routinely varies 2:1 between parts and with temperature, fixed bias is fragile — voltage-divider bias with an emitter resistor pins $I_E$ instead of $I_B$, which is why it is the standard."
+  },
+  {
+    "id": "bjt-021",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In the water analogy, a BJT in its active region is a spring-loaded valve in a big pipe. Which mapping is correct?",
+    "choices": [
+      "A small trickle into the base holds the valve open, letting a flow $\\beta$ times larger pass from collector to emitter — but that big flow is pushed by the supply, not by the transistor",
+      "The base voltage is a water pressure that the valve multiplies by $\\beta$ and delivers at the collector",
+      "The transistor is the pump: it adds energy, so more water comes out than goes in",
+      "The collector flow forces the valve open, and the base merely measures how much is passing"
+    ],
+    "answer": 0,
+    "explanation": "The base is the handle, not the pump: a tiny control current $I_B$ sets how far the valve opens, and the main flow $I_C = \\beta I_B$ is driven entirely by the external supply pushing current through the load. The transistor adds no energy of its own — it only grants permission — which is why every amplifier still needs a power supply. And the causality runs one way: the base controls the collector, never the reverse."
+  },
+  {
+    "id": "bjt-022",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Picture this circuit as a valve in a pipe: current pours from the $+9\\,\\text{V}$ supply through $R_C$, down through the transistor, to ground. Click the wire that acts as the valve's *handle* — the small control input.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [296, 48], "to": [296, 120], "label": "R_C", "value": "1 kΩ" },
+        { "type": "npn", "at": [280, 160] },
+        { "type": "ground", "at": [296, 216] }
+      ],
+      "wires": [
+        [[296, 48], [296, 36]],
+        [[296, 120], [296, 132]],
+        [[160, 160], [256, 160]],
+        [[296, 188], [296, 216]]
+      ],
+      "labels": [
+        { "text": "+9 V", "at": [296, 24], "terminal": [296, 36] },
+        { "text": "IN", "at": [148, 160], "anchor": "right", "terminal": [160, 160] }
+      ]
+    },
+    "probe": { "target": "node" },
+    "answer": { "at": [200, 160] },
+    "explanation": "The base is the handle: a trickle of current into the IN wire sets how much current the collector–emitter 'pipe' may carry. The collector and emitter wires *are* the pipe — they carry the big flow but control nothing. That asymmetry is the whole transistor: tiny effort at the base, big flow through the pipe, tied together by $I_C = \\beta I_B$."
+  },
+  {
+    "id": "bjt-023",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Why is connecting a BJT's base directly to a stiff $5\\,\\text{V}$ source — no series resistor — a recipe for a dead transistor?",
+    "choices": [
+      "The base–emitter junction is just a diode: past about $0.7\\,\\text{V}$ its current rises exponentially, so a stiff source forces enormous base current — a resistor must limit it",
+      "The base needs exactly $0.7\\,\\text{V}$, and a $5\\,\\text{V}$ source simply cannot turn it on",
+      "Without a base resistor the transistor cannot develop voltage gain, but no damage occurs",
+      "The base resistor is only there to filter noise; omitting it is safe as long as the supply is DC"
+    ],
+    "answer": 0,
+    "explanation": "Treat the base–emitter junction as exactly what it is: a silicon diode. Its exponential I–V curve means that beyond roughly $0.7\\,\\text{V}$, a tiny bit of extra voltage produces a huge amount of extra current, so a stiff $5\\,\\text{V}$ source dumps effectively unlimited current into the junction and burns it. The rule is the same as for an LED: never drive a diode straight from a voltage source. A series resistor turns the voltage into a well-defined current, $I_B = (5 - 0.7)/R_B$."
+  },
+  {
+    "id": "bjt-024",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A transistor switch is already hard-saturated, and you double the base drive current. What happens to the collector current?",
+    "choices": [
+      "Almost nothing — the valve is already fully open, so the supply and load set the current; the extra base drive is simply wasted",
+      "It doubles, since $I_C = \\beta I_B$ always holds",
+      "It rises by exactly the amount of base current you added",
+      "The transistor pops out of saturation and returns to the active region"
+    ],
+    "answer": 0,
+    "explanation": "Saturation is the valve cranked fully open: the collector–emitter path has collapsed to $V_{CE(sat)} \\approx 0.2\\,\\text{V}$, and the current is whatever the load allows, $I_C \\approx (V_{CC} - 0.2)/R_{load}$ — the handle has run out of travel. Turning it harder changes nothing at the collector; the extra base current just piles up as stored charge that must be swept out before the transistor can turn *off*, so over-driving actually slows the switch. $I_C = \\beta I_B$ is an active-region law only."
+  },
+  {
+    "id": "bjt-025",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A BJT has three operating regions: cutoff, active, and saturation. Which everyday-role matching is right?",
+    "choices": [
+      "Cutoff = switch open (off), active = amplifier (flow smoothly tracks the control), saturation = switch closed (fully on)",
+      "Cutoff = switch closed, active = switch open, saturation = amplifier",
+      "Cutoff = amplifier, active = switch closed, saturation = off",
+      "All three regions amplify; they differ only in how much gain the transistor gives"
+    ],
+    "answer": 0,
+    "explanation": "Think of the valve: shut (cutoff — no base drive, the collector looks like an open circuit), partway open and tracking the handle (active — $I_C = \\beta I_B$, the amplifier region), and cranked fully open (saturation — $V_{CE} \\approx 0.2\\,\\text{V}$, the load sets the current). Digital circuits slam between the two end states and sprint through the middle; amplifiers live entirely in the middle and avoid the ends. Knowing which region you're in decides which equations you're allowed to use."
+  },
+  {
+    "id": "bjt-026",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "An emitter follower has a voltage gain of about 1 — the output just copies the input minus $0.7\\,\\text{V}$. Why is such a 'do-nothing' stage everywhere?",
+    "choices": [
+      "It is a *strength* amplifier: the output copies the input voltage but can supply $\\beta$ times more current, so a weak source can drive a heavy load without sagging",
+      "Its gain is actually $\\beta$; the 'gain of 1' applies only at DC",
+      "It inverts the signal, which is required between amplifier stages",
+      "It blocks DC while passing AC, like a coupling capacitor"
+    ],
+    "answer": 0,
+    "explanation": "The follower trades voltage gain for muscle: $v_{out}$ tracks $v_{in} - 0.7\\,\\text{V}$, but the load's current comes from the collector supply while the source contributes only $I_{load}/(\\beta + 1)$. It turns a weak, easily-loaded signal into a sturdy copy that can drive headphones, long cables, or a low-impedance next stage without drooping. Amplifying current instead of voltage is still real amplification — power gain is what counts."
+  },
+  {
+    "id": "bjt-027",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "You need to switch the $+12\\,\\text{V}$ side of a grounded load (a *high-side* switch). Which transistor makes this easy, and how?",
+    "choices": [
+      "A pnp with its emitter on the $+12\\,\\text{V}$ rail — pulling its base about $0.7\\,\\text{V}$ below the rail turns it on: pnp naturally *pulls high*",
+      "An npn with the load on its emitter and $5\\,\\text{V}$ logic on its base — it will switch the full $12\\,\\text{V}$ onto the load",
+      "An npn with its emitter on the $+12\\,\\text{V}$ rail — grounding the base turns it on",
+      "Either polarity works identically; npn and pnp differ only in fabrication, not in circuit role"
+    ],
+    "answer": 0,
+    "explanation": "An npn turns on when its base sits $0.7\\,\\text{V}$ *above* its emitter, so it is happiest with the emitter grounded, yanking the load's low side down — a low-side switch. Perched up at the rail it struggles: as a high-side follower, $5\\,\\text{V}$ logic can lift the load only to $5 - 0.7 = 4.3\\,\\text{V}$, never the full rail. The pnp is the mirror image: emitter on $+12\\,\\text{V}$, and pulling the base one diode drop below the rail (easy for logic, through a resistor) connects the load to the full supply. npn pulls low; pnp pulls high."
+  },
+  {
+    "id": "bjt-028",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In a Darlington pair, two $\\beta = 100$ transistors give an overall current gain around $10{,}000$. What is the mechanism?",
+    "choices": [
+      "The first transistor's emitter current feeds the second transistor's base, so the gains *multiply*: $\\beta_{total} \\approx \\beta_1 \\beta_2$",
+      "The gains add, giving $\\beta_{total} \\approx 200$",
+      "The two transistors share the load current equally, doubling the power rating but not the gain",
+      "The second transistor raises the voltage gain, not the current gain"
+    ],
+    "answer": 0,
+    "explanation": "Cascaded amplification multiplies: the first transistor turns the input trickle into a $\\beta_1$-times larger stream, and that entire stream pours into the second base to be amplified by $\\beta_2$ again — $100 \\times 100 \\approx 10{,}000$. A microamp-scale signal can then control amperes. The price of stacking: two base–emitter diodes in series (turn-on at about $1.4\\,\\text{V}$) and a higher saturation voltage around $0.9\\,\\text{V}$, so Darlington switches run warmer than single transistors."
+  },
+  {
+    "id": "bjt-029",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "This npn switches a red LED on and off. Click the component whose job is to *protect the LED* by limiting its current.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [316, 40], "to": [316, 100], "label": "R_1", "value": "330 Ω" },
+        { "type": "led", "from": [316, 100], "to": [316, 160], "label": "D_1" },
+        { "type": "resistor", "from": [180, 200], "to": [260, 200], "label": "R_B", "value": "1 kΩ" },
+        { "type": "npn", "at": [300, 200] },
+        { "type": "ground", "at": [316, 256] }
+      ],
+      "wires": [
+        [[316, 40], [316, 28]],
+        [[316, 160], [316, 172]],
+        [[164, 200], [180, 200]],
+        [[260, 200], [276, 200]],
+        [[316, 228], [316, 256]]
+      ],
+      "labels": [
+        { "text": "+5 V", "at": [316, 16], "terminal": [316, 28] },
+        { "text": "5 V", "at": [152, 200], "anchor": "right", "terminal": [164, 200] }
+      ]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "R_1" },
+    "explanation": "An LED, like any diode, pins its own voltage (about $2\\,\\text{V}$) and will happily take as much current as you allow — something else must set the limit. That job belongs to $R_1$: it absorbs the leftover supply voltage and fixes $I \\approx (5 - 2 - 0.2)/330\\,\\Omega \\approx 8.5\\,\\text{mA}$. $R_B$ limits the *base* current instead, and the transistor is just the switch — fully on or fully off, it does not regulate the LED at all."
+  },
+  {
+    "id": "bjt-030",
+    "topic": "bjt",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A power BJT biased with a fixed base voltage (no emitter resistor) warms up, and its collector current starts creeping upward on its own. What is happening?",
+    "choices": [
+      "Thermal runaway: at fixed $V_{BE}$ a hotter transistor conducts more, more current means more heating, and the loop feeds itself — an emitter resistor would break the loop",
+      "The resistors' values increase with temperature, forcing the current up",
+      "$\\beta$ falls with temperature, so the base has to supply more current",
+      "Nothing is wrong — collector current is supposed to track temperature, and the bias point is unaffected"
+    ],
+    "answer": 0,
+    "explanation": "This is thermal runaway, a positive feedback loop: at fixed $V_{BE}$ a hotter junction conducts more (collector current roughly doubles per $10\\,^{\\circ}\\text{C}$ rise), more current means more $V_{CE} I_C$ heating, and the temperature climbs further — sometimes to destruction. An emitter resistor breaks the loop: rising current lifts the emitter voltage, which squeezes $V_{BE}$ and throttles the current back down — negative feedback. That is why power output stages almost always carry small emitter resistors."
+  },
+  {
+    "id": "bjt-031",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "probe",
+    "prompt": "The $5\\,\\text{V}$ input drives this npn into hard saturation. Click the resistor that now determines how much collector current flows.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [316, 48], "to": [316, 120], "label": "R_C", "value": "220 Ω" },
+        { "type": "resistor", "from": [180, 160], "to": [260, 160], "label": "R_B", "value": "1 kΩ" },
+        { "type": "npn", "at": [300, 160] },
+        { "type": "ground", "at": [316, 216] }
+      ],
+      "wires": [
+        [[316, 48], [316, 36]],
+        [[316, 120], [316, 132]],
+        [[164, 160], [180, 160]],
+        [[260, 160], [276, 160]],
+        [[316, 188], [316, 216]]
+      ],
+      "labels": [
+        { "text": "+12 V", "at": [316, 24], "terminal": [316, 36] },
+        { "text": "5 V", "at": [152, 160], "anchor": "right", "terminal": [164, 160] }
+      ]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "R_C" },
+    "explanation": "A saturated transistor is a closed switch with a $0.2\\,\\text{V}$ blemish, so the collector leg is just the $12\\,\\text{V}$ rail across $R_C$: $I_C \\approx (12 - 0.2)/220\\,\\Omega \\approx 54\\,\\text{mA}$, set entirely by $R_C$. $R_B$ only sets the *base* current, and once that is ample enough to guarantee saturation, changing it barely moves the collector current. $\\beta$ rules the active region; the load rules saturation."
+  },
+  {
+    "id": "bjt-032",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "This emitter follower's base is held at $5.0\\,\\text{V}$. Taking $V_{BE} = 0.7\\,\\text{V}$, find the output voltage $V_{out}$, in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "npn", "at": [280, 120] },
+        { "type": "resistor", "from": [296, 148], "to": [296, 228], "label": "R_E", "value": "1 kΩ" },
+        { "type": "ground", "at": [296, 228] }
+      ],
+      "wires": [
+        [[296, 92], [296, 40]],
+        [[176, 120], [256, 120]],
+        [[296, 148], [380, 148]]
+      ],
+      "nodes": [[296, 148]],
+      "labels": [
+        { "text": "+12 V", "at": [296, 28], "terminal": [296, 40] },
+        { "text": "5.0 V", "at": [164, 120], "anchor": "right", "terminal": [176, 120] },
+        { "text": "V_{out}", "at": [392, 148], "anchor": "left" }
+      ]
+    },
+    "answer": 4.3,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "A follower's emitter rides one diode drop below its base, wherever the base goes: $V_{out} = 5.0 - 0.7 = 4.3\\,\\text{V}$. Nothing is amplified in voltage — the payoff is strength: the $4.3\\,\\text{mA}$ flowing in $R_E$ comes from the $+12\\,\\text{V}$ collector supply, while the $5\\,\\text{V}$ source contributes only that current divided by $\\beta + 1$. The weak source gets a sturdy copy of itself."
+  },
+  {
+    "id": "bjt-033",
+    "topic": "bjt",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The logic input saturates this transistor ($V_{CE(sat)} = 0.2\\,\\text{V}$), lighting the LED, which drops $2.0\\,\\text{V}$. Find the LED current, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [316, 40], "to": [316, 100], "label": "R_1", "value": "150 Ω" },
+        { "type": "led", "from": [316, 100], "to": [316, 160], "label": "D_1" },
+        { "type": "resistor", "from": [180, 200], "to": [260, 200], "label": "R_B", "value": "1 kΩ" },
+        { "type": "npn", "at": [300, 200] },
+        { "type": "ground", "at": [316, 256] }
+      ],
+      "wires": [
+        [[316, 40], [316, 28]],
+        [[316, 160], [316, 172]],
+        [[164, 200], [180, 200]],
+        [[260, 200], [276, 200]],
+        [[316, 228], [316, 256]]
+      ],
+      "labels": [
+        { "text": "+5 V", "at": [316, 16], "terminal": [316, 28] },
+        { "text": "5 V", "at": [152, 200], "anchor": "right", "terminal": [164, 200] }
+      ]
+    },
+    "answer": 18.7,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Walk KVL down the lit branch, letting each part subtract its fixed drop from the $5\\,\\text{V}$ rail: the LED pins $2.0\\,\\text{V}$ and the saturated transistor $0.2\\,\\text{V}$, leaving $5 - 2.0 - 0.2 = 2.8\\,\\text{V}$ across the resistor. So $I = 2.8/150 \\approx 18.7\\,\\text{mA}$ — a bright, healthy indicator. Only the resistor gets a vote on the current; the LED and the transistor just subtract their fixed drops."
+  },
+  {
+    "id": "bjt-034",
+    "topic": "bjt",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A Darlington pair (two npn, each $\\beta = 100$, each $V_{BE} = 0.7\\,\\text{V}$) is wired as an emitter follower driving an $8\\,\\Omega$ load to ground. The input holds the first base at $5.0\\,\\text{V}$. What base current must the input source supply, in µA?",
+    "answer": 45,
+    "tolerance": 0.05,
+    "unit": "µA",
+    "explanation": "A Darlington follower drops *two* diodes on the way through, so the load sees $5.0 - 1.4 = 3.6\\,\\text{V}$ and draws $3.6/8 = 450\\,\\text{mA}$ — far more than any signal source could deliver directly. But cascaded gains multiply, $\\beta_{total} \\approx 100 \\times 100 = 10{,}000$, so the input supplies only $450\\,\\text{mA}/10{,}000 = 45\\,\\mu\\text{A}$ (the exact $(\\beta+1)^2$ figure, $44\\,\\mu\\text{A}$, is a hair less). This is how a feeble control signal drives a speaker-sized load: strength amplification, squared."
+  },
+  {
+    "id": "bjt-035",
+    "topic": "bjt",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "An npn switch powers a $48\\,\\Omega$ heater from a $12\\,\\text{V}$ supply, driven into hard saturation with $V_{CE(sat)} = 0.2\\,\\text{V}$. What percentage of the total power drawn from the supply is dissipated in the transistor?",
+    "answer": 1.67,
+    "tolerance": 0.03,
+    "unit": "%",
+    "explanation": "The heater and transistor carry the same current, so the power splits in proportion to voltage: the transistor takes $0.2\\,\\text{V}$ of the $12\\,\\text{V}$ total, i.e. $0.2/12 \\approx 1.7\\%$ — no current calculation needed (though checking: $I = 11.8/48 \\approx 246\\,\\text{mA}$, so $P_Q \\approx 49\\,\\text{mW}$ out of $2.95\\,\\text{W}$). This is exactly why a saturated switch runs cool: nearly all the power lands in the load. Held half-on in the active region with, say, $6\\,\\text{V}$ across it, the same transistor would eat half the power and cook."
   }
 ]

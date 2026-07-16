@@ -427,5 +427,313 @@
     "tolerance": 0.02,
     "unit": "V",
     "explanation": "Transform the left side: 12 V in series with 1 kΩ becomes a 12 mA source in parallel with 1 kΩ. It now sits directly in parallel with $I_1$, and parallel current sources pointing the same way simply add: $12 + 3 = 15\\,\\text{mA}$ through 1 kΩ. Transform back: $V_{th} = 15\\,\\text{mA} \\times 1\\,\\text{k}\\Omega = 15\\,\\text{V}$ in series with 1 kΩ. Cross-check without transformations: with $a$–$b$ open, all 3 mA must return through $R_1$, raising node $a$ to $12 + 3\\,\\text{mA} \\cdot 1\\,\\text{k} = 15\\,\\text{V}$. Same answer — the transformations are just bookkeeping."
+  },
+  {
+    "id": "nt-021",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A two-terminal network contains resistors, independent sources — and one silicon diode. Why can it **not** be replaced by a single Thévenin equivalent that works for every load?",
+    "choices": [
+      "The diode bends the terminal $V$–$I$ curve — it is no longer a straight line, and no single $V_{th}$–$R_{th}$ pair can reproduce a curve",
+      "The diode's $0.7\\,\\text{V}$ drop subtracts from $V_{th}$, making it undefined",
+      "Diodes store charge, so the network has memory and no DC behavior at all",
+      "Nothing breaks — Thévenin only requires the network to have two terminals"
+    ],
+    "answer": 0,
+    "explanation": "Thévenin's theorem is really a statement about straight lines: linearity guarantees the terminal $V$–$I$ relationship is a line, and $V_{th}$/$R_{th}$ are just its intercept and slope. A diode kinks that line — a light load might leave it off while a heavy load turns it on — so no single line fits all loads, and the equivalent evaporates. This is also why the trick survives in small-signal analysis: zoom in close enough to one operating point and even a curved characteristic looks straight, so a *local* Thévenin equivalent returns."
+  },
+  {
+    "id": "nt-022",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Superposition lets you compute the voltage or current each independent source produces alone, then add the results. Why does the same trick **fail** for power?",
+    "choices": [
+      "Power goes as the *square* of voltage or current, and squares don't add: $(I_1 + I_2)^2 \\neq I_1^2 + I_2^2$",
+      "It doesn't fail — power superposes in any linear circuit",
+      "Because a killed source can't absorb power, so the bookkeeping double-counts it",
+      "Because power superposition only works when all sources push in the same direction"
+    ],
+    "answer": 0,
+    "explanation": "Superposition is a property of *linear* quantities, and power is quadratic. Concretely: if each of two sources alone drives $1\\,\\text{A}$ through a resistor, together they drive $2\\,\\text{A}$ — currents added just fine — but the power went from $1^2R$ per source to $2^2R = 4R$, not $2R$. The missing piece is the cross-term $2I_1I_2R$, which belongs to neither source alone. So always superpose voltages or currents first, and square only at the very end."
+  },
+  {
+    "id": "nt-023",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A divider's output looks like $V_{th} = 6\\,\\text{V}$ behind $R_{th} = 5\\,\\text{k}\\Omega$. Without computing anything exactly, rank the loads $1\\,\\text{k}\\Omega$, $5\\,\\text{k}\\Omega$, and $50\\,\\text{k}\\Omega$ by how badly each sags the output.",
+    "choices": [
+      "$1\\,\\text{k}\\Omega$ sags it most, $50\\,\\text{k}\\Omega$ barely at all — the smaller the load compared to $R_{th}$, the harder the sag",
+      "$50\\,\\text{k}\\Omega$ sags it most — bigger resistors drop more voltage",
+      "All three sag it equally, since $R_{th}$ is fixed",
+      "None of them sag it — a divider's ratio fixes its output"
+    ],
+    "answer": 0,
+    "explanation": "The load forms a fresh divider with $R_{th}$ and keeps the fraction $\\frac{R_L}{R_{th} + R_L}$ of the 6 V. A small load hogs current through $R_{th}$, so most of the voltage dies inside the source: $1\\,\\text{k}$ keeps only $1/6$ (1 V!), $5\\,\\text{k}$ keeps exactly half (3 V), and $50\\,\\text{k}$ keeps $50/55 \\approx 91\\%$ (about 5.5 V). Handy rule of thumb: a load $10\\times R_{th}$ costs you roughly 9% — which is why 'make the load much bigger than the output impedance' is the standard design mantra."
+  },
+  {
+    "id": "nt-024",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Looking into terminals $a$–$b$, exactly **one** of the two resistors determines the Thévenin resistance. Click it.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "10 V", "flipLabel": true },
+        { "type": "resistor", "from": [140, 60], "to": [140, 200], "label": "R_2", "value": "1 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [180, 60], "to": [300, 60], "label": "R_1", "value": "2.2 kΩ" }
+      ],
+      "wires": [
+        [[60, 60], [180, 60]],
+        [[300, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ],
+      "nodes": [[140, 60], [140, 200]],
+      "labels": [
+        { "text": "a", "at": [352, 60], "anchor": "left", "terminal": [340, 60] },
+        { "text": "b", "at": [352, 200], "anchor": "left", "terminal": [340, 200] }
+      ]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "R_1" },
+    "explanation": "Kill the source to find $R_{th}$: the ideal 10 V source becomes a short circuit, and that short lands directly across $R_2$ — from the terminals, $R_2$ has vanished ($1\\,\\text{k}\\Omega$ in parallel with $0\\,\\Omega$ is $0\\,\\Omega$). All that's left looking in from $a$–$b$ is $R_1$, so $R_{th} = 2.2\\,\\text{k}\\Omega$. The general lesson: a resistor wired straight across an ideal voltage source never affects what the outside world sees — the source clamps that node pair no matter what."
+  },
+  {
+    "id": "nt-025",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Terminal $a$ is open — nothing is connected. Click the node **inside the network** (not on terminal $a$'s own wire) that sits at exactly $V_{th}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [60, 220], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [180, 60], "to": [180, 140], "label": "R_1", "value": "2.2 kΩ" },
+        { "type": "resistor", "from": [180, 140], "to": [180, 220], "label": "R_2", "value": "2.2 kΩ" },
+        { "type": "resistor", "from": [180, 140], "to": [280, 140], "label": "R_3", "value": "10 kΩ" },
+        { "type": "ground", "at": [120, 220] }
+      ],
+      "wires": [
+        [[60, 60], [180, 60]],
+        [[60, 220], [180, 220]],
+        [[280, 140], [340, 140]]
+      ],
+      "nodes": [[180, 140]],
+      "labels": [{ "text": "a", "at": [352, 140], "anchor": "left", "terminal": [340, 140] }]
+    },
+    "probe": { "target": "node" },
+    "answer": { "at": [180, 140] },
+    "explanation": "$V_{th}$ is the open-circuit terminal voltage — and with $a$ open, $R_3$ carries zero current, so it drops zero volts. The divider midpoint therefore sits at exactly the same potential as the terminal: $V_{th} = 12 \\cdot \\frac{2.2}{4.4} = 6\\,\\text{V}$, and the $10\\,\\text{k}\\Omega$ contributes nothing to it. Resistance in series with an open terminal changes $R_{th}$, never $V_{th}$ — the sag only appears once a load draws current through $R_3$."
+  },
+  {
+    "id": "nt-026",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A black box measures $V_{th} = 10\\,\\text{V}$, $R_{th} = 1\\,\\text{k}\\Omega$. You solder a $1\\,\\text{k}\\Omega$ resistor permanently *across* its terminals and treat the result as a new black box. What are the new $V_{th}$ and $R_{th}$?",
+    "choices": [
+      "$V_{th} = 5\\,\\text{V}$, $R_{th} = 500\\,\\Omega$ — the added resistor both divides the open-circuit voltage and parallels the resistance",
+      "$V_{th} = 10\\,\\text{V}$, $R_{th} = 500\\,\\Omega$ — the open-circuit voltage can't change",
+      "$V_{th} = 5\\,\\text{V}$, $R_{th} = 2\\,\\text{k}\\Omega$ — the resistances add",
+      "$V_{th} = 10\\,\\text{V}$, $R_{th} = 2\\,\\text{k}\\Omega$"
+    ],
+    "answer": 0,
+    "explanation": "Just redo the two defining experiments on the new box. Open-circuit test: the soldered resistor forms a divider with the internal $1\\,\\text{k}\\Omega$ — equal values, so the new $V_{th}$ is half: 5 V. Dead-source test: $1\\,\\text{k} \\| 1\\,\\text{k} = 500\\,\\Omega$. Contrast with adding the same resistor in *series* with a terminal: no current flows open-circuit, so $V_{th}$ would stay 10 V while $R_{th}$ grew to 2 kΩ. Parallel trades away voltage for a stiffer output; series keeps the voltage but weakens it."
+  },
+  {
+    "id": "nt-027",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "You'll be hanging several loads in parallel across one source, adding them one at a time. Which equivalent — Thévenin or Norton — makes the running analysis easier, and why?",
+    "choices": [
+      "Norton — its resistance already sits in parallel, so each new load just joins the parallel pile and a current divider hands you every branch current",
+      "Thévenin — series circuits are always simpler to solve than parallel ones",
+      "Norton — current sources deliver more power than voltage sources",
+      "Neither — equivalents are only valid for a single attached load"
+    ],
+    "answer": 0,
+    "explanation": "The two forms carry identical information ($I_N = V_{th}/R_{th}$, same resistance) — choosing between them is purely about matching the *shape* of the equivalent to the shape of the problem. Norton is a current source with everything in parallel: each added load merges by the parallel-resistor rule, and the fixed $I_N$ splits among branches by a current divider. If instead you were stacking elements in a series chain, you'd flip to Thévenin for the same reason. Pick the packaging that matches how the circuit grows."
+  },
+  {
+    "id": "nt-028",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "numeric",
+    "prompt": "With nothing attached, a mystery box reads $6\\,\\text{V}$ across its terminals. With an ammeter shorting them, it reads $3\\,\\text{mA}$. What is its Thévenin resistance, in $\\text{k}\\Omega$?",
+    "answer": 2,
+    "tolerance": 0.02,
+    "unit": "kΩ",
+    "explanation": "You've measured both intercepts of the box's straight $V$–$I$ line: the open-circuit voltage ($6\\,\\text{V}$) and the short-circuit current ($3\\,\\text{mA}$). The slope connecting them is the resistance: $R_{th} = V_{oc}/I_{sc} = 6\\,\\text{V} / 3\\,\\text{mA} = 2\\,\\text{k}\\Omega$. Two terminal measurements fully characterize any linear network — you never need to open the box. (In the lab, short a source only if it can survive it; the gentler version is loading it until the voltage halves.)"
+  },
+  {
+    "id": "nt-029",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Two identical $9\\,\\text{V}$ batteries, each with $1\\,\\Omega$ internal resistance, are wired in parallel (matching polarity). What Thévenin equivalent does the pair present?",
+    "choices": [
+      "$9\\,\\text{V}$ behind $0.5\\,\\Omega$ — same voltage, half the internal resistance: a stiffer source",
+      "$18\\,\\text{V}$ behind $2\\,\\Omega$ — voltages and resistances both add",
+      "$9\\,\\text{V}$ behind $2\\,\\Omega$ — the internal resistances add in series",
+      "$4.5\\,\\text{V}$ behind $1\\,\\Omega$ — paralleling halves the voltage"
+    ],
+    "answer": 0,
+    "explanation": "With identical voltages there's no circulating current, and open-circuit both batteries hold the terminals at 9 V — so $V_{th} = 9\\,\\text{V}$. Kill the sources and the two $1\\,\\Omega$ resistances land in parallel: $R_{th} = 0.5\\,\\Omega$. Physically, the batteries split any load current, so each suffers only half the internal drop — that's exactly why battery packs parallel cells for current capability. (Paralleling *unequal* voltages is another story: current circulates and wastes power even with no load attached.)"
+  },
+  {
+    "id": "nt-030",
+    "topic": "network-theorems",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "You're using superposition to find $V_1$'s contribution to the voltage across $R_2$. One component must be replaced by an **open circuit** before you solve — click it.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [220, 60], "to": [220, 200], "label": "R_2", "value": "1 kΩ", "flipLabel": true },
+        { "type": "isource", "from": [340, 200], "to": [340, 60], "label": "I_1", "value": "2 mA" }
+      ],
+      "wires": [
+        [[180, 60], [340, 60]],
+        [[60, 200], [340, 200]]
+      ],
+      "nodes": [[220, 60], [220, 200]]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "I_1" },
+    "explanation": "Superposition means one source at a time, with every other source set to *zero*. Zero amps through the current source's branch means the branch carries nothing — which is exactly a gap, so $I_1$ is replaced by an open circuit. (Shorting it would be wrong: a short is a zero-*volt* element, the way to kill a voltage source.) With $I_1$ opened, $V_1$ drives a plain 1 k/1 k divider contributing $4.5\\,\\text{V}$; on $I_1$'s turn ($V_1$ shorted) it pushes 2 mA into $1\\,\\text{k} \\| 1\\,\\text{k} = 500\\,\\Omega$ for another $1\\,\\text{V}$, totaling $5.5\\,\\text{V}$."
+  },
+  {
+    "id": "nt-031",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A source with $V_{th} = 10\\,\\text{V}$ and $R_{th} = 2\\,\\Omega$ drives an $8\\,\\Omega$ load. What percentage of the total generated power actually reaches the load?",
+    "answer": 80,
+    "tolerance": 0.02,
+    "unit": "%",
+    "explanation": "$R_{th}$ and $R_L$ carry the same current, so power splits in proportion to resistance — efficiency is simply $\\frac{R_L}{R_{th} + R_L} = \\frac{8}{10} = 80\\%$. Check with numbers: $I = 10/10 = 1\\,\\text{A}$, so the load gets $8\\,\\text{W}$ of the $10\\,\\text{W}$ generated. Notice that *matching* ($R_L = R_{th}$) would cap efficiency at 50% — maximum power transfer and maximum efficiency are different goals, and grids and power supplies chase efficiency by keeping $R_{th} \\ll R_L$."
+  },
+  {
+    "id": "nt-032",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A Norton source ($I_N = 6\\,\\text{mA}$, $R_N = 1\\,\\text{k}\\Omega$) drives a $2\\,\\text{k}\\Omega$ load. Find the load current through $R_L$, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "isource", "from": [60, 200], "to": [60, 60], "label": "I_N", "value": "6 mA", "flipLabel": true },
+        { "type": "resistor", "from": [180, 60], "to": [180, 200], "label": "R_N", "value": "1 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_L", "value": "2 kΩ" }
+      ],
+      "wires": [
+        [[60, 60], [300, 60]],
+        [[60, 200], [300, 200]]
+      ],
+      "nodes": [[180, 60], [180, 200]]
+    },
+    "answer": 2,
+    "tolerance": 0.02,
+    "unit": "mA",
+    "explanation": "In Norton form this is a single current-divider step: the 6 mA splits between $R_N$ and $R_L$ in inverse proportion to resistance, so $I_L = 6 \\cdot \\frac{1\\text{k}}{1\\text{k} + 2\\text{k}} = 2\\,\\text{mA}$. Sanity-check via the shared node voltage: $6\\,\\text{mA} \\times (1\\,\\text{k} \\| 2\\,\\text{k} \\approx 667\\,\\Omega) = 4\\,\\text{V}$, and $4\\,\\text{V}/2\\,\\text{k} = 2\\,\\text{mA}$. The Thévenin telling of the same story — 6 V behind 1 kΩ into 2 kΩ, $6/3\\text{k} = 2\\,\\text{mA}$ — agrees, as it must."
+  },
+  {
+    "id": "nt-033",
+    "topic": "network-theorems",
+    "tier": 2,
+    "type": "slider",
+    "prompt": "This source is $V_{th} = 8\\,\\text{V}$ behind $R_{th} = 1\\,\\text{k}\\Omega$. Set the load $R_L$ so the loaded output is exactly $6\\,\\text{V}$.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_{th}", "value": "8 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_{th}", "value": "1 kΩ" },
+        { "type": "resistor", "from": [300, 60], "to": [300, 200], "label": "R_L", "bind": true }
+      ],
+      "wires": [
+        [[180, 60], [300, 60]],
+        [[60, 200], [300, 200]]
+      ],
+      "labels": [{ "text": "V_{out}", "at": [352, 130], "anchor": "left" }]
+    },
+    "slider": { "min": 500, "max": 10000, "step": 100, "unit": "Ω", "label": "R_L" },
+    "answer": 3000,
+    "tolerance": 0.03,
+    "explanation": "The load forms a divider with $R_{th}$: $V_{out} = 8 \\cdot \\frac{R_L}{1\\text{k} + R_L}$. Keeping 6 of the 8 volts means the load must hold $3/4$ of the total resistance, so $R_L = 3 R_{th} = 3\\,\\text{k}\\Omega$ (check: $8 \\cdot 3/4 = 6\\,\\text{V}$). The general rhythm: to keep the fraction $f$ of $V_{th}$, you need $R_L = R_{th} \\cdot \\frac{f}{1-f}$ — so keeping most of the voltage demands a load many times the output impedance."
+  },
+  {
+    "id": "nt-034",
+    "topic": "network-theorems",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "Two real batteries — $12\\,\\text{V}$ with $1\\,\\Omega$ internal resistance and $11.5\\,\\text{V}$ with $0.5\\,\\Omega$ — are wired in parallel. Find the Thévenin voltage at open terminal $a$ (with respect to ground), in volts.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [80, 220], "to": [80, 140], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [80, 140], "to": [80, 60], "label": "R_1", "value": "1 Ω", "flipLabel": true },
+        { "type": "vsource", "from": [240, 220], "to": [240, 140], "label": "V_2", "value": "11.5 V" },
+        { "type": "resistor", "from": [240, 140], "to": [240, 60], "label": "R_2", "value": "0.5 Ω" },
+        { "type": "ground", "at": [160, 220] }
+      ],
+      "wires": [
+        [[80, 60], [240, 60]],
+        [[80, 220], [240, 220]],
+        [[240, 60], [340, 60]]
+      ],
+      "nodes": [[240, 60], [240, 220]],
+      "labels": [{ "text": "a", "at": [352, 60], "anchor": "left", "terminal": [340, 60] }]
+    },
+    "answer": 11.67,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "Parallel real sources don't average evenly — each pulls the shared node toward its own voltage with strength $1/R$ (its conductance). Millman's theorem says it directly: $V_{th} = \\frac{12/1 + 11.5/0.5}{1/1 + 1/0.5} = \\frac{35}{3} \\approx 11.67\\,\\text{V}$ — twice as close to the stiffer 11.5 V battery. Cross-check by the loop: $(12 - 11.5)/1.5\\,\\Omega = 1/3\\,\\text{A}$ circulates between the batteries, dropping $1/3\\,\\text{V}$ across $R_1$: $12 - 0.33 = 11.67\\,\\text{V}$. That standing current flows even with no load — the mismatch quietly wastes energy, which is why you never parallel unequal sources ($R_{th}$, for the record, is $1 \\| 0.5 = 0.33\\,\\Omega$)."
+  },
+  {
+    "id": "nt-035",
+    "topic": "network-theorems",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "What is the **maximum** power this network can deliver to any resistive load connected between terminal $a$ and ground, in mW?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 260,
+      "components": [
+        { "type": "vsource", "from": [60, 220], "to": [60, 60], "label": "V_1", "value": "15 V", "flipLabel": true },
+        { "type": "resistor", "from": [200, 60], "to": [200, 140], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [200, 140], "to": [200, 220], "label": "R_2", "value": "2 kΩ" },
+        { "type": "ground", "at": [120, 220] }
+      ],
+      "wires": [
+        [[60, 60], [200, 60]],
+        [[60, 220], [200, 220]],
+        [[200, 140], [340, 140]]
+      ],
+      "nodes": [[200, 140]],
+      "labels": [{ "text": "a", "at": [352, 140], "anchor": "left", "terminal": [340, 140] }]
+    },
+    "answer": 37.5,
+    "tolerance": 0.03,
+    "unit": "mW",
+    "explanation": "Shrink the network first — the load never sees the '15 V' source, only its Thévenin shadow: $V_{th} = 15 \\cdot \\frac{2}{3} = 10\\,\\text{V}$ and $R_{th} = 1\\,\\text{k} \\| 2\\,\\text{k} \\approx 667\\,\\Omega$. The most any linear source can hand over occurs at the matched load $R_L = R_{th}$, where the terminal voltage halves: $P_{max} = \\frac{V_{th}^2}{4R_{th}} = \\frac{100}{2667} \\approx 37.5\\,\\text{mW}$. Maximum deliverable power is a property of those two numbers alone — the whole internal topology has already been priced in."
   }
 ]

@@ -33,10 +33,36 @@ function balancedMath(s) {
   return n % 2 === 0;
 }
 
+// prose runs as the renderer sees them: text between $...$ / $$...$$ segments
+function proseRuns(text) {
+  const runs = [];
+  let i = 0;
+  while (i < text.length) {
+    if (text[i] === '$') {
+      const d = text.startsWith('$$', i) ? '$$' : '$';
+      const end = text.indexOf(d, i + d.length);
+      if (end !== -1) { i = end + d.length; continue; }
+    }
+    let next = text.indexOf('$', text[i] === '$' ? i + 1 : i);
+    if (next === -1) next = text.length;
+    runs.push(text.slice(i, next));
+    i = next;
+  }
+  return runs;
+}
+
 function checkText(file, id, field, s) {
   if (typeof s !== 'string' || !s.trim()) return err(file, id, `${field} missing/empty`);
   if (!balancedMath(s)) err(file, id, `${field} has unbalanced $ delimiters`);
-  if (/<[a-z]/i.test(s.replace(/\$[^$]*\$/g, ''))) warn(file, id, `${field} contains raw HTML tags`);
+  for (const run of proseRuns(s)) {
+    if (/<[a-z]/i.test(run)) warn(file, id, `${field} contains raw HTML tags`);
+    // markdown must resolve within a single prose run — bold/italic can't span math
+    const leftover = run.replace(/\*\*[^*]+\*\*/g, '').replace(/\*[^*\s][^*]*\*/g, '');
+    if (leftover.includes('*')) {
+      err(file, id, `${field} has markdown * that doesn't resolve (bold/italic may not span math)`);
+      break;
+    }
+  }
 }
 
 function checkFigure(file, id, fig, q) {

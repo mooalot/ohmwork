@@ -98,6 +98,40 @@ body {
 .hero-text b { color: var(--phosphor); }
 .hero-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
 
+/* intuition-only mode switch */
+.mode-row { display: flex; align-items: center; gap: 12px; margin: -10px 0 18px; }
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  background: var(--bg2);
+  border: 1px solid var(--border-lit);
+  border-radius: 20px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.mode-toggle:hover { border-color: var(--phosphor-dark); }
+.mode-toggle .mode-state {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 10px;
+}
+.mode-toggle.on {
+  color: var(--phosphor);
+  border-color: var(--phosphor-dark);
+  box-shadow: 0 0 10px rgba(61, 245, 166, 0.25);
+}
+.mode-toggle.on .mode-state { background: var(--phosphor); color: #04140c; border-color: transparent; }
+.mode-hint { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+
 .topic-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));

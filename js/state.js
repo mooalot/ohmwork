@@ -25,6 +25,7 @@ function blank() {
     totalCorrect: 0,
     lessonsCompleted: 0,
     srs: {}, // qid -> { box, due, seen, correct }
+    settings: { intuitionOnly: false },
   };
 }
 
@@ -50,6 +51,16 @@ function save() {
 
 export function getState() {
   return state;
+}
+
+export function getSetting(key) {
+  return state.settings?.[key] ?? false;
+}
+
+export function setSetting(key, value) {
+  state.settings = state.settings || {};
+  state.settings[key] = value;
+  save();
 }
 
 function today() {

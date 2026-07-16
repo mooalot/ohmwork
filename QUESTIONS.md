@@ -27,7 +27,9 @@ Common fields (all required unless noted):
   calculation), `3` rigorous (multi-step math: phasor arithmetic, Laplace, small-signal, etc.).
 - `type` — `"mc"`, `"numeric"`, or `"slider"`.
 - `prompt` — HTML-safe text. Inline math in `$...$` (KaTeX); `**bold**` and `*italic*`
-  markdown in prose. No raw `<` / `>` outside math.
+  markdown in prose. Bold/italic must open and close **within one prose run** — they cannot
+  span across a `$...$` segment (write `**Click the node** at $2.6\,\text{V}$.`, not
+  `**Click the node at $2.6\,\text{V}$.**`). No raw `<` / `>` outside math.
 - `figure` — optional circuit or plot (see below).
 - `explanation` — shown after answering, right or wrong. Teach the **intuition first**, then
   the math. 2–5 sentences. May contain `$...$` math and `$$...$$` display math.

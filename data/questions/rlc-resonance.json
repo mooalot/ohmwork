@@ -374,5 +374,262 @@
     "tolerance": 0.03,
     "unit": "kHz",
     "explanation": "A parallel tank's impedance peaks at the same $f_0 = \\frac{1}{2\\pi\\sqrt{LC}}$ where a series circuit's impedance dips — the L–C energy exchange is the same physics, viewed from outside instead of along the loop. $LC = 10^{-3} \\times 10^{-9} = 10^{-12}$, so $\\sqrt{LC} = 10^{-6}$ and $f_0 = \\frac{1}{2\\pi \\times 10^{-6}} \\approx 159\\,\\text{kHz}$. At that frequency the tank refuses current from the outside world — which is exactly why oscillators and tuners park a tank there to develop a large voltage."
+  },
+  {
+    "id": "rlc-021",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "You're pushing a child on a swing and want a big amplitude from gentle pushes. What's the trick — and what is the electrical analogy?",
+    "choices": [
+      "Push in rhythm with the swing's own natural period, adding a little energy every cycle — exactly like driving an RLC circuit at its resonant frequency",
+      "Push as hard as possible at random moments — total effort is all that matters",
+      "Push much faster than the swing's natural rhythm so it never has time to slow down",
+      "Push against the motion each time, to load the swing with potential energy"
+    ],
+    "answer": 0,
+    "explanation": "Resonance is nothing more than good timing. Each gentle push arrives just as the swing is already moving away from you, so every cycle deposits a little more energy and the amplitude builds; push off-rhythm and half your shoves fight the motion, cancelling your own work. A sinusoidal source at $f_0$ does the same to an RLC circuit — every cycle of the drive lands in step with the natural L–C energy slosh, so a small source builds a large oscillation. An off-frequency drive is the mistimed push: the response stays small no matter how hard you shove."
+  },
+  {
+    "id": "rlc-022",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Strike a bell and it hums for several seconds; slam a door and you get one dull thud. In oscillator language, what's the difference?",
+    "choices": [
+      "The bell is a high-$Q$ resonator that loses only a tiny fraction of its energy each cycle; the door is low-$Q$, dumping its energy almost immediately",
+      "The bell simply stores more energy, and more energy always means longer ringing",
+      "The door has no natural frequency, so it cannot oscillate at all",
+      "The bell keeps ringing because the surrounding air continuously drives it"
+    ],
+    "answer": 0,
+    "explanation": "How long something rings is set not by how much energy it starts with, but by what *fraction* of that energy it loses per cycle — which is exactly what $Q$ measures. A bronze bell dissipates only a sliver of its vibration each swing, so it survives thousands of cycles (a resonator rings for roughly $Q$ cycles before substantially dying out). A door slab flexes once and internal friction eats the energy immediately — a $Q$ near 1. Circuits are the same: a low-resistance RLC rings on and on, a lossy one just thuds."
+  },
+  {
+    "id": "rlc-023",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "This circuit was given an initial kick and its oscillation is slowly dying away. Click the component responsible for the decay — the one that removes energy from the oscillation on every cycle.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "capacitor", "from": [80, 60], "to": [80, 200], "label": "C", "flipLabel": true },
+        { "type": "resistor", "from": [80, 60], "to": [220, 60], "label": "R" },
+        { "type": "inductor", "from": [220, 60], "to": [340, 60], "label": "L" }
+      ],
+      "wires": [
+        [[340, 60], [340, 200]],
+        [[80, 200], [340, 200]]
+      ]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "R" },
+    "explanation": "Damping *is* energy escaping as heat. The inductor and capacitor only trade energy back and forth — neither destroys any — but every time the sloshing current passes through the resistor, a bite of energy leaves as $I^2R$ heat and never comes back, so each swing is smaller than the last. More resistance means bigger bites and a faster fade; enough resistance and the energy is gone before even one full swing completes (overdamped). Remove $R$ entirely and the ringing would last forever."
+  },
+  {
+    "id": "rlc-024",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Two RLC circuits are kicked and ring down as shown. Which one has more damping, and how can you tell without any math?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "v (V)",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": -10,
+      "ymax": 10,
+      "xticks": 2,
+      "yticks": 5,
+      "curves": [
+        { "fn": "expr", "expr": "10*Math.exp(-t/6)*Math.cos(2*Math.PI*0.8*t)", "legend": "A" },
+        { "fn": "expr", "expr": "10*Math.exp(-t/1.5)*Math.cos(2*Math.PI*0.8*t)", "legend": "B", "color": 2 }
+      ]
+    },
+    "choices": [
+      "B — its envelope collapses within a couple of cycles, meaning a much larger fraction of the energy is lost per swing",
+      "A — it keeps ringing longer, so its resistor must be working harder",
+      "They are equally damped, since both oscillate at about the same frequency",
+      "Impossible to say without knowing the component values"
+    ],
+    "answer": 0,
+    "explanation": "Read the envelope, not the wiggles: damping shows up as how quickly the peaks shrink. B's amplitude is nearly gone after two or three swings, so it loses a large share of its energy every cycle — heavy damping, low $Q$. A hums along for many cycles — light damping, high $Q$. That both oscillate at a similar frequency only tells you their $\\omega_0$ is similar; the *decay rate* is where the resistance is written."
+  },
+  {
+    "id": "rlc-025",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Three LC circuits: **A** uses $L$ and $C$; **B** uses $4L$ and $C$; **C** uses $L$ and $C/4$. Rank their resonant frequencies from highest to lowest — no calculator needed.",
+    "choices": [
+      "C, then A, then B — quadrupling $L$ halves $f_0$, and quartering $C$ doubles it",
+      "B, then A, then C — more inductance stores more energy, hence faster oscillation",
+      "A, then B, then C — changing either component always lowers the frequency",
+      "All three are equal — only the ratio $L/C$ matters, and it changed the same way"
+    ],
+    "answer": 0,
+    "explanation": "Think inertia and spring stiffness: more $L$ is a heavier mass (slower slosh), and less $C$ is a stiffer spring (faster slosh). Because $f_0 = \\frac{1}{2\\pi\\sqrt{LC}}$, a factor of 4 in either component moves $f_0$ by only $\\sqrt{4} = 2$: B runs at half of A's frequency and C at double, giving C, A, B. The square root means component changes always shift $f_0$ more gently than you'd first guess."
+  },
+  {
+    "id": "rlc-026",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Which single sentence correctly captures the duality between series and parallel resonance?",
+    "choices": [
+      "At $f_0$ a series RLC's impedance is at its *minimum* (current pours through), while a parallel tank's impedance is at its *maximum* (the source is nearly ignored)",
+      "Both reach minimum impedance at $f_0$; they differ only in bandwidth",
+      "A series circuit resonates at $\\frac{1}{2\\pi\\sqrt{LC}}$ but a parallel one at twice that frequency",
+      "Series resonance maximizes impedance while parallel resonance minimizes it"
+    ],
+    "answer": 0,
+    "explanation": "It's the same L–C energy slosh either way — what flips is where you stand. In a series loop the L and C *voltages* cancel, leaving only $R$ in the current's path: impedance minimum, current maximum. In a parallel tank the L and C *branch currents* cancel at the terminals, so the outside world can barely push any current in: impedance maximum. The ideal resonant frequency $f_0 = \\frac{1}{2\\pi\\sqrt{LC}}$ is the same for both."
+  },
+  {
+    "id": "rlc-027",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "An opera singer can shatter a wine glass with a sustained note (and wind once tore apart the Tacoma Narrows Bridge). What two ingredients does this kind of resonant destruction require?",
+    "choices": [
+      "The drive must match the object's natural frequency, and the object must be high-$Q$ so energy accumulates over many cycles instead of leaking away",
+      "Sheer loudness — any sound intense enough will break any glass at any pitch",
+      "A frequency far above the object's natural one, so it can't keep up",
+      "One very short, sharp burst of energy, like a clap"
+    ],
+    "answer": 0,
+    "explanation": "One push can't break a glass, but thousands of perfectly timed pushes can. When the note sits exactly on the glass's natural frequency, each acoustic cycle adds a little energy to the vibration — and if the glass is high-$Q$ (crystal has very low internal friction), almost none of it leaks away between pushes, so the amplitude builds cycle after cycle until the rim flexes past its breaking point. An off-pitch note or a lossy object sheds the energy as fast as it arrives and just buzzes gently. Every resonant disaster needs both ingredients: matched frequency *and* low damping."
+  },
+  {
+    "id": "rlc-028",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A car's suspension should absorb a bump and return the body to level as fast as possible *without bouncing*. Which damping regime is the design target, and why?",
+    "choices": [
+      "Critically damped — the fastest possible settling with zero overshoot; less damping bounces, more damping just slows the return",
+      "Undamped — maximum spring action gives the smoothest ride",
+      "Heavily overdamped — more damping is always better",
+      "Strongly underdamped — a high-$Q$ suspension stores the bump's energy efficiently"
+    ],
+    "answer": 0,
+    "explanation": "Critical damping is a design sweet spot, not a compromise. Underdamped (worn shock absorbers) means the bump's energy keeps sloshing between spring and chassis, so the car bounces down the road. Overdamped means no bounce, but the suspension creeps back so slowly it can't absorb the next bump. Critically damped sits exactly on the boundary: the quickest return that never overshoots. In RLC terms the target is $\\alpha = \\omega_0$ — the same goal used in meters and relay drivers that must settle fast and clean."
+  },
+  {
+    "id": "rlc-029",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Energy is sloshing back and forth in this tank circuit. Click the component that stores its share of the energy in a **magnetic field**.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "capacitor", "from": [160, 60], "to": [160, 200], "label": "C", "flipLabel": true },
+        { "type": "inductor", "from": [280, 60], "to": [280, 200], "label": "L" }
+      ],
+      "wires": [
+        [[160, 60], [280, 60]],
+        [[160, 200], [280, 200]]
+      ]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "L" },
+    "explanation": "The two storage elements hold energy in different fields. The capacitor stores $\\frac{1}{2}CV^2$ in the *electric* field between its plates; the inductor stores $\\frac{1}{2}LI^2$ in the *magnetic* field wrapped around its winding — which is why it acts like inertia: that collapsing field is what keeps current flowing when the cap runs empty. Oscillation is just these two fields taking turns holding the same energy, trading it twice per cycle."
+  },
+  {
+    "id": "rlc-030",
+    "topic": "rlc-resonance",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In an ideal oscillating LC circuit, freeze time at the instant the capacitor voltage is at its maximum. What is the current at that moment?",
+    "choices": [
+      "Zero — every bit of energy is momentarily parked in the capacitor's electric field, so none is left for the inductor",
+      "Also at its maximum — voltage and current peak together",
+      "Exactly half its peak value",
+      "Whatever value $V_{max}$ divided by the wire resistance gives"
+    ],
+    "answer": 0,
+    "explanation": "Think of a pendulum at the top of its arc: maximum height, zero speed. Maximum capacitor voltage is the same snapshot — all the energy is electric, $\\frac{1}{2}CV_{max}^2$, so the inductor's $\\frac{1}{2}LI^2$ must be zero, meaning $I = 0$. A quarter cycle later the roles fully reverse: the cap sits at zero volts while the current peaks. Voltage and current in an LC loop are always 90° apart — one is the sine and the other the cosine of the same slosh."
+  },
+  {
+    "id": "rlc-031",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A series RLC uses $L = 4.7\\,\\text{mH}$ and $C = 470\\,\\text{pF}$ and is driven exactly at resonance. What is the inductor's reactance $X_L$ at that frequency, in kΩ?",
+    "answer": 3.16,
+    "tolerance": 0.03,
+    "unit": "kΩ",
+    "explanation": "At resonance you never need the frequency itself: $X_L = \\omega_0 L = \\frac{L}{\\sqrt{LC}} = \\sqrt{L/C}$, the circuit's *characteristic impedance*. Here $L/C = \\frac{4.7\\times10^{-3}}{470\\times10^{-12}} = 10^{7}$, so $X_L = \\sqrt{10^7} \\approx 3.16\\,\\text{kΩ}$ — and $X_C$ is exactly the same, which is the definition of resonance. This single number sets the scale of the L–C energy exchange; comparing it to $R$ gives $Q = \\sqrt{L/C}\\,/R$ directly."
+  },
+  {
+    "id": "rlc-032",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "The capacitor has been charged to $10\\,\\text{V}$. The switch then closes and the capacitor discharges into the inductor (assume no resistance). What peak current flows, in mA?",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "capacitor", "from": [100, 60], "to": [100, 200], "label": "C", "value": "1 µF", "flipLabel": true },
+        { "type": "switch", "from": [100, 60], "to": [240, 60], "label": "S" },
+        { "type": "inductor", "from": [340, 60], "to": [340, 200], "label": "L", "value": "10 mH" }
+      ],
+      "wires": [
+        [[240, 60], [340, 60]],
+        [[100, 200], [340, 200]]
+      ]
+    },
+    "answer": 100,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Use energy bookkeeping, not differential equations. All the capacitor's initial energy, $\\frac{1}{2}CV^2 = \\frac{1}{2}(10^{-6})(10)^2 = 50\\,\\text{µJ}$, is in the inductor at the moment the cap reaches zero volts — and that is when the current peaks. Setting $\\frac{1}{2}LI^2 = 50\\,\\text{µJ}$ gives $I = V\\sqrt{C/L} = 10\\sqrt{10^{-6}/10^{-2}} = 10 \\times 0.01 = 100\\,\\text{mA}$. The shortcut is worth memorizing: $V_{peak}/I_{peak} = \\sqrt{L/C}$, the characteristic impedance again."
+  },
+  {
+    "id": "rlc-033",
+    "topic": "rlc-resonance",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "An LC oscillator runs at $f_0 = 8\\,\\text{kHz}$. You replace the capacitor with one four times larger. What is the new resonant frequency?",
+    "choices": [
+      "$4\\,\\text{kHz}$ — quadrupling $C$ only halves $f_0$, because of the square root",
+      "$2\\,\\text{kHz}$ — the frequency drops in direct proportion to $C$",
+      "$16\\,\\text{kHz}$ — more capacitance charges up faster",
+      "$8\\,\\text{kHz}$ — the frequency depends only on $L$"
+    ],
+    "answer": 0,
+    "explanation": "A bigger capacitor is a softer spring: it takes longer to charge and push back, so the slosh slows down. But $f_0 = \\frac{1}{2\\pi\\sqrt{LC}}$ puts $C$ under a square root, so a factor of 4 moves the frequency by only $1/\\sqrt{4} = 1/2$: from 8 kHz to 4 kHz. This square-root compression is why radio tuning capacitors need a huge capacitance swing (often 10:1) to cover only about a 3:1 span of frequencies."
+  },
+  {
+    "id": "rlc-034",
+    "topic": "rlc-resonance",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A **parallel** RLC tank has $R = 1\\,\\text{kΩ}$, $L = 10\\,\\text{mH}$, and $C = 100\\,\\text{nF}$, all in parallel. Compute the damping coefficient $\\alpha$ of its natural response, in $\\text{s}^{-1}$. (Careful — the series formula does not apply.)",
+    "answer": 5000,
+    "tolerance": 0.03,
+    "unit": "s⁻¹",
+    "explanation": "For a parallel RLC the damping is $\\alpha = \\frac{1}{2RC} = \\frac{1}{2 \\times 1000 \\times 10^{-7}} = 5000\\,\\text{s}^{-1}$, and since $\\omega_0 = \\frac{1}{\\sqrt{LC}} = \\frac{1}{\\sqrt{10^{-9}}} \\approx 31\\,623\\,\\text{rad/s}$ is far larger, the tank rings. Note the duality with the series case ($\\alpha = \\frac{R}{2L}$): in series the resistor sits *in* the current's path, so more $R$ kills the ringing faster; in parallel it sits *across* the tank as a leak, so a **larger** $R$ steals less circulating current and the ringing lasts longer. An ideal parallel tank wants $R \\to \\infty$; an ideal series loop wants $R \\to 0$."
+  },
+  {
+    "id": "rlc-035",
+    "topic": "rlc-resonance",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A series RLC with $R = 10\\,\\Omega$, $L = 10\\,\\text{mH}$, and $C = 1\\,\\text{µF}$ rings after a disturbance, its peaks decaying as $e^{-\\alpha t}$. How long until the envelope falls to $1/e$ (about 37%) of its initial value, in ms?",
+    "answer": 2,
+    "tolerance": 0.03,
+    "unit": "ms",
+    "explanation": "The envelope's time constant is $1/\\alpha$, and for a series RLC $\\alpha = \\frac{R}{2L}$ — notice that $C$ never enters: the capacitor sets how fast the energy sloshes, not how fast it leaks away. Here $\\alpha = \\frac{10}{2 \\times 0.01} = 500\\,\\text{s}^{-1}$, so the $1/e$ time is $\\frac{2L}{R} = 2\\,\\text{ms}$. Sanity check that it really rings: $\\omega_0 = \\frac{1}{\\sqrt{LC}} = \\frac{1}{\\sqrt{10^{-8}}} = 10^4\\,\\text{rad/s} \\gg \\alpha$, so the circuit is well underdamped ($Q = \\frac{\\omega_0}{2\\alpha} = 10$) and completes several swings inside that envelope decay."
   }
 ]

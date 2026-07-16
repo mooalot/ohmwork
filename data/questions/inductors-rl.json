@@ -408,5 +408,302 @@
     ],
     "answer": 0,
     "explanation": "Extract the time constant first: the curve crosses the 63% line at $t = 1\\,\\text{ms}$, so $\\tau = 1\\,\\text{ms}$. Since $\\tau = L/R$, the inductance is $L = \\tau R = 0.001 \\times 220 = 0.22\\,\\text{H} = 220\\,\\text{mH}$. The $4.5\\,\\text{µH}$ trap is the inverted formula $\\tau/R$ — units save you here, because seconds *divided* by ohms is not henries, but seconds *times* ohms is."
+  },
+  {
+    "id": "rl-021",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A classic mechanical analogy: an inductor is like a heavy flywheel on a shaft (or a massive water turbine spinning in a pipe). In this analogy, what does the **current** correspond to?",
+    "choices": [
+      "The flywheel's spinning speed — you can't change it instantly, only spin it up or brake it gradually",
+      "The torque twisting the shaft",
+      "The flywheel's mass",
+      "The friction in the bearings"
+    ],
+    "answer": 0,
+    "explanation": "Map it piece by piece: current ↔ spinning speed, voltage ↔ torque, inductance ↔ mass (inertia), resistance ↔ friction. A heavy flywheel doesn't jump from rest to full speed — you apply torque and it *ramps*, exactly like $v = L\\,di/dt$ rearranged to $di/dt = v/L$. And try to stop a spinning flywheel dead: it fights back violently, which is precisely the inductive kick when a switch opens. Keep this picture and most inductor behavior becomes obvious."
+  },
+  {
+    "id": "rl-022",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A capacitor's *voltage* can never change instantaneously. For an **inductor**, which quantity IS allowed to jump instantly?",
+    "choices": [
+      "Its voltage — $v = L\\,di/dt$ only needs the current's *slope* to change, which is just a kink in $i(t)$",
+      "Its current — nothing about an inductor may change abruptly",
+      "Neither — both must always change smoothly",
+      "Both — any quantity can jump as long as the average power is finite"
+    ],
+    "answer": 0,
+    "explanation": "The stored energy is the tell: an inductor's energy $\\tfrac{1}{2}LI^2$ lives in its *current*, so a current jump would be an instantaneous energy jump — infinite power, forbidden. But no energy is tied to the inductor's voltage, so it snaps around freely: end a steady current ramp and the voltage drops from $L\\,di/dt$ to zero in an instant. It's the perfect mirror of the capacitor, where energy rides on voltage ($\\tfrac{1}{2}CV^2$) and the *current* is what jumps freely."
+  },
+  {
+    "id": "rl-023",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "The switch has been open forever and closes at $t = 0$. **Immediately after** it closes, click the resistor that the current flows through on its way back to the source.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [140, 60], "label": "S" },
+        { "type": "resistor", "from": [140, 60], "to": [220, 60], "label": "R_1", "value": "1 kΩ" },
+        { "type": "resistor", "from": [280, 60], "to": [280, 200], "label": "R_2", "value": "1 kΩ" },
+        { "type": "inductor", "from": [360, 60], "to": [360, 200], "label": "L_1", "value": "100 mH" }
+      ],
+      "wires": [
+        [[220, 60], [360, 60]],
+        [[60, 200], [360, 200]]
+      ],
+      "nodes": [[280, 60], [280, 200]]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "R_2" },
+    "explanation": "At $t = 0^+$ the inductor insists on keeping the current it already had — zero — so for that first instant it behaves like a *break* in the wire. The only closed loop is through $R_2$, so all the current ($12/2\\text{k} = 6\\,\\text{mA}$) returns that way. As the inductor's current ramps up it gradually steals the show, and at $t = \\infty$ it's a plain wire shorting out $R_2$ entirely — the current path literally migrates from one branch to the other."
+  },
+  {
+    "id": "rl-024",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Two branches hang off the resistor: a capacitor and an inductor. The circuit has been powered for a **very long time**. Click the branch component that the steady current flows through.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "9 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [180, 60], "label": "R_1", "value": "470 Ω" },
+        { "type": "capacitor", "from": [260, 60], "to": [260, 200], "label": "C_1", "value": "10 µF" },
+        { "type": "inductor", "from": [360, 60], "to": [360, 200], "label": "L_1", "value": "10 mH" }
+      ],
+      "wires": [
+        [[180, 60], [360, 60]],
+        [[60, 200], [360, 200]]
+      ],
+      "nodes": [[260, 60], [260, 200]]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "L_1" },
+    "explanation": "At DC steady state the two components swap costumes: the capacitor, having charged up, passes no current at all — an *open* — while the inductor, its field settled, drops no voltage at all — a *short*. So the whole $9/470 \\approx 19\\,\\text{mA}$ flows down the inductor branch, and the capacitor branch just sits there holding its voltage (which here is 0 V, since the inductor shorts the node to the bottom rail). One mnemonic: at DC, caps block and coils conduct — the exact opposite of their high-frequency behavior."
+  },
+  {
+    "id": "rl-025",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Motors, relays, solenoids, and transformer primaries are all notorious \"inductive loads.\" What makes them inductive?",
+    "choices": [
+      "They all do their job by building a magnetic field with a coil of wire — and a coil wound to make a useful field is, by construction, an inductor",
+      "They contain iron, and iron is a poor conductor",
+      "Their moving parts store kinetic energy that pushes current backward into the supply",
+      "Manufacturers add series inductors to them to limit inrush current"
+    ],
+    "answer": 0,
+    "explanation": "Anything that works by magnetism needs a strong magnetic field, and the way to make one electrically is many turns of wire (usually around iron). But inductance *is* the measure of how much field a coil makes per amp — so the very feature that makes a relay pull in or a motor spin is what makes it an inductor. That's why these loads arc switches, spike drivers, and need flyback diodes: the working field stores real energy that must go somewhere when you cut the current."
+  },
+  {
+    "id": "rl-026",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A transformer happily converts 120 V AC to 12 V AC, but connected to a 12 V **DC** source it delivers nothing to the secondary (and its primary may overheat). Why?",
+    "choices": [
+      "Energy only couples to the secondary through a *changing* magnetic field; steady DC makes a constant field that induces nothing — and at DC the primary is just a low-resistance wire",
+      "DC cannot flow through the many turns of the primary winding",
+      "The iron core blocks DC flux while passing AC flux",
+      "DC magnetizes the secondary, which cancels the output voltage"
+    ],
+    "answer": 0,
+    "explanation": "Faraday's law is the whole story: the secondary's voltage comes from the *rate of change* of the shared magnetic flux. AC keeps the flux swinging, so energy pours across; DC parks the flux at one value, $d\\Phi/dt = 0$, and the secondary goes silent. Worse, with no changing flux the primary generates no back-voltage to oppose the source, so the DC sees only the winding's small wire resistance — large current, hot transformer. Changing current isn't a nice-to-have for magnetic coupling; it's the mechanism itself."
+  },
+  {
+    "id": "rl-027",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A modern chip packs billions of transistors, plus abundant resistors and capacitors — yet designers avoid on-chip inductors whenever they possibly can. Why?",
+    "choices": [
+      "Useful inductance needs physical size — loops of conductor enclosing magnetic field volume — and unlike transistors it barely shrinks, so on-chip coils are huge, weak, and lossy",
+      "Chip currents are far too small to create any magnetic field",
+      "At chip frequencies an inductor would behave like a perfect open circuit anyway",
+      "Photolithography cannot produce coil-shaped metal patterns"
+    ],
+    "answer": 0,
+    "explanation": "An inductor stores energy in the magnetic field threading its loops, so its value scales with loop area, turn count, and core volume — quantities that fight miniaturization. A transistor got a million times smaller over the decades; a henry of inductance did not. On-chip spiral inductors do exist (RF chips draw them in the metal layers), but they're nanohenries, eat huge die area, and waste energy in the lossy silicon below — which is why designers reach for switched-capacitor tricks and op-amp \"gyrators\" to fake inductance instead."
+  },
+  {
+    "id": "rl-028",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A phone backlight needs about $18\\,\\text{V}$ but the battery provides only $3.7\\,\\text{V}$. A tiny **boost converter** bridges the gap using an inductor and a fast switch. What's the core idea?",
+    "choices": [
+      "Build up current in the inductor, then interrupt its path — the coil generates whatever voltage it takes to keep its current flowing, and that kick pumps charge into an output held above the supply",
+      "The inductor stores the battery's voltage while the switch is closed, then releases it multiplied",
+      "Several inductors in series add their voltages the way stacked batteries do",
+      "The inductor resonates with the battery, and resonance amplifies the voltage"
+    ],
+    "answer": 0,
+    "explanation": "It's the switch-arc phenomenon, domesticated. Close the switch and the battery ramps current into the coil (energy in, $\\tfrac{1}{2}Li^2$); snap it open and the coil *will not* let that current stop — its voltage soars past the output rail until a diode conducts, shoving the energy into the output capacitor at 18 V. Do this hundreds of thousands of times a second and you have a smooth high-voltage supply. Note the misconception in the runner-up: inductors store energy via *current*, never voltage."
+  },
+  {
+    "id": "rl-029",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Old fluorescent light fixtures hum because of a heavy iron-cored inductor — the **ballast** — wired in series with the tube. What is it there for?",
+    "choices": [
+      "An ionized tube conducts harder the hotter its arc gets — nearly a runaway short — so the inductor's AC opposition limits the current while wasting far less power than a resistor, and its kickback even helps strike the arc",
+      "It smooths out the 50/60 Hz flicker by storing energy between mains cycles",
+      "It continuously steps the mains voltage up to the tube's operating voltage",
+      "It filters out the radio interference the tube would otherwise radiate"
+    ],
+    "answer": 0,
+    "explanation": "A gas discharge has a vicious feedback: more current → hotter plasma → *lower* resistance → even more current. Something in series must take up the slack, and on AC an inductor opposes current changes constantly, limiting the current while dissipating very little heat — a resistor doing the same job would cook. As a bonus, when the starter switch snaps open, the ballast's inductive kick provides the high-voltage jolt that ionizes the tube in the first place. Two inductor superpowers — current limiting and kickback — in one lump of iron."
+  },
+  {
+    "id": "rl-030",
+    "topic": "inductors-rl",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "The plot shows the current forced through an inductor: a triangle wave that ramps up slowly and falls quickly. During the **falling** segments, what is the inductor's voltage?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "i_L (A)",
+      "xmin": 0,
+      "xmax": 6,
+      "ymin": 0,
+      "ymax": 5,
+      "xticks": 1,
+      "yticks": 1,
+      "curves": [
+        { "fn": "points", "points": [[0, 0], [2, 4], [3, 0], [5, 4], [6, 0]] }
+      ]
+    },
+    "choices": [
+      "Constant and negative — the slope is constant and negative, and $v = L\\,di/dt$ follows the *slope*, not the level",
+      "Zero, since the current is just retracing values it already visited on the way up",
+      "Positive but shrinking, following the current down",
+      "A brief negative spike at the peak only, where the current turns around"
+    ],
+    "answer": 0,
+    "explanation": "An inductor is a slope detector: $v = L\\,di/dt$ never asks what the current *is*, only how fast it's changing. Each falling segment is a straight line, so $di/dt$ is one fixed negative number and the voltage sits at one fixed negative value the whole way down. And since the fall takes 1 ms versus 2 ms for the rise, the falling slope is twice as steep — the negative voltage is twice the magnitude of the positive one. The voltage waveform is a lopsided square wave that jumps instantly at each corner (voltage may jump; current may not)."
+  },
+  {
+    "id": "rl-031",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "Flywheel thinking, with numbers: a $100\\,\\text{mH}$ inductor carries a steady $3\\,\\text{A}$. If its stored field energy could be transferred perfectly into a $0.9\\,\\text{W}$ lamp, how long would it keep the lamp lit, in ms?",
+    "answer": 500,
+    "tolerance": 0.03,
+    "unit": "ms",
+    "explanation": "The coil is a little energy flywheel: it holds $E = \\tfrac{1}{2}LI^2 = \\tfrac{1}{2} \\times 0.1 \\times 3^2 = 0.45\\,\\text{J}$. Power is energy per time, so $t = E/P = 0.45/0.9 = 0.5\\,\\text{s} = 500\\,\\text{ms}$. Half a second sounds modest, but this is exactly what a flyback converter does on fast repeat — ferry energy from the field to the load, thousands of scoops per second. It's also why inductor current can't just vanish: 0.45 J has to *go* somewhere."
+  },
+  {
+    "id": "rl-032",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "Two RL circuits use the **same source voltage and the same inductor**, but different resistors. Their current-rise curves leave the origin at exactly the same rate, yet B levels off at half of A's current. What's going on?",
+    "figure": {
+      "kind": "plot",
+      "width": 420,
+      "height": 220,
+      "xlabel": "t (ms)",
+      "ylabel": "i_L (mA)",
+      "xmin": 0,
+      "xmax": 8,
+      "ymin": 0,
+      "ymax": 12,
+      "xticks": 2,
+      "yticks": 2,
+      "curves": [
+        { "fn": "exp", "v0": 0, "vf": 10, "tau": 2, "legend": "A" },
+        { "fn": "exp", "v0": 0, "vf": 5, "tau": 1, "legend": "B", "color": 2 }
+      ]
+    },
+    "choices": [
+      "B's resistor is twice A's — the launch slope $V/L$ doesn't involve $R$ at all, but the destination $V/R$ does",
+      "B's inductor must be smaller, since its curve settles sooner",
+      "B's source voltage is half of A's",
+      "Nothing can be concluded without knowing the component values"
+    ],
+    "answer": 0,
+    "explanation": "Each feature of the curve belongs to a different component. The take-off slope at $t=0$ is $V/L$ — the resistor drops nothing at zero current, so it has no say — and equal slopes confirm equal $V$ and $L$. The cruising altitude is $V/R$, so B leveling at half the current means twice the resistance. B settling *faster* is the same fact again: $\\tau = L/R$ halves when $R$ doubles. If B's source were halved instead, its launch slope would have been half too — the plot rules that out."
+  },
+  {
+    "id": "rl-033",
+    "topic": "inductors-rl",
+    "tier": 2,
+    "type": "probe",
+    "prompt": "The switch has been closed a long time, so the coil carries a steady current. The instant the switch **opens**, the coil forces its current to keep flowing and one node gets yanked to a large negative voltage — the spike that pits and arcs switch contacts. Click that node.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "12 V", "flipLabel": true },
+        { "type": "resistor", "from": [60, 60], "to": [160, 60], "label": "R_1", "value": "120 Ω" },
+        { "type": "switch", "from": [160, 60], "to": [240, 60], "label": "S", "closed": true },
+        { "type": "inductor", "from": [320, 60], "to": [320, 200], "label": "L_1", "value": "100 mH" }
+      ],
+      "wires": [
+        [[240, 60], [320, 60]],
+        [[60, 200], [320, 200]]
+      ]
+    },
+    "probe": { "target": "node" },
+    "answer": { "at": [320, 60] },
+    "explanation": "Follow the current's demand: 100 mA has been flowing *into* the coil's top terminal, and the coil insists that continue. When the switch opens, the node between the switch and the coil is left floating — and the coil drags it down as far as it must (hundreds of volts negative) trying to keep pulling current in, until the air gap at the contacts breaks down and arcs. The source side of the switch stays placidly near 12 V; all the drama is on the coil side. A flyback diode across the coil would catch this node after less than a volt of swing."
+  },
+  {
+    "id": "rl-034",
+    "topic": "inductors-rl",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "The switch has been closed for a long time, then opens at $t = 0$. Find the inductor current $1\\,\\text{ms}$ after it opens, in mA.",
+    "figure": {
+      "kind": "circuit",
+      "width": 420,
+      "height": 240,
+      "components": [
+        { "type": "vsource", "from": [60, 200], "to": [60, 60], "label": "V_1", "value": "10 V", "flipLabel": true },
+        { "type": "switch", "from": [60, 60], "to": [140, 60], "label": "S", "closed": true },
+        { "type": "resistor", "from": [140, 60], "to": [220, 60], "label": "R_s", "value": "100 Ω" },
+        { "type": "inductor", "from": [260, 60], "to": [260, 200], "label": "L_1", "value": "100 mH" },
+        { "type": "resistor", "from": [360, 60], "to": [360, 200], "label": "R_1", "value": "100 Ω" }
+      ],
+      "wires": [
+        [[220, 60], [260, 60]],
+        [[260, 60], [360, 60]],
+        [[60, 200], [360, 200]]
+      ],
+      "nodes": [[260, 60], [260, 200]]
+    },
+    "answer": 36.8,
+    "tolerance": 0.03,
+    "unit": "mA",
+    "explanation": "Solve the before and after as two separate circuits. Before: the inductor is a steady-state wire shorting out $R_1$, so it carries $10/100 = 100\\,\\text{mA}$. After the switch opens, the source and $R_s$ are gone; the coil's 100 mA freewheels around the $L_1$–$R_1$ loop and decays with a *new* time constant $\\tau = L/R_1 = 0.1/100 = 1\\,\\text{ms}$. One time constant later, $i = 100\\,e^{-1} \\approx 36.8\\,\\text{mA}$. The key trap: the decay $\\tau$ uses only the resistance the current actually flows through after switching."
+  },
+  {
+    "id": "rl-035",
+    "topic": "inductors-rl",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A $12\\,\\text{V}$ source, $100\\,\\Omega$ resistor, and $10\\,\\text{mH}$ inductor are in series; the switch closes at $t = 0$. The inductor's **voltage** starts at $12\\,\\text{V}$ and decays as the current builds. How long until $v_L$ has fallen to $1\\,\\text{V}$, in µs?",
+    "answer": 248.5,
+    "tolerance": 0.03,
+    "unit": "µs",
+    "explanation": "Watch the voltage's side of the story: at $t = 0^+$ the current is zero, the resistor drops nothing, and the inductor takes the full 12 V; as current builds, the resistor steals voltage and the inductor's share decays as $v_L(t) = 12\\,e^{-t/\\tau}$. With $\\tau = L/R = 0.01/100 = 100\\,\\text{µs}$, solve $12\\,e^{-t/\\tau} = 1$: $t = \\tau \\ln 12 = 100 \\times 2.485 \\approx 248.5\\,\\text{µs}$. Sanity check: that's about $2.5\\tau$, where an exponential has fallen to $e^{-2.5} \\approx 8\\%$ of its start — and $1\\,\\text{V}$ is indeed 8% of 12 V."
   }
 ]

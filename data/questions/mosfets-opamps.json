@@ -437,5 +437,293 @@
     "tolerance": 0.02,
     "unit": "V",
     "explanation": "The follower's input draws no current, so the sensor's $100\\,\\text{k}\\Omega$ carries zero current and drops zero volts — the + input sees the full $2\\,\\text{V}$, and feedback copies it to the output. The $2\\,\\text{mA}$ the load needs comes from the op-amp's supply rails, not from the sensor. Without the buffer, the sensor's $100\\,\\text{k}\\Omega$ against the $1\\,\\text{k}\\Omega$ load would form a brutal divider leaving only $2 \\times \\frac{1}{101} \\approx 20\\,\\text{mV}$."
+  },
+  {
+    "id": "mo-021",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Modern chips pack *billions* of transistors into a fingernail of silicon. Which MOSFET property makes that possible, where BJTs could never compete?",
+    "choices": [
+      "The gate is insulated: a MOSFET is controlled by an electric field, not a steady current, so billions of them can sit holding their state while drawing essentially no power",
+      "MOSFETs amplify current more strongly than BJTs, so far fewer are needed",
+      "MOSFETs withstand much higher voltages, which dense chips require",
+      "MOSFETs work without any connection to the power supply"
+    ],
+    "answer": 0,
+    "explanation": "Think of the gate as a pressure plate: pressing on it (applying voltage) opens the channel, but nothing has to flow *through* the plate. A BJT's base, by contrast, must be continuously fed current to stay on — multiply that by a billion devices and the chip melts. Field control means a CMOS gate holding a logic level draws essentially nothing, so density is limited by geometry, not by power. That single property — control without current — is why digital logic went MOS and never looked back."
+  },
+  {
+    "id": "mo-022",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "To carry more current, power MOSFETs are routinely wired directly in parallel — something you can't safely do with BJTs. Why does it work for MOSFETs?",
+    "choices": [
+      "$R_{DS(on)}$ *rises* with temperature: a MOSFET hogging current heats up, resists more, and sheds current back to its partners — the set self-balances",
+      "MOSFETs conduct *more* as they heat up, so the hottest one helpfully takes over the load",
+      "Their gates share charge equally, which forces the drain currents to match exactly",
+      "Paralleling halves the voltage each transistor must block"
+    ],
+    "answer": 0,
+    "explanation": "The magic is a *negative* feedback loop built into the physics: hotter MOSFET → higher $R_{DS(on)}$ → less current → cools back down. Any imbalance corrects itself. BJTs have the opposite sign — a hotter BJT conducts *more*, grabs even more current, gets hotter still — a runaway called current hogging, which is why paralleling BJTs needs ballast resistors. With MOSFETs you just tie drains, sources, and (through small gate resistors) gates together, and thermodynamics does the load-sharing."
+  },
+  {
+    "id": "mo-023",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Every power MOSFET's datasheet symbol shows a diode drawn between source and drain. The gate is held at $0\\,\\text{V}$, so the switch is \"off\". What can still happen?",
+    "choices": [
+      "Current can still flow in the reverse direction (source to drain in an NMOS) through this intrinsic *body diode* — an off MOSFET only blocks one way",
+      "Nothing — an off MOSFET blocks current in both directions",
+      "The diode conducts only while the gate is being driven",
+      "The diode conducts in the same direction as the channel, adding to the on-current"
+    ],
+    "answer": 0,
+    "explanation": "The body diode isn't a design choice — it's a parasitic pn junction baked into the device structure, and no gate voltage can remove it. So \"off\" really means \"blocks in one direction only\": reverse the voltage across an off NMOS and the body diode simply conducts (with a lossy ~0.7 V drop). Circuit designers treat this as both a hazard (a MOSFET can't be a bidirectional blocker by itself — that takes two in series) and a feature (in motor drives and synchronous converters, the body diode catches freewheeling current during switching dead-time)."
+  },
+  {
+    "id": "mo-024",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "This is a CMOS inverter and $V_{in}$ is **low** ($0\\,\\text{V}$). Click the transistor that turns on and pulls $V_{out}$ high.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "pmos", "at": [240, 100], "label": "M_1" },
+        { "type": "nmos", "at": [240, 200], "label": "M_2" },
+        { "type": "ground", "at": [256, 256] }
+      ],
+      "wires": [
+        [[256, 72], [256, 40]],
+        [[256, 128], [256, 172]],
+        [[256, 150], [340, 150]],
+        [[216, 100], [180, 100], [180, 200], [216, 200]],
+        [[180, 150], [130, 150]],
+        [[256, 228], [256, 256]]
+      ],
+      "nodes": [[256, 150], [180, 150]],
+      "labels": [
+        { "text": "V_{DD}", "at": [256, 28] },
+        { "text": "V_{out}", "at": [352, 150], "anchor": "left" },
+        { "text": "V_{in}", "at": [118, 150], "anchor": "right" }
+      ]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "M_1" },
+    "explanation": "CMOS is a complementary pair: the PMOS $M_1$ (source at $V_{DD}$) is the pull-*up*, the NMOS $M_2$ (source at ground) is the pull-*down*, and the same input drives both gates with opposite effect. With $V_{in} = 0$, the PMOS sees its gate far *below* its source — a large negative $V_{GS}$ — so it turns on and connects $V_{out}$ to $V_{DD}$; the NMOS has $V_{GS} = 0$ and is off. One device always conducts and the other always blocks, which is why the output is solidly driven in both states yet no current flows from rail to rail at rest."
+  },
+  {
+    "id": "mo-025",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Two MOSFETs are candidates to switch the same $5\\,\\text{A}$ load: one has $R_{DS(on)} = 100\\,\\text{m}\\Omega$, the other $10\\,\\text{m}\\Omega$. Without a calculator — how does the heat generated in the switch compare?",
+    "choices": [
+      "The $10\\,\\text{m}\\Omega$ part dissipates 10× less: same current through one-tenth the resistance, and $P = I^2R$ is linear in $R$",
+      "100× less, because power scales with the square of the resistance",
+      "They run equally hot — the load, not the switch, sets the dissipation",
+      "The $10\\,\\text{m}\\Omega$ part runs *hotter*, because a lower resistance passes more current"
+    ],
+    "answer": 0,
+    "explanation": "$R_{DS(on)}$ is the single number that says how good a *closed* switch is — an ideal switch would be $0\\,\\Omega$ and dissipate nothing. The load fixes the current at about 5 A either way (the switch's few milliohms barely change the loop), so the switch's own heat is $P = I^2 R$: the current is squared, the resistance is not. Same $I$, one-tenth the $R$, one-tenth the heat — $2.5\\,\\text{W}$ versus $0.25\\,\\text{W}$, often the difference between needing a heatsink and not."
+  },
+  {
+    "id": "mo-026",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "In a working op-amp circuit the two inputs sit at the same voltage — the \"virtual short\". Why can't you replace the op-amp's input pair with an actual wire?",
+    "choices": [
+      "The equality is an *effect*, not a connection: the output actively adjusts, through the feedback network, to keep the inputs matched — and no current flows between them. A real wire would carry current and there would be nothing left to do the adjusting",
+      "You could — a wire between the inputs behaves identically to the virtual short",
+      "A wire would work for DC but fail at high frequencies",
+      "The inputs sit at different voltages internally, so a wire would short out the supplies"
+    ],
+    "answer": 0,
+    "explanation": "\"Virtual\" is doing real work in that name. The two inputs are equal the way a thermostat makes room temperature equal the setpoint — an active system holds them there — not the way two ends of a wire are equal. Two things break if you solder them together: current could now flow between the nodes (the real op-amp inputs pass none, which is exactly what makes summing junctions and clean gain ratios work), and the output loses its error signal, so the feedback loop that *created* the equality is gone. Same voltage, completely different physics."
+  },
+  {
+    "id": "mo-027",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "A bare op-amp's gain is enormous (~$10^6$) and sloppy — it drifts with temperature and varies part to part. Why do amplifiers built from it nonetheless have precise, stable gain?",
+    "choices": [
+      "Negative feedback trades the excess away: the closed-loop gain is set by the feedback resistor ratio, and the op-amp's huge gain merely has to be \"big enough\" — its exact value cancels out of the result",
+      "Manufacturers laser-trim every op-amp to a gain of exactly $10^6$",
+      "The huge gain only exists at DC; at signal frequencies the gain is naturally small and stable",
+      "The feedback resistors physically limit how much current the op-amp can amplify"
+    ],
+    "answer": 0,
+    "explanation": "This is the great bargain of feedback: sacrifice gain you don't need to buy precision you do. With a feedback network dividing the output by 10, the loop settles where the divided output equals the input — gain of 10, set by two resistors you can buy at 0.1% tolerance. The op-amp's own gain appears only in the error left over, roughly one part in $A/10$: whether $A$ is $10^5$ or $3 \\times 10^6$ today changes the result by parts per ten thousand. A million-× amplifier is useless raw; wrapped in feedback, its wildness becomes irrelevant."
+  },
+  {
+    "id": "mo-028",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Negative feedback means the output is routed back where it can oppose the input difference. Click the **feedback resistor** — the component that carries the output back to an op-amp input.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "opamp", "at": [290, 140], "swap": true },
+        { "type": "resistor", "from": [230, 190], "to": [350, 190], "label": "R_f", "value": "10 kΩ", "flipLabel": true },
+        { "type": "resistor", "from": [230, 190], "to": [230, 260], "label": "R_g", "value": "2.2 kΩ" },
+        { "type": "ground", "at": [230, 260] }
+      ],
+      "wires": [
+        [[120, 126], [258, 126]],
+        [[258, 154], [230, 154], [230, 190]],
+        [[350, 190], [350, 140]],
+        [[322, 140], [400, 140]]
+      ],
+      "nodes": [[230, 190], [350, 140]],
+      "labels": [
+        { "text": "V_{in}", "at": [108, 126], "anchor": "right", "terminal": [120, 126] },
+        { "text": "V_{out}", "at": [412, 140], "anchor": "left" }
+      ]
+    },
+    "probe": { "target": "component" },
+    "answer": { "component": "R_f" },
+    "explanation": "Trace from the output: it runs down through $R_f$ to the inverting input — that path *is* the feedback. $R_g$ only ties the inverting input to ground; it never touches the output, so it can't feed anything back. Together they form a divider that hands a fraction $\\frac{R_g}{R_g + R_f}$ of $V_{out}$ to the $-$ input, and the loop settles when that fraction equals $V_{in}$ — which is exactly why the gain is $1 + R_f/R_g$. Spotting the output-to-input path at a glance is the first move in reading any op-amp circuit."
+  },
+  {
+    "id": "mo-029",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "probe",
+    "prompt": "Feedback holds one node of this circuit at $0\\,\\text{V}$ even though it is not wired to ground — the **virtual ground**. Click that node.",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "resistor", "from": [80, 146], "to": [180, 146], "label": "R_{in}", "value": "10 kΩ" },
+        { "type": "resistor", "from": [220, 80], "to": [340, 80], "label": "R_f", "value": "47 kΩ" },
+        { "type": "opamp", "at": [280, 160] },
+        { "type": "ground", "at": [210, 220] }
+      ],
+      "wires": [
+        [[180, 146], [248, 146]],
+        [[220, 146], [220, 80]],
+        [[340, 80], [340, 160]],
+        [[312, 160], [392, 160]],
+        [[248, 174], [210, 174], [210, 220]]
+      ],
+      "nodes": [[220, 146], [340, 160]],
+      "labels": [
+        { "text": "V_{in}", "at": [68, 146], "anchor": "right", "terminal": [80, 146] },
+        { "text": "V_{out}", "at": [404, 160], "anchor": "left" }
+      ]
+    },
+    "probe": { "target": "node" },
+    "answer": { "at": [220, 146] },
+    "explanation": "The $+$ input is grounded, so feedback drives the inverting input — the node where $R_{in}$ and $R_f$ meet — to $0\\,\\text{V}$ as well: ground potential with no ground wire, hence *virtual* ground. It's held there actively: if it drifted up, the output would swing down through $R_f$ and pull it back. That pinned node is what makes the inverting amp so tractable — the input current is exactly $V_{in}/R_{in}$, all of it detours through $R_f$ (the op-amp input takes none), and the gain collapses to the clean ratio $-R_f/R_{in}$."
+  },
+  {
+    "id": "mo-030",
+    "topic": "mosfets-opamps",
+    "tier": 1,
+    "type": "mc",
+    "prompt": "Amplifier A is inverting with $R_{in} = 1\\,\\text{k}\\Omega$, $R_f = 10\\,\\text{k}\\Omega$. Amplifier B is inverting with $R_{in} = 100\\,\\text{k}\\Omega$, $R_f = 1\\,\\text{M}\\Omega$. How do their gains compare?",
+    "choices": [
+      "Identical: gain $= -R_f/R_{in} = -10$ for both — only the *ratio* matters, though B loads its source 100× less while A is quieter",
+      "B's gain is 100× larger, because its resistors are 100× larger",
+      "A's gain is larger, because smaller resistors let more current flow",
+      "Impossible to say without knowing the op-amp's internal gain"
+    ],
+    "answer": 0,
+    "explanation": "The gain formula contains only a quotient, so scaling both resistors by any factor changes nothing: $10\\text{k}/1\\text{k} = 1\\text{M}/100\\text{k} = 10$. Intuitively, the virtual ground converts $V_{in}$ into a current through $R_{in}$, and $R_f$ converts that same current back into a voltage — double both and the current halves while the volts-per-amp doubles, canceling exactly. What the absolute values *do* choose is everything else: B presents a 100 kΩ input impedance (gentle on weak sources) but more thermal noise; A works the source harder but is quieter and less disturbed by stray capacitance. Ratio sets the gain; magnitudes set the tradeoffs."
+  },
+  {
+    "id": "mo-031",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A non-inverting amplifier ($R_f = 10\\,\\text{k}\\Omega$, $R_g = 2\\,\\text{k}\\Omega$) runs from $\\pm 10\\,\\text{V}$ supplies, and its output can swing all the way to the rails. The input is $2.5\\,\\text{V}$. What voltage actually appears at the output, in volts?",
+    "answer": 10,
+    "tolerance": 0.02,
+    "unit": "V",
+    "explanation": "An op-amp is not a source of voltage — it's a *valve* on its own supply rails, and it can never deliver more than they provide. The gain is $1 + R_f/R_g = 1 + 10/2 = 6$, so the feedback loop *asks* for $6 \\times 2.5 = 15\\,\\text{V}$ — but the rail stops the output at $10\\,\\text{V}$ and it saturates there. Note what breaks at that moment: with the output pinned, feedback can no longer equalize the inputs, so the golden rules are suspended until the input shrinks back into range ($|V_{in}| \\le 10/6 \\approx 1.67\\,\\text{V}$)."
+  },
+  {
+    "id": "mo-032",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "numeric",
+    "prompt": "A power MOSFET's total gate charge is $Q_g = 30\\,\\text{nC}$. To switch it fully on in $60\\,\\text{ns}$, what *average* current must the gate driver deliver during the transition, in A?",
+    "answer": 0.5,
+    "tolerance": 0.03,
+    "unit": "A",
+    "explanation": "Gate charge is the real currency of switching: the gate may draw nothing at DC, but to change state you must physically move $Q_g$ onto it, and current is charge per time — $I = Q_g/t = 30\\,\\text{nC}/60\\,\\text{ns} = 0.5\\,\\text{A}$. Half an amp, just to flip a \"currentless\" input! A weak driver (say a microcontroller pin at 20 mA) would stretch the same charge delivery to 1.5 µs, leaving the MOSFET dawdling through its half-on, high-dissipation region 25× longer on every edge. This arithmetic is the entire reason gate-driver ICs exist."
+  },
+  {
+    "id": "mo-033",
+    "topic": "mosfets-opamps",
+    "tier": 2,
+    "type": "mc",
+    "prompt": "There is no feedback network here: the divider sets the $-$ input and $V_{in} = 3\\,\\text{V}$ drives the $+$ input. The op-amp runs from the same $0\\,\\text{V}$ and $+5\\,\\text{V}$ rails. What is $V_{out}$?",
+    "figure": {
+      "kind": "circuit",
+      "width": 460,
+      "height": 300,
+      "components": [
+        { "type": "vsource", "from": [60, 260], "to": [60, 60], "label": "V_1", "value": "5 V", "flipLabel": true },
+        { "type": "resistor", "from": [140, 60], "to": [140, 140], "label": "R_1", "value": "10 kΩ" },
+        { "type": "resistor", "from": [140, 140], "to": [140, 220], "label": "R_2", "value": "10 kΩ" },
+        { "type": "opamp", "at": [300, 160] },
+        { "type": "ground", "at": [140, 260] }
+      ],
+      "wires": [
+        [[60, 60], [140, 60]],
+        [[140, 140], [240, 140], [240, 146], [268, 146]],
+        [[140, 220], [140, 260]],
+        [[60, 260], [140, 260]],
+        [[170, 174], [268, 174]],
+        [[332, 160], [400, 160]]
+      ],
+      "nodes": [[140, 140], [140, 260]],
+      "labels": [
+        { "text": "V_{in}", "at": [158, 174], "anchor": "right", "terminal": [170, 174] },
+        { "text": "V_{out}", "at": [412, 160], "anchor": "left" }
+      ]
+    },
+    "choices": [
+      "$\\approx 5\\,\\text{V}$: the $+$ input (3 V) is above the $-$ input (2.5 V), and with no feedback the output slams to the positive rail",
+      "$0.5\\,\\text{V}$ — the difference between the two inputs",
+      "$2.5\\,\\text{V}$ — the output copies the $-$ input",
+      "$3\\,\\text{V}$ — the output copies the $+$ input"
+    ],
+    "answer": 0,
+    "explanation": "First the reference: the op-amp input draws no current, so the $10\\,\\text{k}/10\\,\\text{k}$ divider is unloaded and sits at exactly $5/2 = 2.5\\,\\text{V}$. With no feedback path there is nothing to equalize the inputs — the virtual short does not apply — so the raw open-loop gain multiplies the $0.5\\,\\text{V}$ difference and asks for thousands of volts; the output simply saturates at the $+5\\,\\text{V}$ rail. This is a comparator: a one-bit answer to \"is $V_{in}$ above 2.5 V?\", and the output will snap to $0\\,\\text{V}$ the moment it isn't."
+  },
+  {
+    "id": "mo-034",
+    "topic": "mosfets-opamps",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "An inverting amplifier has $R_{in} = 1\\,\\text{k}\\Omega$ and $R_f = 10\\,\\text{k}\\Omega$, but the op-amp's open-loop gain is only $A = 1000$ (not infinite), with $V_{out} = A(V_+ - V_-)$ and no input current. Find the actual closed-loop gain $V_{out}/V_{in}$.",
+    "answer": -9.891,
+    "tolerance": 0.02,
+    "unit": "V/V",
+    "explanation": "With finite $A$ the virtual ground is only *almost* at zero: the output needs $V_- = -V_{out}/A$ to exist. Superposition on the resistor divider gives $V_- = \\frac{R_f}{R_{in}+R_f}V_{in} + \\frac{R_{in}}{R_{in}+R_f}V_{out} = \\frac{10}{11}V_{in} + \\frac{1}{11}V_{out}$; setting $V_{out} = -A V_-$ and solving: $V_{out}/V_{in} = \\frac{-10A}{A + 11} = \\frac{-10000}{1011} \\approx -9.89$. Even a mediocre gain of 1000 lands within 1.1% of the ideal $-10$, and a real op-amp's $A \\approx 10^5$ would miss by 0.01% — this is the quantitative face of \"feedback tames the gain\": the error shrinks as $\\left(1 + R_f/R_{in}\\right)/A$."
+  },
+  {
+    "id": "mo-035",
+    "topic": "mosfets-opamps",
+    "tier": 3,
+    "type": "numeric",
+    "prompt": "A MOSFET switches a $24\\,\\text{V}$, $5\\,\\text{A}$ load at $200\\,\\text{kHz}$. Each transition (turn-on and turn-off) takes $100\\,\\text{ns}$, during which voltage and current overlap; approximate the energy lost per transition as $\\tfrac{1}{2} V I\\, t$. Conduction loss is negligible. Estimate the average switching power dissipated in the MOSFET, in W.",
+    "answer": 2.4,
+    "tolerance": 0.03,
+    "unit": "W",
+    "explanation": "A switch only dissipates when it is *neither* fully on nor fully off — during the crossing, it briefly holds volts and amps at the same time. Each crossing costs $E \\approx \\tfrac{1}{2} \\times 24 \\times 5 \\times 100\\,\\text{ns} = 6\\,\\mu\\text{J}$; every cycle has two of them (on and off), so $12\\,\\mu\\text{J}$ per cycle, and at $200\\,\\text{kHz}$: $P = 12\\,\\mu\\text{J} \\times 200{,}000 = 2.4\\,\\text{W}$. Note what the formula rewards: this loss scales with *frequency* and *transition time*, not with duty cycle — which is why fast gate drivers (shorter $t$) matter more, not less, as converters push to higher frequencies."
   }
 ]

@@ -42,6 +42,13 @@ function el(tag, cls, html) {
   return e;
 }
 
+// intuition-only mode: tier-1 questions need no calculator
+const intuitionOn = () => S.getSetting('intuitionOnly');
+const activePool = (qs) => (intuitionOn() ? qs.filter((q) => q.tier === 1) : qs);
+
+const BULB_SVG =
+  '<svg width="15" height="17" viewBox="0 0 22 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 1a8 8 0 0 1 4.5 14.6c-1 .8-1.5 1.6-1.5 2.9h-6c0-1.3-.5-2.1-1.5-2.9A8 8 0 0 1 11 1z"/><path d="M8 22h6M9 25h4"/></svg>';
+
 // --------------------------------------------------------------------------
 // Home screen
 // --------------------------------------------------------------------------
@@ -50,7 +57,7 @@ function showHome() {
   screen.innerHTML = '';
   const st = S.getState();
 
-  const dueAll = S.dueCount(bank.all.map((q) => q.id));
+  const dueAll = S.dueCount(activePool(bank.all).map((q) => q.id));
   const hero = el('div', 'hero');
   const streak = S.currentStreak();
   const saved = S.streakSavedToday();
@@ -77,20 +84,36 @@ function showHome() {
   hero.appendChild(heroBtns);
   screen.appendChild(hero);
 
+  // intuition-only mode switch: no-calculator questions only
+  const modeRow = el('div', 'mode-row');
+  const toggle = el('button', 'mode-toggle' + (intuitionOn() ? ' on' : ''));
+  toggle.innerHTML = `${BULB_SVG}<span>Intuition only</span><span class="mode-state">${intuitionOn() ? 'ON' : 'OFF'}</span>`;
+  toggle.title = 'Only tier-1 questions — mental models, no calculator needed';
+  toggle.addEventListener('click', () => {
+    S.setSetting('intuitionOnly', !intuitionOn());
+    showHome();
+  });
+  modeRow.appendChild(toggle);
+  modeRow.appendChild(
+    el('span', 'mode-hint', intuitionOn() ? 'lessons pull only no-calculator questions' : '')
+  );
+  screen.appendChild(modeRow);
+
   const grid = el('div', 'topic-grid');
   for (const t of TOPICS) {
-    const qs = bank.byTopic[t.id] || [];
+    const qs = activePool(bank.byTopic[t.id] || []);
     const ids = qs.map((q) => q.id);
     const mastery = S.topicMastery(ids);
     const due = S.dueCount(ids);
     const card = el('button', 'topic-card');
+    const countLabel = intuitionOn() ? `${qs.length} intuition questions` : `${qs.length} questions`;
     card.innerHTML = `
       <div class="topic-icon">${t.icon}</div>
       <div class="topic-body">
         <div class="topic-title">${t.title}${due ? ` <span class="due-pill">${due} due</span>` : ''}</div>
         <div class="topic-blurb">${t.blurb}</div>
         <div class="mastery-bar"><div class="mastery-fill" style="width:${Math.round(mastery * 100)}%"></div></div>
-        <div class="topic-meta">${qs.length} questions · ${Math.round(mastery * 100)}% mastered</div>
+        <div class="topic-meta">${countLabel} · ${Math.round(mastery * 100)}% mastered</div>
       </div>`;
     if (!qs.length) card.classList.add('empty');
     else card.addEventListener('click', () => startLesson(t.id));
@@ -125,15 +148,16 @@ function startLesson(topicId) {
   let pool;
   let title;
   if (topicId === 'due') {
-    pool = bank.all.filter((q) => S.isDue(q.id));
+    pool = activePool(bank.all).filter((q) => S.isDue(q.id));
     title = 'Review';
   } else if (topicId) {
-    pool = bank.byTopic[topicId] || [];
+    pool = activePool(bank.byTopic[topicId] || []);
     title = TOPICS.find((t) => t.id === topicId)?.title || topicId;
   } else {
-    pool = bank.all;
+    pool = activePool(bank.all);
     title = 'Daily Mix';
   }
+  if (intuitionOn()) title += ' · intuition';
   if (!pool.length) return;
   const questions = S.pickLesson(pool, LESSON_SIZE);
   runLesson(questions, title);
